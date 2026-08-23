@@ -1,0 +1,136 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Project Indo-Phoenix — Hologram Edition</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@300;400;500;600&family=JetBrains+Mono:wght@200;300;400&family=Noto+Sans+TC:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/base.css">
+<link rel="stylesheet" href="assets/css/template-c.css">
+</head>
+<body>
+
+<div class="preloader"><div class="preloader__num">0</div></div>
+<canvas id="bg-canvas"></canvas>
+<div class="grain"></div>
+
+<nav class="nav">
+  <a class="brand" href="#">INDO<em>·</em>PHOENIX</a>
+  <div class="nav-right">
+    <div class="nav-links">
+      <a href="#mission" data-i18n="nav.mission"></a>
+      <a href="#metrics" data-i18n="nav.metrics"></a>
+      <a href="#contact" data-i18n="nav.contact"></a>
+    </div>
+    <button class="lang-toggle">中文</button>
+  </div>
+</nav>
+
+<!-- ================= HERO ================= -->
+<header class="hero">
+  <div class="hero-copy">
+    <p class="label hero-kicker" data-reveal data-delay="100" data-i18n="hero.kicker"></p>
+    <h1 class="hero-title" data-reveal data-delay="250">
+      <span class="line"><span>INDO—</span></span>
+      <span class="line metal"><span>PHOENIX</span></span>
+    </h1>
+    <p class="hero-sub" data-reveal data-delay="450" data-i18n="hero.sub"></p>
+    <div class="app-tags" data-reveal data-delay="560">
+      <span>ROBOTICS</span><span>AI&nbsp;WEARABLES</span><span>SMARTPHONES</span><span>UAV&nbsp;SYSTEMS</span><span>AEROSPACE·DEFENSE</span>
+    </div>
+    <div class="hero-cta" data-reveal data-delay="660">
+      <a class="btn-line" href="#contact" data-i18n="cta.btn"></a>
+    </div>
+  </div>
+  <div class="scroll-hint"><span data-i18n="hero.scroll"></span><i></i></div>
+</header>
+
+<!-- ================= MARQUEE ================= -->
+<div class="marquee" aria-hidden="true">
+  <div class="marquee-track">
+    <span>ROBOTICS&nbsp;·&nbsp;AI&nbsp;WEARABLES&nbsp;·&nbsp;SMARTPHONES&nbsp;·&nbsp;UAV&nbsp;SYSTEMS&nbsp;·&nbsp;AEROSPACE&nbsp;&amp;&nbsp;DEFENSE&nbsp;·&nbsp;FLEXIBLE&nbsp;CIRCUITS&nbsp;·&nbsp;</span><span>ROBOTICS&nbsp;·&nbsp;AI&nbsp;WEARABLES&nbsp;·&nbsp;SMARTPHONES&nbsp;·&nbsp;UAV&nbsp;SYSTEMS&nbsp;·&nbsp;AEROSPACE&nbsp;&amp;&nbsp;DEFENSE&nbsp;·&nbsp;FLEXIBLE&nbsp;CIRCUITS&nbsp;·&nbsp;</span>
+  </div>
+</div>
+
+<!-- ================= MISSION ================= -->
+<section class="section" id="mission">
+  <span class="label" data-reveal data-i18n="mission.label"></span>
+  <h2 class="section-title" data-reveal data-i18n="mission.title"></h2>
+  <div class="mission-list">
+    <article class="mission-item" data-reveal>
+      <span class="m-index">01</span>
+      <div><h3 data-i18n="mission.m1t"></h3><p data-i18n="mission.m1d"></p></div>
+    </article>
+    <article class="mission-item" data-reveal>
+      <span class="m-index">02</span>
+      <div><h3 data-i18n="mission.m2t"></h3><p data-i18n="mission.m2d"></p></div>
+    </article>
+    <article class="mission-item" data-reveal>
+      <span class="m-index">03</span>
+      <div><h3 data-i18n="mission.m3t"></h3><p data-i18n="mission.m3d"></p></div>
+    </article>
+  </div>
+</section>
+
+<!-- ================= METRICS ================= -->
+<section class="section" id="metrics">
+  <h2 class="giant-word" aria-hidden="true">$25.2M</h2>
+  <span class="label" data-reveal data-i18n="metrics.label"></span>
+  <h2 class="section-title" data-reveal data-i18n="metrics.title"></h2>
+  <div class="tile-grid">
+    <div class="tile" data-reveal><span class="tile-num"><span data-count="21.7" data-decimals="1">0</span>%</span><h4 data-i18n="tiles.ebit.label"></h4><p data-i18n="tiles.ebit.desc"></p></div>
+    <div class="tile" data-reveal><span class="tile-num"><span data-count="55.7" data-decimals="1">0</span>%</span><h4 data-i18n="tiles.bep.label"></h4><p data-i18n="tiles.bep.desc"></p></div>
+    <div class="tile" data-reveal><span class="tile-num">21.3<span class="tilde">–</span>24.8%</span><h4 data-i18n="tiles.irr.label"></h4><p data-i18n="tiles.irr.desc"></p></div>
+    <div class="tile" data-reveal><span class="tile-num"><span data-count="4.2" data-decimals="1">0</span> yrs</span><h4 data-i18n="tiles.payback.label"></h4><p data-i18n="tiles.payback.desc"></p></div>
+    <div class="tile" data-reveal><span class="tile-num">$<span data-count="23">0</span>M</span><h4 data-i18n="tiles.capex.label"></h4><p data-i18n="tiles.capex.desc"></p></div>
+    <div class="tile" data-reveal><span class="tile-num">$<span data-count="25.2" data-decimals="1">0</span>M</span><h4 data-i18n="tiles.rev.label"></h4><p data-i18n="tiles.rev.desc"></p></div>
+  </div>
+</section>
+
+<!-- ================= FOOTER ================= -->
+<footer class="footer" id="contact">
+  <hr class="footer-rule" data-reveal>
+  <div class="cta-block">
+    <p class="cta-body" data-reveal data-i18n="cta.body"></p>
+    <a class="btn-line" href="#" data-reveal data-i18n="cta.btn"></a>
+  </div>
+  <div class="footer-bottom">
+    <span data-i18n="foot.note"></span>
+    <span data-i18n="foot.rights"></span>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://unpkg.com/lenis@1.1.18/dist/lenis.min.js"></script>
+<script src="assets/js/data.js"></script>
+<script src="assets/js/app.js"></script>
+<script src="assets/js/scene-c.js"></script>
+<script>
+document.addEventListener("ipx:ready", function () {
+  if (!window.gsap || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  gsap.registerPlugin(ScrollTrigger);
+
+  // Hero lines slide up with clip reveal
+  gsap.fromTo(".hero-title .line > span",
+    { yPercent: 110 },
+    { yPercent: 0, duration: 1.4, ease: "expo.out", stagger: 0.12, delay: 0.15 }
+  );
+
+  // Giant word drifts horizontally while scrolling through metrics
+  gsap.to(".giant-word", {
+    xPercent: -14, ease: "none",
+    scrollTrigger: { trigger: "#metrics", start: "top bottom", end: "bottom top", scrub: true }
+  });
+
+  gsap.to(".hero-copy > *", {
+    yPercent: -10, opacity: 0.25, ease: "none", stagger: 0.02,
+    scrollTrigger: { trigger: ".hero", start: "top top", end: "bottom top", scrub: true }
+  });
+});
+</script>
+</body>
+</html>

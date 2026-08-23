@@ -1,0 +1,178 @@
+/* ============================================================
+   TEMPLATE B — "MISSION CONTROL"
+   Deep-space navy + electric-teal HUD / aerospace console
+   ============================================================ */
+
+:root {
+  --bg: #050a14;
+  --ink: #dce7f0;
+  --accent: #4fd1c5;
+  --muted: #64788c;
+  --line: rgba(79, 209, 197, 0.22);
+  --font-display: "Space Grotesk", "Noto Sans TC", system-ui, sans-serif;
+  --font-body: "Space Grotesk", "Noto Sans TC", system-ui, sans-serif;
+}
+
+.mono, .mono-num .tile-num { font-family: "JetBrains Mono", monospace; }
+body { font-weight: 300; }
+
+/* subtle blueprint grid over the whole page */
+body::before {
+  content: ""; position: fixed; inset: 0; z-index: -1;
+  background-image:
+    linear-gradient(rgba(79,209,197,.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(79,209,197,.04) 1px, transparent 1px);
+  background-size: 72px 72px;
+  mask-image: radial-gradient(ellipse at 50% 40%, black 30%, transparent 78%);
+  -webkit-mask-image: radial-gradient(ellipse at 50% 40%, black 30%, transparent 78%);
+}
+
+/* CRT scanline veil */
+.scanlines {
+  position: fixed; inset: 0; z-index: 3; pointer-events: none; opacity: .35;
+  background: repeating-linear-gradient(
+    to bottom,
+    transparent 0 3px,
+    rgba(0, 0, 0, .12) 3px 4px
+  );
+}
+.scanlines::after {
+  content: ""; position: absolute; left: 0; right: 0; height: 120px;
+  background: linear-gradient(to bottom, transparent,
+              rgba(79, 209, 197, .045), transparent);
+  animation: sweep 9s linear infinite;
+}
+@keyframes sweep {
+  from { top: -140px; } to { top: 110%; }
+}
+
+.brand-tag { color: var(--muted); font-size: 10px; letter-spacing: .3em; margin-left: 10px; }
+
+/* ---------- Hero ---------- */
+.hero {
+  position: relative; z-index: 5;
+  min-height: 100vh;
+  display: flex; flex-direction: column; justify-content: center;
+  padding: 120px clamp(24px, 8vw, 130px) 60px;
+}
+.hero-kicker { margin-bottom: 28px; }
+.hero-title {
+  font-family: var(--font-display);
+  font-size: clamp(46px, 8.4vw, 138px);
+  font-weight: 400; line-height: 1; letter-spacing: -.015em;
+  text-transform: uppercase;
+}
+.hero-title em { font-style: normal; color: var(--accent); display: block; }
+.hero-sub {
+  max-width: 540px; margin-top: 38px;
+  font-size: clamp(15px, 1.3vw, 18px); font-weight: 300;
+  line-height: 1.75; color: var(--muted);
+}
+.hero-cta { margin-top: 44px; }
+
+/* live status line */
+.hud-status {
+  display: inline-flex; align-items: center; gap: 14px;
+  margin-top: clamp(48px, 8vh, 90px);
+  padding: 14px 22px;
+  border: 1px solid var(--line);
+  width: fit-content; max-width: 100%;
+  font-size: 11px; letter-spacing: .16em; color: var(--muted);
+}
+.hud-status b { color: var(--accent); font-weight: 400; }
+.hud-dot {
+  width: 8px; height: 8px; border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 12px var(--accent);
+  animation: pulse 1.8s ease-in-out infinite;
+}
+@keyframes pulse { 50% { opacity: .25; } }
+
+/* ---------- HUD cards (corner brackets) ---------- */
+.hud-card { position: relative; }
+.hud-card::before, .hud-card::after {
+  content: ""; position: absolute; width: 18px; height: 18px;
+  border-color: var(--accent); border-style: solid;
+  transition: all .45s var(--ease);
+}
+.hud-card::before {
+  top: -1px; left: -1px;
+  border-width: 1px 0 0 1px;
+}
+.hud-card::after {
+  bottom: -1px; right: -1px;
+  border-width: 0 1px 1px 0;
+}
+.hud-card:hover::before, .hud-card:hover::after { width: 100%; height: 100%; }
+
+.mission-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: clamp(20px, 2.5vw, 36px);
+  margin-top: clamp(48px, 7vh, 84px);
+}
+.hud-card {
+  padding: clamp(30px, 3vw, 46px);
+  border: 1px solid var(--line);
+  background: rgba(79, 209, 197, 0.03);
+  backdrop-filter: blur(4px);
+  transition: background .5s var(--ease), transform .5s var(--ease);
+}
+.hud-card:hover { background: rgba(79, 209, 197, 0.06); transform: translateY(-5px); }
+.hud-card h3 {
+  font-size: 15px; font-weight: 500; letter-spacing: .18em;
+  text-transform: uppercase; color: var(--accent); margin-bottom: 16px;
+}
+.hud-card p { font-size: 13.5px; line-height: 1.8; color: var(--muted); }
+@media (max-width: 900px) { .mission-grid { grid-template-columns: 1fr; } }
+
+/* ---------- Metric tiles ---------- */
+.tile-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: clamp(20px, 2.5vw, 36px);
+  margin-top: clamp(48px, 7vh, 84px);
+}
+.tile-num {
+  display: block; font-size: clamp(34px, 3.2vw, 52px);
+  font-weight: 200; color: var(--ink); line-height: 1;
+}
+.tile-num .tilde { color: var(--accent); margin: 0 4px; }
+.tile h4 {
+  margin-top: 20px; font-weight: 500;
+  font-size: 11px; letter-spacing: .26em; text-transform: uppercase;
+  color: var(--accent);
+}
+.tile p { margin-top: 10px; font-size: 13px; line-height: 1.7; color: var(--muted); }
+@media (max-width: 900px) { .tile-grid { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 600px) { .tile-grid { grid-template-columns: 1fr; } }
+
+/* ---------- Scroll hint ---------- */
+.scroll-hint {
+  position: absolute; right: clamp(24px, 5vw, 56px); bottom: 36px;
+  display: flex; align-items: center; gap: 14px;
+  font-size: 10px; letter-spacing: .34em; text-transform: uppercase;
+  color: var(--muted);
+}
+.scroll-hint i {
+  width: 1px; height: 54px; background: var(--line);
+  position: relative; overflow: hidden; display: block;
+}
+.scroll-hint i::after {
+  content: ""; position: absolute; left: 0; top: -50%;
+  width: 100%; height: 50%; background: var(--accent);
+  animation: dripB 2.2s var(--ease) infinite;
+}
+@keyframes dripB {
+  0% { top: -50%; } 60%, 100% { top: 105%; }
+}
+@media (max-width: 900px) { .scroll-hint { display: none; } }
+
+/* ---------- Footer ---------- */
+.cta-block {
+  display: flex; align-items: flex-end; justify-content: space-between;
+  gap: 40px; flex-wrap: wrap;
+}
+.cta-body {
+  font-family: var(--font-display);
+  font-size: clamp(24px, 3.2vw, 44px);
+  font-weight: 300; line-height: 1.25; max-width: 720px;
+}
