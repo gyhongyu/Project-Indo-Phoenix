@@ -1,29 +1,35 @@
 /* ============================================================
    PROJECT INDO-PHOENIX — Data Layer
-   Source: "Project Indo-Phoenix_ India's Strategic Aerospace &
-   Defense FPC Hub" xlsx (FPC Factory Model, Modules 1–5)
+   ROLE: bundled FALLBACK defaults only.
+   Live SSOT = online Google Sheet (WEB_DATA / WEB_TEXT tabs)
+   served via GAS Web App -> assets/js/content-engine.js
+   Set the deployed GAS URL below once, everything syncs.
    ============================================================ */
+
+window.IPX_CONFIG = {
+  gasUrl: "https://script.google.com/macros/s/AKfycbzPRGJ3gOlbro2YigiF5t1qoG3PEwUGXU9d-tWkrIGpiK7yfiCMNV3DxzKLvEC84mG9eQ/exec"   // <== TODO: paste your GAS Web App /exec URL here
+};
 
 window.IPX_DATA = {
   stats: {
-    capacityMonthlyM2: 15000,   // Module 1 — base monthly capacity (m²)
-    annualVolumeM2: 180000,
-    weightedPrice: 140,         // USD/m²
-    monthlyRevenue: 2100000,    // USD
-    annualRevenue: 25200000,    // USD
-    totalCapex: 23000000,       // USD — India project (Module 3)
-    specsSubsidy: 5750000,      // USD — SPECS 25% cash-back
-    netCapex: 17250000,         // USD
-    monthlyOpex: 1645000,       // USD (Module 4)
-    ebitMonthly: 455000,        // USD (Module 5)
-    ebitMargin: 21.7,           // %
-    bep: 55.7,                  // %
-    bepRevenue: 1170000,        // USD / month
-    irrLow: 21.3,
-    irrHigh: 24.8,
-    payback: 4.2,               // years (with SPECS subsidy)
-    paybackRaw: 5.2,            // years (without subsidy)
-    factoryArea: 12000,         // m² total building area (Module 2)
+    capacityMonthlyM2: 15000,   // 'FPC Factory Model'!D10
+    annualVolumeM2: 180000,     // E10
+    weightedPrice: 160,         // F10
+    monthlyRevenue: 2400000,    // G10
+    annualRevenue: 28800000,    // H10
+    totalCapex: 23000000,       // D27 — India project (Module 3)
+    specsSubsidy: 5750000,      // F27 — SPECS 25% cash-back
+    netCapex: 17250000,         // G27
+    monthlyOpex: 1845000,       // D35 (Module 4)
+    ebitMonthly: 555000,        // C41 (Module 5)
+    ebitMargin: 23.1,           // %  (E41)
+    bep: 50.8,                  // % utilization (E42)
+    bepRevenue: 1218543,        // USD / month (C43)
+    irrLow: 21.3,               // manual input on WEB_DATA tab
+    irrHigh: 24.8,              // manual input on WEB_DATA tab
+    payback: 4.2,               // years with SPECS subsidy (manual input)
+    paybackRaw: 5.2,            // years without subsidy (manual input)
+    factoryArea: 13000,         // m² total layout (D20)
     cleanroomClass: "10K"       // Class 10,000 yellow-light exposure zone
   }
 };

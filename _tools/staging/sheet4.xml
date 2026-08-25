@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<worksheet xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main"><sheetData>
+<row r="1"><c r="A1" t="inlineStr"><is><t>key</t></is></c><c r="B1" t="inlineStr"><is><t>en</t></is></c><c r="C1" t="inlineStr"><is><t>zh</t></is></c></row>
+<row r="2"><c r="A2" t="inlineStr"><is><t>nav.mission</t></is></c><c r="B2" t="inlineStr"><is><t>Mission</t></is></c><c r="C2" t="inlineStr"><is><t>戰略使命</t></is></c></row>
+<row r="3"><c r="A3" t="inlineStr"><is><t>nav.metrics</t></is></c><c r="B3" t="inlineStr"><is><t>The Numbers</t></is></c><c r="C3" t="inlineStr"><is><t>核心數據</t></is></c></row>
+<row r="4"><c r="A4" t="inlineStr"><is><t>nav.contact</t></is></c><c r="B4" t="inlineStr"><is><t>Contact</t></is></c><c r="C4" t="inlineStr"><is><t>聯絡</t></is></c></row>
+<row r="5"><c r="A5" t="inlineStr"><is><t>hero.kicker</t></is></c><c r="B5" t="inlineStr"><is><t>India's Strategic Aerospace &amp; Defense FPC Hub</t></is></c><c r="C5" t="inlineStr"><is><t>印度戰略性航太與國防 FPC 樞紐</t></is></c></row>
+<row r="6"><c r="A6" t="inlineStr"><is><t>hero.titleA</t></is></c><c r="B6" t="inlineStr"><is><t>Project</t></is></c><c r="C6" t="inlineStr"><is><t>Project</t></is></c></row>
+<row r="7"><c r="A7" t="inlineStr"><is><t>hero.titleB</t></is></c><c r="B7" t="inlineStr"><is><t>Indo-Phoenix</t></is></c><c r="C7" t="inlineStr"><is><t>Indo-Phoenix</t></is></c></row>
+<row r="8"><c r="A8" t="inlineStr"><is><t>hero.sub</t></is></c><c r="B8" t="inlineStr"><is><t>India's first end-to-end manufacturing facility for high-end, aerospace and defense-grade flexible printed circuits.</t></is></c><c r="C8" t="inlineStr"><is><t>印度首座高階、航太與國防等級軟性印刷電路板（FPC）端到端製造工廠。</t></is></c></row>
+<row r="9"><c r="A9" t="inlineStr"><is><t>hero.scroll</t></is></c><c r="B9" t="inlineStr"><is><t>Scroll</t></is></c><c r="C9" t="inlineStr"><is><t>下滑探索</t></is></c></row>
+<row r="10"><c r="A10" t="inlineStr"><is><t>mission.label</t></is></c><c r="B10" t="inlineStr"><is><t>Strategic Mission</t></is></c><c r="C10" t="inlineStr"><is><t>戰略使命</t></is></c></row>
+<row r="11"><c r="A11" t="inlineStr"><is><t>mission.title</t></is></c><c r="B11" t="inlineStr"><is><t>Built where capacity is zero.</t></is></c><c r="C11" t="inlineStr"><is><t>建在產能為零的地方。</t></is></c></row>
+<row r="12"><c r="A12" t="inlineStr"><is><t>mission.m1t</t></is></c><c r="B12" t="inlineStr"><is><t>First Mover</t></is></c><c r="C12" t="inlineStr"><is><t>先發優勢</t></is></c></row>
+<row r="13"><c r="A13" t="inlineStr"><is><t>mission.m1d</t></is></c><c r="B13" t="inlineStr"><is><t>India's first end-to-end plant for aerospace &amp; defense-grade FPC manufacturing.</t></is></c><c r="C13" t="inlineStr"><is><t>印度首座針對航太與國防等級 FPC 的端到端製造工廠。</t></is></c></row>
+<row r="14"><c r="A14" t="inlineStr"><is><t>mission.m2t</t></is></c><c r="B14" t="inlineStr"><is><t>0% Local Competition</t></is></c><c r="C14" t="inlineStr"><is><t>在地競爭 0%</t></is></c></row>
+<row r="15"><c r="A15" t="inlineStr"><is><t>mission.m2d</t></is></c><c r="B15" t="inlineStr"><is><t>No low-end SMT assembly. Pure focus on high-margin wet-process bare-board manufacturing — where local capacity today is 0%.</t></is></c><c r="C15" t="inlineStr"><is><t>不碰低階 SMT 組裝——專注高毛利的濕製程裸板製造，目前該領域印度在地產能為 0%。</t></is></c></row>
+<row r="16"><c r="A16" t="inlineStr"><is><t>mission.m3t</t></is></c><c r="B16" t="inlineStr"><is><t>Brownfield Advantage</t></is></c><c r="C16" t="inlineStr"><is><t>棕地投資優勢</t></is></c></row>
+<row r="17"><c r="A17" t="inlineStr"><is><t>mission.m3d</t></is></c><c r="B17" t="inlineStr"><is><t>Modular brownfield investment leverages investors' existing factory space and utilities, minimizing capital expenditure.</t></is></c><c r="C17" t="inlineStr"><is><t>模組化棕地投資模式，善用投資者現有廠房空間與公用設施，將資本支出降至最低。</t></is></c></row>
+<row r="18"><c r="A18" t="inlineStr"><is><t>metrics.label</t></is></c><c r="B18" t="inlineStr"><is><t>Dynamic Feasibility Model</t></is></c><c r="C18" t="inlineStr"><is><t>動態可行性模型</t></is></c></row>
+<row r="19"><c r="A19" t="inlineStr"><is><t>metrics.title</t></is></c><c r="B19" t="inlineStr"><is><t>The numbers speak first.</t></is></c><c r="C19" t="inlineStr"><is><t>讓數字先說話。</t></is></c></row>
+<row r="20"><c r="A20" t="inlineStr"><is><t>tiles.ebit.label</t></is></c><c r="B20" t="inlineStr"><is><t>EBIT Margin</t></is></c><c r="C20" t="inlineStr"><is><t>息稅前利潤率</t></is></c></row>
+<row r="21"><c r="A21" t="inlineStr"><is><t>tiles.ebit.desc</t></is></c><c r="B21" t="inlineStr"><is><t>At full monthly capacity utilization.</t></is></c><c r="C21" t="inlineStr"><is><t>滿載月產能運營之下。</t></is></c></row>
+<row r="22"><c r="A22" t="inlineStr"><is><t>tiles.bep.label</t></is></c><c r="B22" t="inlineStr"><is><t>Break-Even Point</t></is></c><c r="C22" t="inlineStr"><is><t>損益兩平點</t></is></c></row>
+<row r="23"><c r="A23" t="inlineStr"><is><t>tiles.bep.desc</t></is></c><c r="B23" t="inlineStr"><is><t>Standard for a highly-capitalized wet-process plant.</t></is></c><c r="C23" t="inlineStr"><is><t>高度資本化濕製程工廠的標準水準。</t></is></c></row>
+<row r="24"><c r="A24" t="inlineStr"><is><t>tiles.irr.label</t></is></c><c r="B24" t="inlineStr"><is><t>Internal Rate of Return</t></is></c><c r="C24" t="inlineStr"><is><t>內部報酬率</t></is></c></row>
+<row r="25"><c r="A25" t="inlineStr"><is><t>tiles.irr.desc</t></is></c><c r="B25" t="inlineStr"><is><t>Far beyond electronics-manufacturing benchmarks.</t></is></c><c r="C25" t="inlineStr"><is><t>遠超標準電子製造業基準。</t></is></c></row>
+<row r="26"><c r="A26" t="inlineStr"><is><t>tiles.payback.label</t></is></c><c r="B26" t="inlineStr"><is><t>Static Payback</t></is></c><c r="C26" t="inlineStr"><is><t>靜態回收期</t></is></c></row>
+<row r="27"><c r="A27" t="inlineStr"><is><t>tiles.payback.desc</t></is></c><c r="B27" t="inlineStr"><is><t>With SPECS 25% subsidy.</t></is></c><c r="C27" t="inlineStr"><is><t>含 SPECS 25% 補貼。</t></is></c></row>
+<row r="28"><c r="A28" t="inlineStr"><is><t>tiles.capex.label</t></is></c><c r="B28" t="inlineStr"><is><t>Total CapEx</t></is></c><c r="C28" t="inlineStr"><is><t>建廠總資本支出</t></is></c></row>
+<row r="29"><c r="A29" t="inlineStr"><is><t>tiles.capex.desc</t></is></c><c r="B29" t="inlineStr"><is><t>Net after SPECS 25% cash-back.</t></is></c><c r="C29" t="inlineStr"><is><t>扣除 SPECS 25% 現金返還後淨投入。</t></is></c></row>
+<row r="30"><c r="A30" t="inlineStr"><is><t>tiles.rev.label</t></is></c><c r="B30" t="inlineStr"><is><t>Annual Revenue</t></is></c><c r="C30" t="inlineStr"><is><t>年度營收</t></is></c></row>
+<row r="31"><c r="A31" t="inlineStr"><is><t>tiles.rev.desc</t></is></c><c r="B31" t="inlineStr"><is><t>Weighted average price at full capacity.</t></is></c><c r="C31" t="inlineStr"><is><t>滿載加權平均單價計算。</t></is></c></row>
+<row r="32"><c r="A32" t="inlineStr"><is><t>cta.body</t></is></c><c r="B32" t="inlineStr"><is><t>Position your capital at the origin of India's defense-electronics supply chain.</t></is></c><c r="C32" t="inlineStr"><is><t>將您的資本，佈局在印度國防電子供應鏈的起點。</t></is></c></row>
+<row r="33"><c r="A33" t="inlineStr"><is><t>cta.btn</t></is></c><c r="B33" t="inlineStr"><is><t>Request Investor Access</t></is></c><c r="C33" t="inlineStr"><is><t>申請投資人專區</t></is></c></row>
+<row r="34"><c r="A34" t="inlineStr"><is><t>foot.note</t></is></c><c r="B34" t="inlineStr"><is><t>Figures derived from the Project Indo-Phoenix dynamic feasibility factsheet.</t></is></c><c r="C34" t="inlineStr"><is><t>數據源自「印度鳳凰計畫」動態可行性數據表。</t></is></c></row>
+<row r="35"><c r="A35" t="inlineStr"><is><t>foot.rights</t></is></c><c r="B35" t="inlineStr"><is><t>© 2026 Project Indo-Phoenix. Confidential investor material.</t></is></c><c r="C35" t="inlineStr"><is><t>© 2026 印度鳳凰計畫。投資人機密資料。</t></is></c></row>
+</sheetData></worksheet>

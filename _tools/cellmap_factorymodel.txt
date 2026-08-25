@@ -1,0 +1,249 @@
+R2 A2 = 0
+R3 A3 = 3
+R3 C3 = 5
+R5 A5 = 6
+R6 A6 = 8
+R6 C6 = Production Share
+(生產比例)
+R6 D6 = Monthly Volume (m²)
+(預估月產量)
+R6 E6 = Annual Volume (m²)
+(預估年產量)
+R6 F6 = Unit Price (USD/m²)
+(調整單價)
+R6 G6 = Monthly Rev (USD)
+(預估月營收)
+R6 H6 = Annual Rev (USD)
+(預估年營收)
+R7 A7 = 19
+R7 C7 = 0.4
+R7 D7 = [F:C7*$C$11] 6000
+R7 E7 = [F:D7*12] 72000
+R7 F7 = 100.0
+R7 G7 = [F:D7*F7] 600000
+R7 H7 = [F:G7*12] 7200000
+R8 A8 = 28
+R8 C8 = 0.5
+R8 D8 = 7500
+R8 E8 = 90000
+R8 F8 = 180.0
+R8 G8 = 1350000
+R8 H8 = 16200000
+R9 A9 = 30
+R9 C9 = 0.1
+R9 D9 = 1500
+R9 E9 = 18000
+R9 F9 = 300.0
+R9 G9 = 450000
+R9 H9 = 5400000
+R10 A10 = 34
+R10 C10 = [F:SUM(C7:C9)] 1
+R10 D10 = 15000
+R10 E10 = 180000
+R10 F10 = [F:G10/D10] 160
+R10 G10 = [F:SUM(G7:G9)] 2400000
+R10 H10 = 28800000
+R11 A11 = 49
+R11 C11 = 15000.0
+R11 D11 = Standard target capacity. Governs dynamic volume calculations above.標準目標產能。用於控制上述的動態產量計算
+R13 A13 = 54
+R14 A14 = 55
+R14 C14 = Kunshan Ref (m²)
+(崑山參考面積)
+R14 D14 = India Project (m²)
+(印度預估面積)
+R14 E14 = Environmental Standards
+(溫濕度與潔淨落塵標準)
+R14 F14 = Key Processes / Equipments
+(核心工藝與設備)
+R14 G14 = ZLD & Infrastructure Notes
+(環保與基建備註)
+R15 A15 = 61
+R15 C15 = 1200.0
+R15 D15 = 1500.0
+R15 E15 = Class 10,000, Temp 22±2°C, Humidity 55±5%
+萬級無塵室，溫度 22±2°C，濕度 55±5%
+R15 F15 = LDI Direct Imaging, Dry Film Lamination
+LDI 直接成像，乾膜壓膜
+R15 G15 = High ambient temp in India requires 40% higher HVAC capacity
+印度的高環境溫度需要增加 40% 的暖通空調 (HVAC) 容量。
+R16 A16 = 65
+R16 C16 = 4000.0
+R16 D16 = 4500.0
+R16 E16 = FRP anti-acid floor, dedicated exhaust
+FRP 防酸地板，專用排氣系統
+R16 F16 = VCP Continuous Plating, DES Line
+VCP 連續電鍍，DES 生產線
+R16 G16 = Requires local pollution control (SPCB) CTE/CTO approval
+需要取得當地污染控制局 (SPCB) 的建廠同意書/營運同意書 (CTE/CTO) 批准。
+R17 A17 = 69
+R17 C17 = 1500.0
+R17 D17 = 2000.0
+R17 E17 = Strict floor load: 1.5 tons/m²
+嚴格的地板載重：1.5 噸/平方公尺
+
+R17 F17 = Laser Drill, Vacuum Hot Press
+雷射鑽孔，真空熱壓合
+R17 G17 = Micro-vibration isolated floor base required
+需要具備微震隔離功能的地板基座。
+R18 A18 = 73
+R18 C18 = 1500.0
+R18 D18 = 2000.0
+R18 E18 = Cold Storage 2-10°C, strict humidity control
+冷藏室 2-10°C，嚴格的濕度控制
+R18 F18 = FCCL, Coverlay, chemical storage
+軟性銅箔基板 (FCCL)、覆蓋膜、化學品儲存
+R18 G18 = 45-60 Days Safety Stock in India (vs 7-14 in Kunshan) due to logistics
+受限於物流因素，印度的安全庫存天數需 45-60 天（相較於崑山的 7-14 天）
+R19 A19 = 77
+R19 C19 = 1500.0
+R19 D19 = 3000.0
+R19 E19 = Zero Liquid Discharge (ZLD) Mandate
+廢水零排放 (ZLD) 強制要求
+R19 F19 = MVR Evaporators, Multi-stage RO
+MVR 蒸發器，多級逆滲透 (RO)
+R19 G19 = 3x larger footprint than Kunshan. Essential regulatory filter
+佔地面積為崑山的 3 倍。為符合法規要求的必要過濾設施。
+R20 A20 = 81
+R20 C20 = [F:SUM(C15:C19)] 9700
+R20 D20 = 13000
+R20 E20 = Total factory layout size. Reflects the heavy industrial wet-process scale. 總廠房佈局面積。反映了重工業濕過程的規模
+R22 A22 = 83
+R23 A23 = 84
+R23 C23 = Kunshan Ref (USD)
+(崑山參考預算)
+R23 D23 = India Project (USD)
+(印度在地建置預算)
+R23 E23 = Share %
+(比例)
+R23 F23 = SPECS Subsidy Refund (25%)
+(政府補貼現金返還)
+R23 G23 = Net Indian Inv (USD)
+(扣除補貼後淨投入)
+R23 H23 = Taiwan Technical Group Boundary
+(技術股責任與管理邊界)
+R24 A24 = 91
+R24 C24 = 1.5E7
+R24 D24 = 1.65E7
+R24 E24 = [F:D24/$D$27] 0.7173913043
+R24 F24 = [F:D24*0.25] 4125000
+R24 G24 = [F:D24-F24] 12375000
+R24 H24 = Direct Vendor-code support (DuPont, Taiflex, Panasonic). Verify machines at source via CEC green channel.
+直接供應商代碼支援（杜邦、台虹、松下）。透過 CEC 綠色通道於原廠進行機台驗證。
+R25 A25 = 93
+R25 C25 = 1000000.0
+R25 D25 = 3500000.0
+R25 E25 = 0.152173913
+R25 F25 = 875000
+R25 G25 = 2625000
+R25 H25 = Define design specifications. Water treatment chemical inputs. Actual local engineering & CTE/CTO by Promoter.
+制定設計規範。水處理化學品投入。實際的當地工程及 CTE/CTO（建廠同意書/營運同意書）由發起人負責。
+R26 A26 = 95
+R26 C26 = 2500000.0
+R26 D26 = 3000000.0
+R26 E26 = 0.1304347826
+R26 F26 = 750000
+R26 G26 = 2250000
+R26 H26 = Output plant Layout, Class 10K/100K cleanliness. HVAC humidity specifications. Actual civil construction by Promoter.
+輸出廠房佈局、10K/100K 等級無塵室潔淨度。暖通空調 (HVAC) 濕度規範。實際土建工程由發起人負責。
+R27 A27 = 97
+R27 C27 = [F:SUM(C24:C26)] 18500000
+R27 D27 = 23000000
+R27 E27 = 1
+R27 F27 = 5750000
+R27 G27 = 17250000
+R27 H27 = SPECS 25% cash-back applies strictly to machinery & factory assets.
+SPECS 25% 現金返還僅嚴格適用於機器設備與廠房資產。
+R29 A29 = 99
+R30 A30 = 100
+R30 C30 = Kunshan Monthly (USD)
+(崑山單月成本)
+R30 D30 = India Projected (USD)
+(印度單月成本)
+R30 E30 = Share %
+(比例)
+R30 F30 = Variable Cost %
+(可變成本比例)
+R30 G30 = Variable Portion (USD)
+(變動成本部分)
+R30 H30 = Fixed Portion (USD)
+(固定成本部分)
+R31 A31 = 107
+R31 C31 = 600000.0
+R31 D31 = 900000.0
+R31 E31 = [F:D31/$D$35] 0.487804878
+R31 F31 = 1.0
+R31 G31 = [F:D31*F31] 900000
+R31 H31 = [F:D31-G31] 0
+R32 A32 = 108
+R32 C32 = 450000.0
+R32 D32 = 430000.0
+R32 E32 = 0.2330623306
+R32 F32 = 0.4
+R32 G32 = 172000
+R32 H32 = 258000
+R33 A33 = 109
+R33 C33 = 150000.0
+R33 D33 = 265000.0
+R33 E33 = 0.1436314363
+R33 F33 = 0.7569
+R33 G33 = 200578.5
+R33 H33 = 64421.5
+R34 A34 = 110
+R34 C34 = 180000.0
+R34 D34 = 250000.0
+R34 E34 = 0.135501355
+R34 F34 = 0.0
+R34 G34 = 0
+R34 H34 = 250000
+R35 A35 = 111
+R35 C35 = [F:SUM(C31:C34)] 1380000
+R35 D35 = 1845000
+R35 E35 = 1
+R35 F35 = [F:G35/D35] 0.6897444444
+R35 G35 = [F:SUM(G31:G34)] 1272578.5
+R35 H35 = 572421.5
+R37 A37 = 112
+R38 A38 = 113
+R38 C38 = Monthly Value (USD)
+(單月預估值)
+R38 D38 = Annual Value (USD)
+(年度預估值)
+R38 E38 = Margin / Parameter Value
+(毛利率 / 評估指標值)
+R38 F38 = Strategic Explanation & Target Benchmarks
+(業界標準與決策建議指標)
+R39 A39 = 118
+R39 C39 = [F:G10] 2400000
+R39 D39 = [F:C39*12] 28800000
+R39 E39 = 100.0%
+R39 F39 = At 15,000 m²/month full-capacity operation, weighted average price is $140/m².
+在每月 15,000 平方公尺滿載運營下，加權平均價格為 140 美元/平方公尺。
+R40 A40 = 121
+R40 C40 = [F:D35] 1845000
+R40 D40 = 22140000
+R40 E40 = [F:C40/C39] 0.76875
+R40 F40 = Includes materials, labor, power, water, and straight-line asset depreciation.
+包含材料、人工、電力、水資源及直線法資產折舊。
+R41 A41 = 123
+R41 C41 = [F:C39-C40] 555000
+R41 D41 = 6660000
+R41 E41 = [F:C41/C39] 0.23125
+R41 F41 = EBIT Margin of 21.7% demonstrates excellent scale profitability when full.
+21.7% 的息稅前利潤率 (EBIT Margin) 顯示滿載時具有極佳的規模獲利能力。
+R42 A42 = 125
+R42 C42 = [F:H35/(C39-G35)] 0.5077262585
+R42 F42 = BEP of 55.7% is achieved. Standard for a highly capitalized wet-process plant.
+達成 55.7% 的損益兩平點 (BEP)。這是高度資本化濕製程工廠的標準水準。
+R43 A43 = 127
+R43 C43 = [F:C39*E42] 1218543.021
+R43 D43 = [F:D39*E42] 14622516.25
+R43 E43 = 128
+R44 A44 = 129
+R44 C44 = 130
+R44 F44 = Far exceeds standard electronics manufacturing benchmarks. Highly attractive.
+遠超過標準電子製造業基準。極具吸引力。
+R45 A45 = 132
+R45 C45 = 133
+R45 F45 = Assumes SPECS 25% CapEx subsidy is cleared. Without subsidy, payback is 5.2 Years.
+假設已取得 SPECS 25% 的資本支出補貼。若無補貼，回收期為 5.2 年。

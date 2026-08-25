@@ -10,7 +10,7 @@
 <link rel="stylesheet" href="assets/css/base.css">
 <link rel="stylesheet" href="assets/css/template-a.css">
 </head>
-<body>
+<body data-template="a">
 
 <div class="preloader"><div class="preloader__num">0</div></div>
 <canvas id="bg-canvas"></canvas>
@@ -39,10 +39,10 @@
     <a class="btn-line" href="#contact" data-i18n="cta.btn"></a>
   </div>
   <div class="hero-stats" data-reveal data-delay="700">
-    <div class="stat"><span class="stat-num"><span data-count="15000">0</span> m²</span><span class="stat-cap">Monthly Capacity · 月產能</span></div>
-    <div class="stat"><span class="stat-num">$<span data-count="140">0</span></span><span class="stat-cap">Avg. Price per m² · 均價</span></div>
-    <div class="stat"><span class="stat-num"><span data-count="21.7" data-decimals="1">0</span>%</span><span class="stat-cap">EBIT Margin · 利潤率</span></div>
-    <div class="stat"><span class="stat-num"><span data-count="4.2" data-decimals="1">0</span> yrs</span><span class="stat-cap">Payback · 回收期</span></div>
+    <div class="stat"><span class="stat-num"><span data-stat="capacityMonthlyM2" data-count="15000">0</span> m²</span><span class="stat-cap">Monthly Capacity · 月產能</span></div>
+    <div class="stat"><span class="stat-num">$<span data-stat="weightedPrice" data-count="140">0</span></span><span class="stat-cap">Avg. Price per m² · 均價</span></div>
+    <div class="stat"><span class="stat-num"><span data-stat="ebitMargin" data-decimals="1" data-count="21.7">0</span>%</span><span class="stat-cap">EBIT Margin · 利潤率</span></div>
+    <div class="stat"><span class="stat-num"><span data-stat="payback" data-decimals="1" data-count="4.2">0</span> yrs</span><span class="stat-cap">Payback · 回收期</span></div>
   </div>
   <div class="scroll-hint"><span data-i18n="hero.scroll"></span><i></i></div>
 </header>
@@ -72,12 +72,12 @@
   <span class="label" data-reveal data-i18n="metrics.label"></span>
   <h2 class="section-title" data-reveal data-i18n="metrics.title"></h2>
   <div class="tile-grid">
-    <div class="tile" data-reveal><span class="tile-num"><span data-count="21.7" data-decimals="1">0</span>%</span><h4 data-i18n="tiles.ebit.label"></h4><p data-i18n="tiles.ebit.desc"></p></div>
-    <div class="tile" data-reveal><span class="tile-num"><span data-count="55.7" data-decimals="1">0</span>%</span><h4 data-i18n="tiles.bep.label"></h4><p data-i18n="tiles.bep.desc"></p></div>
-    <div class="tile" data-reveal><span class="tile-num">21.3<span class="tilde">–</span>24.8%</span><h4 data-i18n="tiles.irr.label"></h4><p data-i18n="tiles.irr.desc"></p></div>
-    <div class="tile" data-reveal><span class="tile-num"><span data-count="4.2" data-decimals="1">0</span> yrs</span><h4 data-i18n="tiles.payback.label"></h4><p data-i18n="tiles.payback.desc"></p></div>
-    <div class="tile" data-reveal><span class="tile-num">$<span data-count="23">0</span>M</span><h4 data-i18n="tiles.capex.label"></h4><p data-i18n="tiles.capex.desc"></p></div>
-    <div class="tile" data-reveal><span class="tile-num">$<span data-count="25.2" data-decimals="1">0</span>M</span><h4 data-i18n="tiles.rev.label"></h4><p data-i18n="tiles.rev.desc"></p></div>
+    <div class="tile" data-reveal><span class="tile-num"><span data-stat="ebitMargin" data-decimals="1" data-count="21.7">0</span>%</span><h4 data-i18n="tiles.ebit.label"></h4><p data-i18n="tiles.ebit.desc"></p></div>
+    <div class="tile" data-reveal><span class="tile-num"><span data-stat="bep" data-decimals="1" data-count="55.7">0</span>%</span><h4 data-i18n="tiles.bep.label"></h4><p data-i18n="tiles.bep.desc"></p></div>
+    <div class="tile" data-reveal><span class="tile-num"><span data-stat="irrLow" data-decimals="1" data-count="21.3">21.3</span><span class="tilde">–</span><span data-stat="irrHigh" data-decimals="1" data-count="24.8">24.8</span>%</span><h4 data-i18n="tiles.irr.label"></h4><p data-i18n="tiles.irr.desc"></p></div>
+    <div class="tile" data-reveal><span class="tile-num"><span data-stat="payback" data-decimals="1" data-count="4.2">0</span> yrs</span><h4 data-i18n="tiles.payback.label"></h4><p data-i18n="tiles.payback.desc"></p></div>
+    <div class="tile" data-reveal><span class="tile-num">$<span data-stat="totalCapex" data-scale="1000000" data-count="23">0</span>M</span><h4 data-i18n="tiles.capex.label"></h4><p data-i18n="tiles.capex.desc"></p></div>
+    <div class="tile" data-reveal><span class="tile-num">$<span data-stat="annualRevenue" data-scale="1000000" data-decimals="1" data-count="25.2">0</span>M</span><h4 data-i18n="tiles.rev.label"></h4><p data-i18n="tiles.rev.desc"></p></div>
   </div>
 </section>
 
@@ -98,8 +98,10 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 <script src="https://unpkg.com/lenis@1.1.18/dist/lenis.min.js"></script>
 <script src="assets/js/data.js"></script>
+<script src="assets/js/content-engine.js"></script>
 <script src="assets/js/app.js"></script>
 <script src="assets/js/scene-a.js"></script>
+<script src="assets/js/fx.js"></script>
 <script>
 document.addEventListener("ipx:ready", function () {
   if (!window.gsap || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;

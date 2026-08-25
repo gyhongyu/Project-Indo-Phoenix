@@ -118,24 +118,50 @@
 
   const mat = new THREE.ShaderMaterial({
     uniforms: {
-      uTime:  { value: 0 },
-      uScanY: { value: -2 },
-      uColA:  { value: new THREE.Color(0x35e0ff) },
-      uColB:  { value: new THREE.Color(0x8b7bff) }
+      uTime:   { value: 0 },
+      uScanY:  { value: -2 },
+      uColA:   { value: new THREE.Color(0x35e0ff) },
+      uColB:   { value: new THREE.Color(0x8b7bff) },
+      uMag:    { value: 0 },                          /* magnetize envelope 0..1 */
+      uMagPos: { value: new THREE.Vector3(0, 0, 0) }, /* cursor point, cloud-local */
+      uGlitch: { value: 0 },                          /* glitch burst envelope */
+      uDeep:   { value: 0 },                          /* deep-scan exploded view */
+      uGlow:   { value: 0 }                           /* wheel / scroll power */
     },
     vertexShader: [
       "attribute float aSeed;",
       "uniform float uScanY;",
       "uniform float uTime;",
+      "uniform float uMag;",
+      "uniform vec3 uMagPos;",
+      "uniform float uGlitch;",
+      "uniform float uDeep;",
+      "uniform float uGlow;",
       "varying float vGlow;",
       "varying float vMix;",
       "void main() {",
-      "  vec4 mv = modelViewMatrix * vec4(position, 1.0);",
+      "  vec3 p = position;",
+      /* magnetize: points near the cursor get pulled in + agitated */
+      "  vec3 dm = p - uMagPos;",
+      "  float pull = smoothstep(0.95, 0.0, length(dm)) * uMag;",
+      "  p -= dm * pull * 0.55;",
+      "  p += vec3(sin(uTime * 3.1 + aSeed * 43.0),",
+      "            cos(uTime * 2.6 + aSeed * 61.0),",
+      "            sin(uTime * 2.2 + aSeed * 29.0)) * pull * 0.07;",
+      /* deep scan: exploded view along each point's radial */
+      "  p += normalize(p + vec3(0.0001)) * uDeep * (0.22 + aSeed * 0.22);",
+      /* glitch burst: horizontal slices jump sideways */
+      "  float row = floor((p.y + 2.0) * 9.0);",
+      "  float jump = step(0.8, fract(sin(row * 91.7 + floor(uTime * 28.0) * 13.1) * 43758.5453));",
+      "  p.x += (jump - 0.5) * 0.30 * uGlitch;",
+      "  p.z += (fract(aSeed * 7.0) - 0.5) * 0.10 * uGlitch;",
+      "  vec4 mv = modelViewMatrix * vec4(p, 1.0);",
       "  gl_Position = projectionMatrix * mv;",
       "  gl_PointSize = (7.0 + aSeed * 8.0) / max(0.1, -mv.z);",
       "  float scan = smoothstep(0.30, 0.02, abs(position.y - uScanY));",
       "  float flick = 0.84 + 0.16 * sin(uTime * 24.0 + aSeed * 90.0);",
-      "  vGlow = (0.38 + 0.9 * scan) * flick;",
+      "  vGlow = (0.38 + 0.9 * scan + uDeep * 0.55 + uGlow * 0.85) * flick",
+      "        + uGlitch * 0.5 + pull * 0.6;",
       "  vMix = aSeed;",
       "}"
     ].join("\n"),
@@ -160,19 +186,22 @@
   const group = new THREE.Group();
   group.add(cloud);
 
-  /* hologram projector rings */
+  /* hologram projector rings (refs kept so FX can breathe them) */
+  const projRings = [];
   [0.85, 1.25, 1.70].forEach((r, i) => {
     const pts = [];
     for (let k = 0; k <= 90; k++) {
       const a = (k / 90) * Math.PI * 2;
       pts.push(new THREE.Vector3(Math.cos(a) * r, 0, Math.sin(a) * r));
     }
+    const baseOp = 0.16 - i * 0.045;
     const ring = new THREE.LineLoop(
       new THREE.BufferGeometry().setFromPoints(pts),
-      new THREE.LineBasicMaterial({ color: 0x35e0ff, transparent: true, opacity: 0.16 - i * 0.045 })
+      new THREE.LineBasicMaterial({ color: 0x35e0ff, transparent: true, opacity: baseOp })
     );
     ring.position.y = -1.14;
     group.add(ring);
+    projRings.push({ mesh: ring, baseOp: baseOp });
   });
   scene.add(group);
 
@@ -220,13 +249,49 @@
   resize();
   applyShape(SHAPES[0]);
 
+  /* ============================================================
+     Interaction core — magnetize · glitch burst · deep scan ·
+     wheel glow · ghost echo (driven by fx-c.js via IPX_HOLO)
+     All displacement lives in the vertex shader: zero CPU cost.
+     ============================================================ */
+  const raycaster = new THREE.Raycaster();
+  const planeZ0 = new THREE.Plane(new THREE.Vector3(0, 0, 1), 0);
+  const ndc = new THREE.Vector2();
+  const hitP = new THREE.Vector3();
+
+  let magActive = false, magHas = false;
+  const magClient = { x: 0, y: 0 };
+  let magV = 0, deepTarget = 0, deepV = 0, glitchV = 0, glowV = 0;
+
+  /* ghost echo pass: same geometry, offset additive copy */
+  const ghostMat = new THREE.PointsMaterial({
+    color: 0x35e0ff, size: 0.02, transparent: true,
+    opacity: 0, depthWrite: false, blending: THREE.AdditiveBlending
+  });
+  const ghost = new THREE.Points(geo, ghostMat);
+  ghost.visible = false;
+  group.add(ghost);
+
+  const ECHO_MS = 850;
+  let echoOn = false, echoUntil = 0;
+
+  /* asymmetric envelope: fast rise, slow release */
+  function envTo(v, target, dt, rise, fall) {
+    const c = target > v ? rise : fall;
+    return v + (target - v) * (1 - Math.pow(c, dt));
+  }
+
   let visible = true;
   document.addEventListener("visibilitychange", () => {
     visible = !document.hidden;
-    if (visible) requestAnimationFrame(loop);
+    if (visible) { last = performance.now(); requestAnimationFrame(loop); }
   });
 
-  function render(now) {
+  /* ---------------- render loop ---------------- */
+  let last = performance.now();
+  let scanPhase = 0;
+
+  function render(now, dt) {
     const cyc = now % (CYCLE * SHAPES.length);
     const idx = Math.floor(cyc / CYCLE);
     const ph = cyc % CYCLE;
@@ -234,7 +299,49 @@
     else if (idx !== curIdx) { curIdx = idx; applyShape(SHAPES[idx]); }
 
     mat.uniforms.uTime.value = now * 0.001;
-    mat.uniforms.uScanY.value = -1.4 + 2.9 * ((now * 0.00021) % 1);
+    /* scan sweep speeds up during deep scan */
+    scanPhase = (scanPhase + dt * 0.21 * (1 + deepV * 1.8)) % 1;
+    mat.uniforms.uScanY.value = -1.4 + 2.9 * scanPhase;
+
+    /* envelopes: fast rise, slow decay */
+    magV = envTo(magV, magActive ? 1 : 0, dt, 2e-7, 0.0032);
+    deepV = envTo(deepV, deepTarget, dt, 0.0014, 0.08);
+    glitchV *= Math.pow(0.0005, dt);
+
+    /* cursor client coords → world z=0 plane → cloud-local space */
+    if (magActive && magHas) {
+      ndc.set((magClient.x / innerWidth) * 2 - 1,
+              -((magClient.y / innerHeight) * 2 - 1));
+      raycaster.setFromCamera(ndc, camera);
+      if (raycaster.ray.intersectPlane(planeZ0, hitP)) {
+        group.worldToLocal(hitP);
+        mat.uniforms.uMagPos.value.copy(hitP);
+      }
+    }
+    mat.uniforms.uMag.value = magV;
+    mat.uniforms.uDeep.value = deepV;
+    mat.uniforms.uGlitch.value = glitchV;
+    mat.uniforms.uGlow.value = glowV;
+
+    /* projector rings brighten & pulse with power / deep scan */
+    projRings.forEach((r, i) => {
+      r.mesh.material.opacity = Math.min(0.6,
+        r.baseOp + glowV * 0.22 + deepV * 0.30);
+      r.mesh.scale.setScalar(1 + Math.sin(now * 0.004 + i * 1.7) * 0.03 * deepV);
+    });
+
+    /* rare ghost echo: signal double-image fading in and out */
+    if (echoOn) {
+      const k = Math.min(1, 1 - (echoUntil - now) / ECHO_MS);
+      ghost.visible = true;
+      ghost.position.set(Math.sin(now * 0.02) * 0.07,
+                         Math.cos(now * 0.017) * 0.05, -0.14);
+      ghostMat.size = 0.02 + deepV * 0.01;
+      ghostMat.opacity = 0.20 * Math.sin(Math.PI * k);
+      if (now >= echoUntil) {
+        echoOn = false; ghost.visible = false; ghostMat.opacity = 0;
+      }
+    }
 
     mx += (tx - mx) * 0.045; my += (ty - my) * 0.045;
     group.rotation.y = Math.sin(now * 0.00022) * 0.38 + mx * 0.45;
@@ -245,8 +352,22 @@
 
   function loop(now) {
     if (!visible) return;
-    render(now);
+    const dt = Math.min(0.05, (now - last) / 1000);
+    last = now;
+    render(now, dt);
     requestAnimationFrame(loop);
   }
   requestAnimationFrame(loop);
+
+  /* ---------------- public API (consumed by fx-c.js) ---------------- */
+  window.IPX_HOLO = {
+    mag: (x, y, active) => {
+      magActive = !!active;
+      if (magActive) { magClient.x = x; magClient.y = y; magHas = true; }
+    },
+    glitch: () => { glitchV = 1; },
+    deep: (v) => { deepTarget = v ? 1 : 0; },
+    glow: (v) => { glowV = v; },
+    echo: () => { echoOn = true; echoUntil = performance.now() + ECHO_MS; }
+  };
 })();

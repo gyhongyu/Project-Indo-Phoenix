@@ -130,6 +130,17 @@
     });
   }
 
+  /* ---------------- Nav scroll state ----------------
+     darkens/dims the fixed navbar once content scrolls under it */
+  function initNav() {
+    const nav = document.querySelector(".nav");
+    if (!nav) return;
+    const update = () =>
+      nav.classList.toggle("is-scrolled", (window.scrollY || 0) > 24);
+    addEventListener("scroll", update, { passive: true });
+    update();
+  }
+
   /* ------------------- Smooth scrolling ------------------------- */
   function initSmoothScroll() {
     if (!window.Lenis || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
@@ -151,6 +162,7 @@
     );
     initCursor();
     initSmoothScroll();
+    initNav();
     runPreloader(() => {
       initReveals();
       document.body.classList.add("ready");
