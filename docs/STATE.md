@@ -1,7 +1,7 @@
 # 🏛️ Project Indo-Phoenix 系統現狀與架構真源 (docs/STATE.md)
 
 > ⚠️ **【文檔紀律】本檔為專案唯一架構真源 (SSOT)，嚴格維持 ≤ 200 行上限。**
-> 最後校準日期：2026-08-23 · 審查主管：CTO · 狀態：`✅ VERIFIED`
+> 最後校準日期：2026-08-26 · 審查主管：CTO · 狀態：`✅ VERIFIED`
 
 ---
 
@@ -52,14 +52,16 @@
 ## 🗺️ 4. 目錄結構與模組地圖 (Directory SSOT)
 ```text
 Project Indo-Phoenix/
-├── index.html              ← 網站入口 (根目錄部署 GitHub Pages)
-├── template-a.html         ← 模板 A: 黑金編輯風 (OBSIDIAN)
-├── template-b.html         ← 模板 B: 航太 HUD 風 (MISSION CONTROL)
-├── template-c.html         ← 模板 C: 全息點雲科幻風 (HOLOGRAM)
+├── index.html              ← 網站入口 (根目錄部署 GitHub Pages, 自定義網域 fpc.teaforia.in)
+├── template-a.html         ← 模板 A: 黑金編輯風 (OBSIDIAN) — data-template="a"
+├── template-b.html         ← 模板 B: 航太 HUD 風 (MISSION CONTROL) — data-template="b"
+├── template-c.html         ← 模板 C: 全息點雲科幻風 (HOLOGRAM) — data-template="c"
 ├── assets/
-│   ├── css/                ← base.css, template-a/b/c.css
+│   ├── css/                ← base.css (含 nav 滾動加深/游標主題/#fx-canvas), template-a/b/c.css
 │   └── js/                 ← data.js (備援快照+設定), content-engine.js (線上SSOT引擎),
-│                              app.js (UI引擎), scene-a/b/c.js (3D場景)
+│                              app.js (UI引擎: cursor/smoothscroll/nav), scene-a/b/c.js (3D場景),
+│                              fx.js (A煙霧層), fx-core.js (B/C共用FX核心), fx-b.js / fx-c.js (覆蓋層)
+├── _tools/check-shader.js  ← GLSL 靜態檢查 (A FRAG + C VERT/FRAG)
 ├── docs/                   ← DMC 研發知識庫治理中心
 │   ├── STATE.md            ← [本檔] 架構唯一真源 (≤200行)
 │   ├── ACTIVE_LOG.md       ← 研發踩坑與決策單向追加日誌
@@ -70,7 +72,6 @@ Project Indo-Phoenix/
 ├── ROADMAP.md              ← 專案階段施工圖
 ├── README.md               ← 專案公開說明與部署指南
 ├── GAS部署指南.md           ← Sheet 上傳 + GAS 萬能網關部署步驟
-├── _tools/                 ← XLSX 手術腳本 / 備份 / 引擎煙霧測試
 ├── 交接工作報告.md         ← 歷史交接底稿
 └── Project Indo-Phoenix...xlsx ← 原始可行性財務模型 (含 WEB_DATA/WEB_TEXT 頁籤)
 ```
@@ -81,3 +82,21 @@ Project Indo-Phoenix/
 1. **GitHub Pages 根路徑陷阱**：所有資源與頁面跳轉一律採用相對路徑（如 `assets/...`），支援子目錄與自定義網域。
 2. **WebGL Context 洩漏防禦**：頁面切換或分頁隱藏時，透過 `visibilitychange` 與 dispose 機制釋放 GPU 負載。
 3. **i18n Key 缺漏防禦**：所有 HTML `data-i18n` 鍵值必須在 `data.js` 的 `en` 與 `zh` 中 100% 對齊。
+4. **FX 迴圈啟動鐵律（2026-08-26 教訓）**：每個 rAF 迴圈必須有**初始 kickoff 呼叫**，不可只依賴
+   visibilitychange 重啟（fx.js 曾因此載入後全靜、切窗才復活）；FX 驗收必須「載入後不切窗直接測互動」。
+
+---
+
+## 🎨 6. 互動特效層架構 (FX Layer — 2026-08-26 定版)
+| 模板 | 場景 API（window 全域） | 覆蓋層 | 手勵組合 |
+|---|---|---|---|
+| A 黑金 | `IPX_SMOKE` (scene-a.js) | `fx.js`（獨立實作） | 煙尾/煙泡/hold boost/滾輪 glow/神影 |
+| B 航太 | `IPX_ORBIT` (scene-b.js) | `fx-core.js` + `fx-b.js` | 重力井/離子尾/雷達脈衝/點火/衛星過境 |
+| C 全息 | `IPX_HOLO` (scene-c.js) | `fx-core.js` + `fx-c.js` | 磁化吸聚/glitch/deep scan/ghost echo |
+
+- 鐵律：基底粒子陣列**永不變異**（快照→每幀重算→插值）；相機參數純乘法不覆寫；B/C 強度 ≒ A 的 70%。
+- 政策：直接操縱回饋永遠啟用（業主需求）；僅自主環境動畫（神影/衛星/echo 排程）尊重 reduced-motion。
+- z-index 圖層：#bg-canvas(-2) → #fx-canvas(1) → grain(3) → 內容(5) → nav(20)。
+- 共用樣式（base.css）：`body[data-template]` 鍵控游標主題（A金/B青方/C青虛線）、`.nav.is-scrolled`
+  滾動加深刮層（app.js `initNav()`，>24px 觸發）、B/C `user-select:none`。
+- bootstrap 順序（app.js init）：`initCursor → initSmoothScroll(Lenis) → initNav`——三者並列，缺一即回歸。
