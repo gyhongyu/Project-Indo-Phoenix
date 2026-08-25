@@ -217,4 +217,5 @@
     requestAnimationFrame(loop);
   }
   fig.next = performance.now() + 22000 + Math.random() * 18000;  /* first visit: pure smoke */
+  requestAnimationFrame(loop);   /* initial kickoff — was missing: loop only started after a visibilitychange (window switch) */
 })();

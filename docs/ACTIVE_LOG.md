@@ -5,6 +5,17 @@
 
 ---
 
+### [2026-08-26] [fx] 熱修：模板 A 煙尾/煙泡「載入後不動、切窗復活」——主迴圈缺少初始啟動呼叫
+- **類型**: `BUGFIX`
+- **代碼錨點**: `assets/js/fx.js` 檔尾（L220 新增 `requestAnimationFrame(loop)`）
+- **核心事實 / 決策理由**:
+  - 根因確診：fx.js 全檔 `requestAnimationFrame(loop)` 僅存在於 visibilitychange 重啟（L202）與 loop 自身續跑（L217），**無初始 kickoff**——載入後渲染迴圈從未啟動，煙尾/煙泡靜止。
+  - 症狀完全吻合：切走視窗再切回 → 瀏覽器發出 visibilitychange → 迴圈此時才首次啟動 → 業主見「煙又超奇怪地出現了」。
+  - B/C 正常對照組：fx-core.js（L123/L125）有正確初始 kickoff，僅較早編寫的 fx.js 漏行。
+  - 教訓入冊：headless DOM 檢查測不出「迴圈未啟動」類 bug（canvas 已建、監聽已掛、零報錯）；日後 FX 層驗收須含「載入後不切窗直接測互動」步驟。
+- **驗證**: `node --check fx.js` 通過；kickoff 行已確認存在（L220）。
+- **狀態**: `待業主公網複驗`
+
 ### [2026-08-26] [app] 熱修：initSmoothScroll 誤遭替換致全站平滑捲動失效
 - **類型**: `BUGFIX`
 - **代碼錨點**: `assets/js/app.js` L164（bootstrap）
