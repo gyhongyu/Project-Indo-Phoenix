@@ -426,6 +426,88 @@
     }
     .btn-cta-primary:hover { background: #fff; color: #000; box-shadow: 0 0 28px rgba(255,255,255,0.7); }
 
+    /* Card Detail Hover Indicator & Interactive Modal */
+    .stat-card.has-info, .main-anchor-stat.has-info, .flow-card.has-info {
+      cursor: pointer; position: relative;
+    }
+    .info-hint-icon {
+      position: absolute; top: 12px; right: 12px;
+      font-size: 11px; font-family: var(--font-mono); color: var(--accent);
+      background: rgba(255,255,255,0.04); border: 1px solid var(--line-subtle);
+      width: 20px; height: 20px; border-radius: 50%; display: flex;
+      align-items: center; justify-content: center; opacity: 0.7;
+      transition: all 0.3s var(--ease);
+    }
+    .stat-card:hover .info-hint-icon, .main-anchor-stat:hover .info-hint-icon {
+      opacity: 1; border-color: var(--accent); background: var(--accent); color: var(--bg);
+      box-shadow: 0 0 10px var(--accent-glow);
+    }
+
+    /* Executive Detail Modal Overlay */
+    .deck-modal-backdrop {
+      position: fixed; inset: 0; z-index: 100;
+      background: rgba(0, 0, 0, 0.75); backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      display: flex; align-items: center; justify-content: center;
+      padding: 24px; opacity: 0; pointer-events: none;
+      transition: opacity 0.35s var(--ease);
+    }
+    .deck-modal-backdrop.is-open {
+      opacity: 1; pointer-events: auto;
+    }
+    .deck-modal-card {
+      width: 100%; max-width: 640px;
+      background: linear-gradient(135deg, rgba(20, 24, 36, 0.95) 0%, rgba(10, 12, 18, 0.98) 100%);
+      border: 1px solid var(--accent);
+      border-radius: var(--card-radius);
+      box-shadow: 0 24px 80px rgba(0, 0, 0, 0.8), 0 0 40px var(--accent-glow);
+      padding: 36px 32px; position: relative;
+      transform: scale(0.92) translateY(20px);
+      transition: transform 0.35s var(--ease);
+    }
+    .deck-modal-backdrop.is-open .deck-modal-card {
+      transform: scale(1) translateY(0);
+    }
+    .modal-close-btn {
+      position: absolute; top: 18px; right: 18px;
+      background: transparent; border: 1px solid var(--line-subtle);
+      color: var(--ink-sub); font-family: var(--font-mono); font-size: 13px;
+      width: 32px; height: 32px; border-radius: 50%; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      transition: all 0.3s var(--ease);
+    }
+    .modal-close-btn:hover {
+      border-color: var(--accent); color: var(--ink); background: rgba(255,255,255,0.06);
+    }
+    .modal-tag {
+      font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.25em;
+      text-transform: uppercase; color: var(--accent); margin-bottom: 10px;
+    }
+    .modal-title {
+      font-family: var(--font-display); font-size: 28px; font-weight: 500;
+      color: var(--ink); margin-bottom: 16px; line-height: 1.2;
+    }
+    .modal-stat-badge {
+      display: inline-flex; align-items: baseline; gap: 8px;
+      background: rgba(255,255,255,0.04); border: 1px solid var(--line-subtle);
+      padding: 8px 16px; border-radius: var(--tag-radius); margin-bottom: 20px;
+    }
+    .modal-stat-badge .val {
+      font-family: var(--font-display); font-size: 30px; color: var(--accent); font-weight: 600;
+    }
+    .modal-stat-badge .lbl {
+      font-family: var(--font-mono); font-size: 11.5px; color: var(--ink-sub); text-transform: uppercase;
+    }
+    .modal-body-text {
+      font-size: 14.5px; color: var(--ink-sub); line-height: 1.7;
+      padding-top: 16px; border-top: 1px solid rgba(255,255,255,0.08);
+    }
+    .modal-body-text strong { color: var(--ink); font-weight: 500; }
+    .modal-source-ref {
+      margin-top: 20px; font-family: var(--font-mono); font-size: 11px;
+      color: var(--accent); opacity: 0.85; display: flex; align-items: center; gap: 6px;
+    }
+
     /* Generic Card */
     .stat-card {
       background: rgba(10, 15, 25, 0.18);
@@ -520,6 +602,26 @@
       <div id="slideContent"></div>
     </div>
   </main>
+
+  <!-- Executive Detail Modal Container -->
+  <div class="deck-modal-backdrop" id="deckModal" onclick="closeDetailModal(event)">
+    <div class="deck-modal-card" onclick="event.stopPropagation()">
+      <button class="modal-close-btn" onclick="closeDetailModal()">✕</button>
+      <div class="modal-tag" id="modalTag">EXECUTIVE NOTE / 決策指標依據</div>
+      <div class="modal-title" id="modalTitle">Financial Indicator</div>
+      <div class="modal-stat-badge">
+        <span class="val" id="modalVal">$0</span>
+        <span class="lbl" id="modalLbl">BENCHMARK</span>
+      </div>
+      <div class="modal-body-text" id="modalText">
+        Strategic Explanation text from Google Sheet FPC Factory Model.
+      </div>
+      <div class="modal-source-ref">
+        <span>●</span>
+        <span id="modalSource">FPC Factory Model SSOT</span>
+      </div>
+    </div>
+  </div>
 
   <!-- Deck Navigation Footer -->
   <footer class="deck-footer">
@@ -667,14 +769,42 @@
               type: "bep-cockpit",
               tag: "SLIDE 07 / PROFITABILITY & BREAK-EVEN",
               title: `Module 5: ${bepUtil}% Break-Even Point & Robust ROI`,
-              desc: `Crossing into profitability at only $${bepRev}M monthly revenue (${(getLiveStat("bep",50.8)*150).toFixed(0)} m² utilization).`,
+              desc: `Crossing into dynamic profitability at $${bepRev}M monthly revenue (${(getLiveStat("bep",50.8)*150).toFixed(0)} m² utilization).`,
               bepVal: `${bepUtil}%`,
               bepDesc: `BEP achieved at $${bepRev}M monthly revenue. Standard for highly capitalized wet-process plants.`,
               cards: [
-                { label: "Target Monthly Revenue", val: `$${(getLiveStat("monthlyRevenue",2400000)/1000000).toFixed(1)}M`, unit: "/ mo", desc: "At full 15,000 m²/month operation." },
-                { label: "Full Capacity EBIT", val: `$${ebitMo}K`, unit: "/ mo", desc: `${ebitMarg}% margin delivering $${(ebitMo*12/1000).toFixed(2)}M annual EBIT.` },
-                { label: "Internal Rate of Return", val: irrRange, unit: "", desc: "Substantially outperforms benchmark electronics manufacturing." },
-                { label: "Static Payback Period", val: `${paybackYrs}`, unit: "Years", desc: `With SPECS 25% subsidy (${paybackNoSub} yrs without).` }
+                {
+                  label: "Target Monthly Revenue",
+                  val: `$${(getLiveStat("monthlyRevenue",2400000)/1000000).toFixed(1)}M`,
+                  unit: "/ mo",
+                  desc: "At full 15,000 m²/month operation ($160/m² weighted ASP).",
+                  detail: "At 15,000 m²/month full-capacity operation, weighted average price is $160/m² (Model Row 39). Represents total monthly production gross value under dual-shift continuous manufacturing.",
+                  source: "FPC Factory Model!G10 / Module 5"
+                },
+                {
+                  label: "Operating Profit / EBIT",
+                  val: `$${ebitMo}K`,
+                  unit: "/ mo",
+                  desc: `${ebitMarg}% margin delivering $${(ebitMo*12/1000).toFixed(2)}M annual EBIT.`,
+                  detail: "EBIT Margin of 23.1% ($555,000/month, $6,660,000/year). Demonstrates excellent scale profitability when operating at full utilization capacity (Model Row 41).",
+                  source: "FPC Factory Model!C41 / E41"
+                },
+                {
+                  label: "Internal Rate of Return",
+                  val: irrRange,
+                  unit: "",
+                  desc: "Substantially outperforms benchmark electronics manufacturing.",
+                  detail: "Projected IRR between 21.3% and 24.8%. Far exceeds standard electronics manufacturing benchmarks (12-15%). Highly attractive profile for strategic defense & tech funds (Model Row 44).",
+                  source: "WEB_DATA / Module 5 Benchmark"
+                },
+                {
+                  label: "Static Payback Period",
+                  val: `${paybackYrs}`,
+                  unit: "Years",
+                  desc: `With SPECS 25% subsidy (${paybackNoSub} yrs without).`,
+                  detail: "Assumes SPECS 25% CapEx subsidy cash refund ($5.75M) is cleared, yielding a 4.2-year payback. Without government subsidy, the static payback period is 5.2 Years (Model Row 45).",
+                  source: "FPC Factory Model!Row 45"
+                }
               ]
             },
             // Slide 08: Smart Factory 4-Step Pipeline Flow
@@ -819,10 +949,38 @@
               bepVal: `${bepUtil}%`,
               bepDesc: `月營收達 $${bepRev}M 達成損益兩平。高度資本化濕製程工廠標準。`,
               cards: [
-                { label: "目標月營業收入", val: `$${(getLiveStat("monthlyRevenue",2400000)/1000000).toFixed(1)}M`, unit: "/ 月", desc: "在每月 15,000 平方公尺滿載運營下達成。" },
-                { label: "滿載單月營業利潤", val: `$${ebitMo}K`, unit: "/ 月", desc: `${ebitMarg}% 利潤率，年化營業利潤達 $${(ebitMo*12/1000).toFixed(2)}M 美元。` },
-                { label: "內部報酬率 (IRR)", val: irrRange, unit: "", desc: "遠超過標準電子製造業基準，回報極具吸引力。" },
-                { label: "靜態投資回收期", val: `${paybackYrs}`, unit: "年", desc: `含 SPECS 25% 補貼（未含補貼為 ${paybackNoSub} 年）。` }
+                {
+                  label: "目標月營業收入",
+                  val: `$${(getLiveStat("monthlyRevenue",2400000)/1000000).toFixed(1)}M`,
+                  unit: "/ 月",
+                  desc: "在每月 15,000 平方公尺滿載運營下達成（加權均價 $160/m²）。",
+                  detail: "在每月 15,000 平方公尺滿載運營下，加權平均價格為 160 美元/平方公尺（試算表第 39 列）。代表雙班制連續生產下的單月總產值。",
+                  source: "FPC Factory Model!G10 / 模組 5"
+                },
+                {
+                  label: "滿載單月營業利潤 / EBIT",
+                  val: `$${ebitMo}K`,
+                  unit: "/ 月",
+                  desc: `${ebitMarg}% 利潤率，年化營業利潤達 $${(ebitMo*12/1000).toFixed(2)}M 美元。`,
+                  detail: "23.1% 的息稅前利潤率 (EBIT Margin，單月 55.5 萬美元、年化 666 萬美元)。顯示滿載時具有極佳的規模獲利能力（試算表第 41 列）。",
+                  source: "FPC Factory Model!C41 / E41"
+                },
+                {
+                  label: "內部報酬率 (IRR)",
+                  val: irrRange,
+                  unit: "",
+                  desc: "遠超過標準電子製造業基準，回報極具吸引力。",
+                  detail: "預估內部報酬率介於 21.3% ~ 24.8%。遠超過標準電子製造業基準 (12%~15%)，極具戰略投資與主權基金吸引力（試算表第 44 列）。",
+                  source: "WEB_DATA / 模組 5 基準"
+                },
+                {
+                  label: "靜態投資回收期",
+                  val: `${paybackYrs}`,
+                  unit: "年",
+                  desc: `含 SPECS 25% 補貼（未含補貼為 ${paybackNoSub} 年）。`,
+                  detail: "假設已取得 SPECS 25% 的資本支出現金返還補貼 ($5.75M)，投資回收期為 4.2 年；若無政府補貼，靜態回收期為 5.2 年（試算表第 45 列）。",
+                  source: "FPC Factory Model!第 45 列"
+                }
               ]
             },
             // Slide 08: 智慧工廠 4 步管線
@@ -1011,8 +1169,9 @@
               <div class="gauge-label">${slide.bepDesc}</div>
             </div>
             <div class="sub-stat-grid">
-              ${slide.cards.map(c => `
-                <div class="stat-card gs-anim-card">
+              ${slide.cards.map((c, idx) => `
+                <div class="stat-card gs-anim-card ${c.detail ? 'has-info' : ''}" ${c.detail ? `onclick="openDetailModal(${currentSlide}, ${idx})"` : ''}>
+                  ${c.detail ? `<div class="info-hint-icon" title="View Strategic Explanation">ⓘ</div>` : ''}
                   <div class="stat-card-label">${c.label}</div>
                   <div class="stat-card-value">
                     <span class="count-target" data-target="${c.val}">0</span>
@@ -1242,7 +1401,35 @@
       }
     }
 
+    /* ═══════════════════════════════════════════════════════════════
+       EXECUTIVE DETAIL MODAL CONTROLLER
+       ═══════════════════════════════════════════════════════════════ */
+    function openDetailModal(slideIdx, cardIdx) {
+      const slide = getI18NDeck()[currentLang].slides[slideIdx];
+      if (!slide || !slide.cards || !slide.cards[cardIdx]) return;
+      const card = slide.cards[cardIdx];
+
+      document.getElementById("modalTag").textContent = currentLang === "zh" ? "決策依據與業界標準說明" : "Strategic Explanation & Benchmarks";
+      document.getElementById("modalTitle").textContent = card.label;
+      document.getElementById("modalVal").textContent = card.val;
+      document.getElementById("modalLbl").textContent = card.unit || (currentLang === "zh" ? "指標現值" : "Current Value");
+      document.getElementById("modalText").textContent = card.detail || card.desc;
+      document.getElementById("modalSource").textContent = card.source || "Google Sheet (FPC Factory Model)";
+
+      const modal = document.getElementById("deckModal");
+      modal.classList.add("is-open");
+    }
+
+    function closeDetailModal(e) {
+      if (e && e.target && e.target.closest(".deck-modal-card") && !e.target.classList.contains("modal-close-btn")) {
+        return;
+      }
+      document.getElementById("deckModal").classList.remove("is-open");
+    }
+
     window.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") closeDetailModal();
+      if (document.getElementById("deckModal").classList.contains("is-open")) return;
       if (e.key === "ArrowRight" || e.key === " " || e.key === "PageDown") nextSlide();
       if (e.key === "ArrowLeft" || e.key === "PageUp") prevSlide();
     });
