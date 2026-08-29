@@ -638,6 +638,57 @@
     }
     .btn-cta-primary:hover { background: #fff; color: #000; box-shadow: 0 0 28px rgba(255,255,255,0.7); }
 
+    /* Slide 01 Mini KPI Pathway & Benchmark Badges */
+    .mini-kpi-pathway {
+      display: flex; align-items: center; justify-content: space-between;
+      background: rgba(255,255,255,0.03); border: 1px dashed var(--line-subtle);
+      border-radius: var(--tag-radius); padding: 8px 12px; margin: 10px 0;
+    }
+    .kpi-step { display: flex; flex-direction: column; }
+    .kpi-step-val { font-family: var(--font-mono); font-size: 13px; font-weight: 700; color: var(--accent); }
+    .kpi-step-lbl { font-size: 10px; color: var(--ink-sub); }
+    .kpi-arrow { color: var(--line); font-size: 12px; }
+
+    .stat-benchmark-tag {
+      font-family: var(--font-mono); font-size: 10.5px; font-weight: 600;
+      padding: 2px 8px; border-radius: 4px; display: inline-flex; align-items: center; gap: 4px;
+      margin-top: 4px;
+    }
+    .tag-positive { background: rgba(52, 211, 153, 0.15); color: #34d399; border: 1px solid rgba(52, 211, 153, 0.3); }
+    .tag-accent { background: var(--accent-glow); color: var(--accent); border: 1px solid var(--accent); }
+
+    /* Slide 02 Visual Comparison Bars & Metrics Meter */
+    .vs-metric-row {
+      display: flex; flex-direction: column; gap: 4px; margin-top: 6px;
+    }
+    .vs-bar-track {
+      width: 100%; height: 6px; background: rgba(255,255,255,0.04);
+      border-radius: 3px; overflow: hidden; position: relative;
+    }
+    .vs-bar-bad { height: 100%; width: 90%; background: #ef4444; border-radius: 3px; }
+    .vs-bar-good { height: 100%; width: 15%; background: var(--accent); border-radius: 3px; box-shadow: 0 0 10px var(--accent); }
+
+    /* Slide 03 Buyer Logos, Demand Pills & Target Metrics */
+    .buyer-pills-row {
+      display: flex; flex-wrap: wrap; gap: 6px; margin: 10px 0;
+    }
+    .buyer-pill {
+      font-family: var(--font-mono); font-size: 11px; font-weight: 600;
+      background: rgba(255,255,255,0.04); border: 1px solid var(--line-subtle);
+      padding: 3px 8px; border-radius: 4px; color: var(--ink);
+    }
+    .buyer-pill.highlight {
+      background: var(--accent-glow); border-color: var(--accent); color: var(--accent);
+    }
+    .buyer-data-matrix {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 8px;
+      background: rgba(0,0,0,0.25); border: 1px solid var(--line-subtle);
+      border-radius: 6px; padding: 8px 10px; margin-top: 10px;
+    }
+    .buyer-data-item { display: flex; flex-direction: column; }
+    .buyer-data-val { font-family: var(--font-mono); font-size: 13px; font-weight: 700; color: var(--accent); }
+    .buyer-data-lbl { font-size: 10.5px; color: var(--ink-sub); }
+
     /* Card Detail Hover Indicator & Interactive Modal */
     .stat-card.has-info, .main-anchor-stat.has-info, .flow-card.has-info {
       cursor: pointer; position: relative;
@@ -891,12 +942,45 @@
               tag: "SLIDE 01 / EXECUTIVE STRATEGY",
               title: "India's 1st Strategic Aerospace & Defense FPC Hub",
               desc: "Debunking the '30% Self-Reliance' statistical myth. High-end bare FPC wet-chemistry manufacturing is practically 0% in India. Capturing the China+1 strategic window.",
-              mainStat: { label: "Full Capacity Annual Revenue", val: `$${revAnnual}M`, desc: `Targeted on ${capMonthly} m²/mo volume at $${weightedPrice}/m² weighted ASP (35%–40% gross margin).` },
+              mainStat: { 
+                label: "Full Capacity Annual Revenue", 
+                val: `$${revAnnual}M`, 
+                desc: `Targeted on ${capMonthly} m²/mo volume at $${weightedPrice}/m² weighted ASP (35%–40% gross margin).`,
+                kpiSteps: [
+                  { val: "15,000 m²", lbl: "Monthly Volume" },
+                  { val: "38.5%", lbl: "Gross Margin" },
+                  { val: "$28.8M", lbl: "Annual Run-Rate" }
+                ]
+              },
               subStats: [
-                { label: "Net Investor CapEx", val: `$${netCapEx}M`, desc: `Gross $${totCapEx}M minus 25% SPECS Government Cash Rebate ($${specsSub}M).` },
-                { label: "EBIT Operating Margin", val: `${ebitMarg}%`, desc: `Delivering $${(ebitMo*12/1000).toFixed(2)}M annual operating cash flow at scale.` },
-                { label: "Static Payback", val: `${paybackYrs} Yrs`, desc: `Rapid payback supported by SPECS subsidy (${paybackNoSub} yrs raw).` },
-                { label: "Internal Rate of Return", val: irrRange, desc: "Substantially exceeds standard electronics manufacturing benchmarks." }
+                { 
+                  label: "Net Investor CapEx", 
+                  val: `$${netCapEx}M`, 
+                  tag: "SPECS 25% Refund", 
+                  tagType: "tag-positive",
+                  desc: `Gross $${totCapEx}M minus 25% SPECS Government Cash Rebate ($${specsSub}M).` 
+                },
+                { 
+                  label: "EBIT Operating Margin", 
+                  val: `${ebitMarg}%`, 
+                  tag: "$6.66M Annual EBIT", 
+                  tagType: "tag-accent",
+                  desc: `Delivering $${(ebitMo*12/1000).toFixed(2)}M annual operating cash flow at scale.` 
+                },
+                { 
+                  label: "Static Payback", 
+                  val: `${paybackYrs} Yrs`, 
+                  tag: `Raw: ${paybackNoSub} Yrs`, 
+                  tagType: "tag-positive",
+                  desc: `Rapid payback supported by SPECS subsidy (${paybackNoSub} yrs raw).` 
+                },
+                { 
+                  label: "Internal Rate of Return", 
+                  val: irrRange, 
+                  tag: "Benchmark: 12-15%", 
+                  tagType: "tag-accent",
+                  desc: "Substantially exceeds standard electronics manufacturing benchmarks." 
+                }
               ]
             },
             // Slide 02: Market Gap & Dual Sourcing Matrix
@@ -907,15 +991,15 @@
               desc: "Eliminating cross-border 3-week logistics lag. Supplying tier-1 automotive, energy storage, and defense corridors with 48h turnaround.",
               badHeader: "Traditional Cross-Border Import 🔴",
               badList: [
-                { badge: "3~5 Weeks", text: "Long overseas engineering cycles stall new product introduction." },
-                { badge: "24%~46%", text: "Customs duty inversion & freight costs + 45-60 days safety inventory lockup." },
-                { badge: "Geopolitical", text: "Severe supply chain risk; DVA capped at 15-20%, limiting PLI subsidy." }
+                { badge: "3~5 Weeks", bar: "bad", text: "Long overseas engineering cycles stall new product introduction (NPI)." },
+                { badge: "24%~46%", bar: "bad", text: "Customs duty inversion & freight costs + 45-60 days safety inventory lockup." },
+                { badge: "Geopolitical", bar: "bad", text: "Severe supply chain risk; DVA capped at 15-20%, limiting PLI subsidy." }
               ],
               goodHeader: "Indo-Phoenix Local Hub 🟢",
               goodList: [
-                { badge: "48~72 Hrs", text: "Rapid prototyping directly inside Indian industrial corridor; 3-5 day mass JIT." },
-                { badge: "0% Tariff", text: "100% local basic chemicals sourcing + MOOWR / ASEAN FTA duty exemption." },
-                { badge: "35%+ DVA", text: "Boosts customer Domestic Value Add to unlock maximum PLI government incentives." }
+                { badge: "48~72 Hrs", bar: "good", text: "Rapid prototyping directly inside Indian industrial corridor; 3-5 day mass JIT." },
+                { badge: "0% Tariff", bar: "good", text: "100% local basic chemicals sourcing + MOOWR / ASEAN FTA duty exemption." },
+                { badge: "35%+ DVA", bar: "good", text: "Boosts customer Domestic Value Add to unlock maximum PLI government incentives." }
               ]
             },
             // Slide 03: 3 Core Target Market Verticals & Pipeline
@@ -930,21 +1014,36 @@
                   icon: "🔋",
                   tag: "ENERGY STORAGE CCS",
                   title: "EV & Battery Pack CCS",
-                  desc: "Tata AutoComp (TACO), Waaree Energy, Ola Electric, Exide Energy, Amara Raja. Replaces heavy copper wiring with 500-1500mm heavy copper FPC.",
+                  desc: "Replaces heavy copper wiring with 500-1500mm heavy copper (2-12oz) flexible circuits.",
+                  buyers: ["Tata AutoComp", "Waaree Energy", "Ola Electric", "Exide Energy", "Amara Raja"],
+                  metrics: [
+                    { val: "$25M~$35M", lbl: "TACO Annual Import" },
+                    { val: "90%+", lbl: "Current Import Ratio" }
+                  ],
                   detail: "TACO alone imports $25M-$35M of CCS FPC annually. High-temperature (-40°C~+125°C) thick copper flex circuits are 90%+ imported."
                 },
                 {
                   icon: "🚗",
                   tag: "AUTOMOTIVE TIER-1",
                   title: "Automotive Sensor & ADAS",
-                  desc: "Samvardhana Motherson, Bosch India, Uno Minda, Tata Motors, Mahindra. Over 100 FPC parts per modern electric vehicle.",
+                  desc: "Over 100 FPC parts per modern EV. Local testing & zero-defect IATF 16949 bare boards.",
+                  buyers: ["Samvardhana Motherson", "Bosch India", "Uno Minda", "Tata Motors", "Mahindra"],
+                  metrics: [
+                    { val: "$45M~$65M", lbl: "Motherson Annual Import" },
+                    { val: "IATF 16949", lbl: "Turnkey Automotive Std" }
+                  ],
                   detail: "Motherson imports $45M-$65M annually. Indo-Phoenix provides IATF 16949 automotive qualified bare boards with local testing."
                 },
                 {
                   icon: "🛡️",
                   tag: "DEFENSE OFFSET 5-7X",
                   title: "Aerospace & Defense Offset",
-                  desc: "TASL, Adani Defence, L&T, ideaForge, Raphe mPhibr (100% non-China sourcing), ISRO, HAL. Mandatory 30%-50% DAP 2020 offset.",
+                  desc: "Mandatory 30%-50% DAP 2020 offset. Strict non-China sourcing requirement across drone & radar fleets.",
+                  buyers: ["Raphe mPhibr ($145M Fund)", "ideaForge (50% Mkt)", "TASL", "Adani Defence", "ISRO"],
+                  metrics: [
+                    { val: "5~7x", lbl: "Higher Margin vs Comms" },
+                    { val: "IPC Class 3", lbl: "Mil-Grade Zero China" }
+                  ],
                   detail: "Indo-Phoenix is India's only IPC Class 3 / AS9100 qualified bare board plant, capturing 5-7x higher margins under defense offset mandates."
                 }
               ]
@@ -1327,12 +1426,45 @@
               tag: "簡報 01 / 執行摘要與國家戰略定位",
               title: "破除 30% 自給率假象：搶佔全印首座高階 FPC 前製程「絕對真空」",
               desc: "專注 35%~40% 高毛利裸板製造，承接全球 China+1 歷史性產業轉移窗口，打造高壁壘、高現金流上市平台。",
-              mainStat: { label: "滿載年度營收規模", val: `$${revAnnual}M`, desc: `以每月 ${capMonthly} m² 產能與 $${weightedPrice}/m² 加權單價推算（鎖定 35%~40% 綜合毛利）。` },
+              mainStat: { 
+                label: "滿載年度營收規模", 
+                val: `$${revAnnual}M`, 
+                desc: `以每月 ${capMonthly} m² 產能與 $${weightedPrice}/m² 加權單價推算（鎖定 35%~40% 綜合毛利）。`,
+                kpiSteps: [
+                  { val: "15,000 m²", lbl: "月度滿載產能" },
+                  { val: "38.5%", lbl: "綜合毛利率" },
+                  { val: "$28.8M", lbl: "年化總產值" }
+                ]
+              },
               subStats: [
-                { label: "投資人淨資本支出", val: `$${netCapEx}M`, desc: `總預算 $${totCapEx}M 扣除 SPECS 25% 現金返還 ($${specsSub}M)。` },
-                { label: "息稅前利潤率 (EBIT)", val: `${ebitMarg}%`, desc: `滿載年貢獻營業利潤達 $${(ebitMo*12/1000).toFixed(2)}M 美元。` },
-                { label: "靜態投資回收期", val: `${paybackYrs} 年`, desc: `含 SPECS 補貼 ${paybackYrs} 年回本（未含補貼為 ${paybackNoSub} 年）。` },
-                { label: "內部報酬率 (IRR)", val: irrRange, desc: "大幅超越傳統電子代工與製造業回報基準。" }
+                { 
+                  label: "投資人淨資本支出", 
+                  val: `$${netCapEx}M`, 
+                  tag: "SPECS 25% 現金返還", 
+                  tagType: "tag-positive",
+                  desc: `總預算 $${totCapEx}M 扣除 SPECS 25% 現金返還 ($${specsSub}M)。` 
+                },
+                { 
+                  label: "息稅前利潤率 (EBIT)", 
+                  val: `${ebitMarg}%`, 
+                  tag: "年營業利潤 $6.66M", 
+                  tagType: "tag-accent",
+                  desc: `滿載年貢獻營業利潤達 $${(ebitMo*12/1000).toFixed(2)}M 美元。` 
+                },
+                { 
+                  label: "靜態投資回收期", 
+                  val: `${paybackYrs} 年`, 
+                  tag: `無補貼為 ${paybackNoSub} 年`, 
+                  tagType: "tag-positive",
+                  desc: `含 SPECS 補貼 ${paybackYrs} 年回本（未含補貼為 ${paybackNoSub} 年）。` 
+                },
+                { 
+                  label: "內部報酬率 (IRR)", 
+                  val: irrRange, 
+                  tag: "製造業基準: 12-15%", 
+                  tagType: "tag-accent",
+                  desc: "大幅超越傳統電子代工與製造業回報基準。" 
+                }
               ]
             },
             // Slide 02: 市場痛點與雙軌對比
@@ -1343,15 +1475,15 @@
               desc: "打通印度車載、國防與消費電子在地化供應動脈，重塑供應鏈響應時效，提升客戶 DVA 拿滿 PLI 增量補貼。",
               badHeader: "傳統海外進口三大死穴 🔴",
               badList: [
-                { badge: "3~5 週", text: "打樣跨國寄送與工程溝通週期冗長，拖垮客戶新品上市時效。" },
-                { badge: "24%~46%", text: "負擔關稅倒掛與昂貴空運，疊加 45~60 天在途安全庫存積壓現金流。" },
-                { badge: "地緣斷鏈", text: "供應鏈高度依賴外匯與地緣政治；組裝廠 DVA 停滯在 15~20% 面臨政策扣減。" }
+                { badge: "3~5 週", bar: "bad", text: "打樣跨國寄送與工程溝通週期冗長，拖垮客戶新品上市時效 (NPI)。" },
+                { badge: "24%~46%", bar: "bad", text: "負擔關稅倒掛與昂貴空運，疊加 45~60 天在途安全庫存積壓現金流。" },
+                { badge: "地緣斷鏈", bar: "bad", text: "供應鏈高度依賴外匯與地緣政治；組裝廠 DVA 停滯在 15~20% 面臨政策扣減。" }
               ],
               goodHeader: "Indo-Phoenix 在地化三大殺手鐧 🟢",
               goodList: [
-                { badge: "48~72 小時", text: "印度在地快速工程打樣，3~5 天量產 JIT 廠邊直送。" },
-                { badge: "0% 關稅", text: "基礎原料 100% 本地採購，享有 MOOWR 保稅與東協 FTA 免稅通道。" },
-                { badge: "35%+ DVA", text: "直接提升客戶在地價值增值 (DVA)，助力客戶拿滿國家 PLI 增量補貼。" }
+                { badge: "48~72 小時", bar: "good", text: "印度在地快速工程打樣，3~5 天量產 JIT 廠邊直送。" },
+                { badge: "0% 關稅", bar: "good", text: "基礎原料 100% 本地採購，享有 MOOWR 保稅與東協 FTA 免稅通道。" },
+                { badge: "35%+ DVA", bar: "good", text: "直接提升客戶在地價值增值 (DVA)，助力客戶拿滿國家 PLI 增量補貼。" }
               ]
             },
             // Slide 03: 三大剛需賽道真實買家
@@ -1366,21 +1498,36 @@
                   icon: "🔋",
                   tag: "新能源儲能 CCS",
                   title: "EV 與電池 Pack CCS 採樣軟板",
-                  desc: "Tata AutoComp (TACO)、Waaree Energy、Ola Electric、Exide Energy、Amara Raja。全面替代笨重銅線束。",
+                  desc: "全面替代傳統笨重採樣銅線束，提供 500-1500mm 超長厚銅 (2-12oz) 軟板。",
+                  buyers: ["Tata AutoComp", "Waaree Energy", "Ola Electric", "Exide Energy", "Amara Raja"],
+                  metrics: [
+                    { val: "$25M~$35M", lbl: "TACO 單一巨頭進口額" },
+                    { val: "90%+", lbl: "全印裸板目前依賴進口" }
+                  ],
                   detail: "單一巨頭 TACO 年進口達 $25M~$35M。超長厚銅（2~12oz）耐溫軟板（-40°C~+125°C）全印 90%+ 依賴進口。"
                 },
                 {
                   icon: "🚗",
                   tag: "車載 TIER-1",
                   title: "車載感測與 ADAS 車規級線束",
-                  desc: "Samvardhana Motherson、Bosch India、Uno Minda、Tata Motors、Mahindra。單車採用超 100 種 FPC。",
+                  desc: "單車採用超 100 種 FPC。提供 IATF 16949 / AEC-Q 車規認證本土裸板與在地測試。",
+                  buyers: ["Samvardhana Motherson", "Bosch India", "Uno Minda", "Tata Motors", "Mahindra"],
+                  metrics: [
+                    { val: "$45M~$65M", lbl: "Motherson 年進口額" },
+                    { val: "IATF 16949", lbl: "車規交鑰匙認證體系" }
+                  ],
                   detail: "Motherson 年進口 $45M~$65M。Indo-Phoenix 提供全套 IATF 16949 / AEC-Q 車規認證本土裸板。"
                 },
                 {
                   icon: "🛡️",
                   tag: "國防相抵 5~7倍暴利",
                   title: "航太與國防軍規相抵 (Offset)",
-                  desc: "TASL、Adani Defence、L&T、ideaForge、Raphe mPhibr (B輪1億美元排斥中國零件)、ISRO、HAL。",
+                  desc: "DAP 2020 強制 30%-50% 本地採購相抵。軍用無人機與相控陣雷達嚴格排斥中國零件。",
+                  buyers: ["Raphe mPhibr (獲投1.45億)", "ideaForge (市佔50%)", "TASL", "Adani Defence", "ISRO"],
+                  metrics: [
+                    { val: "5~7 倍", lbl: "通訊產品超額利潤倍數" },
+                    { val: "IPC Class 3", lbl: "全印唯一軍規無中化實體" }
+                  ],
                   detail: "DAP 2020 強制要求 30%~50% 在地採購；Indo-Phoenix 為全印唯一符合 IPC Class 3 / AS9100 實體，享有 5~7 倍超額利潤。"
                 }
               ]
@@ -1805,14 +1952,30 @@
         html += `
           <div class="hero-metric-box">
             <div class="main-anchor-stat gs-anim-hero">
-              <div class="main-stat-label">${slide.mainStat.label}</div>
-              <div class="main-stat-num count-target" data-target="${slide.mainStat.val}">0</div>
-              <div class="main-stat-desc">${slide.mainStat.desc}</div>
+              <div>
+                <div class="main-stat-label">${slide.mainStat.label}</div>
+                <div class="main-stat-num count-target" data-target="${slide.mainStat.val}">0</div>
+                <div class="main-stat-desc">${slide.mainStat.desc}</div>
+              </div>
+              ${slide.mainStat.kpiSteps ? `
+                <div class="mini-kpi-pathway">
+                  ${slide.mainStat.kpiSteps.map((step, idx) => `
+                    <div class="kpi-step">
+                      <span class="kpi-step-val">${step.val}</span>
+                      <span class="kpi-step-lbl">${step.lbl}</span>
+                    </div>
+                    ${idx < slide.mainStat.kpiSteps.length - 1 ? '<span class="kpi-arrow">➔</span>' : ''}
+                  `).join("")}
+                </div>
+              ` : ''}
             </div>
             <div class="sub-stat-grid">
               ${slide.subStats.map(s => `
                 <div class="stat-card gs-anim-card">
-                  <div class="stat-card-label">${s.label}</div>
+                  <div style="display:flex; justify-content:space-between; align-items:flex-start;">
+                    <div class="stat-card-label">${s.label}</div>
+                    ${s.tag ? `<span class="stat-benchmark-tag ${s.tagType || 'tag-accent'}">${s.tag}</span>` : ''}
+                  </div>
                   <div class="stat-card-value count-target" data-target="${s.val}">0</div>
                   <div class="stat-card-desc">${s.desc}</div>
                 </div>
@@ -1992,7 +2155,26 @@
                   </div>
                   <div class="feature-card-title">${c.title}</div>
                   <div class="feature-card-desc">${c.desc}</div>
+
+                  ${c.buyers ? `
+                    <div class="buyer-pills-row">
+                      ${c.buyers.map((b, bi) => `
+                        <span class="buyer-pill ${bi === 0 ? 'highlight' : ''}">${b}</span>
+                      `).join("")}
+                    </div>
+                  ` : ''}
                 </div>
+
+                ${c.metrics ? `
+                  <div class="buyer-data-matrix">
+                    ${c.metrics.map(m => `
+                      <div class="buyer-data-item">
+                        <span class="buyer-data-val">${m.val}</span>
+                        <span class="buyer-data-lbl">${m.lbl}</span>
+                      </div>
+                    `).join("")}
+                  </div>
+                ` : ''}
               </div>
             `).join("")}
           </div>
@@ -2015,8 +2197,17 @@
               <ul class="vs-list">
                 ${slide.badList.map(item => `
                   <li class="vs-item">
-                    <span class="vs-badge badge-bad">${item.badge}</span>
-                    <span>${item.text}</span>
+                    <div>
+                      <div style="display:flex; align-items:center; gap:8px;">
+                        <span class="vs-badge badge-bad">${item.badge}</span>
+                        <span>${item.text}</span>
+                      </div>
+                      ${item.bar === 'bad' ? `
+                        <div class="vs-metric-row">
+                          <div class="vs-bar-track"><div class="vs-bar-bad"></div></div>
+                        </div>
+                      ` : ''}
+                    </div>
                   </li>
                 `).join("")}
               </ul>
@@ -2027,8 +2218,17 @@
                 ${slide.goodList.map((item, idx) => `
                   <li class="vs-item" style="cursor: pointer;"
                       onmouseenter="document.getElementById('vsFloatingText').innerHTML = '<strong>${currentLang === 'zh' ? '戰略突破依據' : 'Strategic Edge'}:</strong> ${item.text.replace(/'/g, "\\'")}';">
-                    <span class="vs-badge badge-good">${item.badge}</span>
-                    <span><strong>${item.text}</strong></span>
+                    <div>
+                      <div style="display:flex; align-items:center; gap:8px;">
+                        <span class="vs-badge badge-good">${item.badge}</span>
+                        <span><strong>${item.text}</strong></span>
+                      </div>
+                      ${item.bar === 'good' ? `
+                        <div class="vs-metric-row">
+                          <div class="vs-bar-track"><div class="vs-bar-good"></div></div>
+                        </div>
+                      ` : ''}
+                    </div>
                   </li>
                 `).join("")}
               </ul>
