@@ -599,24 +599,37 @@
 
     /* 6. Feature Cards Grid (Slide 3 Market Verticals, Slide 4 Moats, Slide 5 AI) */
     .feature-cards-grid {
-      flex: 1; display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px;
-      margin-bottom: 12px; min-height: 0;
+      flex: 1; display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: clamp(10px, 1.4vw, 16px);
+      margin-bottom: clamp(6px, 1vh, 12px); min-height: 0;
     }
     .feature-card-item {
       background: rgba(10, 15, 25, 0.2); border: 1px solid var(--line-subtle);
-      border-radius: var(--card-radius); padding: clamp(18px, 2.2vh, 26px) 22px;
+      border-radius: var(--card-radius); padding: clamp(12px, 1.6vh, 20px) clamp(14px, 1.5vw, 20px);
       display: flex; flex-direction: column; justify-content: space-between;
-      cursor: pointer; transition: all 0.25s var(--ease);
+      cursor: pointer; transition: all 0.25s var(--ease); min-height: 0;
     }
     .feature-card-item:hover, .feature-card-item.active {
       background: var(--bg-card-hover); border-color: var(--accent);
       transform: translateY(-3px); box-shadow: 0 8px 24px var(--accent-glow);
     }
-    .feature-card-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px; }
-    .feature-card-icon { font-size: 24px; }
-    .feature-card-tag { font-family: var(--font-mono); font-size: 11px; color: var(--accent); background: rgba(255,255,255,0.04); padding: 3px 10px; border-radius: 4px; }
-    .feature-card-title { font-size: 16px; font-weight: 600; color: var(--ink); margin-bottom: 8px; }
-    .feature-card-desc { font-size: 13px; color: var(--ink-sub); line-height: 1.55; }
+    .feature-card-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px; }
+    .feature-card-icon { font-size: 20px; display: flex; align-items: center; }
+    .feature-card-tag { font-family: var(--font-mono); font-size: 10.5px; color: var(--accent); background: rgba(255,255,255,0.04); padding: 2px 8px; border-radius: 4px; }
+    .feature-card-title { font-size: clamp(14px, 1.2vw, 16px); font-weight: 600; color: var(--ink); margin-bottom: 4px; }
+    .feature-card-desc { font-size: clamp(11.5px, 0.95vw, 13px); color: var(--ink-sub); line-height: 1.45; }
+
+    /* Non-Fullscreen Vertical Space Defense */
+    @media (max-height: 860px) {
+      .slide-desc { margin-bottom: 8px; font-size: 13px; line-height: 1.4; }
+      .blueprint-thumb-box { height: 85px; margin: 6px 0; }
+      .buyer-pills-row { margin: 6px 0; gap: 4px; }
+      .buyer-pill { font-size: 10px; padding: 2px 6px; }
+      .buyer-data-matrix { margin-top: 6px; padding: 6px 8px; }
+      .buyer-data-val { font-size: 12px; }
+      .buyer-data-lbl { font-size: 9.5px; }
+      .cockpit-floating-bar { padding: 6px 14px; margin-top: 6px; }
+      .floating-bar-text { font-size: 12px; }
+    }
 
     /* 7. Action Hub Call-To-Action Box (Slide 13) */
     .cta-hub-box {
@@ -711,24 +724,54 @@
     .agenda-subitem { font-size: 12px; color: var(--ink-sub); display: flex; align-items: center; gap: 6px; }
     .agenda-subitem-dot { width: 4px; height: 4px; border-radius: 50%; background: var(--accent); }
 
-    /* CAD Blueprint Sample Preview Thumbnails (Slide 03) */
+    /* CAD Blueprint Sample Preview Thumbnails (Slide 03) - Elastic Responsive */
     .blueprint-thumb-box {
-      width: 100%; height: 130px; border-radius: 6px; overflow: hidden;
-      margin: 10px 0; border: 1px solid var(--line-subtle); position: relative;
-      background: #020617;
+      width: 100%; height: clamp(75px, 11vh, 125px); border-radius: 6px; overflow: hidden;
+      margin: clamp(6px, 1vh, 10px) 0; border: 1px solid var(--line-subtle); position: relative;
+      background: #020617; cursor: zoom-in;
     }
     .blueprint-thumb-img {
       width: 100%; height: 100%; object-fit: cover; object-position: center;
-      transition: transform 0.4s var(--ease); opacity: 0.88;
+      transition: transform 0.4s var(--ease), opacity 0.3s var(--ease); opacity: 0.88;
     }
     .blueprint-thumb-box:hover .blueprint-thumb-img {
-      transform: scale(1.05); opacity: 1;
+      transform: scale(1.04); opacity: 1;
     }
     .blueprint-zoom-badge {
-      position: absolute; bottom: 6px; right: 6px;
+      position: absolute; bottom: 4px; right: 6px;
       font-family: var(--font-mono); font-size: 9.5px;
-      background: rgba(0,0,0,0.75); color: var(--accent);
+      background: rgba(0,0,0,0.8); color: var(--accent);
       padding: 2px 6px; border-radius: 3px; border: 1px solid var(--line-subtle);
+      pointer-events: none;
+    }
+
+    /* Full-Screen Sample Image Lightbox Modal */
+    .image-modal-backdrop {
+      position: fixed; inset: 0; z-index: 120;
+      background: rgba(0, 0, 0, 0.88); backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      display: flex; align-items: center; justify-content: center;
+      padding: 24px; opacity: 0; pointer-events: none;
+      transition: opacity 0.35s var(--ease);
+    }
+    .image-modal-backdrop.is-open {
+      opacity: 1; pointer-events: auto;
+    }
+    .image-modal-card {
+      max-width: 92vw; max-height: 90vh;
+      background: rgba(10, 12, 18, 0.95);
+      border: 1px solid var(--accent); border-radius: var(--card-radius);
+      box-shadow: 0 24px 80px rgba(0, 0, 0, 0.9), 0 0 40px var(--accent-glow);
+      padding: 16px; position: relative; display: flex; flex-direction: column;
+      align-items: center;
+    }
+    .image-modal-img {
+      max-width: 88vw; max-height: 78vh; object-fit: contain;
+      border-radius: 6px; border: 1px solid rgba(255,255,255,0.08);
+    }
+    .image-modal-caption {
+      font-family: var(--font-mono); font-size: 12px; color: var(--accent);
+      margin-top: 10px; letter-spacing: 0.1em;
     }
 
     /* Top Nav Agenda Quick Jump Button */
@@ -953,6 +996,15 @@
     </div>
   </div>
 
+  <!-- High-Res Sample Image Lightbox Modal -->
+  <div class="image-modal-backdrop" id="imageModal" onclick="closeImageModal(event)">
+    <div class="image-modal-card" onclick="event.stopPropagation()">
+      <button class="modal-close-btn" onclick="closeImageModal()">✕</button>
+      <img id="imageModalImg" class="image-modal-img" src="" alt="High Res Sample" />
+      <div id="imageModalCaption" class="image-modal-caption">SAMPLE PREVIEW</div>
+    </div>
+  </div>
+
   <!-- Deck Navigation Footer -->
   <footer class="deck-footer">
     <div class="timeline-steps" id="timelineSteps"></div>
@@ -1145,8 +1197,9 @@
                   tag: "ENERGY STORAGE CCS",
                   title: "EV & Battery Pack CCS",
                   desc: "Replaces heavy copper wiring with 500-1500mm heavy copper (2-12oz) flexible circuits.",
-                  blueprintImg: "assets/samples/sample_ccs_blueprint.jpg",
-                  blueprintLabel: "CAD DWG: CCS-HEAVY-COPPER-FPC",
+                  blueprintImg: "assets/samples/CCS-縮圖.jpg",
+                  fullImg: "assets/samples/CCS-大圖.jpg",
+                  blueprintLabel: "HD SAMPLE: EV-BATTERY-CCS-PACK",
                   buyers: ["Tata AutoComp", "Waaree Energy", "Ola Electric", "Exide Energy", "Amara Raja"],
                   metrics: [
                     { val: "$25M~$35M", lbl: "TACO Annual Import" },
@@ -1159,8 +1212,9 @@
                   tag: "AUTOMOTIVE TIER-1",
                   title: "Automotive Sensor & ADAS",
                   desc: "Over 100 FPC parts per modern EV. Local testing & zero-defect IATF 16949 bare boards.",
-                  blueprintImg: "assets/samples/sample_auto_blueprint.jpg",
-                  blueprintLabel: "CAD DWG: AUTO-ADAS-SENSOR-1L2L",
+                  blueprintImg: "assets/samples/Automotive-縮圖.jpg",
+                  fullImg: "assets/samples/Automotive-大圖.jpg",
+                  blueprintLabel: "HD SAMPLE: AUTO-ADAS-SENSOR-FPC",
                   buyers: ["Samvardhana Motherson", "Bosch India", "Uno Minda", "Tata Motors", "Mahindra"],
                   metrics: [
                     { val: "$45M~$65M", lbl: "Motherson Annual Import" },
@@ -1173,8 +1227,9 @@
                   tag: "DEFENSE OFFSET 5-7X",
                   title: "Aerospace & Defense Offset",
                   desc: "Mandatory 30%-50% DAP 2020 offset. Strict non-China sourcing requirement across drone & radar fleets.",
-                  blueprintImg: "assets/samples/sample_drone_blueprint.jpg",
-                  blueprintLabel: "CAD DWG: AERO-DRONE-HDI-RIGIDFLEX",
+                  blueprintImg: "assets/samples/Drone-縮圖.jpg",
+                  fullImg: "assets/samples/Drone-大圖.jpg",
+                  blueprintLabel: "HD SAMPLE: AERO-DRONE-RIGIDFLEX",
                   buyers: ["Raphe mPhibr ($145M Fund)", "ideaForge (50% Mkt)", "TASL", "Adani Defence", "ISRO"],
                   metrics: [
                     { val: "5~7x", lbl: "Higher Margin vs Comms" },
@@ -1698,8 +1753,9 @@
                   tag: "新能源儲能 CCS",
                   title: "EV 與電池 Pack CCS 採樣軟板",
                   desc: "全面替代傳統笨重採樣銅線束，提供 500-1500mm 超長厚銅 (2-12oz) 軟板。",
-                  blueprintImg: "assets/samples/sample_ccs_blueprint.jpg",
-                  blueprintLabel: "CAD 工程圖：CCS-HEAVY-COPPER-FPC",
+                  blueprintImg: "assets/samples/CCS-縮圖.jpg",
+                  fullImg: "assets/samples/CCS-大圖.jpg",
+                  blueprintLabel: "高清樣品圖：EV-BATTERY-CCS-PACK",
                   buyers: ["Tata AutoComp", "Waaree Energy", "Ola Electric", "Exide Energy", "Amara Raja"],
                   metrics: [
                     { val: "$25M~$35M", lbl: "TACO 單一巨頭進口額" },
@@ -1712,8 +1768,9 @@
                   tag: "車載 TIER-1",
                   title: "車載感測與 ADAS 車規級線束",
                   desc: "單車採用超 100 種 FPC。提供 IATF 16949 / AEC-Q 車規認證本土裸板與在地測試。",
-                  blueprintImg: "assets/samples/sample_auto_blueprint.jpg",
-                  blueprintLabel: "CAD 工程圖：AUTO-ADAS-SENSOR-1L2L",
+                  blueprintImg: "assets/samples/Automotive-縮圖.jpg",
+                  fullImg: "assets/samples/Automotive-大圖.jpg",
+                  blueprintLabel: "高清樣品圖：AUTO-ADAS-SENSOR-FPC",
                   buyers: ["Samvardhana Motherson", "Bosch India", "Uno Minda", "Tata Motors", "Mahindra"],
                   metrics: [
                     { val: "$45M~$65M", lbl: "Motherson 年進口額" },
@@ -1726,8 +1783,9 @@
                   tag: "國防相抵 5~7倍暴利",
                   title: "航太與國防軍規相抵 (Offset)",
                   desc: "DAP 2020 強制 30%-50% 本地採購相抵。軍用無人機與相控陣雷達嚴格排斥中國零件。",
-                  blueprintImg: "assets/samples/sample_drone_blueprint.jpg",
-                  blueprintLabel: "CAD 工程圖：AERO-DRONE-HDI-RIGIDFLEX",
+                  blueprintImg: "assets/samples/Drone-縮圖.jpg",
+                  fullImg: "assets/samples/Drone-大圖.jpg",
+                  blueprintLabel: "高清樣品圖：AERO-DRONE-RIGIDFLEX",
                   buyers: ["Raphe mPhibr (獲投1.45億)", "ideaForge (市佔50%)", "TASL", "Adani Defence", "ISRO"],
                   metrics: [
                     { val: "5~7 倍", lbl: "通訊產品超額利潤倍數" },
@@ -2400,9 +2458,9 @@
                   <div class="feature-card-desc">${c.desc}</div>
 
                   ${c.blueprintImg ? `
-                    <div class="blueprint-thumb-box" title="Clean CAD Engineering Blueprint">
+                    <div class="blueprint-thumb-box" title="${currentLang === 'zh' ? '點擊放大檢視高清樣品大圖' : 'Click to view high-res sample'}" onclick="event.stopPropagation(); openImageModal('${c.fullImg || c.blueprintImg}', '${c.title.replace(/'/g, "\\'")}')">
                       <img class="blueprint-thumb-img" src="${c.blueprintImg}" alt="FPC Blueprint" loading="lazy" />
-                      <div class="blueprint-zoom-badge">${c.blueprintLabel || 'CAD BLUEPRINT'}</div>
+                      <div class="blueprint-zoom-badge">🔍 ${c.blueprintLabel || 'HD SAMPLE'}</div>
                     </div>
                   ` : ''}
 
@@ -2895,16 +2953,31 @@
       modal.classList.add("is-open");
     }
 
-    function closeDetailModal(e) {
-      if (e && e.target && e.target.closest(".deck-modal-card") && !e.target.classList.contains("modal-close-btn")) {
+    /* Sample Image Lightbox Handlers */
+    function openImageModal(imgUrl, caption) {
+      const modal = document.getElementById("imageModal");
+      const img = document.getElementById("imageModalImg");
+      const cap = document.getElementById("imageModalCaption");
+      if (img) img.src = imgUrl;
+      if (cap) cap.textContent = caption || "SAMPLE HIGH-RES PREVIEW";
+      if (modal) modal.classList.add("is-open");
+    }
+
+    function closeImageModal(e) {
+      if (e && e.target && e.target.closest(".image-modal-card") && !e.target.classList.contains("modal-close-btn")) {
         return;
       }
-      document.getElementById("deckModal").classList.remove("is-open");
+      const modal = document.getElementById("imageModal");
+      if (modal) modal.classList.remove("is-open");
     }
 
     window.addEventListener("keydown", (e) => {
-      if (e.key === "Escape") closeDetailModal();
+      if (e.key === "Escape") {
+        closeDetailModal();
+        closeImageModal();
+      }
       if (document.getElementById("deckModal").classList.contains("is-open")) return;
+      if (document.getElementById("imageModal").classList.contains("is-open")) return;
       if (e.key === "ArrowRight" || e.key === " " || e.key === "PageDown") nextSlide();
       if (e.key === "ArrowLeft" || e.key === "PageUp") prevSlide();
     });
