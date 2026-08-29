@@ -145,6 +145,9 @@
       flex: 1; display: flex; align-items: center; justify-content: center;
       padding: clamp(20px, 3vh, 40px) clamp(20px, 4vw, 48px);
     }
+    /* ═══════════════════════════════════════════════════════════════
+       PPTX-STYLE ANIMATIONS & STAGGERED OBJECT TIMELINES
+       ═══════════════════════════════════════════════════════════════ */
     .slide-wrapper {
       width: 100%; max-width: 1280px; min-height: 640px;
       background: var(--bg-card);
@@ -159,7 +162,45 @@
       overflow: hidden;
       transition: border-color 0.4s var(--ease), box-shadow 0.4s var(--ease), background 0.4s var(--ease);
     }
-    
+
+    /* Directional Slide Push Transition */
+    .slide-stage-content {
+      will-change: transform, opacity;
+    }
+    .slide-enter-next {
+      animation: slideInRight 0.42s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+    .slide-enter-prev {
+      animation: slideInLeft 0.42s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
+    @keyframes slideInRight {
+      0% { opacity: 0; transform: translate3d(36px, 0, 0) scale(0.985); }
+      100% { opacity: 1; transform: translate3d(0, 0, 0) scale(1); }
+    }
+    @keyframes slideInLeft {
+      0% { opacity: 0; transform: translate3d(-36px, 0, 0) scale(0.985); }
+      100% { opacity: 1; transform: translate3d(0, 0, 0) scale(1); }
+    }
+
+    /* Staggered Object Reveal Items */
+    .obj-anim {
+      opacity: 1;
+      animation: objReveal 0.4s cubic-bezier(0.16, 1, 0.3, 1) both;
+    }
+    .delay-1 { animation-delay: 0.04s; }
+    .delay-2 { animation-delay: 0.10s; }
+    .delay-3 { animation-delay: 0.16s; }
+    .delay-card-0 { animation-delay: 0.22s; }
+    .delay-card-1 { animation-delay: 0.28s; }
+    .delay-card-2 { animation-delay: 0.34s; }
+    .delay-card-3 { animation-delay: 0.40s; }
+
+    @keyframes objReveal {
+      0% { opacity: 0; transform: translate3d(0, 14px, 0); }
+      100% { opacity: 1; transform: translate3d(0, 0, 0); }
+    }
+
     /* HUD Corner Marks for Theme B/C */
     body[data-template="b"] .slide-wrapper::before,
     body[data-template="b"] .slide-wrapper::after,
@@ -240,9 +281,10 @@
       font-size: clamp(30px, 2.8vw, 42px);
       font-weight: 500; color: var(--accent);
       line-height: 1.0; margin-bottom: 8px;
+      display: flex; align-items: baseline;
     }
     .stat-card-unit {
-      font-size: 13px; font-weight: 300; color: var(--ink-sub); margin-left: 4px;
+      font-size: 13px; font-weight: 300; color: var(--ink-sub); margin-left: 6px;
       font-family: var(--font-body);
     }
     .stat-card-desc {
@@ -354,6 +396,7 @@
 
   <!-- Core Libraries -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
   <script src="assets/js/data.js"></script>
   <script src="assets/js/content-engine.js"></script>
   <script src="assets/js/app.js"></script>
@@ -450,6 +493,7 @@
     let currentTheme = "a";
     let currentLang = "en";
     let currentSlide = 0;
+    let slideDirection = "next"; // 'next' or 'prev'
 
     // Load URL param for theme/lang if present e.g. sample-deck.html?theme=b&lang=zh
     const urlParams = new URLSearchParams(window.location.search);
@@ -469,29 +513,122 @@
       renderSlide();
     }
 
+    let isAnimating = false;
+
     function renderSlide() {
       const slides = I18N[currentLang].slides;
       const slide = slides[currentSlide];
-      
+      const container = document.getElementById("slideContent");
+
       const content = `
-        <div class="slide-meta">
-          <div class="slide-tag">${slide.tag}</div>
-          <div class="slide-page-num">${currentSlide + 1} / ${slides.length}</div>
-        </div>
-        <h1 class="slide-title">${slide.title}</h1>
-        <p class="slide-desc">${slide.desc}</p>
-        <div class="slide-grid">
-          ${slide.cards.map(c => `
-            <div class="stat-card">
-              <div class="stat-card-label">${c.label}</div>
-              <div class="stat-card-value">${c.val}<span class="stat-card-unit">${c.unit}</span></div>
-              <div class="stat-card-desc">${c.desc}</div>
-            </div>
-          `).join("")}
+        <div class="slide-stage-content" id="activeSlideStage">
+          <div class="slide-meta gs-reveal">
+            <div class="slide-tag">${slide.tag}</div>
+            <div class="slide-page-num">${currentSlide + 1} / ${slides.length}</div>
+          </div>
+          <h1 class="slide-title gs-reveal">${slide.title}</h1>
+          <p class="slide-desc gs-reveal">${slide.desc}</p>
+          <div class="slide-grid">
+            ${slide.cards.map((c, idx) => `
+              <div class="stat-card gs-card">
+                <div class="stat-card-label">${c.label}</div>
+                <div class="stat-card-value">
+                  <span class="count-target" data-target="${c.val}">0</span>
+                  <span class="stat-card-unit">${c.unit}</span>
+                </div>
+                <div class="stat-card-desc">${c.desc}</div>
+              </div>
+            `).join("")}
+          </div>
         </div>
       `;
-      document.getElementById("slideContent").innerHTML = content;
+
+      container.innerHTML = content;
       renderTimeline();
+
+      // Trigger 3D background pulse reaction
+      triggerFxPulse();
+
+      // Execute powerful GSAP Presentation Timelines
+      if (window.gsap) {
+        const xOffset = slideDirection === "next" ? 60 : -60;
+        const tl = gsap.timeline({
+          onComplete: () => { isAnimating = false; }
+        });
+
+        // Stage enter
+        tl.fromTo("#activeSlideStage", 
+          { opacity: 0, x: xOffset, scale: 0.98 },
+          { opacity: 1, x: 0, scale: 1, duration: 0.45, ease: "power3.out" }
+        );
+
+        // Header / Desc reveal
+        tl.fromTo(".gs-reveal",
+          { opacity: 0, y: 18 },
+          { opacity: 1, y: 0, duration: 0.4, stagger: 0.08, ease: "power2.out" },
+          "-=0.3"
+        );
+
+        // Cards Staggered Pop-in
+        tl.fromTo(".gs-card",
+          { opacity: 0, y: 25, scale: 0.95 },
+          { opacity: 1, y: 0, scale: 1, duration: 0.45, stagger: 0.08, ease: "back.out(1.4)" },
+          "-=0.25"
+        );
+
+        // Digital count up sync
+        animateNumbers();
+      } else {
+        animateNumbers();
+      }
+    }
+
+    function triggerFxPulse() {
+      try {
+        if (currentTheme === "a" && window.IPX_SMOKE && window.IPX_SMOKE.boost) {
+          window.IPX_SMOKE.boost(1.8);
+          setTimeout(() => window.IPX_SMOKE.boost(0), 400);
+        } else if (currentTheme === "b" && window.IPX_ORBIT && window.IPX_ORBIT.pulse) {
+          window.IPX_ORBIT.pulse(window.innerWidth / 2, window.innerHeight / 2);
+        } else if (currentTheme === "c" && window.IPX_HOLO && window.IPX_HOLO.warp) {
+          window.IPX_HOLO.warp(1.0);
+        }
+      } catch (e) {}
+    }
+
+    function animateNumbers() {
+      document.querySelectorAll(".count-target").forEach(el => {
+        const raw = el.getAttribute("data-target");
+        // Check if pure numeric
+        const clean = raw.replace(/[$,%]/g, "").trim();
+        const num = parseFloat(clean);
+        if (isNaN(num)) return; // Keep string like "48 – 72" or "21.3 – 24.8"
+        
+        const prefix = raw.startsWith("$") ? "$" : "";
+        const suffix = raw.endsWith("%") ? "%" : "";
+        const isDecimal = clean.includes(".");
+        const decimals = isDecimal ? clean.split(".")[1].length : 0;
+        
+        const duration = 650;
+        const start = performance.now();
+        const startVal = 0;
+
+        function tick(now) {
+          const t = Math.min(1, (now - start) / duration);
+          const ease = 1 - Math.pow(1 - t, 3);
+          const current = (startVal + (num - startVal) * ease);
+          
+          if (decimals > 0) {
+            el.textContent = prefix + current.toFixed(decimals) + suffix;
+          } else {
+            el.textContent = prefix + Math.round(current).toLocaleString() + suffix;
+          }
+
+          if (t < 1) requestAnimationFrame(tick);
+          else el.textContent = raw;
+        }
+        requestAnimationFrame(tick);
+      });
     }
 
     function renderTimeline() {
@@ -502,9 +639,27 @@
       `).join("");
     }
 
-    function goToSlide(idx) { currentSlide = idx; renderSlide(); }
-    function nextSlide() { if (currentSlide < I18N[currentLang].slides.length - 1) { currentSlide++; renderSlide(); } }
-    function prevSlide() { if (currentSlide > 0) { currentSlide--; renderSlide(); } }
+    function goToSlide(idx) {
+      if (idx === currentSlide) return;
+      slideDirection = idx > currentSlide ? "next" : "prev";
+      currentSlide = idx;
+      renderSlide();
+    }
+    function nextSlide() {
+      const slides = I18N[currentLang].slides;
+      if (currentSlide < slides.length - 1) {
+        slideDirection = "next";
+        currentSlide++;
+        renderSlide();
+      }
+    }
+    function prevSlide() {
+      if (currentSlide > 0) {
+        slideDirection = "prev";
+        currentSlide--;
+        renderSlide();
+      }
+    }
 
     window.addEventListener("keydown", (e) => {
       if (e.key === "ArrowRight" || e.key === " " || e.key === "PageDown") nextSlide();
@@ -562,9 +717,16 @@
       document.body.appendChild(fxScript);
     }
 
-    // Init Execution
-    setLang(currentLang);
-    loadActiveThemeScene(currentTheme);
+    // Init Execution on Window Load & DOM Ready
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", () => {
+        setLang(currentLang);
+        loadActiveThemeScene(currentTheme);
+      });
+    } else {
+      setLang(currentLang);
+      loadActiveThemeScene(currentTheme);
+    }
   </script>
 </body>
 </html>
