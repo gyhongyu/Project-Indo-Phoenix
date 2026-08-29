@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Project Indo-Phoenix — Dynamic Interactive Pitch Deck</title>
+  <!-- Google Fonts: A (Cormorant+Jost), B (Space Grotesk+JetBrains Mono), C (Chakra Petch) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:ital,wght@0,300;0,400;0,600;1,400&family=Cormorant+Garamond:ital,wght@0,300;0,500;1,300&family=JetBrains+Mono:wght@300;400;600&family=Jost:wght@200;300;400;500;600&family=Noto+Sans+TC:wght@300;400;500;700&family=Space+Grotesk:wght@300;400;500;600&display=swap" rel="stylesheet">
+  
+  <!-- Base Shared Design Tokens -->
+  <link rel="stylesheet" href="assets/css/base.css">
+  
+  <style>
+    /* ═══════════════════════════════════════════════════════════════
+       THEME OVERRIDES & DYNAMIC TOKENS
+       ═══════════════════════════════════════════════════════════════ */
+    body[data-template="a"] {
+      --bg: #0a0a0b;
+      --bg-card: rgba(10, 10, 12, 0.08);
+      --bg-card-hover: rgba(201, 169, 110, 0.08);
+      --ink: #ecebe6;
+      --ink-sub: #b5b0a3;
+      --accent: #c9a96e;
+      --accent-glow: rgba(201, 169, 110, 0.22);
+      --line: rgba(201, 169, 110, 0.28);
+      --line-subtle: rgba(201, 169, 110, 0.14);
+      --font-display: "Cormorant Garamond", Georgia, "Noto Sans TC", serif;
+      --font-body: "Jost", "Noto Sans TC", system-ui, sans-serif;
+      --font-mono: "JetBrains Mono", monospace;
+      --tag-radius: 999px;
+      --card-radius: 6px;
+    }
+    
+    body[data-template="b"] {
+      --bg: #050a14;
+      --bg-card: rgba(5, 10, 20, 0.08);
+      --bg-card-hover: rgba(79, 209, 197, 0.08);
+      --ink: #dce7f0;
+      --ink-sub: #829ab1;
+      --accent: #4fd1c5;
+      --accent-glow: rgba(79, 209, 197, 0.24);
+      --line: rgba(79, 209, 197, 0.32);
+      --line-subtle: rgba(79, 209, 197, 0.15);
+      --font-display: "Space Grotesk", "Noto Sans TC", sans-serif;
+      --font-body: "Space Grotesk", "Noto Sans TC", system-ui, sans-serif;
+      --font-mono: "JetBrains Mono", monospace;
+      --tag-radius: 2px;
+      --card-radius: 2px;
+    }
+    
+    body[data-template="c"] {
+      --bg: #06070b;
+      --bg-card: rgba(6, 7, 11, 0.08);
+      --bg-card-hover: rgba(53, 224, 255, 0.08);
+      --ink: #eaf6ff;
+      --ink-sub: #7a8fa6;
+      --accent: #35e0ff;
+      --accent-glow: rgba(53, 224, 255, 0.25);
+      --line: rgba(94, 214, 255, 0.3);
+      --line-subtle: rgba(139, 123, 255, 0.16);
+      --font-display: "Chakra Petch", "Noto Sans TC", sans-serif;
+      --font-body: "Chakra Petch", "Noto Sans TC", system-ui, sans-serif;
+      --font-mono: "JetBrains Mono", monospace;
+      --tag-radius: 4px;
+      --card-radius: 4px;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--ink);
+      font-family: var(--font-body);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      overflow-x: hidden;
+      transition: background 0.5s var(--ease), color 0.4s var(--ease);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* 3D WebGL Canvas Layer (-2) & 2D FX Interaction Layer (1) */
+    #bg-canvas {
+      position: fixed; inset: 0; width: 100%; height: 100%;
+      z-index: -2;
+    }
+    #fx-canvas {
+      position: fixed; inset: 0; width: 100%; height: 100%;
+      z-index: 1; pointer-events: none;
+    }
+    .grain {
+      position: fixed; inset: 0; z-index: 3; pointer-events: none; opacity: .055;
+      background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="240" height="240"><filter id="n"><feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="2" stitchTiles="stitch"/></filter><rect width="100%" height="100%" filter="url(%23n)"/></svg>');
+    }
+
+    /* Top Control Bar */
+    .deck-topbar {
+      position: relative; z-index: 20;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 16px clamp(20px, 4vw, 48px);
+      border-bottom: 1px solid var(--line-subtle);
+      background: rgba(10, 10, 14, 0.72);
+      backdrop-filter: blur(14px);
+    }
+    .brand-group {
+      display: flex; align-items: center; gap: 14px;
+    }
+    .brand-title {
+      font-family: var(--font-display);
+      font-size: 19px; letter-spacing: 0.18em; text-transform: uppercase;
+      font-weight: 400; text-decoration: none; color: var(--ink);
+    }
+    .brand-title em { color: var(--accent); font-style: normal; font-weight: 600; }
+    .badge-deck {
+      font-family: var(--font-mono);
+      font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase;
+      padding: 4px 10px; border: 1px solid var(--accent);
+      color: var(--accent); border-radius: var(--tag-radius);
+    }
+    
+    .deck-controls {
+      display: flex; align-items: center; gap: 16px;
+    }
+    .control-group {
+      display: flex; align-items: center; gap: 6px;
+      background: rgba(255,255,255,0.04);
+      padding: 4px; border-radius: 999px;
+      border: 1px solid var(--line-subtle);
+    }
+    .btn-ctrl {
+      background: transparent; border: none; color: var(--ink-sub);
+      font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.1em;
+      padding: 6px 14px; border-radius: 999px; cursor: pointer;
+      transition: all 0.3s var(--ease);
+    }
+    .btn-ctrl:hover { color: var(--ink); }
+    .btn-ctrl.active {
+      background: var(--accent); color: var(--bg); font-weight: 600;
+      box-shadow: 0 0 14px var(--accent-glow);
+    }
+
+    /* Presentation Slide Stage */
+    .deck-stage {
+      position: relative; z-index: 10;
+      flex: 1; display: flex; align-items: center; justify-content: center;
+      padding: clamp(20px, 3vh, 40px) clamp(20px, 4vw, 48px);
+    }
+    .slide-wrapper {
+      width: 100%; max-width: 1280px; min-height: 640px;
+      background: var(--bg-card);
+      border: 1px solid var(--line);
+      border-radius: var(--card-radius);
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.35), 0 0 24px var(--accent-glow);
+      backdrop-filter: blur(2px);
+      -webkit-backdrop-filter: blur(2px);
+      display: flex; flex-direction: column; justify-content: space-between;
+      padding: clamp(32px, 4vw, 56px);
+      position: relative;
+      overflow: hidden;
+      transition: border-color 0.4s var(--ease), box-shadow 0.4s var(--ease), background 0.4s var(--ease);
+    }
+    
+    /* HUD Corner Marks for Theme B/C */
+    body[data-template="b"] .slide-wrapper::before,
+    body[data-template="b"] .slide-wrapper::after,
+    body[data-template="c"] .slide-wrapper::before,
+    body[data-template="c"] .slide-wrapper::after {
+      content: ""; position: absolute; width: 14px; height: 14px;
+      border-color: var(--accent); border-style: solid; pointer-events: none;
+    }
+    body[data-template="b"] .slide-wrapper::before,
+    body[data-template="c"] .slide-wrapper::before {
+      top: 6px; left: 6px; border-width: 2px 0 0 2px;
+    }
+    body[data-template="b"] .slide-wrapper::after,
+    body[data-template="c"] .slide-wrapper::after {
+      bottom: 6px; right: 6px; border-width: 0 2px 2px 0;
+    }
+
+    /* Slide Header */
+    .slide-meta {
+      display: flex; align-items: center; justify-content: space-between;
+      margin-bottom: 20px;
+    }
+    .slide-tag {
+      font-family: var(--font-mono); font-size: 11px;
+      letter-spacing: 0.28em; text-transform: uppercase; color: var(--accent);
+      display: flex; align-items: center; gap: 8px;
+    }
+    .slide-tag::before {
+      content: ""; display: inline-block; width: 6px; height: 6px;
+      border-radius: 50%; background: var(--accent);
+      box-shadow: 0 0 8px var(--accent);
+    }
+    .slide-page-num {
+      font-family: var(--font-mono); font-size: 12px; color: var(--ink-sub);
+    }
+
+    .slide-title {
+      font-family: var(--font-display);
+      font-size: clamp(30px, 3.6vw, 48px);
+      font-weight: 400; line-height: 1.12;
+      letter-spacing: -0.01em; margin-bottom: 12px;
+      color: var(--ink);
+    }
+    .slide-desc {
+      font-size: clamp(14px, 1.2vw, 16px);
+      color: var(--ink-sub); line-height: 1.6; max-width: 920px;
+      margin-bottom: 32px;
+    }
+
+    /* Grid Layout of Slide Cards */
+    .slide-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 18px; margin-bottom: 28px;
+    }
+    .stat-card {
+      background: rgba(10, 15, 25, 0.15);
+      border: 1px solid var(--line-subtle);
+      border-radius: var(--card-radius);
+      padding: 22px;
+      transition: all 0.3s var(--ease);
+      display: flex; flex-direction: column; justify-content: space-between;
+      position: relative;
+    }
+    .stat-card:hover {
+      background: var(--bg-card-hover);
+      border-color: var(--line);
+      transform: translateY(-3px);
+      box-shadow: 0 8px 24px var(--accent-glow);
+    }
+    .stat-card-label {
+      font-family: var(--font-mono); font-size: 11px;
+      letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--ink-sub); margin-bottom: 10px;
+    }
+    .stat-card-value {
+      font-family: var(--font-display);
+      font-size: clamp(30px, 2.8vw, 42px);
+      font-weight: 500; color: var(--accent);
+      line-height: 1.0; margin-bottom: 8px;
+    }
+    .stat-card-unit {
+      font-size: 13px; font-weight: 300; color: var(--ink-sub); margin-left: 4px;
+      font-family: var(--font-body);
+    }
+    .stat-card-desc {
+      font-size: 12.5px; color: var(--ink-sub); line-height: 1.5;
+    }
+
+    /* Footnote */
+    .slide-footnote {
+      padding-top: 18px; border-top: 1px solid var(--line-subtle);
+      display: flex; align-items: center; justify-content: space-between;
+      font-size: 11.5px; color: var(--ink-sub); font-family: var(--font-mono);
+    }
+    .ssot-indicator {
+      display: flex; align-items: center; gap: 8px; color: var(--accent);
+    }
+
+    /* Deck Navigation Footer */
+    .deck-footer {
+      position: relative; z-index: 20;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 14px clamp(20px, 4vw, 48px);
+      background: rgba(10, 10, 14, 0.85);
+      border-top: 1px solid var(--line-subtle);
+      backdrop-filter: blur(12px);
+    }
+    .timeline-steps {
+      display: flex; align-items: center; gap: 8px;
+    }
+    .step-pill {
+      height: 4px; border-radius: 2px;
+      background: var(--line-subtle); width: 36px;
+      transition: all 0.4s var(--ease); cursor: pointer;
+    }
+    .step-pill.active {
+      background: var(--accent); width: 64px;
+      box-shadow: 0 0 10px var(--accent-glow);
+    }
+    .nav-actions {
+      display: flex; align-items: center; gap: 12px;
+    }
+    .btn-nav {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--line);
+      color: var(--ink);
+      font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.15em;
+      padding: 8px 18px; border-radius: var(--tag-radius);
+      cursor: pointer; transition: all 0.3s var(--ease);
+    }
+    .btn-nav:hover {
+      background: var(--accent); color: var(--bg);
+      box-shadow: 0 0 14px var(--accent-glow);
+    }
+  </style>
+</head>
+<body data-template="a">
+  <!-- 3D Canvas + 2D FX Canvas + Grain Layers -->
+  <canvas id="bg-canvas"></canvas>
+  <canvas id="fx-canvas"></canvas>
+  <div class="grain"></div>
+
+  <!-- Top Control Bar -->
+  <header class="deck-topbar">
+    <div class="brand-group">
+      <a class="brand-title" href="index.html">INDO<em>·</em>PHOENIX</a>
+      <div class="badge-deck" data-i18n="deckBadge">Pitch Deck Sample</div>
+    </div>
+
+    <div class="deck-controls">
+      <!-- Theme Switcher (A/B/C) with full 3D and FX switching -->
+      <div class="control-group">
+        <button class="btn-ctrl active" onclick="switchTheme('a')">A: Obsidian (黑金)</button>
+        <button class="btn-ctrl" onclick="switchTheme('b')">B: Mission Control (航太)</button>
+        <button class="btn-ctrl" onclick="switchTheme('c')">C: Hologram (全息)</button>
+      </div>
+
+      <!-- Language Toggle (EN / ZH) -->
+      <div class="control-group">
+        <button class="btn-ctrl active" id="btn-lang-en" onclick="setLang('en')">EN</button>
+        <button class="btn-ctrl" id="btn-lang-zh" onclick="setLang('zh')">繁中</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Presentation Stage Area -->
+  <main class="deck-stage">
+    <div class="slide-wrapper" id="slideContainer">
+      <div id="slideContent">
+        <!-- Rendered by JS -->
+      </div>
+
+      <div class="slide-footnote">
+        <div class="ssot-indicator">
+          <span style="font-size: 14px;">●</span>
+          <span data-i18n="ssotLive">SSOT Live Connected: Google Sheet (FPC Factory Model)</span>
+        </div>
+        <div id="slideKeyboardHint" data-i18n="keyboardHint">Use ◄ / ► arrow keys or drag mouse to interact with 3D/FX</div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Deck Navigation Footer -->
+  <footer class="deck-footer">
+    <div class="timeline-steps" id="timelineSteps"></div>
+    <div class="nav-actions">
+      <button class="btn-nav" onclick="prevSlide()" data-i18n="btnPrev">◄ PREV</button>
+      <button class="btn-nav" onclick="nextSlide()" data-i18n="btnNext">NEXT ►</button>
+    </div>
+  </footer>
+
+  <!-- Core Libraries -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="assets/js/data.js"></script>
+  <script src="assets/js/content-engine.js"></script>
+  <script src="assets/js/app.js"></script>
+
+  <!-- Slide Logic & Dynamic 3D/FX Theme Switcher -->
+  <script>
+    const I18N = {
+      en: {
+        deckBadge: "Pitch Deck Sample",
+        ssotLive: "SSOT Live Connected: Google Sheet (FPC Factory Model)",
+        keyboardHint: "Use ◄ / ► arrow keys or drag mouse to interact with 3D/FX",
+        btnPrev: "◄ PREV",
+        btnNext: "NEXT ►",
+        slides: [
+          {
+            tag: "SLIDE 01 / EXECUTIVE SUMMARY",
+            title: "India's First Advanced FPC Smart Manufacturing Plant",
+            desc: "Capitalizing on the 'Make in India' strategic mandate and China+1 supply chain diversification. Building an AI-driven, high-yield flexible circuit board facility with 0% domestic competition.",
+            cards: [
+              { label: "Target Capacity", val: "15,000", unit: "m² / month", desc: "180,000 m² annual volume focused on defense & energy." },
+              { label: "Net CapEx", val: "$17.25", unit: "M USD", desc: "Total $23.0M less 25% SPECS Government Cash Subsidy ($5.75M)." },
+              { label: "EBIT Margin", val: "23.1", unit: "%", desc: "High-margin wet-process model delivering $6.66M annual EBIT." },
+              { label: "Static Payback", val: "4.2", unit: "Years", desc: "Rapid recovery with SPECS subsidy (5.2 years without)." }
+            ]
+          },
+          {
+            tag: "SLIDE 02 / MARKET & ADVANTAGE",
+            title: "Zero Local Competition & Rapid Prototyping Advantage",
+            desc: "India currently imports 100% of high-end aerospace/defense and automotive CCS flex circuits. Indo-Phoenix provides local design, tariff exemption, and rapid 48-72h turnaround.",
+            cards: [
+              { label: "Domestic Capacity", val: "0", unit: "%", desc: "Zero domestic wet-process FPC bare-board manufacturers in India." },
+              { label: "Sampling Speed", val: "48 – 72", unit: "Hours", desc: "Down from 2-3 weeks cross-border import turnaround." },
+              { label: "Tariff & Logistics Savings", val: "10 – 20", unit: "%", desc: "Direct duty exemption and avoidance of expensive airfreight." },
+              { label: "Target Pipeline", val: "3", unit: "Key Sectors", desc: "Energy Storage (Waaree), Auto Tier-1 (EV CCS), Defense UAV." }
+            ]
+          },
+          {
+            tag: "SLIDE 03 / FINANCIAL ENGINE",
+            title: "Robust Dynamic Unit Economics & High Return (IRR)",
+            desc: "Strictly modeled with 100% localized basic chemicals and dual-vendor strategy. Break-even achieved at 50.8% utilization ($1.22M monthly revenue).",
+            cards: [
+              { label: "Annual Revenue", val: "$28.8", unit: "M USD", desc: "At full 15,000 m²/mo capacity with $160/m² weighted ASP." },
+              { label: "Break-Even Point", val: "50.8", unit: "%", desc: "$1.22M monthly revenue standard for wet-process plants." },
+              { label: "Internal Rate of Return", val: "21.3 – 24.8", unit: "%", desc: "Substantially outperforms benchmark electronics manufacturing." },
+              { label: "Total Factory Layout", val: "13,000", unit: "m²", desc: "Includes Class 10K yellow cleanroom and full ZLD facility." }
+            ]
+          }
+        ]
+      },
+      zh: {
+        deckBadge: "商業計劃演示 Sample",
+        ssotLive: "單一真值連動：Google Sheet 線上模型 (FPC Factory Model)",
+        keyboardHint: "支援鍵盤 ◄ / ► 方向鍵或滑鼠長按拖曳體驗 3D 特效",
+        btnPrev: "◄ 上一頁",
+        btnNext: "下一頁 ►",
+        slides: [
+          {
+            tag: "簡報 01 / 執行摘要與願景",
+            title: "印度首座先進 FPC 軟板智慧製造工廠",
+            desc: "精準掌握「印度製造 (Make in India)」政策紅利與全球供應鏈去風險化 (China+1) 歷史機遇。導入 AI/ACC 控制系統，打造全印度最具技術競爭力的高毛利軟板量產基地。",
+            cards: [
+              { label: "規劃月產能基準", val: "15,000", unit: "m² / 月", desc: "年產 18 萬平方米，鎖定高階國防航太與新能源剛需。" },
+              { label: "投資人淨資本支出", val: "$17.25", unit: "M 美元", desc: "總預算 $23.0M 扣除 SPECS 政府 25% 現金補貼 ($5.75M)。" },
+              { label: "滿載 EBIT 利潤率", val: "23.1", unit: "%", desc: "高毛利濕製程架構，年貢獻息稅前利潤達 666 萬美元。" },
+              { label: "靜態投資回收期", val: "4.2", unit: "年", desc: "含 SPECS 補貼 4.2 年回本（未含補貼為 5.2 年）。" }
+            ]
+          },
+          {
+            tag: "簡報 02 / 市場剛需與核心優勢",
+            title: "在地競爭 0% 空白與極速 48 小時打樣交期",
+            desc: "印度目前高階車載、儲能 BMS 與航太 FPC 100% 依賴海外進口。本專案提供在地設計、免除 10-20% 進口關稅，並將打樣週期自 3 週大幅壓縮至 48~72 小時。",
+            cards: [
+              { label: "在地高階產能", val: "0", unit: "%", desc: "全印度目前無高階濕製程軟板裸板製造廠，具絕對先發優勢。" },
+              { label: "工程打樣響應", val: "48 – 72", unit: "小時", desc: "相較跨國寄送需 2-3 週，本地響應極具殺手級優勢。" },
+              { label: "關稅與運費節省", val: "10 – 20", unit: "%", desc: "免除高額關稅與國際航空昂貴運費，毛利空間大幅擴大。" },
+              { label: "三大剛需客群", val: "3", unit: "大核心賽道", desc: "新能源儲能 (Waaree)、車載 Tier-1 (EV CCS)、國防無人機。" }
+            ]
+          },
+          {
+            tag: "簡報 03 / 動態財務模型與投資回報",
+            title: "嚴謹財務勾稽、雙軌供應鏈與超額報酬 (IRR)",
+            desc: "基礎化學品 100% 在地採購降低外匯曝險，關鍵特殊膜材台日戰略進口。工廠稼動率達 50.8%（月營收 $1.22M）即跨越損益兩平點。",
+            cards: [
+              { label: "滿載年度營收", val: "$28.8", unit: "M 美元", desc: "以 $160/m² 加權單價在 15,000 m²/月滿載時達成。" },
+              { label: "損益兩平稼動率", val: "50.8", unit: "%", desc: "月營收達 121.8 萬美元即全面獲利，安全邊際極高。" },
+              { label: "內部報酬率 (IRR)", val: "21.3 – 24.8", unit: "%", desc: "大幅超越傳統電子代工與製造業回報基準。" },
+              { label: "總廠房建置規模", val: "13,000", unit: "m²", desc: "含萬級黃光無塵室 1,500m² 與廢水零排放 ZLD 設施 3,000m²。" }
+            ]
+          }
+        ]
+      }
+    };
+
+    let currentTheme = "a";
+    let currentLang = "en";
+    let currentSlide = 0;
+
+    // Load URL param for theme/lang if present e.g. sample-deck.html?theme=b&lang=zh
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.get("theme")) currentTheme = urlParams.get("theme").toLowerCase();
+    if (urlParams.get("lang")) currentLang = urlParams.get("lang").toLowerCase();
+
+    function setLang(lang) {
+      currentLang = lang;
+      document.getElementById("btn-lang-en").classList.toggle("active", lang === "en");
+      document.getElementById("btn-lang-zh").classList.toggle("active", lang === "zh");
+      
+      document.querySelectorAll("[data-i18n]").forEach(el => {
+        const key = el.getAttribute("data-i18n");
+        if (I18N[lang][key]) el.textContent = I18N[lang][key];
+      });
+
+      renderSlide();
+    }
+
+    function renderSlide() {
+      const slides = I18N[currentLang].slides;
+      const slide = slides[currentSlide];
+      
+      const content = `
+        <div class="slide-meta">
+          <div class="slide-tag">${slide.tag}</div>
+          <div class="slide-page-num">${currentSlide + 1} / ${slides.length}</div>
+        </div>
+        <h1 class="slide-title">${slide.title}</h1>
+        <p class="slide-desc">${slide.desc}</p>
+        <div class="slide-grid">
+          ${slide.cards.map(c => `
+            <div class="stat-card">
+              <div class="stat-card-label">${c.label}</div>
+              <div class="stat-card-value">${c.val}<span class="stat-card-unit">${c.unit}</span></div>
+              <div class="stat-card-desc">${c.desc}</div>
+            </div>
+          `).join("")}
+        </div>
+      `;
+      document.getElementById("slideContent").innerHTML = content;
+      renderTimeline();
+    }
+
+    function renderTimeline() {
+      const slides = I18N[currentLang].slides;
+      const container = document.getElementById("timelineSteps");
+      container.innerHTML = slides.map((_, idx) => `
+        <div class="step-pill ${idx === currentSlide ? 'active' : ''}" onclick="goToSlide(${idx})"></div>
+      `).join("");
+    }
+
+    function goToSlide(idx) { currentSlide = idx; renderSlide(); }
+    function nextSlide() { if (currentSlide < I18N[currentLang].slides.length - 1) { currentSlide++; renderSlide(); } }
+    function prevSlide() { if (currentSlide > 0) { currentSlide--; renderSlide(); } }
+
+    window.addEventListener("keydown", (e) => {
+      if (e.key === "ArrowRight" || e.key === " " || e.key === "PageDown") nextSlide();
+      if (e.key === "ArrowLeft" || e.key === "PageUp") prevSlide();
+    });
+
+    /* ═══════════════════════════════════════════════════════════════
+       DYNAMIC 3D & FX LOADER (Injects Scene & FX per Theme)
+       ═══════════════════════════════════════════════════════════════ */
+    let dynamicScripts = [];
+
+    function switchTheme(theme) {
+      if (theme !== currentTheme) {
+        // Direct reload with parameter to ensure 100% clean WebGL Context recreation
+        const url = new URL(window.location.href);
+        url.searchParams.set("theme", theme);
+        url.searchParams.set("lang", currentLang);
+        window.location.href = url.toString();
+        return;
+      }
+    }
+
+    function loadActiveThemeScene(theme) {
+      document.body.setAttribute("data-template", theme);
+      
+      document.querySelectorAll(".control-group .btn-ctrl").forEach(btn => {
+        if (btn.textContent.toLowerCase().includes(theme + ":")) {
+          btn.classList.add("active");
+        } else if (btn.textContent.includes("A:") || btn.textContent.includes("B:") || btn.textContent.includes("C:")) {
+          btn.classList.remove("active");
+        }
+      });
+
+      const sceneScript = document.createElement("script");
+      const fxScript = document.createElement("script");
+
+      if (theme === "a") {
+        sceneScript.src = "assets/js/scene-a.js";
+        fxScript.src = "assets/js/fx.js";
+      } else if (theme === "b") {
+        sceneScript.src = "assets/js/scene-b.js";
+        const fxCore = document.createElement("script");
+        fxCore.src = "assets/js/fx-core.js";
+        document.body.appendChild(fxCore);
+        fxScript.src = "assets/js/fx-b.js";
+      } else if (theme === "c") {
+        sceneScript.src = "assets/js/scene-c.js";
+        const fxCore = document.createElement("script");
+        fxCore.src = "assets/js/fx-core.js";
+        document.body.appendChild(fxCore);
+        fxScript.src = "assets/js/fx-c.js";
+      }
+
+      document.body.appendChild(sceneScript);
+      document.body.appendChild(fxScript);
+    }
+
+    // Init Execution
+    setLang(currentLang);
+    loadActiveThemeScene(currentTheme);
+  </script>
+</body>
+</html>
