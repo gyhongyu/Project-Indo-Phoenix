@@ -267,28 +267,122 @@
       display: grid; grid-template-columns: 1fr 1fr; gap: 14px;
     }
 
-    /* 2. Precision Data Table (Slide 2 Product Mix, Slide 4 Space Allocation) */
-    .deck-table-wrap {
-      width: 100%; border: 1px solid var(--line-subtle);
-      border-radius: var(--card-radius); overflow: hidden;
-      background: rgba(10, 15, 25, 0.15); margin-bottom: 16px;
+    /* 2. Product Mix Visual Donut & Spec Cards (Slide 2 Overhaul) */
+    .product-mix-grid {
+      display: grid; grid-template-columns: 1.1fr 2fr; gap: 20px;
+      align-items: stretch; margin-bottom: 16px;
     }
-    .deck-table {
-      width: 100%; border-collapse: collapse; text-align: left;
-      font-size: 13px;
+    .donut-hero-card {
+      background: linear-gradient(135deg, rgba(255,255,255,0.03) 0%, rgba(0,0,0,0.4) 100%);
+      border: 1px solid var(--accent); border-radius: var(--card-radius);
+      padding: 24px 20px; display: flex; flex-direction: column;
+      justify-content: space-between; box-shadow: 0 12px 36px var(--accent-glow);
     }
-    .deck-table th {
-      background: rgba(255,255,255,0.03); color: var(--accent);
-      font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.15em;
-      text-transform: uppercase; padding: 12px 16px; border-bottom: 1px solid var(--line-subtle);
+    .donut-circle-wrap {
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      margin: 12px 0; position: relative;
     }
-    .deck-table td {
-      padding: 12px 16px; border-bottom: 1px solid rgba(255,255,255,0.04);
-      color: var(--ink-sub); line-height: 1.4;
+    .donut-svg { width: 140px; height: 140px; transform: rotate(-90deg); }
+    .donut-bg { fill: none; stroke: rgba(255,255,255,0.05); stroke-width: 14; }
+    .donut-segment {
+      fill: none; stroke-width: 14; stroke-linecap: round;
+      transition: stroke-dasharray 1.2s cubic-bezier(0.16, 1, 0.3, 1);
     }
-    .deck-table tr:hover td { background: var(--bg-card-hover); color: var(--ink); }
-    .deck-table td.strong { color: var(--ink); font-weight: 500; font-family: var(--font-mono); }
-    .deck-table td.accent { color: var(--accent); font-weight: 600; font-family: var(--font-mono); }
+    .donut-center-text {
+      position: absolute; display: flex; flex-direction: column; align-items: center; justify-content: center;
+    }
+    .donut-center-val {
+      font-family: var(--font-display); font-size: 26px; font-weight: 600; color: var(--accent); line-height: 1;
+    }
+    .donut-center-lbl {
+      font-family: var(--font-mono); font-size: 9.5px; letter-spacing: 0.15em; color: var(--ink-sub); text-transform: uppercase;
+    }
+    .product-spec-grid {
+      display: grid; grid-template-columns: 1fr; gap: 10px;
+    }
+    .product-spec-card {
+      background: rgba(10, 15, 25, 0.2); border: 1px solid var(--line-subtle);
+      border-radius: var(--card-radius); padding: 14px 18px;
+      display: grid; grid-template-columns: 1.4fr 1fr 1fr 1.2fr; gap: 12px;
+      align-items: center; cursor: pointer; transition: all 0.25s var(--ease);
+    }
+    .product-spec-card:hover, .product-spec-card.active {
+      background: var(--bg-card-hover); border-color: var(--accent);
+      transform: translateX(4px); box-shadow: 0 4px 18px var(--accent-glow);
+    }
+    .spec-title-col { display: flex; align-items: center; gap: 10px; }
+    .spec-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+    .spec-name { font-weight: 500; font-size: 13.5px; color: var(--ink); }
+    .spec-pct { font-family: var(--font-mono); font-size: 11px; color: var(--ink-sub); }
+    .spec-val-num { font-family: var(--font-mono); font-size: 13px; color: var(--ink); font-weight: 600; }
+    .spec-val-sub { font-size: 10.5px; color: var(--ink-sub); }
+
+    /* 3. Space Allocation Area Matrix Tiles (Slide 4 Overhaul) */
+    .space-matrix-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px;
+      margin-bottom: 16px;
+    }
+    .space-tile-card {
+      background: rgba(10, 15, 25, 0.2); border: 1px solid var(--line-subtle);
+      border-radius: var(--card-radius); padding: 16px 16px;
+      display: flex; flex-direction: column; justify-content: space-between;
+      min-height: 140px; cursor: pointer; transition: all 0.25s var(--ease);
+      position: relative;
+    }
+    .space-tile-card:hover, .space-tile-card.active {
+      background: var(--bg-card-hover); border-color: var(--accent);
+      transform: translateY(-3px); box-shadow: 0 8px 24px var(--accent-glow);
+    }
+    .space-tile-top {
+      display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px;
+    }
+    .space-tile-title { font-size: 13px; font-weight: 600; color: var(--ink); }
+    .space-tile-area {
+      font-family: var(--font-mono); font-size: 14px; font-weight: 700; color: var(--accent);
+    }
+    .space-tile-std {
+      font-family: var(--font-mono); font-size: 10.5px; color: var(--accent-light);
+      background: rgba(255,255,255,0.03); padding: 2px 6px; border-radius: 4px;
+      margin-bottom: 6px; display: inline-block;
+    }
+    .space-tile-desc { font-size: 11.5px; color: var(--ink-sub); line-height: 1.4; }
+
+    /* 4. OpEx Cost Composition Master Grid (Slide 6 Overhaul) */
+    .opex-cockpit-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 14px;
+      margin-bottom: 16px;
+    }
+    .opex-cost-card {
+      background: rgba(10, 15, 25, 0.2); border: 1px solid var(--line-subtle);
+      border-radius: var(--card-radius); padding: 16px 18px;
+      display: flex; flex-direction: column; justify-content: space-between;
+      cursor: pointer; transition: all 0.25s var(--ease);
+    }
+    .opex-cost-card:hover, .opex-cost-card.active {
+      background: var(--bg-card-hover); border-color: var(--accent);
+      transform: translateY(-2px); box-shadow: 0 6px 20px var(--accent-glow);
+    }
+    .opex-card-head {
+      display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 6px;
+    }
+    .opex-card-title { font-size: 13.5px; font-weight: 600; color: var(--ink); }
+    .opex-card-pct {
+      font-family: var(--font-mono); font-size: 12px; font-weight: 600; color: var(--accent);
+    }
+    .opex-card-amount {
+      font-family: var(--font-display); font-size: 24px; font-weight: 600;
+      color: var(--accent); line-height: 1; margin-bottom: 6px;
+    }
+    .opex-bar-ratio {
+      height: 6px; background: rgba(255,255,255,0.06); border-radius: 3px;
+      overflow: hidden; display: flex; margin: 8px 0;
+    }
+    .opex-var-bar { height: 100%; background: #38bdf8; }
+    .opex-fix-bar { height: 100%; background: #94a3b8; }
+    .opex-ratio-labels {
+      display: flex; justify-content: space-between; font-family: var(--font-mono);
+      font-size: 10px; color: var(--ink-sub);
+    }
 
     /* 3. VS Matrix (Slide 3 Market Gap) */
     .vs-matrix {
@@ -775,18 +869,47 @@
                 { label: "Internal Rate of Return", val: irrRange, desc: "Substantially outperforms global electronics manufacturing benchmarks." }
               ]
             },
-            // Slide 02: Module 1 Product Capacity Mix Table
+            // Slide 02: Module 1 Visual Product Mix Donut & Spec Architecture
             {
-              type: "data-table",
-              tag: "SLIDE 02 / CAPACITY & REVENUE MODEL",
-              title: "Module 1: Dynamic Capacity & Revenue Architecture",
-              desc: "Product line optimized for aerospace, automotive battery CCS and defense rigid-flex circuits. Scaled to 180,000 m² annual volume.",
-              headers: ["Product Type", "Production Share", "Monthly Volume", "Unit Price (ASP)", "Monthly Revenue", "Annual Revenue"],
-              rows: [
-                ["Single-sided FPC (1L)", "40.0%", "6,000 m²", "$100 / m²", "$600,000", "$7,200,000"],
-                ["Double-sided FPC (2L)", "50.0%", "7,500 m²", "$180 / m²", "$1,350,000", "$16,200,000"],
-                ["Multi-layer FPC (3L+)", "10.0%", "1,500 m²", "$300 / m²", "$450,000", "$5,400,000"],
-                ["Total / Weighted Benchmark", "100.0%", `${capMonthly} m²`, `$${weightedPrice} / m²`, `$${(getLiveStat("monthlyRevenue",2400000)/1000000).toFixed(1)}M`, `$${revAnnual}M`]
+              type: "product-mix-visual",
+              tag: "SLIDE 02 / CAPACITY & REVENUE ARCHITECTURE",
+              title: "Module 1: High-Density Capacity & Revenue Mix",
+              desc: `Full production scaled to ${capMonthly} m²/month (180,000 m²/year) delivering $${revAnnual}M gross run-rate. Click items for technical depth.`,
+              totalVolume: `${capMonthly} m²`,
+              weightedPrice: `$${weightedPrice} / m²`,
+              annualRunRate: `$${revAnnual}M`,
+              defaultExplanation: "1L to 3L+ multi-layer bare boards designed for EV battery CCS, defense avionics, and foldable electronics under dual-shift high throughput.",
+              products: [
+                {
+                  name: "Single-sided FPC (1L)",
+                  pct: "40.0%",
+                  volume: "6,000 m²/mo",
+                  asp: "$100 / m²",
+                  revMo: "$600,000",
+                  revYr: "$7.20M",
+                  color: "#38bdf8",
+                  detail: "Single-layer flexible printed circuits. Primarily targeted at standard automotive sensors, consumer LED backlights, and entry-level industrial controls."
+                },
+                {
+                  name: "Double-sided FPC (2L)",
+                  pct: "50.0%",
+                  volume: "7,500 m²/mo",
+                  asp: "$180 / m²",
+                  revMo: "$1,350,000",
+                  revYr: "$16.20M",
+                  color: "var(--accent)",
+                  detail: "Double-sided PTH through-hole flex circuits. High-volume sweet spot serving automotive battery CCS modules (Waaree/EV) and aerospace telemetry."
+                },
+                {
+                  name: "Multi-layer FPC (3L+)",
+                  pct: "10.0%",
+                  volume: "1,500 m²/mo",
+                  asp: "$300 / m²",
+                  revMo: "$450,000",
+                  revYr: "$5.40M",
+                  color: "#a855f7",
+                  detail: "Multi-layer high-density interconnect (HDI) rigid-flex boards. Built for radar signal processing, missile guidance systems, and medical endoscopes."
+                }
               ]
             },
             // Slide 03: Market Gap & Dual Sourcing Matrix
@@ -808,19 +931,49 @@
                 { badge: "Tier-1 Pipeline", text: "Direct alignment with Waaree (Energy Storage) & EV clients." }
               ]
             },
-            // Slide 04: Module 2 Factory Space Allocation Table
+            // Slide 04: Module 2 Factory Space Allocation Matrix Tiles
             {
-              type: "data-table",
+              type: "space-matrix-visual",
               tag: "SLIDE 04 / PLANT INFRASTRUCTURE",
               title: `Module 2: Factory Area & Space Division (${totalArea} m²)`,
               desc: "Industrial-grade layout designed for heavy wet-chemical processes, micro-vibration isolated drilling, and strict SPCB zero-liquid discharge mandates.",
-              headers: ["Factory Space Division", "India Project Area", "Cleanroom / Standard", "Key Processes / Equipments", "Strategic Infrastructure Notes"],
-              rows: [
-                ["Cleanroom Yellow Light", "1,500 m²", "Class 10K, 22±2°C, 55±5%", "LDI Direct Imaging, Dry Film", "+40% HVAC capacity for Indian ambient conditions"],
-                ["Wet Process Chemical Area", "4,500 m²", "FRP Anti-acid, Exhaust", "VCP Continuous Plating, DES Line", "Local pollution control (SPCB) CTE/CTO approval"],
-                ["Drilling & Vacuum Lamination", "2,000 m²", "Floor Load 1.5 tons/m²", "Laser Drill, Vacuum Hot Press", "Micro-vibration isolated base required"],
-                ["Raw Material Temp Warehouse", "2,000 m²", "Cold Storage 2-10°C", "FCCL, Coverlay, Chemicals", "45-60 Days Safety Stock buffer in India"],
-                ["Wastewater & ZLD Facility", "3,000 m²", "Zero Liquid Discharge (ZLD)", "MVR Evaporators, Multi-stage RO", "3x larger footprint than standard. Mandatory filter"]
+              defaultExplanation: "13,000 m² total footprint structured for compliance with Indian State Pollution Control Board (SPCB) and high-yield wet-chemical processes.",
+              spaces: [
+                {
+                  title: "Cleanroom Yellow Light",
+                  area: "1,500 m²",
+                  std: "Class 10K / 22±2°C",
+                  desc: "LDI Laser Direct Imaging & Dry Film lamination.",
+                  detail: "+40% HVAC cooling headroom engineered specifically for Indian ambient summer extremes (45°C+)."
+                },
+                {
+                  title: "Wet Chemical Plating",
+                  area: "4,500 m²",
+                  std: "FRP Anti-Acid Floor",
+                  desc: "VCP continuous vertical plating and DES etching lines.",
+                  detail: "Heavy acid/alkali resistant FRP coating with redundant negative pressure air scrubbers for SPCB approval."
+                },
+                {
+                  title: "Drilling & Press",
+                  area: "2,000 m²",
+                  std: "Floor Load 1.5 t/m²",
+                  desc: "Laser micro-vias drilling and vacuum hot press.",
+                  detail: "Isolated seismic foundation to prevent micro-vibration interference during high-precision micro-via laser drilling."
+                },
+                {
+                  title: "Cold Raw Materials",
+                  area: "2,000 m²",
+                  std: "Cold Storage 2-10°C",
+                  desc: "FCCL base laminates, coverlays, and pure chemicals.",
+                  detail: "Maintains 45-60 days of strategic safety inventory in India to eliminate international logistics disruptions."
+                },
+                {
+                  title: "Wastewater & ZLD",
+                  area: "3,000 m²",
+                  std: "Zero Liquid Discharge",
+                  desc: "MVR mechanical vapor recompression and multi-stage RO.",
+                  detail: "3x larger footprint than standard factories. Mandatory environmental installation for green project approvals in India."
+                }
               ]
             },
             // Slide 05: Module 3 CapEx & SPECS Subsidy Waterfall
@@ -837,19 +990,50 @@
                 { label: "Net Investor Capital Outlay", val: `$${netCapEx}M`, pct: 75, fillClass: "net" }
               ]
             },
-            // Slide 06: Module 4 Dynamic OpEx Breakdown Table
+            // Slide 06: Module 4 Dynamic OpEx Breakdown Visual Cockpit
             {
-              type: "data-table",
+              type: "opex-cockpit-visual",
               tag: "SLIDE 06 / MONTHLY OPERATING EXPENSES",
               title: `Module 4: Dynamic Monthly OpEx Structure ($${opexMo}M / mo)`,
-              desc: "Cost behavior modeled with dual-vendor procurement. Variable costs account for 69.0% ($1.27M), providing outstanding operational flexibility.",
-              headers: ["OpEx Cost Classification", "Monthly Cost (USD)", "Share %", "Variable %", "Variable Portion", "Fixed Portion"],
-              rows: [
-                ["Direct Material Cost (Chemicals/Films)", "$900,000", "48.8%", "100.0%", "$900,000", "$0"],
-                ["Direct & Indirect Labor (30 Specialists)", "$430,000", "23.3%", "40.0%", "$172,000", "$258,000"],
-                ["Manufacturing & Utilities (Power/Water)", "$265,000", "14.4%", "75.7%", "$200,579", "$64,421"],
-                ["Fixed Depreciation & Amortization", "$250,000", "13.6%", "0.0%", "$0", "$250,000"],
-                ["Total Monthly OpEx", `$${opexMo}M`, "100.0%", "69.0%", "$1,272,579", "$572,421"]
+              desc: `Variable costs account for 69.0% ($1.27M/mo), ensuring extreme anti-cyclical agility. Click cost cards for depth.`,
+              defaultExplanation: "Total monthly OpEx is $1.845M ($22.14M annual). Low fixed depreciation ratio (13.6%) ensures rapid scale profits.",
+              costs: [
+                {
+                  title: "Direct Raw Materials",
+                  amount: "$900,000",
+                  pct: "48.8%",
+                  varPct: "100%",
+                  fixPct: "0%",
+                  sub: "FCCL copper clad, coverlay film, copper anodes & plating chemistry.",
+                  detail: "100% variable cost. Dual-sourcing strategy (Taiwan base + local India chemicals) guarantees supply security and cost parity."
+                },
+                {
+                  title: "Labor & Technical Staff",
+                  amount: "$430,000",
+                  pct: "23.3%",
+                  varPct: "40%",
+                  fixPct: "60%",
+                  sub: "30 Taiwanese & Indian senior process specialists and operators.",
+                  detail: "Fixed senior engineering overhead ($258K) combined with variable shift labor ($172K), optimizing labor productivity."
+                },
+                {
+                  title: "Utilities, Power & Water",
+                  amount: "$265,000",
+                  pct: "14.4%",
+                  varPct: "75.7%",
+                  fixPct: "24.3%",
+                  sub: "High-power HVAC cooling, cleanroom air filtration, and RO recycling.",
+                  detail: "75.7% variable power consumption directly tracking production runs, protected by dedicated substation grid contracts."
+                },
+                {
+                  title: "Straight-line Depreciation",
+                  amount: "$250,000",
+                  pct: "13.6%",
+                  varPct: "0%",
+                  fixPct: "100%",
+                  sub: "10-year straight-line depreciation on production line and infrastructure.",
+                  detail: "Fixed non-cash depreciation charge. Low 13.6% share allows plant to maintain strong cash flow even in down-cycles."
+                }
               ]
             },
             // Slide 07: Module 5 Master Profitability & BEP Cockpit
@@ -957,18 +1141,47 @@
                 { label: "內部報酬率 (IRR)", val: irrRange, desc: "大幅超越傳統電子代工與製造業回報基準。" }
               ]
             },
-            // Slide 02: 模組 1 產銷模型表
+            // Slide 02: 模組 1 產銷架構環形圖與產品規格卡
             {
-              type: "data-table",
-              tag: "簡報 02 / 產能與營收結構模型",
-              title: "模組 1：產能配置與動態營收結構",
-              desc: "產品結構鎖定航太、車載電池 CCS 與國防多層軟板剛需，年規劃產能達 18 萬平方公尺。",
-              headers: ["產品類型", "生產比例", "預估月產量", "加權單價 (ASP)", "預估月營收", "預估年營收"],
-              rows: [
-                ["單面板 (1L)", "40.0%", "6,000 m²", "$100 / m²", "$600,000", "$7,200,000"],
-                ["雙面板 (2L)", "50.0%", "7,500 m²", "$180 / m²", "$1,350,000", "$16,200,000"],
-                ["多層板 (3L+)", "10.0%", "1,500 m²", "$300 / m²", "$450,000", "$5,400,000"],
-                ["合計 / 綜合平均基準", "100.0%", `${capMonthly} m²`, `$${weightedPrice} / m²`, `$${(getLiveStat("monthlyRevenue",2400000)/1000000).toFixed(1)}M`, `$${revAnnual}M`]
+              type: "product-mix-visual",
+              tag: "簡報 02 / 產能規劃與產品營收架構",
+              title: "模組 1：高密度產品組合與年化 $28.8M 營收架構",
+              desc: `滿載規劃為月產能 ${capMonthly} m²（年產能 180,000 m²），加權平均售價 $${weightedPrice}/m²。點選產品可查看深度應用。`,
+              totalVolume: `${capMonthly} m²`,
+              weightedPrice: `$${weightedPrice} / m²`,
+              annualRunRate: `$${revAnnual}M`,
+              defaultExplanation: "涵蓋 1L 至 3L+ 多層高精密軟板，聚焦車載電池 CCS、國防航太雷達與摺疊終端，採雙班制連續滿載生產。",
+              products: [
+                {
+                  name: "單面板 FPC (1L)",
+                  pct: "40.0%",
+                  volume: "6,000 m²/月",
+                  asp: "$100 / m²",
+                  revMo: "$600,000",
+                  revYr: "$7.20M",
+                  color: "#38bdf8",
+                  detail: "單層高柔軟度 FPC 軟板。主要應用於車載標準感知器、消費級 LED 背光模組及工控儀表，具備極高性價比與放量速度。"
+                },
+                {
+                  name: "雙面板 FPC (2L)",
+                  pct: "50.0%",
+                  volume: "7,500 m²/月",
+                  asp: "$180 / m²",
+                  revMo: "$1,350,000",
+                  revYr: "$16.20M",
+                  color: "var(--accent)",
+                  detail: "雙面 PTH 貫孔軟板。為產能黃金主力，深度鎖定電動車 (EV) 電池管理系統 CCS 整合模組 (Waaree 儲能專案) 及航太遙測線束。"
+                },
+                {
+                  name: "多層板 FPC (3L+)",
+                  pct: "10.0%",
+                  volume: "1,500 m²/月",
+                  asp: "$300 / m²",
+                  revMo: "$450,000",
+                  revYr: "$5.40M",
+                  color: "#a855f7",
+                  detail: "多層高密度互連 (HDI) 軟硬結合板。專供軍工主動相控陣雷達信號處理、飛彈導引頭以及醫療高清內視鏡等頂級戰略領域。"
+                }
               ]
             },
             // Slide 03: 市場痛點與雙軌對比
@@ -990,19 +1203,49 @@
                 { badge: "剛需客群", text: "直通 Waaree (儲能電池 CCS) 與車載 Tier-1 供應鏈。" }
               ]
             },
-            // Slide 04: 模組 2 廠房空間分配表
+            // Slide 04: 模組 2 廠房空間分區磁貼
             {
-              type: "data-table",
+              type: "space-matrix-visual",
               tag: "簡報 04 / 廠房面積與空間分配",
-              title: `模組 2：廠房面積與空間分區 (${totalArea} m²)`,
-              desc: "重工業濕製程標準規模，萬級黃光無塵室、防微震鑽孔區與 3 倍大 ZLD 環保廢水零排放設施。",
-              headers: ["廠房空間分區", "印度預估面積", "溫濕度與潔淨度", "核心工藝與設備", "環保與基建備註"],
-              rows: [
-                ["黃光曝光區", "1,500 m²", "萬級無塵室, 22±2°C, 55±5%", "LDI 直接成像，乾膜壓膜", "印度高環境溫度需增加 40% HVAC 容量"],
-                ["濕製程化學區", "4,500 m²", "FRP 防酸地板，專用排氣", "VCP 連續電鍍，DES 生產線", "需取得當地污染控制局 SPCB CTE/CTO 批准"],
-                ["鑽孔與壓合區", "2,000 m²", "地板載重 1.5 噸/m²", "雷射鑽孔，真空熱壓合", "需具備微震隔離功能之地板基座"],
-                ["低溫材料倉", "2,000 m²", "冷藏室 2-10°C 嚴格控濕", "FCCL、覆蓋膜、化學品儲存", "備置 45-60 天印度安全庫存（崑山僅需7-14天）"],
-                ["廢水與環保區 (ZLD)", "3,000 m²", "廢水零排放 (ZLD) 強制要求", "MVR 蒸發器，多級逆滲透 RO", "佔地為崑山 3 倍。為符合法規之必要設施"]
+              title: `模組 2：高標準廠房分區規劃 (${totalArea} m²)`,
+              desc: "重工業級濕製程、防微震微盲孔鑽孔及符合印度 SPCB 零液體排放 (ZLD) 環保法規的現代化空間佈局。",
+              defaultExplanation: "13,000 m² 總佔地佈局，完全符合印度國家污染控制委員會 (SPCB) 最高環保規範與高良率濕製程要求。",
+              spaces: [
+                {
+                  title: "萬級無塵黃光區",
+                  area: "1,500 m²",
+                  std: "Class 10K / 22±2°C",
+                  desc: "LDI 雷射直接成像與乾膜壓合。",
+                  detail: "配置 +40% HVAC 暖通冗餘空調制冷能力，專門克服印度夏季 45°C+ 極端高溫環境。"
+                },
+                {
+                  title: "濕製程電鍍蝕刻區",
+                  area: "4,500 m²",
+                  std: "FRP 耐酸鹼地坪",
+                  desc: "VCP 垂直連續電鍍與 DES 連續蝕刻線。",
+                  detail: "採用重防腐玻璃鋼 (FRP) 防護地坪，配備多級負壓酸霧洗滌塔，確保順利通過 SPCB 環評。"
+                },
+                {
+                  title: "機械鑽孔與真空壓合",
+                  area: "2,000 m²",
+                  std: "承重 1.5 噸/m²",
+                  desc: "雷射微盲孔鑽孔機與高精度真空熱壓機。",
+                  detail: "獨立隔震深地基設計，徹底隔絕微震動對高精密雷射微盲孔鑽孔良率的干擾。"
+                },
+                {
+                  title: "低溫精密材料倉",
+                  area: "2,000 m²",
+                  std: "冷藏室 2-10°C",
+                  desc: "FCCL 銅箔基板、覆蓋膜及化學耗材儲存。",
+                  detail: "常態備置 45-60 天印度在地戰略安全庫存，徹底消除國際海空運物流斷鏈風險。"
+                },
+                {
+                  title: "廢水與零排放 (ZLD)",
+                  area: "3,000 m²",
+                  std: "Zero Liquid Discharge",
+                  desc: "MVR 機械蒸汽再壓縮蒸發器與多級逆滲透 RO。",
+                  detail: "佔地面積達傳統標準 3 倍，為印度綠色高科技項目核准之法定強制環保設施。"
+                }
               ]
             },
             // Slide 05: 模組 3 CapEx 瀑布圖
@@ -1019,19 +1262,50 @@
                 { label: "投資人淨資本支出", val: `$${netCapEx}M`, pct: 75, fillClass: "net" }
               ]
             },
-            // Slide 06: 模組 4 OpEx 成本拆解表
+            // Slide 06: 模組 4 OpEx 成本結構駕駛艙
             {
-              type: "data-table",
+              type: "opex-cockpit-visual",
               tag: "簡報 06 / 單月營運成本結構",
-              title: `模組 4：動態單月營運成本與變動分析 ($${opexMo}M / 月)`,
-              desc: "雙軌供應鏈模型，變動成本佔 69.0% ($1.27M/月)，折舊佔比 13.6%，具備極強的抗景氣循環韌性。",
-              headers: ["營運成本項目", "印度單月成本 (USD)", "佔比 %", "變動成本 %", "變動成本部分", "固定成本部分"],
-              rows: [
-                ["原料與化學耗材 (本地+進口)", "$900,000", "48.8%", "100.0%", "$900,000", "$0"],
-                ["生產與專家人工 (30人團隊)", "$430,000", "23.3%", "40.0%", "$172,000", "$258,000"],
-                ["製造水電能耗 (暖通/動力)", "$265,000", "14.4%", "75.7%", "$200,579", "$64,421"],
-                ["固定資產折舊攤銷 (直線法)", "$250,000", "13.6%", "0.0%", "$0", "$250,000"],
-                ["單月總營運成本", `$${opexMo}M`, "100.0%", "69.0%", "$1,272,579", "$572,421"]
+              title: `模組 4：動態單月營運成本結構 ($${opexMo}M / 月)`,
+              desc: `變動成本佔比高達 69.0% ($1.27M/月)，具備極強抗景氣循環韌性。點選成本卡片查看洞察。`,
+              defaultExplanation: "單月總營運成本為 184.5 萬美元（年化 2,214 萬美元）。折舊佔比僅 13.6%，產能放量獲利爆發力強。",
+              costs: [
+                {
+                  title: "直接原料與化學耗材",
+                  amount: "$900,000",
+                  pct: "48.8%",
+                  varPct: "100%",
+                  fixPct: "0%",
+                  sub: "FCCL 銅箔基板、覆蓋膜、銅陽極及電鍍化學耗材。",
+                  detail: "100% 變動成本。採用台印雙軌供應鏈（台灣核心膜材 + 印度本地基礎酸鹼），保證成本競爭力與供料安全。"
+                },
+                {
+                  title: "生產與台印專家團隊",
+                  amount: "$430,000",
+                  pct: "23.3%",
+                  varPct: "40%",
+                  fixPct: "60%",
+                  sub: "30 位台籍資深製程專家與在地高階技術工程師。",
+                  detail: "包含固定專家工程薪資 ($258K) 與隨班次變動之技術人力成本 ($172K)，實現人效最大化。"
+                },
+                {
+                  title: "水電能耗與動力設施",
+                  amount: "$265,000",
+                  pct: "14.4%",
+                  varPct: "75.7%",
+                  fixPct: "24.3%",
+                  sub: "高功率暖通空調制冷、無塵室空氣過濾循環及水回收能耗。",
+                  detail: "75.7% 為生產運轉變動用電，透過工業園區專屬變電站合約鎖定最優惠階梯電價。"
+                },
+                {
+                  title: "固定資產直線法折舊",
+                  amount: "$250,000",
+                  pct: "13.6%",
+                  varPct: "0%",
+                  fixPct: "100%",
+                  sub: "生產線設備與廠房基礎設施 10 年直線法折舊攤提。",
+                  detail: "非現金固定折舊攤提。13.6% 的低佔比使工廠在景氣低谷期仍能維持充沛的經營現金流。"
+                }
               ]
             },
             // Slide 07: 模組 5 旗艦損益兩平駕駛艙
@@ -1184,12 +1458,149 @@
                   <div class="stat-card-value count-target" data-target="${s.val}">0</div>
                   <div class="stat-card-desc">${s.desc}</div>
                 </div>
-              `).join("")}
+          <div class="cockpit-floating-bar" id="cockpitFloatingBar">
+            <div class="floating-bar-icon">💡</div>
+            <div class="floating-bar-text" id="cockpitFloatingText">
+              <strong>${currentLang === 'zh' ? '決策依據' : 'Strategic Insight'}:</strong> ${slide.cards[0].detail}
             </div>
           </div>
         `;
       }
-      // 2. Precision Data Table
+      // 2. Product Mix Visual Donut & Spec Architecture (Slide 2)
+      else if (slide.type === "product-mix-visual") {
+        html += `
+          <div class="product-mix-grid">
+            <!-- Left: Donut Breakdown Hero Card -->
+            <div class="donut-hero-card gs-anim-card">
+              <div>
+                <div class="slide-tag" style="font-size:10px; margin-bottom:6px;">PRODUCT CAPACITY MIX</div>
+                <div class="donut-circle-wrap">
+                  <svg class="donut-svg" viewBox="0 0 100 100">
+                    <circle class="donut-bg" cx="50" cy="50" r="38"></circle>
+                    <!-- 1L: 40% (offset 0), 2L: 50% (offset 40), 3L+: 10% (offset 90) -->
+                    <circle class="donut-segment" cx="50" cy="50" r="38" stroke="#38bdf8" stroke-dasharray="95.5 238.7" stroke-dashoffset="0"></circle>
+                    <circle class="donut-segment" cx="50" cy="50" r="38" stroke="var(--accent)" stroke-dasharray="119.4 238.7" stroke-dashoffset="-95.5"></circle>
+                    <circle class="donut-segment" cx="50" cy="50" r="38" stroke="#a855f7" stroke-dasharray="23.9 238.7" stroke-dashoffset="-214.9"></circle>
+                  </svg>
+                  <div class="donut-center-text">
+                    <div class="donut-center-val count-target" data-target="${slide.totalVolume}">0</div>
+                    <div class="donut-center-lbl">MONTHLY M²</div>
+                  </div>
+                </div>
+              </div>
+              <div style="border-top:1px solid rgba(255,255,255,0.08); padding-top:12px; display:flex; justify-content:space-between;">
+                <span style="font-family:var(--font-mono); font-size:11px; color:var(--ink-sub);">${currentLang === 'zh' ? '加權均價' : 'Weighted ASP'}: <strong style="color:var(--accent);">${slide.weightedPrice}</strong></span>
+                <span style="font-family:var(--font-mono); font-size:11px; color:var(--ink-sub);">${currentLang === 'zh' ? '年營收' : 'Annual Run-Rate'}: <strong style="color:var(--ink);">${slide.annualRunRate}</strong></span>
+              </div>
+            </div>
+
+            <!-- Right: 3 Interactive Product Specification Tiles -->
+            <div class="product-spec-grid">
+              ${slide.products.map((p, idx) => `
+                <div class="product-spec-card gs-anim-card ${idx === 1 ? 'active' : ''}" 
+                     id="prodCard_${idx}" 
+                     onclick="selectGenericCard('prodCard', ${idx}, '${p.detail.replace(/'/g, "\\'")}')"
+                     onmouseenter="selectGenericCard('prodCard', ${idx}, '${p.detail.replace(/'/g, "\\'")}')">
+                  <div class="spec-title-col">
+                    <div class="spec-dot" style="background:${p.color}; box-shadow:0 0 8px ${p.color};"></div>
+                    <div>
+                      <div class="spec-name">${p.name}</div>
+                      <div class="spec-pct">${p.pct} ${currentLang === 'zh' ? '產能佔比' : 'Capacity Share'}</div>
+                    </div>
+                  </div>
+                  <div>
+                    <div class="spec-val-num">${p.volume}</div>
+                    <div class="spec-val-sub">${currentLang === 'zh' ? '月產量' : 'Monthly Volume'}</div>
+                  </div>
+                  <div>
+                    <div class="spec-val-num" style="color:var(--accent);">${p.asp}</div>
+                    <div class="spec-val-sub">${currentLang === 'zh' ? '基準單價 ASP' : 'Benchmark ASP'}</div>
+                  </div>
+                  <div>
+                    <div class="spec-val-num" style="color:var(--ink);">${p.revYr}</div>
+                    <div class="spec-val-sub">${currentLang === 'zh' ? '年化預估營收' : 'Annual Run-Rate'}</div>
+                  </div>
+                </div>
+              `).join("")}
+            </div>
+          </div>
+
+          <div class="cockpit-floating-bar">
+            <div class="floating-bar-icon">💎</div>
+            <div class="floating-bar-text" id="genericFloatingText">
+              <strong>${currentLang === 'zh' ? '技術與應用依據' : 'Technical & Market Insight'}:</strong> ${slide.products[1].detail}
+            </div>
+          </div>
+        `;
+      }
+
+      // 3. Space Allocation Area Matrix Tiles (Slide 4)
+      else if (slide.type === "space-matrix-visual") {
+        html += `
+          <div class="space-matrix-grid">
+            ${slide.spaces.map((s, idx) => `
+              <div class="space-tile-card gs-anim-card ${idx === 0 ? 'active' : ''}" 
+                   id="spaceCard_${idx}"
+                   onclick="selectGenericCard('spaceCard', ${idx}, '${s.detail.replace(/'/g, "\\'")}')"
+                   onmouseenter="selectGenericCard('spaceCard', ${idx}, '${s.detail.replace(/'/g, "\\'")}')">
+                <div class="space-tile-top">
+                  <div class="space-tile-title">${s.title}</div>
+                  <div class="space-tile-area">${s.area}</div>
+                </div>
+                <div class="space-tile-std">${s.std}</div>
+                <div class="space-tile-desc">${s.desc}</div>
+              </div>
+            `).join("")}
+          </div>
+
+          <div class="cockpit-floating-bar">
+            <div class="floating-bar-icon">🏗️</div>
+            <div class="floating-bar-text" id="genericFloatingText">
+              <strong>${currentLang === 'zh' ? '廠房基建規劃依據' : 'Infrastructure & SPCB Compliance'}:</strong> ${slide.spaces[0].detail}
+            </div>
+          </div>
+        `;
+      }
+
+      // 4. OpEx Cost Composition Visual Cockpit (Slide 6)
+      else if (slide.type === "opex-cockpit-visual") {
+        html += `
+          <div class="opex-cockpit-grid">
+            ${slide.costs.map((c, idx) => `
+              <div class="opex-cost-card gs-anim-card ${idx === 0 ? 'active' : ''}" 
+                   id="opexCard_${idx}"
+                   onclick="selectGenericCard('opexCard', ${idx}, '${c.detail.replace(/'/g, "\\'")}')"
+                   onmouseenter="selectGenericCard('opexCard', ${idx}, '${c.detail.replace(/'/g, "\\'")}')">
+                <div>
+                  <div class="opex-card-head">
+                    <div class="opex-card-title">${c.title}</div>
+                    <div class="opex-card-pct">${c.pct}</div>
+                  </div>
+                  <div class="opex-card-amount">${c.amount} <span style="font-size:12px; font-family:var(--font-body); color:var(--ink-sub);">/ mo</span></div>
+                  <div class="opex-bar-ratio">
+                    <div class="opex-var-bar" style="width:${c.varPct};" title="Variable Cost"></div>
+                    <div class="opex-fix-bar" style="width:${c.fixPct};" title="Fixed Cost"></div>
+                  </div>
+                  <div class="opex-ratio-labels">
+                    <span>${currentLang === 'zh' ? '變動成本' : 'Var'}: ${c.varPct}</span>
+                    <span>${currentLang === 'zh' ? '固定成本' : 'Fix'}: ${c.fixPct}</span>
+                  </div>
+                </div>
+                <div style="font-size:11.5px; color:var(--ink-sub); line-height:1.4; margin-top:8px;">${c.sub}</div>
+              </div>
+            `).join("")}
+          </div>
+
+          <div class="cockpit-floating-bar">
+            <div class="floating-bar-icon">📊</div>
+            <div class="floating-bar-text" id="genericFloatingText">
+              <strong>${currentLang === 'zh' ? '成本行為與供應鏈洞察' : 'Cost Behavior Insight'}:</strong> ${slide.costs[0].detail}
+            </div>
+          </div>
+        `;
+      }
+
+      // Precision Data Table (Fallback)
       else if (slide.type === "data-table") {
         html += `
           <div class="deck-table-wrap gs-anim-hero">
@@ -1537,6 +1948,17 @@
     /* ═══════════════════════════════════════════════════════════════
        FINANCIAL COCKPIT & SENSITIVITY INTERACTION CONTROLLER
        ═══════════════════════════════════════════════════════════════ */
+    function selectGenericCard(prefix, idx, detailText) {
+      document.querySelectorAll(`[id^='${prefix}_']`).forEach((el, i) => {
+        el.classList.toggle("active", i === idx);
+      });
+      const el = document.getElementById("genericFloatingText");
+      if (el) {
+        const title = currentLang === "zh" ? "決策與技術洞察" : "Strategic & Technical Insight";
+        el.innerHTML = `<strong>${title}:</strong> ${detailText}`;
+      }
+    }
+
     function previewCockpitCard(idx) {
       const slide = getI18NDeck()[currentLang].slides[currentSlide];
       if (!slide || !slide.cards || !slide.cards[idx]) return;
