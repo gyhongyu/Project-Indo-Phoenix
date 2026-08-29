@@ -620,15 +620,23 @@
 
     /* Non-Fullscreen Vertical Space Defense */
     @media (max-height: 860px) {
-      .slide-desc { margin-bottom: 8px; font-size: 13px; line-height: 1.4; }
-      .blueprint-thumb-box { height: 85px; margin: 6px 0; }
-      .buyer-pills-row { margin: 6px 0; gap: 4px; }
-      .buyer-pill { font-size: 10px; padding: 2px 6px; }
-      .buyer-data-matrix { margin-top: 6px; padding: 6px 8px; }
-      .buyer-data-val { font-size: 12px; }
-      .buyer-data-lbl { font-size: 9.5px; }
-      .cockpit-floating-bar { padding: 6px 14px; margin-top: 6px; }
-      .floating-bar-text { font-size: 12px; }
+      .slide-desc { margin-bottom: 6px; font-size: 12.5px; line-height: 1.35; }
+      .agenda-matrix-grid { gap: 8px; margin-bottom: 6px; }
+      .agenda-act-card { padding: 8px 14px; }
+      .agenda-act-head { margin-bottom: 2px; }
+      .agenda-act-badge { font-size: 9.5px; padding: 1px 6px; }
+      .agenda-act-title { font-size: 13.5px; margin-bottom: 2px; }
+      .agenda-act-desc { font-size: 11px; line-height: 1.3; }
+      .agenda-act-subitems { margin-top: 4px; padding-top: 4px; gap: 2px; }
+      .agenda-subitem { font-size: 10px; }
+      .blueprint-thumb-box { height: 75px; margin: 4px 0; }
+      .buyer-pills-row { margin: 4px 0; gap: 4px; }
+      .buyer-pill { font-size: 9.5px; padding: 2px 5px; }
+      .buyer-data-matrix { margin-top: 4px; padding: 4px 6px; }
+      .buyer-data-val { font-size: 11.5px; }
+      .buyer-data-lbl { font-size: 9px; }
+      .cockpit-floating-bar { padding: 5px 12px; margin-top: 4px; }
+      .floating-bar-text { font-size: 11.5px; }
     }
 
     /* 7. Action Hub Call-To-Action Box (Slide 13) */
@@ -692,14 +700,15 @@
     }
     /* Agenda 4-Act Master Navigator (Slide 00) */
     .agenda-matrix-grid {
-      flex: 1; display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px;
-      margin-bottom: 12px; min-height: 0;
+      flex: 1; display: grid; grid-template-columns: repeat(2, 1fr); gap: clamp(10px, 1.4vw, 16px);
+      margin-bottom: clamp(6px, 1vh, 12px); min-height: 0;
     }
     .agenda-act-card {
       background: rgba(10, 15, 25, 0.25); border: 1px solid var(--line-subtle);
-      border-radius: var(--card-radius); padding: clamp(16px, 2.2vh, 24px) 22px;
+      border-radius: var(--card-radius); padding: clamp(10px, 1.6vh, 20px) clamp(14px, 1.5vw, 22px);
       display: flex; flex-direction: column; justify-content: space-between;
       cursor: pointer; transition: all 0.3s var(--ease); position: relative;
+      min-height: 0;
     }
     .agenda-act-card:hover {
       background: var(--bg-card-hover); border-color: var(--accent);
@@ -709,20 +718,20 @@
       content: ""; position: absolute; top: 0; left: 0; width: 4px; height: 100%;
       background: var(--accent); border-radius: 4px 0 0 4px; opacity: 0.6;
     }
-    .agenda-act-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
+    .agenda-act-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px; }
     .agenda-act-badge {
-      font-family: var(--font-mono); font-size: 11px; font-weight: 700;
-      color: var(--accent); background: var(--accent-glow); padding: 3px 10px; border-radius: 4px;
+      font-family: var(--font-mono); font-size: 10.5px; font-weight: 700;
+      color: var(--accent); background: var(--accent-glow); padding: 2px 8px; border-radius: 4px;
     }
-    .agenda-act-pages { font-family: var(--font-mono); font-size: 11.5px; color: var(--ink-sub); }
-    .agenda-act-title { font-size: 16px; font-weight: 600; color: var(--ink); margin-bottom: 8px; }
-    .agenda-act-desc { font-size: 13px; color: var(--ink-sub); line-height: 1.5; }
+    .agenda-act-pages { font-family: var(--font-mono); font-size: 11px; color: var(--ink-sub); }
+    .agenda-act-title { font-size: clamp(14px, 1.15vw, 16px); font-weight: 600; color: var(--ink); margin-bottom: 4px; }
+    .agenda-act-desc { font-size: clamp(11.5px, 0.9vw, 13px); color: var(--ink-sub); line-height: 1.4; }
     .agenda-act-subitems {
-      display: flex; flex-direction: column; gap: 4px; margin-top: 10px;
-      padding-top: 8px; border-top: 1px solid rgba(255,255,255,0.05);
+      display: flex; flex-direction: column; gap: 3px; margin-top: clamp(4px, 0.8vh, 8px);
+      padding-top: clamp(4px, 0.8vh, 6px); border-top: 1px solid rgba(255,255,255,0.05);
     }
-    .agenda-subitem { font-size: 12px; color: var(--ink-sub); display: flex; align-items: center; gap: 6px; }
-    .agenda-subitem-dot { width: 4px; height: 4px; border-radius: 50%; background: var(--accent); }
+    .agenda-subitem { font-size: clamp(10.5px, 0.85vw, 12px); color: var(--ink-sub); display: flex; align-items: center; gap: 6px; }
+    .agenda-subitem-dot { width: 4px; height: 4px; border-radius: 50%; background: var(--accent); flex-shrink: 0; }
 
     /* CAD Blueprint Sample Preview Thumbnails (Slide 03) - Elastic Responsive */
     .blueprint-thumb-box {
