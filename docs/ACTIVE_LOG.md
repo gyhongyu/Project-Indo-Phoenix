@@ -129,6 +129,13 @@
   - 線上 Google Sheet 單一真源連動：全站財務數據封裝於 `getLiveStat()`，實時掛載 `IPX_DATA.stats` 與 `ipx:ready` 監聽，後端改表前端簡報自動動態重算渲染。
   - 3D 空間折疊轉場（Origami Pivot）：GSAP Timeline 控制 16° Y 軸透視折疊＋雷射掃掠光束＋次級物件錯落彈入＋數字滾動計數器（Count-up）。
   - 雙向狀態無損保持：A/B/C 模板導航欄與首頁進入 WebPPT 時自動帶上主題與語系，WebPPT 頂部「✕ 返回落地頁」精準回溯來源模板。
-- **驗證**: 5 份核心 HTML 與 JS 語法通過檢查；移除框內冗餘說明列；雙向跳轉路徑 100% 吻合。
-- **狀態**: `✅ 實體落盤完工，交付人類總監審閱`
+### [2026-08-29] [presentation] 熱修：renderSlide 樣板字面常數閉合殘缺致全站簡報白屏
+- **類型**: `BUGFIX`
+- **代碼錨點**: `presentation.html` L1455-1468（hero-showcase 區塊補回 subStats.map 閉合括號 `).join("")`）
+- **核心事實 / 決策理由**:
+  - 根因：先前將全站表格圖表化時，不慎將 floating-bar 區塊錯誤插在 `subStats.map(` 內部，致使 `missing ) after argument list` 語法錯誤阻斷腳本解析，導致 `#slideContent` 初始空白。
+  - 修復：精確修復 template literal 閉合標籤，並透過 `node --check` 驗證全腳本 0 語法錯誤。
+  - DMC 經驗固化：凡修改大型單檔 HTML 內嵌 `<script>` 後，**必須一律強制執行 `node --check` 語法閘門防禦**，杜絕白屏迴歸。
+- **驗證**: `node --check` 通過；所有 10 頁版型渲染函數均已通過語法靜態檢測。
+- **狀態**: `✅ 修復完畢，待業主前台驗收`
 
