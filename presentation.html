@@ -352,15 +352,26 @@
       background: linear-gradient(90deg, var(--accent), var(--accent-light));
     }
 
-    /* 5. BEP Meter Gauge Cockpit (Slide 7) */
-    .bep-cockpit {
-      display: grid; grid-template-columns: 1fr 1fr; gap: 24px; align-items: center;
-      margin-bottom: 16px;
+    /* 5. BEP Master Cockpit (Slide 7 Overhaul) */
+    .bep-cockpit-grid {
+      display: grid; grid-template-columns: 1.15fr 2fr; gap: 20px;
+      align-items: stretch; margin-bottom: 16px;
     }
-    .gauge-container {
+    .gauge-card-master {
+      background: linear-gradient(135deg, rgba(255,255,255,0.03) 0%, rgba(0,0,0,0.4) 100%);
+      border: 1px solid var(--accent); border-radius: var(--card-radius);
+      padding: 24px 20px; display: flex; flex-direction: column;
+      justify-content: space-between; box-shadow: 0 12px 36px var(--accent-glow);
+      position: relative; overflow: hidden;
+    }
+    .gauge-card-master::after {
+      content: ""; position: absolute; inset: 0;
+      background: radial-gradient(circle at top right, var(--accent-glow), transparent 70%);
+      pointer-events: none;
+    }
+    .gauge-main-wrap {
       display: flex; flex-direction: column; align-items: center; justify-content: center;
-      background: rgba(255,255,255,0.02); border: 1px solid var(--line-subtle);
-      border-radius: var(--card-radius); padding: 24px;
+      margin: 10px 0;
     }
     .gauge-circle {
       position: relative; width: 170px; height: 85px; overflow: hidden;
@@ -379,10 +390,87 @@
       font-family: var(--font-display); font-size: 36px; font-weight: 600;
       color: var(--accent); line-height: 1; z-index: 2; margin-bottom: 4px;
     }
-    .gauge-label {
-      font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.2em;
-      text-transform: uppercase; color: var(--ink-sub); margin-top: 12px;
+    .gauge-threshold-text {
+      font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.15em;
+      text-transform: uppercase; color: var(--accent-light); margin-top: 6px;
+      text-align: center;
     }
+
+    /* BEP Sensitivity Slider */
+    .slider-box {
+      margin-top: 14px; padding-top: 14px; border-top: 1px solid rgba(255,255,255,0.08);
+    }
+    .slider-header {
+      display: flex; justify-content: space-between; font-family: var(--font-mono);
+      font-size: 11px; color: var(--ink-sub); margin-bottom: 6px;
+    }
+    .slider-header strong { color: var(--accent); }
+    .cockpit-slider {
+      width: 100%; -webkit-appearance: none; appearance: none;
+      height: 6px; border-radius: 3px; background: rgba(255,255,255,0.1);
+      outline: none; transition: background 0.3s;
+    }
+    .cockpit-slider::-webkit-slider-thumb {
+      -webkit-appearance: none; appearance: none;
+      width: 16px; height: 16px; border-radius: 50%;
+      background: var(--accent); cursor: pointer;
+      box-shadow: 0 0 10px var(--accent);
+    }
+    .slider-result-row {
+      display: flex; justify-content: space-between; font-family: var(--font-mono);
+      font-size: 11px; color: var(--ink-sub); margin-top: 8px;
+    }
+    .slider-result-row strong { color: var(--ink); }
+
+    /* 6 Mini Metrics Grid */
+    .cockpit-cards-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px;
+    }
+    .cockpit-mini-card {
+      background: rgba(10, 15, 25, 0.2);
+      border: 1px solid var(--line-subtle);
+      border-radius: var(--card-radius);
+      padding: 14px 14px; display: flex; flex-direction: column;
+      justify-content: space-between; cursor: pointer;
+      transition: all 0.25s var(--ease); position: relative;
+    }
+    .cockpit-mini-card:hover, .cockpit-mini-card.active {
+      background: var(--bg-card-hover); border-color: var(--accent);
+      transform: translateY(-2px); box-shadow: 0 6px 20px var(--accent-glow);
+    }
+    .cockpit-mini-card.active::before {
+      content: ""; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+      background: var(--accent); box-shadow: 0 0 8px var(--accent);
+    }
+    .mini-card-header {
+      display: flex; justify-content: space-between; align-items: flex-start;
+      margin-bottom: 6px;
+    }
+    .mini-card-label {
+      font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.15em;
+      text-transform: uppercase; color: var(--ink-sub);
+    }
+    .mini-card-val {
+      font-family: var(--font-display); font-size: clamp(20px, 1.8vw, 26px);
+      font-weight: 600; color: var(--accent); line-height: 1; margin-bottom: 4px;
+    }
+    .mini-card-sub { font-size: 11px; color: var(--ink-sub); line-height: 1.35; }
+
+    /* Non-intrusive Contextual Floating Explanation Box */
+    .cockpit-floating-bar {
+      margin-top: 14px; background: linear-gradient(90deg, rgba(201,169,110,0.08) 0%, rgba(20,24,36,0.5) 100%);
+      border: 1px solid var(--line-subtle); border-left: 3px solid var(--accent);
+      border-radius: var(--card-radius); padding: 12px 18px;
+      display: flex; align-items: center; gap: 14px;
+      transition: all 0.3s var(--ease);
+    }
+    .floating-bar-icon {
+      font-size: 16px; color: var(--accent); flex-shrink: 0;
+    }
+    .floating-bar-text {
+      font-size: 12.5px; color: var(--ink-sub); line-height: 1.5;
+    }
+    .floating-bar-text strong { color: var(--ink); font-weight: 500; }
 
     /* 6. Multi-Step Flow Pipeline & Roadmap Timeline (Slide 8 & Slide 9) */
     .flow-pipeline {
@@ -764,46 +852,52 @@
                 ["Total Monthly OpEx", `$${opexMo}M`, "100.0%", "69.0%", "$1,272,579", "$572,421"]
               ]
             },
-            // Slide 07: Module 5 Profitability & BEP Cockpit
+            // Slide 07: Module 5 Master Profitability & BEP Cockpit
             {
-              type: "bep-cockpit",
-              tag: "SLIDE 07 / PROFITABILITY & BREAK-EVEN",
-              title: `Module 5: ${bepUtil}% Break-Even Point & Robust ROI`,
-              desc: `Crossing into dynamic profitability at $${bepRev}M monthly revenue (${(getLiveStat("bep",50.8)*150).toFixed(0)} m² utilization).`,
+              type: "bep-master-cockpit",
+              tag: "SLIDE 07 / PROFITABILITY & BREAK-EVEN ANALYSIS",
+              title: `Module 5: ${bepUtil}% Break-Even Point · High Margin of Safety`,
+              desc: `Dynamic profitability reached at $${bepRev}M/mo (${(getLiveStat("bep",50.8)*150).toFixed(0)} m² utilization). Click cards for contextual insight.`,
               bepVal: `${bepUtil}%`,
-              bepDesc: `BEP achieved at $${bepRev}M monthly revenue. Standard for highly capitalized wet-process plants.`,
+              thresholdRevMo: `$${bepRev}M`,
+              thresholdRevYr: `$${(bepRev * 12).toFixed(2)}M`,
+              defaultExplanation: "Includes materials, labor, power, water, and straight-line depreciation. Operating above 50.8% capacity generates immediate net cash flow.",
               cards: [
                 {
-                  label: "Target Monthly Revenue",
+                  label: "Target Revenue",
                   val: `$${(getLiveStat("monthlyRevenue",2400000)/1000000).toFixed(1)}M`,
-                  unit: "/ mo",
-                  desc: "At full 15,000 m²/month operation ($160/m² weighted ASP).",
-                  detail: "At 15,000 m²/month full-capacity operation, weighted average price is $160/m² (Model Row 39). Represents total monthly production gross value under dual-shift continuous manufacturing.",
-                  source: "FPC Factory Model!G10 / Module 5"
+                  sub: `Annually: $${((getLiveStat("monthlyRevenue",2400000)*12)/1000000).toFixed(1)}M`,
+                  detail: "At 15,000 m²/month full-capacity operation, weighted average price is $160/m². Represents dual-shift continuous manufacturing gross run-rate."
                 },
                 {
-                  label: "Operating Profit / EBIT",
+                  label: "Operating Expenses",
+                  val: `$${opexMo}M`,
+                  sub: "76.9% of total revenue",
+                  detail: "Total monthly OpEx is $1.845M ($22.14M/yr). Variable costs account for 69.0% ($1.27M/mo), providing strong anti-cyclical resilience."
+                },
+                {
+                  label: "EBIT Operating Profit",
                   val: `$${ebitMo}K`,
-                  unit: "/ mo",
-                  desc: `${ebitMarg}% margin delivering $${(ebitMo*12/1000).toFixed(2)}M annual EBIT.`,
-                  detail: "EBIT Margin of 23.1% ($555,000/month, $6,660,000/year). Demonstrates excellent scale profitability when operating at full utilization capacity (Model Row 41).",
-                  source: "FPC Factory Model!C41 / E41"
+                  sub: `${ebitMarg}% Margin ($${(ebitMo*12/1000).toFixed(2)}M/yr)`,
+                  detail: "EBIT Margin of 23.1% delivers $6.66M annualized profit at full capacity, proving extraordinary scale returns."
+                },
+                {
+                  label: "BEP Revenue Threshold",
+                  val: `$${bepRev}M`,
+                  sub: `Annualized: $${(bepRev*12).toFixed(2)}M`,
+                  detail: "The factory crosses into dynamic net profit at only $1.22M monthly revenue. Standard for highly capitalized modern wet-process electronics plants."
                 },
                 {
                   label: "Internal Rate of Return",
                   val: irrRange,
-                  unit: "",
-                  desc: "Substantially outperforms benchmark electronics manufacturing.",
-                  detail: "Projected IRR between 21.3% and 24.8%. Far exceeds standard electronics manufacturing benchmarks (12-15%). Highly attractive profile for strategic defense & tech funds (Model Row 44).",
-                  source: "WEB_DATA / Module 5 Benchmark"
+                  sub: "Benchmark: 12% - 15%",
+                  detail: "Projected IRR between 21.3% and 24.8% far exceeds standard electronics manufacturing benchmarks, offering superior risk-adjusted alpha."
                 },
                 {
-                  label: "Static Payback Period",
-                  val: `${paybackYrs}`,
-                  unit: "Years",
-                  desc: `With SPECS 25% subsidy (${paybackNoSub} yrs without).`,
-                  detail: "Assumes SPECS 25% CapEx subsidy cash refund ($5.75M) is cleared, yielding a 4.2-year payback. Without government subsidy, the static payback period is 5.2 Years (Model Row 45).",
-                  source: "FPC Factory Model!Row 45"
+                  label: "Static Payback",
+                  val: `${paybackYrs} Yrs`,
+                  sub: `Without SPECS: ${paybackNoSub} Yrs`,
+                  detail: "Assumes SPECS 25% CapEx cash refund ($5.75M) is cleared. Static payback period is compressed to 4.2 years (5.2 years without subsidy)."
                 }
               ]
             },
@@ -940,46 +1034,52 @@
                 ["單月總營運成本", `$${opexMo}M`, "100.0%", "69.0%", "$1,272,579", "$572,421"]
               ]
             },
-            // Slide 07: 模組 5 損益兩平
+            // Slide 07: 模組 5 旗艦損益兩平駕駛艙
             {
-              type: "bep-cockpit",
+              type: "bep-master-cockpit",
               tag: "簡報 07 / 獲利能力與損益平衡分析",
               title: `模組 5：損益兩平點 ${bepUtil}% · 安全邊際極高`,
-              desc: `單月營收達 $${bepRev}M 美元（稼動率 ${(getLiveStat("bep",50.8)*150).toFixed(0)} m²/月）即跨入淨獲利階段。`,
+              desc: `單月營收達 $${bepRev}M 美元（稼動率 ${(getLiveStat("bep",50.8)*150).toFixed(0)} m²/月）即跨入淨獲利階段。點選卡片可切換深度說明。`,
               bepVal: `${bepUtil}%`,
-              bepDesc: `月營收達 $${bepRev}M 達成損益兩平。高度資本化濕製程工廠標準。`,
+              thresholdRevMo: `$${bepRev}M`,
+              thresholdRevYr: `$${(bepRev * 12).toFixed(2)}M`,
+              defaultExplanation: "包含原料、人工、電力水資源及直線法折舊。產能稼動率只要超過 50.8%，即刻產生充沛淨現金流。",
               cards: [
                 {
-                  label: "目標月營業收入",
+                  label: "目標營業收入",
                   val: `$${(getLiveStat("monthlyRevenue",2400000)/1000000).toFixed(1)}M`,
-                  unit: "/ 月",
-                  desc: "在每月 15,000 平方公尺滿載運營下達成（加權均價 $160/m²）。",
-                  detail: "在每月 15,000 平方公尺滿載運營下，加權平均價格為 160 美元/平方公尺（試算表第 39 列）。代表雙班制連續生產下的單月總產值。",
-                  source: "FPC Factory Model!G10 / 模組 5"
+                  sub: `年化營收：$${((getLiveStat("monthlyRevenue",2400000)*12)/1000000).toFixed(1)}M`,
+                  detail: "在每月 15,000 平方公尺滿載運營下，加權平均價格為 160 美元/平方公尺。代表雙班制連續生產下的總產值規模。"
                 },
                 {
-                  label: "滿載單月營業利潤 / EBIT",
+                  label: "單月營運成本",
+                  val: `$${opexMo}M`,
+                  sub: "佔總營收比例 76.9%",
+                  detail: "單月總營運成本為 184.5 萬美元（年化 2,214 萬美元）。變動成本佔 69.0%（單月 127 萬美元），具備極強的抗景氣循環韌性。"
+                },
+                {
+                  label: "營業利潤 (EBIT)",
                   val: `$${ebitMo}K`,
-                  unit: "/ 月",
-                  desc: `${ebitMarg}% 利潤率，年化營業利潤達 $${(ebitMo*12/1000).toFixed(2)}M 美元。`,
-                  detail: "23.1% 的息稅前利潤率 (EBIT Margin，單月 55.5 萬美元、年化 666 萬美元)。顯示滿載時具有極佳的規模獲利能力（試算表第 41 列）。",
-                  source: "FPC Factory Model!C41 / E41"
+                  sub: `${ebitMarg}% 利潤率（年化 $${(ebitMo*12/1000).toFixed(2)}M）`,
+                  detail: "23.1% 的息稅前利潤率 (EBIT Margin)，滿載時年化息稅前利潤達 666 萬美元，展現卓越的規模獲利優勢。"
+                },
+                {
+                  label: "損益平衡營收門檻",
+                  val: `$${bepRev}M`,
+                  sub: `年化門檻：$${(bepRev*12).toFixed(2)}M`,
+                  detail: "工廠僅需每月 122 萬美元營收（稼動率 50.8%）即跨越損益平衡點。此為現代高資本化濕製程電子工廠的頂尖水準。"
                 },
                 {
                   label: "內部報酬率 (IRR)",
                   val: irrRange,
-                  unit: "",
-                  desc: "遠超過標準電子製造業基準，回報極具吸引力。",
-                  detail: "預估內部報酬率介於 21.3% ~ 24.8%。遠超過標準電子製造業基準 (12%~15%)，極具戰略投資與主權基金吸引力（試算表第 44 列）。",
-                  source: "WEB_DATA / 模組 5 基準"
+                  sub: "製造業基準：12% - 15%",
+                  detail: "預估內部報酬率介於 21.3% ~ 24.8%。遠超過標準電子製造業基準，對於戰略國防與高科技投資基金極具超額回報吸引力。"
                 },
                 {
                   label: "靜態投資回收期",
-                  val: `${paybackYrs}`,
-                  unit: "年",
-                  desc: `含 SPECS 25% 補貼（未含補貼為 ${paybackNoSub} 年）。`,
-                  detail: "假設已取得 SPECS 25% 的資本支出現金返還補貼 ($5.75M)，投資回收期為 4.2 年；若無政府補貼，靜態回收期為 5.2 年（試算表第 45 列）。",
-                  source: "FPC Factory Model!第 45 列"
+                  val: `${paybackYrs} 年`,
+                  sub: `未計 SPECS 補貼：${paybackNoSub} 年`,
+                  detail: "在取得 SPECS 25% 資本支出現金返還補貼 ($5.75M) 條件下，靜態回收期大幅縮短至 4.2 年（無補貼時為 5.2 年）。"
                 }
               ]
             },
@@ -1157,29 +1257,62 @@
           </div>
         `;
       }
-      // 5. BEP Cockpit Meter
-      else if (slide.type === "bep-cockpit") {
+      // 5. Master BEP Financial Cockpit (Slide 7)
+      else if (slide.type === "bep-master-cockpit") {
         html += `
-          <div class="bep-cockpit">
-            <div class="gauge-container gs-anim-gauge">
-              <div class="gauge-circle">
-                <div class="gauge-arc" id="gaugeArc"></div>
-                <div class="gauge-value count-target" data-target="${slide.bepVal}">0</div>
-              </div>
-              <div class="gauge-label">${slide.bepDesc}</div>
-            </div>
-            <div class="sub-stat-grid">
-              ${slide.cards.map((c, idx) => `
-                <div class="stat-card gs-anim-card ${c.detail ? 'has-info' : ''}" ${c.detail ? `onclick="openDetailModal(${currentSlide}, ${idx})"` : ''}>
-                  ${c.detail ? `<div class="info-hint-icon" title="View Strategic Explanation">ⓘ</div>` : ''}
-                  <div class="stat-card-label">${c.label}</div>
-                  <div class="stat-card-value">
-                    <span class="count-target" data-target="${c.val}">0</span>
-                    <span class="stat-card-unit">${c.unit}</span>
+          <div class="bep-cockpit-grid">
+            <!-- Left: Master BEP Gauge & Sensitivity Simulation -->
+            <div class="gauge-card-master gs-anim-card">
+              <div>
+                <div class="slide-tag" style="font-size:10px; margin-bottom:8px;">BREAK-EVEN METER</div>
+                <div class="gauge-main-wrap">
+                  <div class="gauge-circle">
+                    <div class="gauge-arc" id="cockpitGaugeArc"></div>
+                    <div class="gauge-value count-target" data-target="${slide.bepVal}">0</div>
                   </div>
-                  <div class="stat-card-desc">${c.desc}</div>
+                  <div class="gauge-threshold-text">
+                    ${currentLang === 'zh' ? '損益平衡月門檻' : 'Threshold'}: <strong>${slide.thresholdRevMo}</strong> / mo
+                  </div>
+                </div>
+              </div>
+
+              <!-- Interactive Capacity Sensitivity Slider -->
+              <div class="slider-box">
+                <div class="slider-header">
+                  <span>${currentLang === 'zh' ? '稼動率敏感度模擬' : 'Capacity Simulation'}</span>
+                  <strong id="sliderCapVal">75% (11,250 m²)</strong>
+                </div>
+                <input type="range" class="cockpit-slider" id="cockpitSlider" min="30" max="100" value="75" oninput="updateCockpitSim(this.value)">
+                <div class="slider-result-row">
+                  <span>${currentLang === 'zh' ? '預估月營收' : 'Est. Revenue'}: <strong id="simRev">$1.80M</strong></span>
+                  <span>${currentLang === 'zh' ? '預估月獲利' : 'Est. EBIT'}: <strong id="simEbit" style="color:var(--accent);">$322K</strong></span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Right: 6 Modular Financial Metrics Cards -->
+            <div class="cockpit-cards-grid">
+              ${slide.cards.map((c, idx) => `
+                <div class="cockpit-mini-card gs-anim-card ${idx === 0 ? 'active' : ''}" 
+                     id="cockpitCard_${idx}" 
+                     onclick="selectCockpitCard(${idx})"
+                     onmouseenter="previewCockpitCard(${idx})">
+                  <div class="mini-card-header">
+                    <div class="mini-card-label">${c.label}</div>
+                    <span style="font-size:10px; color:var(--accent); opacity:0.7;">●</span>
+                  </div>
+                  <div class="mini-card-val count-target" data-target="${c.val}">0</div>
+                  <div class="mini-card-sub">${c.sub}</div>
                 </div>
               `).join("")}
+            </div>
+          </div>
+
+          <!-- Non-Intrusive Floating Context Explanation Bar -->
+          <div class="cockpit-floating-bar" id="cockpitFloatingBar">
+            <div class="floating-bar-icon">💡</div>
+            <div class="floating-bar-text" id="cockpitFloatingText">
+              <strong>${currentLang === 'zh' ? '決策依據' : 'Strategic Insight'}:</strong> ${slide.cards[0].detail}
             </div>
           </div>
         `;
@@ -1398,6 +1531,49 @@
         slideDirection = "prev";
         currentSlide--;
         renderSlide(true);
+      }
+    }
+
+    /* ═══════════════════════════════════════════════════════════════
+       FINANCIAL COCKPIT & SENSITIVITY INTERACTION CONTROLLER
+       ═══════════════════════════════════════════════════════════════ */
+    function previewCockpitCard(idx) {
+      const slide = getI18NDeck()[currentLang].slides[currentSlide];
+      if (!slide || !slide.cards || !slide.cards[idx]) return;
+      
+      document.querySelectorAll(".cockpit-mini-card").forEach((el, i) => {
+        el.classList.toggle("active", i === idx);
+      });
+
+      const prefix = currentLang === "zh" ? "決策依據" : "Strategic Insight";
+      document.getElementById("cockpitFloatingText").innerHTML = `<strong>${prefix}:</strong> ${slide.cards[idx].detail}`;
+    }
+
+    function selectCockpitCard(idx) {
+      previewCockpitCard(idx);
+    }
+
+    function updateCockpitSim(val) {
+      const capPct = parseInt(val, 10);
+      const capM2 = Math.round(15000 * (capPct / 100));
+      document.getElementById("sliderCapVal").textContent = `${capPct}% (${capM2.toLocaleString()} m²)`;
+
+      // Live Calculation Model:
+      // Monthly Rev = capM2 * 160
+      const rev = (capM2 * 160) / 1000000;
+      // Fixed Cost = 572.4K, Variable Cost = Rev * (1272.6K / 2400K) = Rev * 0.53025
+      const varCost = rev * 0.53025;
+      const fixedCost = 0.5724;
+      const ebit = (rev - varCost - fixedCost) * 1000;
+
+      document.getElementById("simRev").textContent = `$${rev.toFixed(2)}M`;
+      const ebitEl = document.getElementById("simEbit");
+      if (ebit >= 0) {
+        ebitEl.textContent = `$${Math.round(ebit)}K`;
+        ebitEl.style.color = "var(--accent)";
+      } else {
+        ebitEl.textContent = `-$${Math.abs(Math.round(ebit))}K`;
+        ebitEl.style.color = "#ef4444";
       }
     }
 
