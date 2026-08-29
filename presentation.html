@@ -690,48 +690,20 @@
     .vs-bar-good { height: 100%; width: 15%; background: var(--accent); border-radius: 3px; box-shadow: 0 0 10px var(--accent); }
 
     /* Slide 03 Buyer Logos, Demand Pills & Target Metrics */
+    .buyer-category-block { margin: 6px 0; }
+    .buyer-category-lbl { font-family: var(--font-mono); font-size: 10px; color: var(--accent); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 4px; }
     .buyer-pills-row {
-      display: flex; flex-wrap: wrap; gap: 6px; margin: 10px 0;
+      display: flex; flex-wrap: wrap; gap: 4px; margin-bottom: 6px;
     }
     .buyer-pill {
-      font-family: var(--font-mono); font-size: 11px; font-weight: 600;
+      font-family: var(--font-mono); font-size: 10.5px; font-weight: 600;
       background: rgba(255,255,255,0.04); border: 1px solid var(--line-subtle);
-      padding: 3px 8px; border-radius: 4px; color: var(--ink);
+      padding: 2px 7px; border-radius: 4px; color: var(--ink);
+      transition: all 0.2s var(--ease);
     }
-    /* Agenda 4-Act Master Navigator (Slide 00) */
-    .agenda-matrix-grid {
-      flex: 1; display: grid; grid-template-columns: repeat(2, 1fr); gap: clamp(10px, 1.4vw, 16px);
-      margin-bottom: clamp(6px, 1vh, 12px); min-height: 0;
-    }
-    .agenda-act-card {
-      background: rgba(10, 15, 25, 0.25); border: 1px solid var(--line-subtle);
-      border-radius: var(--card-radius); padding: clamp(10px, 1.6vh, 20px) clamp(14px, 1.5vw, 22px);
-      display: flex; flex-direction: column; justify-content: space-between;
-      cursor: pointer; transition: all 0.3s var(--ease); position: relative;
-      min-height: 0;
-    }
-    .agenda-act-card:hover {
-      background: var(--bg-card-hover); border-color: var(--accent);
-      transform: translateY(-3px); box-shadow: 0 10px 30px var(--accent-glow);
-    }
-    .agenda-act-card::before {
-      content: ""; position: absolute; top: 0; left: 0; width: 4px; height: 100%;
-      background: var(--accent); border-radius: 4px 0 0 4px; opacity: 0.6;
-    }
-    .agenda-act-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px; }
-    .agenda-act-badge {
-      font-family: var(--font-mono); font-size: 10.5px; font-weight: 700;
-      color: var(--accent); background: var(--accent-glow); padding: 2px 8px; border-radius: 4px;
-    }
-    .agenda-act-pages { font-family: var(--font-mono); font-size: 11px; color: var(--ink-sub); }
-    .agenda-act-title { font-size: clamp(14px, 1.15vw, 16px); font-weight: 600; color: var(--ink); margin-bottom: 4px; }
-    .agenda-act-desc { font-size: clamp(11.5px, 0.9vw, 13px); color: var(--ink-sub); line-height: 1.4; }
-    .agenda-act-subitems {
-      display: flex; flex-direction: column; gap: 3px; margin-top: clamp(4px, 0.8vh, 8px);
-      padding-top: clamp(4px, 0.8vh, 6px); border-top: 1px solid rgba(255,255,255,0.05);
-    }
-    .agenda-subitem { font-size: clamp(10.5px, 0.85vw, 12px); color: var(--ink-sub); display: flex; align-items: center; gap: 6px; }
-    .agenda-subitem-dot { width: 4px; height: 4px; border-radius: 50%; background: var(--accent); flex-shrink: 0; }
+    .buyer-pill:hover { border-color: var(--accent); background: rgba(255,255,255,0.08); }
+    .buyer-pill.tier1 { border-color: rgba(201,169,110,0.5); color: var(--accent); background: var(--accent-glow); }
+    .buyer-pill.ems { border-color: rgba(56,189,248,0.4); color: #38bdf8; background: rgba(56,189,248,0.08); }
 
     /* CAD Blueprint Sample Preview Thumbnails (Slide 03) - Elastic Responsive */
     .blueprint-thumb-box {
@@ -962,11 +934,6 @@
     </div>
 
     <div class="deck-controls">
-      <!-- Agenda / Overview Quick Jump -->
-      <button class="btn-agenda-quick" onclick="jumpToSlide(0)">
-        <span>☰</span> <span data-i18n="agendaBtn">AGENDA</span>
-      </button>
-
       <!-- Bilingual Language Toggle (Preserves active theme) -->
       <div class="control-group">
         <button class="btn-ctrl active" id="btn-lang-en" onclick="setLang('en')">EN</button>
@@ -1061,72 +1028,9 @@
       return {
         en: {
           exitLanding: "Landing Page",
-          agendaBtn: "AGENDA",
           btnPrev: "◄ PREV",
           btnNext: "NEXT ►",
           slides: [
-            // Slide 00: Executive Agenda & Four-Act Navigator
-            {
-              type: "agenda-master-visual",
-              tag: "EXECUTIVE AGENDA / FOUR-ACT ROADSHOW MAP",
-              title: "Project Indo-Phoenix: Strategic Roadshow Navigator",
-              desc: "A comprehensive institutional briefing on building India's 1st high-reliability Aerospace & Defense FPC manufacturing hub. Click any Act to jump directly.",
-              acts: [
-                {
-                  actNum: "ACT I",
-                  targetSlide: 1,
-                  badge: "STRATEGY & DEMAND",
-                  pages: "Slide 01 – 03",
-                  title: "Strategic Gap & Real Demand",
-                  desc: "Debunking the 30% self-reliance myth; capturing 0% bare-board vacuum, 48h turnaround, and verified Tier-1 buyer pipeline.",
-                  subitems: [
-                    "01. Executive Vision & 0% Bare-Board Gap",
-                    "02. Pain Point Breakdown: 48h vs 3-Wk Lag",
-                    "03. 3 Core Verticals & Verified Buyer Pool"
-                  ]
-                },
-                {
-                  actNum: "ACT II",
-                  targetSlide: 4,
-                  badge: "MOATS & INFRASTRUCTURE",
-                  pages: "Slide 04 – 06",
-                  title: "Moats, AI SFC & SPCB Clearances",
-                  desc: "5% Sweat Equity governance with >90% promoter control; closed-loop Edge AI ACC, and 13,000m² ZLD environmental moat.",
-                  subitems: [
-                    "04. 5% Sweat Equity & >90% Control Governance",
-                    "05. AI / ACC Closed-Loop Smart Factory",
-                    "06. 13,000 m² Facility & 3x ZLD Clearance"
-                  ]
-                },
-                {
-                  actNum: "ACT III",
-                  targetSlide: 7,
-                  badge: "FINANCIAL PROOFS",
-                  pages: "Slide 07 – 11",
-                  title: "5 Sacred Financial Modules",
-                  desc: "Rock-solid single source of truth financials: $28.8M revenue, $23M CapEx, SPECS 25% refund, $1.845M OpEx, and 50.8% BEP.",
-                  subitems: [
-                    "07. Module 1: Product Capacity Mix ($28.8M)",
-                    "08. Module 2: Factory Space Engineering Standards",
-                    "09. Module 3: CapEx $23M & SPECS 25% Cash Refund",
-                    "10. Module 4: Dynamic OpEx ($1.845M/mo) Structure",
-                    "11. Module 5: Profitability Cockpit & 50.8% BEP"
-                  ]
-                },
-                {
-                  actNum: "ACT IV",
-                  targetSlide: 12,
-                  badge: "ROADMAP & PARTNERSHIP",
-                  pages: "Slide 12 – 13",
-                  title: "24-Month Roadmap & Data Room",
-                  desc: "Phase-gated execution to reach cash flow break-even at Month 12; invitation to exclusive investor Data Room.",
-                  subitems: [
-                    "12. 24-Month Phased Ramp-Up Milestones",
-                    "13. Strategic Terms & Data Room Access"
-                  ]
-                }
-              ]
-            },
             // Slide 01: Executive Vision & Anchor
             {
               type: "hero-showcase",
@@ -1198,7 +1102,7 @@
               type: "feature-cards-visual",
               tag: "SLIDE 03 / TARGET VERTICALS & REAL BUYERS",
               title: "Targeting Confirmed Pipeline Across 3 High-Growth Verticals",
-              desc: "Targeting India's $1.06B–$1.30B FPC market with >350M units/year verified procurement pool. Click cards for depth.",
+              desc: "Targeting India's $1.06B–$1.30B FPC market with >350M units/year verified procurement pool across OEM Tier-1s, EMS Giants, and Defense.",
               defaultExplanation: "Downstream giants urgently require qualified local FPC suppliers to fulfill government DVA and PLI requirements.",
               cards: [
                 {
@@ -1209,12 +1113,36 @@
                   blueprintImg: "assets/samples/CCS-縮圖.jpg",
                   fullImg: "assets/samples/CCS-大圖.jpg",
                   blueprintLabel: "HD SAMPLE: EV-BATTERY-CCS-PACK",
-                  buyers: ["Tata AutoComp", "Waaree Energy", "Ola Electric", "Exide Energy", "Amara Raja"],
+                  buyerCategories: [
+                    {
+                      label: "Tier-1 & Battery Pack OEMs",
+                      pills: [
+                        { name: "Tata AutoComp ($25M-$35M)", tier: "tier1" },
+                        { name: "VVDN eMobility ($12M-$18M)", tier: "tier1" },
+                        { name: "Exide Energy ($15M-$22M)", tier: "tier1" },
+                        { name: "Amara Raja ($12M-$16M)", tier: "tier1" },
+                        { name: "Kaynes EV ($8M-$12M)", tier: "tier1" },
+                        { name: "Lucas TVS", tier: "tier1" },
+                        { name: "Spark Minda", tier: "tier1" },
+                        { name: "Ola Electric", tier: "tier1" }
+                      ]
+                    },
+                    {
+                      label: "EMS Giants & Assemblers",
+                      pills: [
+                        { name: "Foxconn EV ($30M-$45M)", tier: "ems" },
+                        { name: "Tata Electronics ($20M-$30M)", tier: "ems" },
+                        { name: "Dixon Energy ($18M-$25M)", tier: "ems" },
+                        { name: "Syrma SGS ($10M-$15M)", tier: "ems" },
+                        { name: "Jabil India", tier: "ems" }
+                      ]
+                    }
+                  ],
                   metrics: [
                     { val: "$25M~$35M", lbl: "TACO Annual Import" },
                     { val: "90%+", lbl: "Current Import Ratio" }
                   ],
-                  detail: "TACO alone imports $25M-$35M of CCS FPC annually. High-temperature (-40°C~+125°C) thick copper flex circuits are 90%+ imported."
+                  detail: "TACO ($25M-$35M), Foxconn ($30M-$45M), and Dixon ($18M-$25M) urgently need localized 500-1500mm heavy copper flex circuits."
                 },
                 {
                   iconSvg: `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2"><path d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9l-1.5 2.8C2.1 11.2 2 11.6 2 12v4c0 .6.4 1 1 1h2"/><circle cx="7" cy="17" r="2"/><circle cx="17" cy="17" r="2"/></svg>`,
@@ -1224,12 +1152,33 @@
                   blueprintImg: "assets/samples/Automotive-縮圖.jpg",
                   fullImg: "assets/samples/Automotive-大圖.jpg",
                   blueprintLabel: "HD SAMPLE: AUTO-ADAS-SENSOR-FPC",
-                  buyers: ["Samvardhana Motherson", "Bosch India", "Uno Minda", "Tata Motors", "Mahindra"],
+                  buyerCategories: [
+                    {
+                      label: "Tier-1 Auto Systems",
+                      pills: [
+                        { name: "Samvardhana Motherson ($45M-$65M)", tier: "tier1" },
+                        { name: "Bosch India ($35M-$50M)", tier: "tier1" },
+                        { name: "Uno Minda ($22M-$32M)", tier: "tier1" },
+                        { name: "Varroc ($18M-$25M)", tier: "tier1" },
+                        { name: "Lumax ($15M-$22M)", tier: "tier1" },
+                        { name: "Tata Motors / Mahindra", tier: "tier1" }
+                      ]
+                    },
+                    {
+                      label: "Contract EMS Assemblers",
+                      pills: [
+                        { name: "Foxconn Auto ($35M-$50M)", tier: "ems" },
+                        { name: "Continental India ($28M-$40M)", tier: "ems" },
+                        { name: "Dixon Auto ($25M-$38M)", tier: "ems" },
+                        { name: "SFO Technologies", tier: "ems" }
+                      ]
+                    }
+                  ],
                   metrics: [
                     { val: "$45M~$65M", lbl: "Motherson Annual Import" },
                     { val: "IATF 16949", lbl: "Turnkey Automotive Std" }
                   ],
-                  detail: "Motherson imports $45M-$65M annually. Indo-Phoenix provides IATF 16949 automotive qualified bare boards with local testing."
+                  detail: "Motherson ($45M-$65M), Bosch ($35M-$50M), and Continental ($28M-$40M) import 85%+ bare boards from East Asia."
                 },
                 {
                   iconSvg: `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>`,
@@ -1239,12 +1188,34 @@
                   blueprintImg: "assets/samples/Drone-縮圖.jpg",
                   fullImg: "assets/samples/Drone-大圖.jpg",
                   blueprintLabel: "HD SAMPLE: AERO-DRONE-RIGIDFLEX",
-                  buyers: ["Raphe mPhibr ($145M Fund)", "ideaForge (50% Mkt)", "TASL", "Adani Defence", "ISRO"],
+                  buyerCategories: [
+                    {
+                      label: "Military Drone & Avionics",
+                      pills: [
+                        { name: "Raphe mPhibr (Fund $145M)", tier: "tier1" },
+                        { name: "ideaForge (50% Market Share)", tier: "tier1" },
+                        { name: "Garuda Aerospace (IPO-Ready)", tier: "tier1" },
+                        { name: "NewSpace Research ($73M Fund)", tier: "tier1" },
+                        { name: "Asteria Aerospace (Reliance)", tier: "tier1" },
+                        { name: "Sagar Defence / EndureAir", tier: "tier1" }
+                      ]
+                    },
+                    {
+                      label: "Defense Conglomerates & PSUs",
+                      pills: [
+                        { name: "TASL (Tata Aerospace)", tier: "ems" },
+                        { name: "Adani Defence", tier: "ems" },
+                        { name: "Zen Technologies (上市)", tier: "ems" },
+                        { name: "Cyient DLM / Paras Defence", tier: "ems" },
+                        { name: "ISRO / HAL Corridors", tier: "ems" }
+                      ]
+                    }
+                  ],
                   metrics: [
                     { val: "5~7x", lbl: "Higher Margin vs Comms" },
                     { val: "IPC Class 3", lbl: "Mil-Grade Zero China" }
                   ],
-                  detail: "Indo-Phoenix is India's only IPC Class 3 / AS9100 qualified bare board plant, capturing 5-7x higher margins under defense offset mandates."
+                  detail: "DAP 2020 mandates 30%-50% local offset. Raphe mPhibr and ideaForge strictly ban Chinese parts, delivering 5-7x higher margins."
                 }
               ]
             },
@@ -1283,6 +1254,497 @@
                   title: "Turnkey Tier-1 Certifications",
                   desc: "Turnkey delivery of IATF 16949 (Auto), AS9100 (Aero), ISO 26262, and IPC Class 3 defense certifications.",
                   detail: "Provides instant credibility to win high-margin global aerospace, automotive, and medical supplier contracts."
+                }
+              ]
+            },
+            // Slide 05: Closed-Loop AI / ACC Smart Factory
+            {
+              type: "flow-pipeline",
+              tag: "SLIDE 05 / CLOSED-LOOP SMART MANUFACTURING",
+              title: "Closed-Loop Edge AI ACC: 92% Yield & Zero-Defect Line",
+              desc: "Predictive chemical dosing (ACC) and AOI computer vision auto-correct etch speed within 50ms, eliminating human error.",
+              steps: [
+                { num: "01", title: "Smart SFC Traceability", desc: "Every bare board etched with micro-QR code; real-time process sensor tracking." },
+                { num: "02", title: "Edge AI Auto-Dosing", desc: "Analyzes bath pH, Cu²⁺ concentration, and ORP to auto-inject chemistry." },
+                { num: "03", title: "Auto-Correct Etch (ACC)", desc: "Vision AOI detects line-width drift and adjusts conveyor speed in 50ms." },
+                { num: "04", title: "Predictive Maintenance", desc: "Vibration and thermal sensors alert pump and filter health 72 hours before failure." }
+              ]
+            },
+            // Slide 06: Brownfield Facility & Environmental Moat
+            {
+              type: "space-matrix-visual",
+              tag: "SLIDE 06 / BROWNFIELD RETROFITTING & SPCB PERMITS",
+              title: "13,000 m² Facility with 3x ZLD (Zero Liquid Discharge) Clearance",
+              desc: "100% compliant with SPCB red-category chemical plating permits. Advanced MVR + RO water recycling creates insurmountable barrier.",
+              spaces: [
+                {
+                  title: "Heavy Wet Chemistry",
+                  area: "4,500 m²",
+                  std: "Class 100K Cleanroom",
+                  desc: "High-capacity VCP plating, DES etching lines, black-hole direct metallization.",
+                  detail: "Houses the full chemical wet-process line. Fully permitted under State Pollution Control Board (SPCB) red-category industrial standards."
+                },
+                {
+                  title: "Dry Process & Yellow Room",
+                  area: "3,500 m²",
+                  std: "Class 10K / 1K Cleanroom",
+                  desc: "Direct imaging (LDI), automated coverlay alignment, and vacuum laminators.",
+                  detail: "Temperature & humidity strictly controlled (21±1°C, 55±5% RH) to achieve 25μm ultra-fine line pitch without yield degradation."
+                },
+                {
+                  title: "Inspection, SMT & Lab",
+                  area: "2,000 m²",
+                  std: "Class 10K ESD Protected",
+                  desc: "High-speed SMT placement, flying probe testing, and metallurgical cross-section lab.",
+                  detail: "Zero-defect quality gate featuring 3D AOI, ionic contamination testing, and automated micro-short inspection."
+                },
+                {
+                  title: "Warehouse & Cold Storage",
+                  area: "1,500 m²",
+                  std: "Cold Storage 2-10°C",
+                  desc: "FCCL base laminates, coverlays, and pure chemicals.",
+                  detail: "Maintains 45-60 days of strategic safety inventory in India to eliminate international logistics disruptions."
+                },
+                {
+                  title: "Wastewater & ZLD",
+                  area: "3,000 m²",
+                  std: "Zero Liquid Discharge",
+                  desc: "MVR mechanical vapor recompression and multi-stage RO.",
+                  detail: "3x larger footprint than standard factories. Mandatory environmental installation for green project approvals in India."
+                }
+              ]
+            },
+            // Slide 07: Module 1 Product Capacity Mix & Revenue Model
+            {
+              type: "product-mix-visual",
+              tag: "SLIDE 07 / MODULE 1: CAPACITY & REVENUE ARCHITECTURE",
+              title: `Module 1: 15,000 m²/mo Capacity Delivering $${revAnnual}M Annual Run-Rate`,
+              desc: `Weighted average selling price (ASP) of $${weightedPrice}/m² across 1L, 2L, and 3L+ multilayer FPC. Click cards for depth.`,
+              totalVolume: capMonthly,
+              weightedPrice: `$${weightedPrice}/m²`,
+              annualRunRate: `$${revAnnual}M`,
+              products: [
+                {
+                  name: "Single-Sided FPC (1L)",
+                  pct: "40.0%",
+                  color: "#38bdf8",
+                  volume: "6,000 m²",
+                  asp: "$120 / m²",
+                  revYr: "$8.64M",
+                  detail: "High-volume basic interconnects for consumer electronics and automotive battery sensing wire replacement. 40% capacity share."
+                },
+                {
+                  name: "Double-Sided FPC (2L)",
+                  pct: "50.0%",
+                  color: "var(--accent)",
+                  volume: "7,500 m²",
+                  asp: "$170 / m²",
+                  revYr: "$15.30M",
+                  detail: "The volume backbone. Primary solution for EV Battery Pack CCS busbar sensing and IATF-16949 automotive wire harnesses. 50% capacity share."
+                },
+                {
+                  name: "Multilayer / Rigid-Flex (3L+)",
+                  pct: "10.0%",
+                  color: "#a855f7",
+                  volume: "1,500 m²",
+                  asp: "$270 / m²",
+                  revYr: "$4.86M",
+                  detail: "High-density interconnects (HDI) for aerospace drones, radar seekers, and medical robotics. Ultra-high margin (50%+ gross margin). 10% share."
+                }
+              ]
+            },
+            // Slide 08: Module 2 Factory Space & Area Allocation
+            {
+              type: "space-matrix-visual",
+              tag: "SLIDE 08 / MODULE 2: FACTORY SPACE & CLEANROOM SPECS",
+              title: `Module 2: 13,000 m² High-Reliability Cleanroom & ZLD Blueprint`,
+              desc: `Total built-up factory floor area of ${totalArea} m² engineered for zero cross-contamination and continuous roll-to-roll flow.`,
+              spaces: [
+                {
+                  title: "Heavy Wet Chemistry",
+                  area: "4,500 m²",
+                  std: "Class 100K Cleanroom",
+                  desc: "High-capacity VCP plating, DES etching lines, black-hole direct metallization.",
+                  detail: "Houses the full chemical wet-process line. Fully permitted under State Pollution Control Board (SPCB) red-category industrial standards."
+                },
+                {
+                  title: "Dry Process & Yellow Room",
+                  area: "3,500 m²",
+                  std: "Class 10K / 1K Cleanroom",
+                  desc: "Direct imaging (LDI), automated coverlay alignment, and vacuum laminators.",
+                  detail: "Temperature & humidity strictly controlled (21±1°C, 55±5% RH) to achieve 25μm ultra-fine line pitch without yield degradation."
+                },
+                {
+                  title: "Inspection, SMT & Lab",
+                  area: "2,000 m²",
+                  std: "Class 10K ESD Protected",
+                  desc: "High-speed SMT placement, flying probe testing, and metallurgical cross-section lab.",
+                  detail: "Zero-defect quality gate featuring 3D AOI, ionic contamination testing, and automated micro-short inspection."
+                },
+                {
+                  title: "Warehouse & Cold Storage",
+                  area: "1,500 m²",
+                  std: "Cold Storage 2-10°C",
+                  desc: "FCCL base laminates, coverlays, and pure chemicals.",
+                  detail: "Maintains 45-60 days of strategic safety inventory in India to eliminate international logistics disruptions."
+                },
+                {
+                  title: "Wastewater & ZLD",
+                  area: "3,000 m²",
+                  std: "Zero Liquid Discharge",
+                  desc: "MVR mechanical vapor recompression and multi-stage RO.",
+                  detail: "3x larger footprint than standard factories. Mandatory environmental installation for green project approvals in India."
+                }
+              ]
+            },
+            // Slide 09: Module 3 CapEx & SPECS Subsidy Comparison Cockpit
+            {
+              type: "capex-cockpit-visual",
+              tag: "SLIDE 09 / MODULE 3: CAPITAL EXPENDITURE & SPECS REFUND",
+              title: `Module 3: Total CapEx $${totCapEx}M with 25% SPECS Cash Refund`,
+              desc: `Net investment reduced to $${netCapEx}M via SPECS 25% government subsidy. Taiwan technical team manages source verification and engineering boundaries.`,
+              defaultExplanation: "SPECS 25% cash-back strictly applies to production machinery and factory environmental assets. Net capital exposure compressed to $17.25M.",
+              items: [
+                {
+                  title: "Core Production & Test Equipment",
+                  pct: "71.7%",
+                  kunshan: "$15,000,000",
+                  india: "$16,500,000",
+                  subsidy: "-$4,125,000",
+                  net: "$12,375,000",
+                  detail: "Direct vendor-code support (DuPont, Taiflex, Panasonic). Taiwan technical group verifies machines at source via CEC green channel."
+                },
+                {
+                  title: "Plant & Environmental (ZLD) Infrastructure",
+                  pct: "15.2%",
+                  kunshan: "$1,000,000",
+                  india: "$3,500,000",
+                  subsidy: "-$875,000",
+                  net: "$2,625,000",
+                  detail: "Define design specifications & chemical inputs. Local civil engineering & SPCB consent to establish (CTE/CTO) executed by Promoter."
+                },
+                {
+                  title: "Plant Building & Cleanroom Facilities",
+                  pct: "13.0%",
+                  kunshan: "$2,500,000",
+                  india: "$3,000,000",
+                  subsidy: "-$750,000",
+                  net: "$2,250,000",
+                  detail: "Output factory layout, Class 10K/100K cleanliness, and +40% HVAC humidity specs. Actual building civil works managed by local promoter."
+                },
+                {
+                  title: "Total Initial Project CapEx",
+                  pct: "100.0%",
+                  kunshan: "$18,500,000",
+                  india: `$${totCapEx}M`,
+                  subsidy: `-$${specsSub}M`,
+                  net: `$${netCapEx}M`,
+                  detail: "SPECS 25% cash rebate provides an unassailable $5.75M capital cushion, protecting investor downside."
+                }
+              ]
+            },
+            // Slide 10: Module 4 Dynamic OpEx Breakdown Visual Cockpit
+            {
+              type: "opex-cockpit-visual",
+              tag: "SLIDE 10 / MODULE 4: MONTHLY OPERATING EXPENSES",
+              title: `Module 4: Dynamic Monthly OpEx Structure ($${opexMo}M / mo)`,
+              desc: `Variable costs account for 69.0% ($1.27M/mo), ensuring extreme anti-cyclical agility. Click cost cards for depth.`,
+              defaultExplanation: "Total monthly OpEx is $1.845M ($22.14M annual). Low fixed depreciation ratio (13.6%) ensures rapid scale profits.",
+              costs: [
+                {
+                  title: "Direct Raw Materials",
+                  amount: "$900,000",
+                  pct: "48.8%",
+                  varPct: "100%",
+                  fixPct: "0%",
+                  sub: "FCCL copper clad, coverlay film, copper anodes & plating chemistry.",
+                  detail: "100% variable cost. Dual-sourcing strategy (Taiwan base + local India chemicals) guarantees supply security and cost parity."
+                },
+                {
+                  title: "Labor & Technical Staff",
+                  amount: "$430,000",
+                  pct: "23.3%",
+                  varPct: "40%",
+                  fixPct: "60%",
+                  sub: "30 Taiwanese & Indian senior process specialists and operators.",
+                  detail: "Fixed senior engineering overhead ($258K) combined with variable shift labor ($172K), optimizing labor productivity."
+                },
+                {
+                  title: "Utilities, Power & Water",
+                  amount: "$265,000",
+                  pct: "14.4%",
+                  varPct: "75.7%",
+                  fixPct: "24.3%",
+                  sub: "High-power HVAC cooling, cleanroom air filtration, and RO recycling.",
+                  detail: "75.7% variable power consumption directly tracking production runs, protected by dedicated substation grid contracts."
+                },
+                {
+                  title: "Straight-line Depreciation",
+                  amount: "$250,000",
+                  pct: "13.6%",
+                  varPct: "0%",
+                  fixPct: "100%",
+                  sub: "10-year straight-line depreciation on production line and infrastructure.",
+                  detail: "100% fixed cost. Amortized over 10 years, creating huge operational leverage once capacity exceeds break-even."
+                }
+              ]
+            },
+            // Slide 11: Module 5 Master Break-Even & Sensitivity Cockpit
+            {
+              type: "bep-master-cockpit",
+              tag: "SLIDE 11 / MODULE 5: BREAK-EVEN & RETURNS COCKPIT",
+              title: `Module 5: 50.8% Break-Even Point ($${bepRev}M / mo) & ${paybackYrs}-Year Payback`,
+              desc: `Robust financial safety cushion. Interactive model: drag slider to simulate capacity sensitivity.`,
+              bepVal: `${bepUtil}%`,
+              thresholdRevMo: `$${bepRev}M`,
+              defaultExplanation: "The business crosses into net profit at just 50.8% capacity ($1.22M monthly revenue), delivering exceptional downside defense.",
+              cards: [
+                {
+                  label: "Break-Even Utilization",
+                  val: `${bepUtil}%`,
+                  sub: `Capacity: ${Math.round(15000*bepUtil/100).toLocaleString()} m²/mo`,
+                  detail: "At only 50.8% capacity utilization (7,616 m²/mo), project revenue covers 100% of all fixed and variable monthly expenses."
+                },
+                {
+                  label: "EBIT Operating Profit",
+                  val: `$${ebitMo}K`,
+                  sub: `${ebitMarg}% Margin ($${(ebitMo*12/1000).toFixed(2)}M/yr)`,
+                  detail: "EBIT Margin of 23.1% delivers $6.66M annualized profit at full capacity, proving extraordinary scale returns."
+                },
+                {
+                  label: "BEP Revenue Threshold",
+                  val: `$${bepRev}M`,
+                  sub: `Annualized: $${(bepRev*12).toFixed(2)}M`,
+                  detail: "The factory crosses into dynamic net profit at only $1.22M monthly revenue. Standard for highly capitalized modern wet-process electronics plants."
+                },
+                {
+                  label: "Internal Rate of Return",
+                  val: irrRange,
+                  sub: "Benchmark: 12% - 15%",
+                  detail: "Projected IRR between 21.3% and 24.8% far exceeds standard electronics manufacturing benchmarks, offering superior risk-adjusted alpha."
+                },
+                {
+                  label: "Static Payback",
+                  val: `${paybackYrs} Yrs`,
+                  sub: `Without SPECS: ${paybackNoSub} Yrs`,
+                  detail: "Assumes SPECS 25% CapEx cash refund ($5.75M) is cleared. Static payback period is compressed to 4.2 years (5.2 years without subsidy)."
+                }
+              ]
+            },
+            // Slide 12: Implementation Roadmap
+            {
+              type: "flow-pipeline",
+              tag: "SLIDE 12 / EXECUTION ROADMAP & MILESTONES",
+              title: "24-Month Phased Ramp-Up: Break-Even at Month 12",
+              desc: "From brownfield retrofitting to full commercial production within 24 months, achieving scale net profits.",
+              steps: [
+                { num: "T+6M", title: "Plant Setup & Sampling", desc: "Cleanroom construction, CEC machine verification, customer prototype audits." },
+                { num: "T+12M", title: "Scale Production (70%)", desc: "Pass 50.8% BEP threshold. Achieve monthly cash flow profitability." },
+                { num: "T+18M", title: "IATF 16949 / AEC-Q", desc: "Complete Tier-1 automotive and defense customer supplier qualifications." },
+                { num: "T+24M", title: "Full Capacity (95%+)", desc: "Deliver $28.8M annual revenue and begin SaaS AI manufacturing export." }
+              ]
+            },
+            // Slide 13: Call to Action & Data Room Access
+            {
+              type: "cta-hub",
+              tag: "SLIDE 13 / STRATEGIC PARTNERSHIP & DATA ROOM",
+              title: "Position Your Capital at the Origin of India's Defense Supply Chain",
+              desc: "Promoter retains >90% controlling equity with full government backing. Request NDA for exclusive Data Room access.",
+              primaryBtn: "Request Investor Data Room Access",
+              landingBtn: "Return to Landing Page Portal"
+            }
+          ]
+        },
+        zh: {
+          exitLanding: "返回落地頁",
+          btnPrev: "◄ 上一頁",
+          btnNext: "下一頁 ►",
+          slides: [
+            // Slide 01: 執行摘要
+            {
+              type: "hero-showcase",
+              tag: "簡報 01 / 執行摘要與國家戰略定位",
+              title: "破除 30% 自給率假象：搶佔全印首座高階 FPC 前製程「絕對真空」",
+              desc: "專注 35%~40% 高毛利裸板製造，承接全球 China+1 歷史性產業轉移窗口，打造高壁壘、高現金流上市平台。",
+              mainStat: { 
+                label: "滿載年度營收規模", 
+                val: `$${revAnnual}M`, 
+                desc: `以每月 ${capMonthly} m² 產能與 $${weightedPrice}/m² 加權單價推算（鎖定 35%~40% 綜合毛利）。`,
+                kpiSteps: [
+                  { val: "15,000 m²", lbl: "月度滿載產能" },
+                  { val: "38.5%", lbl: "綜合毛利率" },
+                  { val: "$28.8M", lbl: "年化總產值" }
+                ]
+              },
+              subStats: [
+                { 
+                  label: "投資人淨資本支出", 
+                  val: `$${netCapEx}M`, 
+                  tag: "SPECS 25% 現金返還", 
+                  tagType: "tag-positive",
+                  desc: `總預算 $${totCapEx}M 扣除 SPECS 25% 現金返還 ($${specsSub}M)。` 
+                },
+                { 
+                  label: "息稅前利潤率 (EBIT)", 
+                  val: `${ebitMarg}%`, 
+                  tag: "年營業利潤 $6.66M", 
+                  tagType: "tag-accent",
+                  desc: `滿載年貢獻營業利潤達 $${(ebitMo*12/1000).toFixed(2)}M 美元。` 
+                },
+                { 
+                  label: "靜態投資回收期", 
+                  val: `${paybackYrs} 年`, 
+                  tag: `無補貼為 ${paybackNoSub} 年`, 
+                  tagType: "tag-positive",
+                  desc: `含 SPECS 補貼 ${paybackYrs} 年回本（未含補貼為 ${paybackNoSub} 年）。` 
+                },
+                { 
+                  label: "內部報酬率 (IRR)", 
+                  val: irrRange, 
+                  tag: "製造業基準: 12-15%", 
+                  tagType: "tag-accent",
+                  desc: "大幅超越傳統電子代工與製造業回報基準。" 
+                }
+              ]
+            },
+            // Slide 02: 市場痛點與雙軌對比
+            {
+              type: "vs-matrix",
+              tag: "簡報 02 / 市場剛需與痛點破局",
+              title: "0% 在地競爭真空 × 48 小時極速打樣：終結 3 週跨國斷鏈痛點",
+              desc: "打通印度車載、國防與消費電子在地化供應動脈，重塑供應鏈響應時效，提升客戶 DVA 拿滿 PLI 增量補貼。",
+              badHeader: "傳統海外進口三大死穴 🔴",
+              badList: [
+                { badge: "3~5 週", bar: "bad", text: "打樣跨國寄送與工程溝通週期冗長，拖垮客戶新品上市時效 (NPI)。" },
+                { badge: "24%~46%", bar: "bad", text: "負擔關稅倒掛與昂貴空運，疊加 45~60 天在途安全庫存積壓現金流。" },
+                { badge: "地緣斷鏈", bar: "bad", text: "供應鏈高度依賴外匯與地緣政治；組裝廠 DVA 停滯在 15~20% 面臨政策扣減。" }
+              ],
+              goodHeader: "Indo-Phoenix 在地化三大殺手鐧 🟢",
+              goodList: [
+                { badge: "48~72 小時", bar: "good", text: "印度在地快速工程打樣，3~5 天量產 JIT 廠邊直送。" },
+                { badge: "0% 關稅", bar: "good", text: "基礎原料 100% 本地採購，享有 MOOWR 保稅與東協 FTA 免稅通道。" },
+                { badge: "35%+ DVA", bar: "good", text: "直接提升客戶在地價值增值 (DVA)，助力客戶拿滿國家 PLI 增量補貼。" }
+              ]
+            },
+            // Slide 03: 三大剛需賽道真實買家
+            {
+              type: "feature-cards-visual",
+              tag: "簡報 03 / 三大剛需賽道與真實買家名冊",
+              title: "訂單不是猜的，是點名的：手握數十億美元剛性採購池",
+              desc: "對標 2026 印度 $1.06B~$1.30B FPC 市場，年需求超 3.5 億片剛性採購池。涵蓋自主 Tier-1 原廠、EMS 巨頭與國防重工。",
+              defaultExplanation: "下游巨頭為滿足政府國產化與 PLI 考核急需在地供應商，採購名單全部到位，我們是在挑選最高毛利的訂單。",
+              cards: [
+                {
+                  iconSvg: `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2"><rect x="2" y="7" width="16" height="10" rx="2"/><path d="M22 11v2"/><path d="M6 11v2"/><path d="M10 11v2"/><path d="M14 11v2"/></svg>`,
+                  tag: "新能源儲能 CCS",
+                  title: "EV 與電池 Pack CCS 採樣軟板",
+                  desc: "全面替代傳統笨重採樣銅線束，提供 500-1500mm 超長厚銅 (2-12oz) 軟板。",
+                  blueprintImg: "assets/samples/CCS-縮圖.jpg",
+                  fullImg: "assets/samples/CCS-大圖.jpg",
+                  blueprintLabel: "高清樣品圖：EV-BATTERY-CCS-PACK",
+                  buyerCategories: [
+                    {
+                      label: "自研 Tier-1 / 電池 Pack 原廠",
+                      pills: [
+                        { name: "Tata AutoComp ($25M-$35M)", tier: "tier1" },
+                        { name: "VVDN eMobility ($12M-$18M)", tier: "tier1" },
+                        { name: "Exide Energy ($15M-$22M)", tier: "tier1" },
+                        { name: "Amara Raja ($12M-$16M)", tier: "tier1" },
+                        { name: "Kaynes EV ($8M-$12M)", tier: "tier1" },
+                        { name: "Lucas TVS", tier: "tier1" },
+                        { name: "Spark Minda", tier: "tier1" },
+                        { name: "Ola Electric", tier: "tier1" }
+                      ]
+                    },
+                    {
+                      label: "EMS 巨頭 / 模組代工廠",
+                      pills: [
+                        { name: "鴻海 Foxconn EV ($30M-$45M)", tier: "ems" },
+                        { name: "塔塔電子 TEPL ($20M-$30M)", tier: "ems" },
+                        { name: "Dixon Energy ($18M-$25M)", tier: "ems" },
+                        { name: "Syrma SGS ($10M-$15M)", tier: "ems" },
+                        { name: "Jabil India", tier: "ems" }
+                      ]
+                    }
+                  ],
+                  metrics: [
+                    { val: "$25M~$35M", lbl: "TACO 單一巨頭進口額" },
+                    { val: "90%+", lbl: "全印裸板目前依賴進口" }
+                  ],
+                  detail: "TACO ($25M-$35M)、鴻海 ($30M-$45M) 及 Dixon ($18M-$25M) 等急需 500-1500mm 超長厚銅在地裸板。"
+                },
+                {
+                  iconSvg: `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2"><path d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9l-1.5 2.8C2.1 11.2 2 11.6 2 12v4c0 .6.4 1 1 1h2"/><circle cx="7" cy="17" r="2"/><circle cx="17" cy="17" r="2"/></svg>`,
+                  tag: "車載 TIER-1",
+                  title: "車載感測與 ADAS 車規級線束",
+                  desc: "單車採用超 100 種 FPC。提供 IATF 16949 / AEC-Q 車規認證本土裸板與在地測試。",
+                  blueprintImg: "assets/samples/Automotive-縮圖.jpg",
+                  fullImg: "assets/samples/Automotive-大圖.jpg",
+                  blueprintLabel: "高清樣品圖：AUTO-ADAS-SENSOR-FPC",
+                  buyerCategories: [
+                    {
+                      label: "自研車載 Tier-1 系統巨頭",
+                      pills: [
+                        { name: "Samvardhana Motherson ($45M-$65M)", tier: "tier1" },
+                        { name: "Bosch India ($35M-$50M)", tier: "tier1" },
+                        { name: "Uno Minda ($22M-$32M)", tier: "tier1" },
+                        { name: "Varroc ($18M-$25M)", tier: "tier1" },
+                        { name: "Lumax ($15M-$22M)", tier: "tier1" },
+                        { name: "Tata Motors / Mahindra", tier: "tier1" }
+                      ]
+                    },
+                    {
+                      label: "車規級 EMS / SMT 貼片基地",
+                      pills: [
+                        { name: "鴻海 Foxconn Auto ($35M-$50M)", tier: "ems" },
+                        { name: "德國馬牌 Continental ($28M-$40M)", tier: "ems" },
+                        { name: "Dixon Auto ($25M-$38M)", tier: "ems" },
+                        { name: "SFO Technologies", tier: "ems" }
+                      ]
+                    }
+                  ],
+                  metrics: [
+                    { val: "$45M~$65M", lbl: "Motherson 年進口額" },
+                    { val: "IATF 16949", lbl: "車規交鑰匙認證體系" }
+                  ],
+                  detail: "Motherson ($45M-$65M)、Bosch ($35M-$50M) 及 Continental ($28M-$40M) 全印 85%+ 高階車規裸板皆仰賴進口。"
+                },
+                {
+                  iconSvg: `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>`,
+                  tag: "國防相抵 5~7倍暴利",
+                  title: "航太與國防軍規相抵 (Offset)",
+                  desc: "DAP 2020 強制 30%-50% 本地採購相抵。軍用無人機與相控陣雷達嚴格排斥中國零件。",
+                  blueprintImg: "assets/samples/Drone-縮圖.jpg",
+                  fullImg: "assets/samples/Drone-大圖.jpg",
+                  blueprintLabel: "高清樣品圖：AERO-DRONE-RIGIDFLEX",
+                  buyerCategories: [
+                    {
+                      label: "軍用無人機 / 航太深科技",
+                      pills: [
+                        { name: "Raphe mPhibr (融資1.45億美元)", tier: "tier1" },
+                        { name: "ideaForge (印度市佔率 50%)", tier: "tier1" },
+                        { name: "Garuda Aerospace (籌備IPO)", tier: "tier1" },
+                        { name: "NewSpace Research (蜂群無人機)", tier: "tier1" },
+                        { name: "Asteria Aerospace (信實集團)", tier: "tier1" },
+                        { name: "Sagar Defence (海空水面艇)", tier: "tier1" }
+                      ]
+                    },
+                    {
+                      label: "國防軍工巨頭 / 航太事業部",
+                      pills: [
+                        { name: "TASL (塔塔航太防務)", tier: "ems" },
+                        { name: "Adani Defence (阿達尼防務)", tier: "ems" },
+                        { name: "Zen Technologies (上市反無人機)", tier: "ems" },
+                        { name: "Cyient DLM / Paras Defence", tier: "ems" },
+                        { name: "ISRO / HAL 太空與戰機生態", tier: "ems" }
+                      ]
+                    }
+                  ],
+                  metrics: [
+                    { val: "5~7 倍", lbl: "通訊產品超額利潤倍數" },
+                    { val: "IPC Class 3", lbl: "全印唯一軍規無中化實體" }
+                  ],
+                  detail: "DAP 2020 強制要求 30%~50% 在地採購；Raphe mPhibr 與 ideaForge 全面封殺中國零件，Indo-Phoenix 享有 5~7 倍超額利潤。"
                 }
               ]
             },
@@ -1617,72 +2079,9 @@
         },
         zh: {
           exitLanding: "返回落地頁",
-          agendaBtn: "快速目錄",
           btnPrev: "◄ 上一頁",
           btnNext: "下一頁 ►",
           slides: [
-            // Slide 00: 全息總覽與目錄導航
-            {
-              type: "agenda-master-visual",
-              tag: "商業路演總覽 / 四大幕劇導航地圖",
-              title: "Project Indo-Phoenix：戰略路演全息目錄",
-              desc: "印度首座高可靠度航太與國防 FPC 智慧製造樞紐之完整機構級路演架構。點選任一幕劇即可一鍵直達。",
-              acts: [
-                {
-                  actNum: "第一幕",
-                  targetSlide: 1,
-                  badge: "戰略機遇與剛需",
-                  pages: "簡報 01 – 03",
-                  title: "國家戰略真空與點名買家",
-                  desc: "破除 30% 自給率假象；搶佔 0% 裸板絕對真空、48小時極速打樣，手握下游巨頭數十億採購池。",
-                  subitems: [
-                    "01. 執行摘要與高階裸板 0% 絕對真空",
-                    "02. 痛點破局：48h 打樣 vs 3週海外斷鏈",
-                    "03. 三大剛需賽道與點名買家名冊"
-                  ]
-                },
-                {
-                  actNum: "第二幕",
-                  targetSlide: 4,
-                  badge: "技術壁壘與重工基建",
-                  pages: "簡報 04 – 06",
-                  title: "技術股護城河與 ZLD 環保特許",
-                  desc: "台灣團隊 5% 讓利對賭良率、印度大股東 >90% 絕對控股；Edge AI 閉環工廠與 3 倍 ZLD 零排放。",
-                  subitems: [
-                    "04. 5% Sweat Equity 讓利與 >90% 控股治理",
-                    "05. AI / ACC 閉環智慧工廠體系",
-                    "06. 13,000 m² 廠房基建與 SPCB 環評門檻"
-                  ]
-                },
-                {
-                  actNum: "第三幕",
-                  targetSlide: 7,
-                  badge: "神聖五大財務模型",
-                  pages: "簡報 07 – 11",
-                  title: "五大財務模型連鎖真理閉環",
-                  desc: "嚴密閉環數據真源：$28.8M 年營收、CapEx $23M、SPECS 25% 返還、單月 OpEx $1.845M 與 50.8% BEP。",
-                  subitems: [
-                    "07. 模組一：產能規劃與產品營收模型 ($28.8M)",
-                    "08. 模組二：13,000 m² 空間工程標準",
-                    "09. 模組三：CapEx $23M 與 SPECS 25% 補貼",
-                    "10. 模組四：單月 OpEx ($1.845M) 成本結構",
-                    "11. 模組五：獲利駕駛艙與 50.8% 損益平衡點"
-                  ]
-                },
-                {
-                  actNum: "第四幕",
-                  targetSlide: 12,
-                  badge: "放量里程碑與合作",
-                  pages: "簡報 12 – 13",
-                  title: "24 個月放量時程與 Data Room",
-                  desc: "嚴格階段關卡治理，T+12M 跨越損益平衡實現規模淨獲利；受邀進入投資人專屬資料室。",
-                  subitems: [
-                    "12. 24 個月階段性放量里程碑",
-                    "13. 策略合作方案與 Data Room 申請"
-                  ]
-                }
-              ]
-            },
             // Slide 01: 執行摘要
             {
               type: "hero-showcase",
@@ -2473,13 +2872,26 @@
                     </div>
                   ` : ''}
 
-                  ${c.buyers ? `
-                    <div class="buyer-pills-row">
-                      ${c.buyers.map((b, bi) => `
-                        <span class="buyer-pill ${bi === 0 ? 'highlight' : ''}">${b}</span>
+                  ${c.buyerCategories ? `
+                    <div class="buyer-categories-wrap">
+                      ${c.buyerCategories.map(cat => `
+                        <div class="buyer-category-block">
+                          <div class="buyer-category-lbl">● ${cat.label}</div>
+                          <div class="buyer-pills-row">
+                            ${cat.pills.map(p => `
+                              <span class="buyer-pill ${p.tier || ''}">${p.name}</span>
+                            `).join("")}
+                          </div>
+                        </div>
                       `).join("")}
                     </div>
-                  ` : ''}
+                  ` : (c.buyers ? `
+                    <div class="buyer-pills-row">
+                      ${c.buyers.map((b, bi) => `
+                        <span class="buyer-pill ${bi === 0 ? 'tier1' : ''}">${b}</span>
+                      `).join("")}
+                    </div>
+                  ` : '')}
                 </div>
 
                 ${c.metrics ? `
@@ -2865,7 +3277,7 @@
       const container = document.getElementById("timelineSteps");
       container.innerHTML = slides.map((s, idx) => `
         <div class="step-pill ${idx === currentSlide ? 'active' : ''}" 
-             title="${idx === 0 ? (currentLang === 'zh' ? '目錄總覽' : 'Agenda') : (currentLang === 'zh' ? `第 ${idx} 頁` : `Slide ${idx}`)}" 
+             title="${currentLang === 'zh' ? `第 ${idx + 1} 頁` : `Slide ${idx + 1}`}" 
              onclick="goToSlide(${idx})"></div>
       `).join("");
     }
