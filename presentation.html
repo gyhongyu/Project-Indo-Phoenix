@@ -70,14 +70,19 @@
       --card-radius: 4px;
     }
 
+    html, body {
+      height: 100%;
+      overflow: hidden;
+      margin: 0;
+      padding: 0;
+    }
+
     body {
       background: var(--bg);
       color: var(--ink);
       font-family: var(--font-body);
-      min-height: 100vh;
       display: flex;
       flex-direction: column;
-      overflow-x: hidden;
       perspective: 1400px;
       -webkit-font-smoothing: antialiased;
       transition: background 0.6s var(--ease);
@@ -96,11 +101,12 @@
     .deck-topbar {
       position: relative; z-index: 30;
       display: flex; align-items: center; justify-content: space-between;
-      padding: 14px clamp(20px, 4vw, 56px);
+      padding: 10px clamp(20px, 4vw, 56px);
       border-bottom: 1px solid var(--line-subtle);
       background: rgba(8, 9, 13, 0.75);
       backdrop-filter: blur(14px);
       -webkit-backdrop-filter: blur(14px);
+      flex-shrink: 0;
     }
     .brand-group { display: flex; align-items: center; gap: 14px; }
     .brand-title {
@@ -146,11 +152,14 @@
     .deck-stage {
       position: relative; z-index: 10;
       flex: 1; display: flex; align-items: center; justify-content: center;
-      padding: clamp(16px, 2.5vh, 40px) clamp(20px, 4vw, 56px);
+      padding: 10px clamp(20px, 3vw, 48px);
       perspective: 1600px;
+      overflow: hidden;
+      min-height: 0;
     }
     .slide-wrapper {
-      width: 100%; max-width: 1320px; min-height: 640px;
+      width: 100%; max-width: 1320px;
+      max-height: calc(100vh - 128px);
       background: var(--bg-card);
       border: 1px solid var(--line);
       border-radius: var(--card-radius);
@@ -158,7 +167,7 @@
       backdrop-filter: blur(4px);
       -webkit-backdrop-filter: blur(4px);
       display: flex; flex-direction: column; justify-content: space-between;
-      padding: clamp(28px, 3.6vw, 48px);
+      padding: clamp(20px, 2.4vw, 36px) clamp(24px, 3.2vw, 44px);
       position: relative;
       overflow: hidden;
       transform-style: preserve-3d;
@@ -269,41 +278,42 @@
 
     /* 2. Product Mix Visual Donut & Spec Cards (Slide 2 Overhaul) */
     .product-mix-grid {
-      display: grid; grid-template-columns: 1.1fr 2fr; gap: 20px;
-      align-items: stretch; margin-bottom: 16px;
+      display: grid; grid-template-columns: 1.25fr 1.75fr; gap: 24px;
+      align-items: stretch; margin-bottom: 14px;
     }
     .donut-hero-card {
       background: linear-gradient(135deg, rgba(255,255,255,0.03) 0%, rgba(0,0,0,0.4) 100%);
       border: 1px solid var(--accent); border-radius: var(--card-radius);
-      padding: 24px 20px; display: flex; flex-direction: column;
+      padding: 20px 24px; display: flex; flex-direction: column;
       justify-content: space-between; box-shadow: 0 12px 36px var(--accent-glow);
     }
     .donut-circle-wrap {
       display: flex; flex-direction: column; align-items: center; justify-content: center;
-      margin: 12px 0; position: relative;
+      margin: 8px 0; position: relative;
     }
-    .donut-svg { width: 140px; height: 140px; transform: rotate(-90deg); }
-    .donut-bg { fill: none; stroke: rgba(255,255,255,0.05); stroke-width: 14; }
+    .donut-svg { width: clamp(190px, 16vw, 240px); height: clamp(190px, 16vw, 240px); transform: rotate(-90deg); }
+    .donut-bg { fill: none; stroke: rgba(255,255,255,0.05); stroke-width: 13; }
     .donut-segment {
-      fill: none; stroke-width: 14; stroke-linecap: round;
+      fill: none; stroke-width: 13; stroke-linecap: round;
       transition: stroke-dasharray 1.2s cubic-bezier(0.16, 1, 0.3, 1);
     }
     .donut-center-text {
       position: absolute; display: flex; flex-direction: column; align-items: center; justify-content: center;
     }
     .donut-center-val {
-      font-family: var(--font-display); font-size: 26px; font-weight: 600; color: var(--accent); line-height: 1;
+      font-family: var(--font-display); font-size: clamp(28px, 2.6vw, 40px);
+      font-weight: 700; color: var(--accent); line-height: 1; margin-bottom: 2px;
     }
     .donut-center-lbl {
-      font-family: var(--font-mono); font-size: 9.5px; letter-spacing: 0.15em; color: var(--ink-sub); text-transform: uppercase;
+      font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.2em; color: var(--ink-sub); text-transform: uppercase;
     }
     .product-spec-grid {
       display: grid; grid-template-columns: 1fr; gap: 10px;
     }
     .product-spec-card {
       background: rgba(10, 15, 25, 0.2); border: 1px solid var(--line-subtle);
-      border-radius: var(--card-radius); padding: 14px 18px;
-      display: grid; grid-template-columns: 1.4fr 1fr 1fr 1.2fr; gap: 12px;
+      border-radius: var(--card-radius); padding: 14px 20px;
+      display: grid; grid-template-columns: 1.3fr 1fr 1fr 1.1fr; gap: 14px;
       align-items: center; cursor: pointer; transition: all 0.25s var(--ease);
     }
     .product-spec-card:hover, .product-spec-card.active {
@@ -417,7 +427,32 @@
     .badge-bad { background: rgba(239, 68, 68, 0.15); color: #f87171; border: 1px solid rgba(239,68,68,0.3); }
     .badge-good { background: var(--accent-glow); color: var(--accent); border: 1px solid var(--accent); }
 
-    /* 4. CapEx & OpEx Waterfall Bars (Slide 5 & Slide 6) */
+    /* 4. CapEx & SPECS Comparison Master Cockpit (Slide 5 Overhaul) */
+    .capex-cockpit-grid {
+      display: grid; grid-template-columns: 1fr; gap: 10px;
+      margin-bottom: 14px;
+    }
+    .capex-row-card {
+      background: rgba(10, 15, 25, 0.2); border: 1px solid var(--line-subtle);
+      border-radius: var(--card-radius); padding: 14px 18px;
+      display: grid; grid-template-columns: 1.4fr 1fr 1fr 1fr 1.1fr; gap: 14px;
+      align-items: center; cursor: pointer; transition: all 0.25s var(--ease);
+    }
+    .capex-row-card:hover, .capex-row-card.active {
+      background: var(--bg-card-hover); border-color: var(--accent);
+      transform: translateX(4px); box-shadow: 0 4px 18px var(--accent-glow);
+    }
+    .capex-title-block { display: flex; align-items: center; gap: 10px; }
+    .capex-icon { font-size: 14px; color: var(--accent); }
+    .capex-title { font-size: 13.5px; font-weight: 600; color: var(--ink); }
+    .capex-pct { font-family: var(--font-mono); font-size: 11px; color: var(--ink-sub); }
+    .capex-val-col { display: flex; flex-direction: column; }
+    .capex-val-num { font-family: var(--font-mono); font-size: 13.5px; font-weight: 600; color: var(--ink); }
+    .capex-val-sub { font-size: 10.5px; color: var(--ink-sub); }
+    .capex-val-num.accent { color: var(--accent); font-weight: 700; }
+    .capex-val-num.subsidy { color: #34d399; font-weight: 700; }
+
+    /* 4. CapEx Waterfall Bars (Fallback) */
     .capex-waterfall {
       display: flex; flex-direction: column; gap: 14px; margin-bottom: 16px;
     }
@@ -976,18 +1011,50 @@
                 }
               ]
             },
-            // Slide 05: Module 3 CapEx & SPECS Subsidy Waterfall
+            // Slide 05: Module 3 CapEx & SPECS Subsidy Comparison Cockpit
             {
-              type: "capex-waterfall",
+              type: "capex-cockpit-visual",
               tag: "SLIDE 05 / CAPITAL EXPENDITURE & SUBSIDY",
               title: `Module 3: Total CapEx $${totCapEx}M with 25% SPECS Cash Refund`,
-              desc: "Capital-efficient modular deployment. Taiwan technical team verifies machines via CEC green channel. Government cash refund directly protects investor capital.",
-              bars: [
-                { label: "Core Production & Test Equipment (71.7%)", val: "$16.5M", pct: 72, fillClass: "" },
-                { label: "Plant & Environmental Infrastructure (ZLD) (15.2%)", val: "$3.5M", pct: 15, fillClass: "" },
-                { label: "Plant Building & Class 10K Cleanroom (13.0%)", val: "$3.0M", pct: 13, fillClass: "" },
-                { label: "SPECS Government Subsidy Cash-Back (-25%)", val: `-$${specsSub}M`, pct: 25, fillClass: "subsidy" },
-                { label: "Net Investor Capital Outlay", val: `$${netCapEx}M`, pct: 75, fillClass: "net" }
+              desc: `Net investment reduced to $${netCapEx}M via SPECS 25% government subsidy. Taiwan technical team manages source verification and engineering boundaries.`,
+              defaultExplanation: "SPECS 25% cash-back strictly applies to production machinery and factory environmental assets. Net capital exposure compressed to $17.25M.",
+              items: [
+                {
+                  title: "Core Production & Test Equipment",
+                  pct: "71.7%",
+                  kunshan: "$15,000,000",
+                  india: "$16,500,000",
+                  subsidy: "-$4,125,000",
+                  net: "$12,375,000",
+                  detail: "Direct vendor-code support (DuPont, Taiflex, Panasonic). Taiwan technical group verifies machines at source via CEC green channel."
+                },
+                {
+                  title: "Plant & Environmental (ZLD) Infrastructure",
+                  pct: "15.2%",
+                  kunshan: "$1,000,000",
+                  india: "$3,500,000",
+                  subsidy: "-$875,000",
+                  net: "$2,625,000",
+                  detail: "Define design specifications & chemical inputs. Local civil engineering & SPCB consent to establish (CTE/CTO) executed by Promoter."
+                },
+                {
+                  title: "Plant Building & Cleanroom Facilities",
+                  pct: "13.0%",
+                  kunshan: "$2,500,000",
+                  india: "$3,000,000",
+                  subsidy: "-$750,000",
+                  net: "$2,250,000",
+                  detail: "Output factory layout, Class 10K/100K cleanliness, and +40% HVAC humidity specs. Actual building civil works managed by local promoter."
+                },
+                {
+                  title: "Total Initial Project CapEx",
+                  pct: "100.0%",
+                  kunshan: "$18,500,000",
+                  india: `$${totCapEx}M`,
+                  subsidy: `-$${specsSub}M`,
+                  net: `$${netCapEx}M`,
+                  detail: "SPECS 25% cash rebate provides an unassailable $5.75M capital cushion, protecting investor downside."
+                }
               ]
             },
             // Slide 06: Module 4 Dynamic OpEx Breakdown Visual Cockpit
@@ -1248,18 +1315,50 @@
                 }
               ]
             },
-            // Slide 05: 模組 3 CapEx 瀑布圖
+            // Slide 05: 模組 3 CapEx 資本支出比較與 SPECS 補貼駕駛艙
             {
-              type: "capex-waterfall",
+              type: "capex-cockpit-visual",
               tag: "簡報 05 / 資本支出與 SPECS 政府補貼",
               title: `模組 3：建廠總 CapEx $${totCapEx}M 搭配 25% 現金補貼`,
-              desc: "模組化棕地投資模式，台方技術團隊透過 CEC 綠色通道於原廠驗機，政府現金返還直接將淨曝險降至 $17.25M。",
-              bars: [
-                { label: "核心生產與測試設備 (71.7%)", val: "$16.5M", pct: 72, fillClass: "" },
-                { label: "廠房與環保基礎設施 ZLD (15.2%)", val: "$3.5M", pct: 15, fillClass: "" },
-                { label: "廠房建築與萬級無塵室 (13.0%)", val: "$3.0M", pct: 13, fillClass: "" },
-                { label: "SPECS 政府補貼現金返還 (-25%)", val: `-$${specsSub}M`, pct: 25, fillClass: "subsidy" },
-                { label: "投資人淨資本支出", val: `$${netCapEx}M`, pct: 75, fillClass: "net" }
+              desc: `透過 SPECS 25% 現金補貼直接將淨曝險降至 $${netCapEx}M。台方團隊把控核心原廠機台驗收與工程責任邊界。`,
+              defaultExplanation: "SPECS 25% 現金返還嚴格適用於機器設備與廠房資產。扣除補貼後投資人淨資本支出僅為 $17.25M。",
+              items: [
+                {
+                  title: "核心生產與測試設備",
+                  pct: "71.7%",
+                  kunshan: "$15,000,000",
+                  india: "$16,500,000",
+                  subsidy: "-$4,125,000",
+                  net: "$12,375,000",
+                  detail: "直接供應商代碼支援 (杜邦、台虹、松下)。透過 CEC 綠色通道於原廠進行機台驗證與技術封裝。"
+                },
+                {
+                  title: "廠房與環保 (ZLD) 設施",
+                  pct: "15.2%",
+                  kunshan: "$1,000,000",
+                  india: "$3,500,000",
+                  subsidy: "-$875,000",
+                  net: "$2,625,000",
+                  detail: "制定設計規範、水處理化學品投入。實際在地工程及 CTE/CTO (建照/營運同意書) 由發起人全權負責。"
+                },
+                {
+                  title: "廠房建築與無塵室工程",
+                  pct: "13.0%",
+                  kunshan: "$2,500,000",
+                  india: "$3,000,000",
+                  subsidy: "-$750,000",
+                  net: "$2,250,000",
+                  detail: "輸出廠房佈局、萬級/十萬級無塵室潔淨度與暖通空調 (HVAC) 濕度規範。實際土建工程由發起人負責。"
+                },
+                {
+                  title: "建廠總資本支出合計",
+                  pct: "100.0%",
+                  kunshan: "$18,500,000",
+                  india: `$${totCapEx}M`,
+                  subsidy: `-$${specsSub}M`,
+                  net: `$${netCapEx}M`,
+                  detail: "SPECS 25% 官方現金補貼提供堅不可摧的 575 萬美元資本安全邊際，極大化投資人下行保護。"
+                }
               ]
             },
             // Slide 06: 模組 4 OpEx 成本結構駕駛艙
@@ -1647,24 +1746,52 @@
           </div>
         `;
       }
-      // 4. CapEx Waterfall Bars
-      else if (slide.type === "capex-waterfall") {
+      // 4. CapEx & SPECS Subsidy Comparison Cockpit (Slide 5)
+      else if (slide.type === "capex-cockpit-visual") {
         html += `
-          <div class="capex-waterfall">
-            ${slide.bars.map(b => `
-              <div class="waterfall-bar-group gs-anim-bar">
-                <div class="bar-meta">
-                  <span>${b.label}</span>
-                  <strong>${b.val}</strong>
+          <div class="capex-cockpit-grid">
+            ${slide.items.map((it, idx) => `
+              <div class="capex-row-card gs-anim-card ${idx === 0 ? 'active' : ''}" 
+                   id="capexCard_${idx}"
+                   onclick="selectGenericCard('capexCard', ${idx}, '${it.detail.replace(/'/g, "\\'")}')"
+                   onmouseenter="selectGenericCard('capexCard', ${idx}, '${it.detail.replace(/'/g, "\\'")}')">
+                <div class="capex-title-block">
+                  <span class="capex-icon">🏛️</span>
+                  <div>
+                    <div class="capex-title">${it.title}</div>
+                    <div class="capex-pct">${it.pct} ${currentLang === 'zh' ? '佔比' : 'Share'}</div>
+                  </div>
                 </div>
-                <div class="bar-track">
-                  <div class="bar-fill ${b.fillClass}" data-pct="${b.pct}"></div>
+                <div class="capex-val-col">
+                  <div class="capex-val-num">${it.kunshan}</div>
+                  <div class="capex-val-sub">${currentLang === 'zh' ? '崑山參考基準' : 'Kunshan Ref'}</div>
+                </div>
+                <div class="capex-val-col">
+                  <div class="capex-val-num accent">${it.india}</div>
+                  <div class="capex-val-sub">${currentLang === 'zh' ? '印度建廠預算' : 'India Budget'}</div>
+                </div>
+                <div class="capex-val-col">
+                  <div class="capex-val-num subsidy">${it.subsidy}</div>
+                  <div class="capex-val-sub">${currentLang === 'zh' ? 'SPECS 25% 返還' : 'SPECS 25% Cash'}</div>
+                </div>
+                <div class="capex-val-col">
+                  <div class="capex-val-num" style="color:var(--ink);">${it.net}</div>
+                  <div class="capex-val-sub">${currentLang === 'zh' ? '投資人淨投入' : 'Net Investment'}</div>
                 </div>
               </div>
             `).join("")}
           </div>
+
+          <div class="cockpit-floating-bar">
+            <div class="floating-bar-icon">🛡️</div>
+            <div class="floating-bar-text" id="genericFloatingText">
+              <strong>${currentLang === 'zh' ? '台方責任邊界與風控依據' : 'Technical Boundary & Risk Control'}:</strong> ${slide.items[0].detail}
+            </div>
+          </div>
         `;
       }
+
+      // 4. CapEx Waterfall Bars (Fallback)
       // 5. Master BEP Financial Cockpit (Slide 7)
       else if (slide.type === "bep-master-cockpit") {
         html += `
