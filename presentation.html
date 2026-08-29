@@ -677,7 +677,69 @@
       background: rgba(255,255,255,0.04); border: 1px solid var(--line-subtle);
       padding: 3px 8px; border-radius: 4px; color: var(--ink);
     }
-    .buyer-pill.highlight {
+    /* Agenda 4-Act Master Navigator (Slide 00) */
+    .agenda-matrix-grid {
+      flex: 1; display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px;
+      margin-bottom: 12px; min-height: 0;
+    }
+    .agenda-act-card {
+      background: rgba(10, 15, 25, 0.25); border: 1px solid var(--line-subtle);
+      border-radius: var(--card-radius); padding: clamp(16px, 2.2vh, 24px) 22px;
+      display: flex; flex-direction: column; justify-content: space-between;
+      cursor: pointer; transition: all 0.3s var(--ease); position: relative;
+    }
+    .agenda-act-card:hover {
+      background: var(--bg-card-hover); border-color: var(--accent);
+      transform: translateY(-3px); box-shadow: 0 10px 30px var(--accent-glow);
+    }
+    .agenda-act-card::before {
+      content: ""; position: absolute; top: 0; left: 0; width: 4px; height: 100%;
+      background: var(--accent); border-radius: 4px 0 0 4px; opacity: 0.6;
+    }
+    .agenda-act-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
+    .agenda-act-badge {
+      font-family: var(--font-mono); font-size: 11px; font-weight: 700;
+      color: var(--accent); background: var(--accent-glow); padding: 3px 10px; border-radius: 4px;
+    }
+    .agenda-act-pages { font-family: var(--font-mono); font-size: 11.5px; color: var(--ink-sub); }
+    .agenda-act-title { font-size: 16px; font-weight: 600; color: var(--ink); margin-bottom: 8px; }
+    .agenda-act-desc { font-size: 13px; color: var(--ink-sub); line-height: 1.5; }
+    .agenda-act-subitems {
+      display: flex; flex-direction: column; gap: 4px; margin-top: 10px;
+      padding-top: 8px; border-top: 1px solid rgba(255,255,255,0.05);
+    }
+    .agenda-subitem { font-size: 12px; color: var(--ink-sub); display: flex; align-items: center; gap: 6px; }
+    .agenda-subitem-dot { width: 4px; height: 4px; border-radius: 50%; background: var(--accent); }
+
+    /* CAD Blueprint Sample Preview Thumbnails (Slide 03) */
+    .blueprint-thumb-box {
+      width: 100%; height: 130px; border-radius: 6px; overflow: hidden;
+      margin: 10px 0; border: 1px solid var(--line-subtle); position: relative;
+      background: #020617;
+    }
+    .blueprint-thumb-img {
+      width: 100%; height: 100%; object-fit: cover; object-position: center;
+      transition: transform 0.4s var(--ease); opacity: 0.88;
+    }
+    .blueprint-thumb-box:hover .blueprint-thumb-img {
+      transform: scale(1.05); opacity: 1;
+    }
+    .blueprint-zoom-badge {
+      position: absolute; bottom: 6px; right: 6px;
+      font-family: var(--font-mono); font-size: 9.5px;
+      background: rgba(0,0,0,0.75); color: var(--accent);
+      padding: 2px 6px; border-radius: 3px; border: 1px solid var(--line-subtle);
+    }
+
+    /* Top Nav Agenda Quick Jump Button */
+    .btn-agenda-quick {
+      display: flex; align-items: center; gap: 6px;
+      background: rgba(255,255,255,0.04); border: 1px solid var(--line-subtle);
+      color: var(--ink-sub); font-family: var(--font-mono); font-size: 11px;
+      padding: 5px 12px; border-radius: 999px; cursor: pointer;
+      transition: all 0.3s var(--ease); margin-right: 8px;
+    }
+    .btn-agenda-quick:hover {
       background: var(--accent-glow); border-color: var(--accent); color: var(--accent);
     }
     .buyer-data-matrix {
@@ -848,6 +910,11 @@
     </div>
 
     <div class="deck-controls">
+      <!-- Agenda / Overview Quick Jump -->
+      <button class="btn-agenda-quick" onclick="jumpToSlide(0)">
+        <span>☰</span> <span data-i18n="agendaBtn">AGENDA</span>
+      </button>
+
       <!-- Bilingual Language Toggle (Preserves active theme) -->
       <div class="control-group">
         <button class="btn-ctrl active" id="btn-lang-en" onclick="setLang('en')">EN</button>
@@ -933,9 +1000,72 @@
       return {
         en: {
           exitLanding: "Landing Page",
+          agendaBtn: "AGENDA",
           btnPrev: "◄ PREV",
           btnNext: "NEXT ►",
           slides: [
+            // Slide 00: Executive Agenda & Four-Act Navigator
+            {
+              type: "agenda-master-visual",
+              tag: "EXECUTIVE AGENDA / FOUR-ACT ROADSHOW MAP",
+              title: "Project Indo-Phoenix: Strategic Roadshow Navigator",
+              desc: "A comprehensive institutional briefing on building India's 1st high-reliability Aerospace & Defense FPC manufacturing hub. Click any Act to jump directly.",
+              acts: [
+                {
+                  actNum: "ACT I",
+                  targetSlide: 1,
+                  badge: "STRATEGY & DEMAND",
+                  pages: "Slide 01 – 03",
+                  title: "Strategic Gap & Real Demand",
+                  desc: "Debunking the 30% self-reliance myth; capturing 0% bare-board vacuum, 48h turnaround, and verified Tier-1 buyer pipeline.",
+                  subitems: [
+                    "01. Executive Vision & 0% Bare-Board Gap",
+                    "02. Pain Point Breakdown: 48h vs 3-Wk Lag",
+                    "03. 3 Core Verticals & Verified Buyer Pool"
+                  ]
+                },
+                {
+                  actNum: "ACT II",
+                  targetSlide: 4,
+                  badge: "MOATS & INFRASTRUCTURE",
+                  pages: "Slide 04 – 06",
+                  title: "Moats, AI SFC & SPCB Clearances",
+                  desc: "5% Sweat Equity governance with >90% promoter control; closed-loop Edge AI ACC, and 13,000m² ZLD environmental moat.",
+                  subitems: [
+                    "04. 5% Sweat Equity & >90% Control Governance",
+                    "05. AI / ACC Closed-Loop Smart Factory",
+                    "06. 13,000 m² Facility & 3x ZLD Clearance"
+                  ]
+                },
+                {
+                  actNum: "ACT III",
+                  targetSlide: 7,
+                  badge: "FINANCIAL PROOFS",
+                  pages: "Slide 07 – 11",
+                  title: "5 Sacred Financial Modules",
+                  desc: "Rock-solid single source of truth financials: $28.8M revenue, $23M CapEx, SPECS 25% refund, $1.845M OpEx, and 50.8% BEP.",
+                  subitems: [
+                    "07. Module 1: Product Capacity Mix ($28.8M)",
+                    "08. Module 2: Factory Space Engineering Standards",
+                    "09. Module 3: CapEx $23M & SPECS 25% Cash Refund",
+                    "10. Module 4: Dynamic OpEx ($1.845M/mo) Structure",
+                    "11. Module 5: Profitability Cockpit & 50.8% BEP"
+                  ]
+                },
+                {
+                  actNum: "ACT IV",
+                  targetSlide: 12,
+                  badge: "ROADMAP & PARTNERSHIP",
+                  pages: "Slide 12 – 13",
+                  title: "24-Month Roadmap & Data Room",
+                  desc: "Phase-gated execution to reach cash flow break-even at Month 12; invitation to exclusive investor Data Room.",
+                  subitems: [
+                    "12. 24-Month Phased Ramp-Up Milestones",
+                    "13. Strategic Terms & Data Room Access"
+                  ]
+                }
+              ]
+            },
             // Slide 01: Executive Vision & Anchor
             {
               type: "hero-showcase",
@@ -1011,10 +1141,12 @@
               defaultExplanation: "Downstream giants urgently require qualified local FPC suppliers to fulfill government DVA and PLI requirements.",
               cards: [
                 {
-                  icon: "🔋",
+                  iconSvg: `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2"><rect x="2" y="7" width="16" height="10" rx="2"/><path d="M22 11v2"/><path d="M6 11v2"/><path d="M10 11v2"/><path d="M14 11v2"/></svg>`,
                   tag: "ENERGY STORAGE CCS",
                   title: "EV & Battery Pack CCS",
                   desc: "Replaces heavy copper wiring with 500-1500mm heavy copper (2-12oz) flexible circuits.",
+                  blueprintImg: "assets/samples/sample_ccs_blueprint.jpg",
+                  blueprintLabel: "CAD DWG: CCS-HEAVY-COPPER-FPC",
                   buyers: ["Tata AutoComp", "Waaree Energy", "Ola Electric", "Exide Energy", "Amara Raja"],
                   metrics: [
                     { val: "$25M~$35M", lbl: "TACO Annual Import" },
@@ -1023,10 +1155,12 @@
                   detail: "TACO alone imports $25M-$35M of CCS FPC annually. High-temperature (-40°C~+125°C) thick copper flex circuits are 90%+ imported."
                 },
                 {
-                  icon: "🚗",
+                  iconSvg: `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2"><path d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9l-1.5 2.8C2.1 11.2 2 11.6 2 12v4c0 .6.4 1 1 1h2"/><circle cx="7" cy="17" r="2"/><circle cx="17" cy="17" r="2"/></svg>`,
                   tag: "AUTOMOTIVE TIER-1",
                   title: "Automotive Sensor & ADAS",
                   desc: "Over 100 FPC parts per modern EV. Local testing & zero-defect IATF 16949 bare boards.",
+                  blueprintImg: "assets/samples/sample_auto_blueprint.jpg",
+                  blueprintLabel: "CAD DWG: AUTO-ADAS-SENSOR-1L2L",
                   buyers: ["Samvardhana Motherson", "Bosch India", "Uno Minda", "Tata Motors", "Mahindra"],
                   metrics: [
                     { val: "$45M~$65M", lbl: "Motherson Annual Import" },
@@ -1035,10 +1169,12 @@
                   detail: "Motherson imports $45M-$65M annually. Indo-Phoenix provides IATF 16949 automotive qualified bare boards with local testing."
                 },
                 {
-                  icon: "🛡️",
+                  iconSvg: `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>`,
                   tag: "DEFENSE OFFSET 5-7X",
                   title: "Aerospace & Defense Offset",
                   desc: "Mandatory 30%-50% DAP 2020 offset. Strict non-China sourcing requirement across drone & radar fleets.",
+                  blueprintImg: "assets/samples/sample_drone_blueprint.jpg",
+                  blueprintLabel: "CAD DWG: AERO-DRONE-HDI-RIGIDFLEX",
                   buyers: ["Raphe mPhibr ($145M Fund)", "ideaForge (50% Mkt)", "TASL", "Adani Defence", "ISRO"],
                   metrics: [
                     { val: "5~7x", lbl: "Higher Margin vs Comms" },
@@ -1057,28 +1193,28 @@
               defaultExplanation: "Promoter retains absolute equity and asset control (>90%), while technical team stakes careers on 90%+ production yield.",
               cards: [
                 {
-                  icon: "🤝",
+                  iconSvg: `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2"><path d="m11 17 2 2a1 1 0 0 0 1.4 0l6.6-6.6a1 1 0 0 0 0-1.4l-5-5a1 1 0 0 0-1.4 0L11 9"/><path d="m18 13-1.5-7.5L2 2l3.5 14.5L13 18"/></svg>`,
                   tag: "GOVERNANCE",
                   title: "5% Sweat Equity Alignment",
                   desc: "Core executives resign full-time under non-compete to co-found; equity strictly tied to 85%-95% ramp-up yield deliverables.",
                   detail: "Zero cash equity drain on promoter. Indian industrial family holds >90% absolute controlling interest with complete operational veto."
                 },
                 {
-                  icon: "🔑",
+                  iconSvg: `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2"><circle cx="7.5" cy="15.5" r="5.5"/><path d="m21 2-9.6 9.6"/><path d="m15.5 7.5 3 3L22 7l-3-3"/></svg>`,
                   tag: "SUPPLY CHAIN",
                   title: "Global Vendor-Code Access",
                   desc: "Leverages decades-long relations with DuPont, Taiflex, and Panasonic to secure controlled FCCL quotas and credit terms.",
                   detail: "Breaks international allocation barriers, securing tier-1 baseline pricing and eliminating 100% cash prepayment constraints."
                 },
                 {
-                  icon: "⚙️",
+                  iconSvg: `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>`,
                   tag: "COPY EXACTLY",
                   title: "Copy Exactly Process Transfer",
                   desc: "Direct blueprint replication of mature Taiwan DES, VCP, black-hole, and NiPdAu plating parameters to compress learning curves.",
                   detail: "Eliminates 2 years of trial-and-error yield losses common in greenfield Indian electronics setups."
                 },
                 {
-                  icon: "📜",
+                  iconSvg: `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>`,
                   tag: "QUALIFICATION",
                   title: "Turnkey Tier-1 Certifications",
                   desc: "Turnkey delivery of IATF 16949 (Auto), AS9100 (Aero), ISO 26262, and IPC Class 3 defense certifications.",
@@ -1417,9 +1553,72 @@
         },
         zh: {
           exitLanding: "返回落地頁",
+          agendaBtn: "快速目錄",
           btnPrev: "◄ 上一頁",
           btnNext: "下一頁 ►",
           slides: [
+            // Slide 00: 全息總覽與目錄導航
+            {
+              type: "agenda-master-visual",
+              tag: "商業路演總覽 / 四大幕劇導航地圖",
+              title: "Project Indo-Phoenix：戰略路演全息目錄",
+              desc: "印度首座高可靠度航太與國防 FPC 智慧製造樞紐之完整機構級路演架構。點選任一幕劇即可一鍵直達。",
+              acts: [
+                {
+                  actNum: "第一幕",
+                  targetSlide: 1,
+                  badge: "戰略機遇與剛需",
+                  pages: "簡報 01 – 03",
+                  title: "國家戰略真空與點名買家",
+                  desc: "破除 30% 自給率假象；搶佔 0% 裸板絕對真空、48小時極速打樣，手握下游巨頭數十億採購池。",
+                  subitems: [
+                    "01. 執行摘要與高階裸板 0% 絕對真空",
+                    "02. 痛點破局：48h 打樣 vs 3週海外斷鏈",
+                    "03. 三大剛需賽道與點名買家名冊"
+                  ]
+                },
+                {
+                  actNum: "第二幕",
+                  targetSlide: 4,
+                  badge: "技術壁壘與重工基建",
+                  pages: "簡報 04 – 06",
+                  title: "技術股護城河與 ZLD 環保特許",
+                  desc: "台灣團隊 5% 讓利對賭良率、印度大股東 >90% 絕對控股；Edge AI 閉環工廠與 3 倍 ZLD 零排放。",
+                  subitems: [
+                    "04. 5% Sweat Equity 讓利與 >90% 控股治理",
+                    "05. AI / ACC 閉環智慧工廠體系",
+                    "06. 13,000 m² 廠房基建與 SPCB 環評門檻"
+                  ]
+                },
+                {
+                  actNum: "第三幕",
+                  targetSlide: 7,
+                  badge: "神聖五大財務模型",
+                  pages: "簡報 07 – 11",
+                  title: "五大財務模型連鎖真理閉環",
+                  desc: "嚴密閉環數據真源：$28.8M 年營收、CapEx $23M、SPECS 25% 返還、單月 OpEx $1.845M 與 50.8% BEP。",
+                  subitems: [
+                    "07. 模組一：產能規劃與產品營收模型 ($28.8M)",
+                    "08. 模組二：13,000 m² 空間工程標準",
+                    "09. 模組三：CapEx $23M 與 SPECS 25% 補貼",
+                    "10. 模組四：單月 OpEx ($1.845M) 成本結構",
+                    "11. 模組五：獲利駕駛艙與 50.8% 損益平衡點"
+                  ]
+                },
+                {
+                  actNum: "第四幕",
+                  targetSlide: 12,
+                  badge: "放量里程碑與合作",
+                  pages: "簡報 12 – 13",
+                  title: "24 個月放量時程與 Data Room",
+                  desc: "嚴格階段關卡治理，T+12M 跨越損益平衡實現規模淨獲利；受邀進入投資人專屬資料室。",
+                  subitems: [
+                    "12. 24 個月階段性放量里程碑",
+                    "13. 策略合作方案與 Data Room 申請"
+                  ]
+                }
+              ]
+            },
             // Slide 01: 執行摘要
             {
               type: "hero-showcase",
@@ -1495,10 +1694,12 @@
               defaultExplanation: "下游巨頭為滿足政府國產化與 PLI 考核急需在地供應商，採購名單全部到位，我們是在挑選最高毛利的訂單。",
               cards: [
                 {
-                  icon: "🔋",
+                  iconSvg: `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2"><rect x="2" y="7" width="16" height="10" rx="2"/><path d="M22 11v2"/><path d="M6 11v2"/><path d="M10 11v2"/><path d="M14 11v2"/></svg>`,
                   tag: "新能源儲能 CCS",
                   title: "EV 與電池 Pack CCS 採樣軟板",
                   desc: "全面替代傳統笨重採樣銅線束，提供 500-1500mm 超長厚銅 (2-12oz) 軟板。",
+                  blueprintImg: "assets/samples/sample_ccs_blueprint.jpg",
+                  blueprintLabel: "CAD 工程圖：CCS-HEAVY-COPPER-FPC",
                   buyers: ["Tata AutoComp", "Waaree Energy", "Ola Electric", "Exide Energy", "Amara Raja"],
                   metrics: [
                     { val: "$25M~$35M", lbl: "TACO 單一巨頭進口額" },
@@ -1507,10 +1708,12 @@
                   detail: "單一巨頭 TACO 年進口達 $25M~$35M。超長厚銅（2~12oz）耐溫軟板（-40°C~+125°C）全印 90%+ 依賴進口。"
                 },
                 {
-                  icon: "🚗",
+                  iconSvg: `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2"><path d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9l-1.5 2.8C2.1 11.2 2 11.6 2 12v4c0 .6.4 1 1 1h2"/><circle cx="7" cy="17" r="2"/><circle cx="17" cy="17" r="2"/></svg>`,
                   tag: "車載 TIER-1",
                   title: "車載感測與 ADAS 車規級線束",
                   desc: "單車採用超 100 種 FPC。提供 IATF 16949 / AEC-Q 車規認證本土裸板與在地測試。",
+                  blueprintImg: "assets/samples/sample_auto_blueprint.jpg",
+                  blueprintLabel: "CAD 工程圖：AUTO-ADAS-SENSOR-1L2L",
                   buyers: ["Samvardhana Motherson", "Bosch India", "Uno Minda", "Tata Motors", "Mahindra"],
                   metrics: [
                     { val: "$45M~$65M", lbl: "Motherson 年進口額" },
@@ -1519,10 +1722,12 @@
                   detail: "Motherson 年進口 $45M~$65M。Indo-Phoenix 提供全套 IATF 16949 / AEC-Q 車規認證本土裸板。"
                 },
                 {
-                  icon: "🛡️",
+                  iconSvg: `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>`,
                   tag: "國防相抵 5~7倍暴利",
                   title: "航太與國防軍規相抵 (Offset)",
                   desc: "DAP 2020 強制 30%-50% 本地採購相抵。軍用無人機與相控陣雷達嚴格排斥中國零件。",
+                  blueprintImg: "assets/samples/sample_drone_blueprint.jpg",
+                  blueprintLabel: "CAD 工程圖：AERO-DRONE-HDI-RIGIDFLEX",
                   buyers: ["Raphe mPhibr (獲投1.45億)", "ideaForge (市佔50%)", "TASL", "Adani Defence", "ISRO"],
                   metrics: [
                     { val: "5~7 倍", lbl: "通訊產品超額利潤倍數" },
@@ -1541,28 +1746,28 @@
               defaultExplanation: "大股東持有超過 90% 股權與實體資產，技術團隊用職業生涯對賭 90%+ 良率，這是利益極致捆綁的最優合資治理架構。",
               cards: [
                 {
-                  icon: "🤝",
+                  iconSvg: `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2"><path d="m11 17 2 2a1 1 0 0 0 1.4 0l6.6-6.6a1 1 0 0 0 0-1.4l-5-5a1 1 0 0 0-1.4 0L11 9"/><path d="m18 13-1.5-7.5L2 2l3.5 14.5L13 18"/></svg>`,
                   tag: "股權架構",
                   title: "5% Sweat Equity 商業法理",
                   desc: "核心高管簽署競業禁止集體離職全職投入；讓利實業股東控股，將股權與 85%~95% 爬坡良率終身對賭。",
                   detail: "不拿現金、不搶控制權，印度實業家族持有合資公司 >90% 絕對控股權與資本主導權。"
                 },
                 {
-                  icon: "🔑",
+                  iconSvg: `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2"><circle cx="7.5" cy="15.5" r="5.5"/><path d="m21 2-9.6 9.6"/><path d="m15.5 7.5 3 3L22 7l-3-3"/></svg>`,
                   tag: "供應鏈通道",
                   title: "突破國際 Vendor Code 壁壘",
                   desc: "沿用杜邦 (DuPont)、台虹 (Taiflex)、松下 (Panasonic) 信任基礎，取得高階 FCCL/PI 配額與優惠帳期。",
                   detail: "突破新廠現金 100% 預付與原廠配額封鎖，保障戰略物料不缺料、不斷供。"
                 },
                 {
-                  icon: "⚙️",
+                  iconSvg: `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>`,
                   tag: "整廠移植",
                   title: "Copy Exactly 精確工藝複製",
                   desc: "成熟機台參數、DES/VCP/黑孔化/NiPdAu 化學藥水配方零偏差輸出，壓縮 2 年試錯期。",
                   detail: "將台灣前五大上市基地經過驗證的製程參數標準化導入，杜絕印度新廠土法摸索之巨額損失。"
                 },
                 {
-                  icon: "📜",
+                  iconSvg: `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>`,
                   tag: "接單硬實力",
                   title: "全套國際體系認證接單能力",
                   desc: "輔導一次性通過 IATF 16949（車規）、AS9100（航太）、ISO 26262 及 IPC Class 3 認證。",
@@ -1938,17 +2143,55 @@
       const slide = slides[currentSlide];
       const container = document.getElementById("slideContent");
       
+      const pageNumStr = currentSlide === 0 
+        ? (currentLang === "zh" ? "目錄導航" : "AGENDA") 
+        : `${currentSlide} / ${slides.length - 1}`;
+
       let html = `
         <div class="slide-meta">
           <div class="slide-tag">${slide.tag}</div>
-          <div class="slide-page-num">${currentSlide + 1} / ${slides.length}</div>
+          <div class="slide-page-num">${pageNumStr}</div>
         </div>
         <h1 class="slide-title gs-anim-title">${slide.title}</h1>
         <p class="slide-desc gs-anim-desc">${slide.desc}</p>
       `;
 
+      // 0. Master Roadshow Agenda Navigator (Slide 00)
+      if (slide.type === "agenda-master-visual") {
+        html += `
+          <div class="agenda-matrix-grid">
+            ${slide.acts.map((act, idx) => `
+              <div class="agenda-act-card gs-anim-card" onclick="jumpToSlide(${act.targetSlide})">
+                <div>
+                  <div class="agenda-act-head">
+                    <span class="agenda-act-badge">${act.actNum} · ${act.badge}</span>
+                    <span class="agenda-act-pages">${act.pages} ➔</span>
+                  </div>
+                  <div class="agenda-act-title">${act.title}</div>
+                  <div class="agenda-act-desc">${act.desc}</div>
+                </div>
+                <div class="agenda-act-subitems">
+                  ${act.subitems.map(sub => `
+                    <div class="agenda-subitem">
+                      <span class="agenda-subitem-dot"></span>
+                      <span>${sub}</span>
+                    </div>
+                  `).join("")}
+                </div>
+              </div>
+            `).join("")}
+          </div>
+
+          <div class="cockpit-floating-bar">
+            <div class="floating-bar-icon">🗺️</div>
+            <div class="floating-bar-text">
+              <strong>${currentLang === 'zh' ? '全息導航提示' : 'Executive Navigation'}:</strong> ${currentLang === 'zh' ? '點擊任一幕劇卡片可直接跳轉至對應核心章節；在任何頁面隨時點擊頂部「☰ 快速目錄」即可返回此頁。' : 'Click any Act card to jump directly to that module. Click [☰ AGENDA] in the top navigation at any time to return here.'}
+            </div>
+          </div>
+        `;
+      }
       // 1. Hero Showcase
-      if (slide.type === "hero-showcase") {
+      else if (slide.type === "hero-showcase") {
         html += `
           <div class="hero-metric-box">
             <div class="main-anchor-stat gs-anim-hero">
@@ -2150,11 +2393,18 @@
                    onmouseenter="selectGenericCard('featCard', ${idx}, '${c.detail.replace(/'/g, "\\'")}')">
                 <div>
                   <div class="feature-card-top">
-                    <div class="feature-card-icon">${c.icon}</div>
+                    <div class="feature-card-icon">${c.iconSvg ? c.iconSvg : (c.icon || '💎')}</div>
                     <div class="feature-card-tag">${c.tag}</div>
                   </div>
                   <div class="feature-card-title">${c.title}</div>
                   <div class="feature-card-desc">${c.desc}</div>
+
+                  ${c.blueprintImg ? `
+                    <div class="blueprint-thumb-box" title="Clean CAD Engineering Blueprint">
+                      <img class="blueprint-thumb-img" src="${c.blueprintImg}" alt="FPC Blueprint" loading="lazy" />
+                      <div class="blueprint-zoom-badge">${c.blueprintLabel || 'CAD BLUEPRINT'}</div>
+                    </div>
+                  ` : ''}
 
                   ${c.buyers ? `
                     <div class="buyer-pills-row">
@@ -2536,19 +2786,25 @@
       });
     }
 
-    function renderTimeline() {
-      const slides = getI18NDeck()[currentLang].slides;
-      const container = document.getElementById("timelineSteps");
-      container.innerHTML = slides.map((_, idx) => `
-        <div class="step-pill ${idx === currentSlide ? 'active' : ''}" onclick="goToSlide(${idx})"></div>
-      `).join("");
-    }
-
-    function goToSlide(idx) {
+    function jumpToSlide(idx) {
       if (idx === currentSlide || isTransitioning) return;
       slideDirection = idx > currentSlide ? "next" : "prev";
       currentSlide = idx;
       renderSlide(true);
+    }
+
+    function renderTimeline() {
+      const slides = getI18NDeck()[currentLang].slides;
+      const container = document.getElementById("timelineSteps");
+      container.innerHTML = slides.map((s, idx) => `
+        <div class="step-pill ${idx === currentSlide ? 'active' : ''}" 
+             title="${idx === 0 ? (currentLang === 'zh' ? '目錄總覽' : 'Agenda') : (currentLang === 'zh' ? `第 ${idx} 頁` : `Slide ${idx}`)}" 
+             onclick="goToSlide(${idx})"></div>
+      `).join("");
+    }
+
+    function goToSlide(idx) {
+      jumpToSlide(idx);
     }
     function nextSlide() {
       const slides = getI18NDeck()[currentLang].slides;
