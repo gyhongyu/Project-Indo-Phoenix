@@ -132,10 +132,13 @@
 ### [2026-08-29] [presentation] 熱修：renderSlide 樣板字面常數閉合殘缺致全站簡報白屏
 - **類型**: `BUGFIX`
 - **代碼錨點**: `presentation.html` L1455-1468（hero-showcase 區塊補回 subStats.map 閉合括號 `).join("")`）
+### [2026-08-29] [presentation / blueprint] 交付：13 頁旗艦商業路演 WebPPT 全息升級與四大 AI 文案融合
+- **類型**: `FEATURE`
+- **代碼錨點**: `PITCH_DECK_BLUEPRINT.md`（升級為 13 頁 SSOT 藍圖母稿）；`presentation.html`（擴展為 13 頁完整敘事架構，注入四大 AI 精華文案、新增 feature-cards-visual 渲染組件）
 - **核心事實 / 決策理由**:
-  - 根因：先前將全站表格圖表化時，不慎將 floating-bar 區塊錯誤插在 `subStats.map(` 內部，致使 `missing ) after argument list` 語法錯誤阻斷腳本解析，導致 `#slideContent` 初始空白。
-  - 修復：精確修復 template literal 閉合標籤，並透過 `node --check` 驗證全腳本 0 語法錯誤。
-  - DMC 經驗固化：凡修改大型單檔 HTML 內嵌 `<script>` 後，**必須一律強制執行 `node --check` 語法閘門防禦**，杜絕白屏迴歸。
-- **驗證**: `node --check` 通過；所有 10 頁版型渲染函數均已通過語法靜態檢測。
-- **狀態**: `✅ 修復完畢，待業主前台驗收`
+  - 角色靈魂定位：站在「印度高種姓愛國實業家 ✕ 國家補貼巨頭」視角，強調印度大股東 >90% 絕對控股、DVA 提升 35%+ 拿滿 PLI 增量補貼、國防相抵 (Offset) 5~7 倍超額利潤、台灣團隊 5% Sweat Equity 終身對賭良率。
+  - 完整 13 頁敘事矩陣：01 執行摘要 ➔ 02 痛點破局 ➔ 03 三大剛需買家 ➔ 04 技術股護城河 ➔ 05 Edge AI 智慧工廠 ➔ 06 廠房與 ZLD ➔ 07 模組一(產銷) ➔ 08 模組二(空間) ➔ 09 模組三(CapEx $23M) ➔ 10 模組四(OpEx $1.845M) ➔ 11 模組五(BEP 50.8%) ➔ 12 里程碑 ➔ 13 Data Room。
+  - 財務真值硬鎖定：五大財務模型數值（$28.8M、CapEx $23M、SPECS $5.75M、BEP 50.8%、IRR 24.8%）全數連動 SSOT。
+- **驗證**: `node --check` 通過；13 頁雙語版型與互動浮動說明條全數通過語法檢測。
+- **狀態**: `✅ 實體落盤完工，交付人類總監審閱`
 
