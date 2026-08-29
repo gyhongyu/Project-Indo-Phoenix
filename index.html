@@ -3,89 +3,254 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Project Indo-Phoenix — Template Selection</title>
+<title>Project Indo-Phoenix — Template Selection & Executive Pitch Deck</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Jost:wght@200;300;400&family=Cormorant+Garamond:ital,wght@0,300;1,300&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Jost:wght@200;300;400;500;600&family=Cormorant+Garamond:ital,wght@0,300;0,500;1,300&family=JetBrains+Mono:wght@300;400;600&family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-  :root { --bg: #0b0b0c; --ink: #ecebe6; --accent: #c9a96e; --muted: #85806f;
-          --ease: cubic-bezier(.16, 1, .3, 1); }
+  :root {
+    --bg: #09090b; --ink: #ecebe6; --accent: #c9a96e; --accent-glow: rgba(201,169,110,.25);
+    --muted: #8e8a7b; --line: rgba(201,169,110,.22); --ease: cubic-bezier(.16, 1, .3, 1);
+  }
   body {
     background:
-      radial-gradient(1200px 600px at 70% -10%, rgba(201,169,110,.08), transparent 60%),
+      radial-gradient(1200px 600px at 70% -10%, rgba(201,169,110,.09), transparent 60%),
+      radial-gradient(900px 500px at 20% 100%, rgba(79,209,197,.06), transparent 65%),
       var(--bg);
     color: var(--ink);
-    font-family: "Jost", system-ui, sans-serif;
+    font-family: "Jost", "Noto Sans TC", system-ui, sans-serif;
     min-height: 100vh; display: flex; flex-direction: column;
-    padding: clamp(32px, 6vh, 80px) clamp(24px, 7vw, 110px);
+    padding: clamp(24px, 5vh, 64px) clamp(24px, 6vw, 100px);
+    -webkit-font-smoothing: antialiased;
   }
+
+  /* Top Navigation with Lang Toggle */
+  .top-nav {
+    display: flex; align-items: center; justify-content: space-between;
+    margin-bottom: clamp(30px, 5vh, 60px);
+  }
+  .brand-logo {
+    font-size: 13px; letter-spacing: .4em; text-transform: uppercase;
+    color: var(--ink); text-decoration: none; font-weight: 400;
+  }
+  .brand-logo em { color: var(--accent); font-style: normal; }
+  .lang-btn {
+    border: 1px solid var(--accent); border-radius: 999px;
+    background: transparent; color: var(--accent);
+    font-family: inherit; font-size: 11px; letter-spacing: .2em;
+    padding: 7px 18px; cursor: pointer; transition: all .3s var(--ease);
+  }
+  .lang-btn:hover { background: var(--accent); color: var(--bg); }
+
+  /* Header Section */
   header .kicker {
-    font-size: 11px; letter-spacing: .44em; text-transform: uppercase;
+    font-family: "JetBrains Mono", monospace;
+    font-size: 11px; letter-spacing: .4em; text-transform: uppercase;
     color: var(--accent); display: block;
   }
   header h1 {
-    font-family: "Cormorant Garamond", Georgia, serif;
-    font-weight: 300; font-size: clamp(38px, 5vw, 72px);
-    margin-top: 20px; line-height: 1.05;
+    font-family: "Cormorant Garamond", Georgia, "Noto Sans TC", serif;
+    font-weight: 300; font-size: clamp(36px, 4.8vw, 68px);
+    margin-top: 14px; line-height: 1.06;
   }
-  header p.sub { color: var(--muted); margin-top: 16px; max-width: 560px; line-height: 1.7; font-weight: 200; }
+  header p.sub {
+    color: var(--muted); margin-top: 14px; max-width: 620px;
+    line-height: 1.7; font-weight: 300; font-size: 15px;
+  }
+
+  /* Presentation Master Banner Card */
+  .deck-banner-card {
+    margin-top: 32px;
+    background: linear-gradient(135deg, rgba(201,169,110,.14) 0%, rgba(20,20,26,.85) 100%);
+    border: 1px solid var(--accent);
+    border-radius: 6px; padding: 28px 32px;
+    display: flex; align-items: center; justify-content: space-between; gap: 24px;
+    text-decoration: none; color: inherit;
+    box-shadow: 0 16px 48px rgba(0,0,0,.5), 0 0 32px var(--accent-glow);
+    transition: transform .4s var(--ease), box-shadow .4s var(--ease), border-color .4s var(--ease);
+    position: relative; overflow: hidden;
+  }
+  .deck-banner-card:hover {
+    transform: translateY(-4px);
+    border-color: #fff;
+    box-shadow: 0 20px 56px rgba(0,0,0,.6), 0 0 44px var(--accent-glow);
+  }
+  .deck-banner-left { max-width: 760px; }
+  .deck-badge {
+    display: inline-block; font-family: "JetBrains Mono", monospace;
+    font-size: 10px; letter-spacing: .25em; text-transform: uppercase;
+    color: var(--accent); border: 1px solid var(--accent); padding: 3px 9px;
+    border-radius: 999px; margin-bottom: 12px;
+  }
+  .deck-banner-title {
+    font-family: "Cormorant Garamond", "Noto Sans TC", serif;
+    font-size: clamp(24px, 2.6vw, 34px); font-weight: 500; margin-bottom: 8px;
+    color: var(--ink);
+  }
+  .deck-banner-desc { font-size: 13.5px; color: var(--muted); line-height: 1.6; }
+  .deck-btn-enter {
+    background: var(--accent); color: var(--bg);
+    font-family: "JetBrains Mono", monospace; font-size: 12px; font-weight: 600;
+    letter-spacing: .2em; text-transform: uppercase; padding: 12px 24px;
+    border-radius: 999px; flex-shrink: 0; display: flex; align-items: center; gap: 8px;
+    transition: all .3s var(--ease);
+  }
+  .deck-banner-card:hover .deck-btn-enter {
+    background: #fff; color: #000; box-shadow: 0 0 20px rgba(255,255,255,.6);
+  }
+
+  /* Template Grids */
+  .grid-title {
+    font-family: "JetBrains Mono", monospace; font-size: 11px;
+    letter-spacing: .35em; text-transform: uppercase; color: var(--muted);
+    margin-top: 48px; margin-bottom: 18px;
+  }
   .grid {
     display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 22px; margin-top: clamp(40px, 7vh, 80px); flex: 1;
+    gap: 20px; flex: 1;
   }
   a.card {
     display: flex; flex-direction: column; text-decoration: none; color: inherit;
-    border: 1px solid rgba(201,169,110,.2);
-    padding: 34px 30px; min-height: 300px;
-    transition: transform .5s var(--ease), border-color .5s var(--ease), background .5s var(--ease);
-    background: rgba(255,255,255,.012);
+    border: 1px solid var(--line); border-radius: 4px;
+    padding: 30px 26px; min-height: 280px;
+    transition: transform .4s var(--ease), border-color .4s var(--ease), background .4s var(--ease);
+    background: rgba(255,255,255,.015);
   }
-  a.card:hover { transform: translateY(-8px); border-color: var(--accent); background: rgba(201,169,110,.05); }
-  .card .tag { font-size: 10px; letter-spacing: .3em; color: var(--accent); text-transform: uppercase; }
-  .card h2 { font-family: "Cormorant Garamond", serif; font-weight: 400; font-size: 30px; margin-top: 18px; }
-  .card .swatches { display: flex; gap: 8px; margin-top: 14px; }
-  .card .swatches i { width: 26px; height: 26px; border-radius: 50%; border: 1px solid rgba(255,255,255,.15); }
-  .card p { color: var(--muted); font-size: 13.5px; line-height: 1.75; margin-top: 18px; font-weight: 200; flex: 1; }
-  .card .open { margin-top: 24px; font-size: 11px; letter-spacing: .28em; text-transform: uppercase; color: var(--ink); opacity: .75; }
-  footer { margin-top: 48px; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px;
-           font-size: 11px; letter-spacing: .16em; text-transform: uppercase; color: var(--muted); }
+  a.card:hover { transform: translateY(-6px); border-color: var(--accent); background: rgba(201,169,110,.05); }
+  .card .tag { font-family: "JetBrains Mono", monospace; font-size: 10px; letter-spacing: .3em; color: var(--accent); text-transform: uppercase; }
+  .card h2 { font-family: "Cormorant Garamond", serif; font-weight: 400; font-size: 28px; margin-top: 14px; }
+  .card .swatches { display: flex; gap: 8px; margin-top: 12px; }
+  .card .swatches i { width: 22px; height: 22px; border-radius: 50%; border: 1px solid rgba(255,255,255,.15); }
+  .card p { color: var(--muted); font-size: 13px; line-height: 1.7; margin-top: 16px; font-weight: 300; flex: 1; }
+  .card .open {
+    margin-top: 20px; font-family: "JetBrains Mono", monospace;
+    font-size: 11px; letter-spacing: .25em; text-transform: uppercase;
+    color: var(--ink); opacity: .8; display: flex; align-items: center; gap: 6px;
+  }
+
+  footer {
+    margin-top: 48px; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px;
+    font-family: "JetBrains Mono", monospace; font-size: 11px; letter-spacing: .16em;
+    text-transform: uppercase; color: var(--muted); border-top: 1px solid rgba(255,255,255,.05);
+    padding-top: 24px;
+  }
 </style>
 </head>
 <body>
+  <!-- Top Nav -->
+  <div class="top-nav">
+    <a class="brand-logo" href="#">INDO<em>·</em>PHOENIX</a>
+    <button class="lang-btn" id="langToggleBtn" onclick="toggleIndexLang()">中文</button>
+  </div>
+
   <header>
-    <span class="kicker">Project Indo-Phoenix · Demo Templates</span>
-    <h1>Choose the direction.</h1>
-    <p class="sub">三個高端視覺方向的演示模板，皆為英文預設、可切換繁體中文（右上角按鈕）。數據全部來自可行性數據表 Module 1–5。挑選後再擴展為完整正式站。</p>
+    <span class="kicker" id="idxKicker">Strategic Aerospace &amp; Defense FPC Hub</span>
+    <h1 id="idxTitle">Choose the Direction.</h1>
+    <p class="sub" id="idxSub">三個高端視覺方向的演示落地頁，皆為英文預設、可切換繁體中文（右上角按鈕）。各模板內部均內建專屬全息 WebPPT 商業計劃演示。挑選後直接轉發對應客戶。</p>
   </header>
 
+  <!-- Template Grids -->
+  <div class="grid-title" id="idxGridTitle">Choose an Investor Landing Page Template</div>
   <main class="grid">
-    <a class="card" href="template-a.html">
+    <a class="card" id="cardA" href="template-a.html">
       <span class="tag">Template A</span>
       <h2>OBSIDIAN</h2>
       <div class="swatches"><i style="background:#0a0a0b"></i><i style="background:#c9a96e"></i><i style="background:#ecebe6"></i></div>
-      <p>Editorial black &amp; champagne-gold. Raw-WebGL silk shader, serif oversized type. Rolls-Royce × Aman — for sovereign funds &amp; family offices.</p>
-      <span class="open">Open →</span>
+      <p id="cardADesc">Editorial black &amp; champagne-gold. Raw-WebGL silk shader, serif oversized type. Rolls-Royce × Aman — for sovereign funds &amp; family offices.</p>
+      <span class="open" id="cardAOpen">Enter Template A →</span>
     </a>
-    <a class="card" href="template-b.html">
+    <a class="card" id="cardB" href="template-b.html">
       <span class="tag">Template B</span>
       <h2>MISSION CONTROL</h2>
       <div class="swatches"><i style="background:#050a14"></i><i style="background:#4fd1c5"></i><i style="background:#c9a96e"></i></div>
-      <p>Aerospace HUD console. Three.js particle planet &amp; orbital ring, scanlines, corner-bracket telemetry cards. SpaceX × Anduril — defense-tech aura.</p>
-      <span class="open">Open →</span>
+      <p id="cardBDesc">Aerospace HUD console. Three.js particle planet &amp; orbital ring, scanlines, corner-bracket telemetry cards. SpaceX × Anduril — defense-tech aura.</p>
+      <span class="open" id="cardBOpen">Enter Template B →</span>
     </a>
-    <a class="card" href="template-c.html">
+    <a class="card" id="cardC" href="template-c.html">
       <span class="tag">Template C</span>
       <h2>HOLOGRAM</h2>
       <div class="swatches"><i style="background:#06070b"></i><i style="background:#35e0ff"></i><i style="background:#8b7bff"></i></div>
-      <p>Sci-fi hologram lab. Three.js point-cloud morphs between drone, AI glasses, smartphone and robot arm with scanline sweep. Deep-tech lab aura — made for robotics &amp; smart-device investors.</p>
-      <span class="open">Open →</span>
+      <p id="cardCDesc">Sci-fi hologram lab. Three.js point-cloud morphs between drone, AI glasses, smartphone and robot arm with scanline sweep. Deep-tech aura.</p>
+      <span class="open" id="cardCOpen">Enter Template C →</span>
     </a>
   </main>
 
   <footer>
     <span>© 2026 Project Indo-Phoenix · Confidential investor material</span>
-    <span>Data source: FPC Factory Model (Modules 1–5)</span>
+    <span>Data source: Live Google Sheet (FPC Factory Model)</span>
   </footer>
+
+  <!-- Dedicated Independent Dual-Language Script for Index Portal (Zero Cloud Requirement) -->
+  <script>
+    const INDEX_I18N = {
+      en: {
+        toggleBtn: "中文",
+        kicker: "Strategic Aerospace & Defense FPC Hub",
+        title: "Project Indo-Phoenix Portal",
+        sub: "India's first end-to-end smart manufacturing facility for high-end aerospace & defense FPCs. Explore the executive pitch deck and 3 bespoke investor landing templates.",
+        deckBadge: "★ Master Presentation",
+        deckTitle: "Executive Investor WebPPT Deck",
+        deckDesc: "Immersive 3D origami stage transitions, live dynamic financial model (directly driven by Google Sheet SSOT), and full 10-slide feasibility pitch deck.",
+        deckBtn: "Launch Deck →",
+        gridTitle: "Or Explore Landing Page Templates",
+        cardADesc: "Editorial black & champagne-gold. Raw-WebGL silk shader, serif oversized type. Rolls-Royce × Aman style — crafted for sovereign funds and family offices.",
+        cardAOpen: "Enter Template A →",
+        cardBDesc: "Aerospace HUD console. Three.js particle planet & orbital ring, scanlines, telemetry cards. SpaceX × Anduril style — defense-tech authority.",
+        cardBOpen: "Enter Template B →",
+        cardCDesc: "Sci-fi hologram lab. Procedural 3D point-cloud morphs between drone, AI glasses, and robot arm. Deep-tech aura for smart device investors.",
+        cardCOpen: "Enter Template C →"
+      },
+      zh: {
+        toggleBtn: "EN",
+        kicker: "印度戰略性航太與國防 FPC 樞紐",
+        title: "印度鳳凰計畫 · 入口總覽",
+        sub: "印度首座高階航太與國防 FPC 軟板智慧製造工廠。為全球頂級投資機構打造，具備全動態商業計劃演示 WebPPT 與 3 套奢華演示落地頁。",
+        deckBadge: "★ 商業計劃演示總綱",
+        deckTitle: "投資人商業計劃 WebPPT 演示",
+        deckDesc: "沉浸式 3D 空間折疊轉場、全動態財務模型（實時直連 Google Sheet 數據真源）、完整 10 頁深度投資分析報告。",
+        deckBtn: "進入商業計劃 PPT →",
+        gridTitle: "或進入三套主題落地頁",
+        cardADesc: "黑金奢華編輯風格。原生 WebGL 絲綢流動 Shader，襯線尊榮排版。勞斯萊斯 × 安縵酒店質感——獻給主權基金與家族辦公室。",
+        cardAOpen: "進入模板 A →",
+        cardBDesc: "航太 HUD 任務控制台。Three.js 粒子星球與軌道光環，遙測數據儀表。SpaceX × Anduril 權威國防科技感。",
+        cardBOpen: "進入模板 B →",
+        cardCDesc: "科幻全息實驗室。無人機、AI 眼鏡與機器手臂 3D 點雲動態變換。前沿深科技風——專為智慧硬體投資人打造。",
+        cardCOpen: "進入模板 C →"
+      }
+    };
+
+    let idxLang = localStorage.getItem("ipx-lang") || "en";
+
+    function applyIndexLang(l) {
+      idxLang = l;
+      localStorage.setItem("ipx-lang", l);
+      const dict = INDEX_I18N[l];
+
+      document.getElementById("langToggleBtn").textContent = dict.toggleBtn;
+      document.getElementById("idxKicker").textContent = dict.kicker;
+      document.getElementById("idxTitle").textContent = dict.title;
+      document.getElementById("idxSub").textContent = dict.sub;
+      document.getElementById("idxGridTitle").textContent = dict.gridTitle;
+      document.getElementById("cardADesc").textContent = dict.cardADesc;
+      document.getElementById("cardAOpen").textContent = dict.cardAOpen;
+      document.getElementById("cardBDesc").textContent = dict.cardBDesc;
+      document.getElementById("cardBOpen").textContent = dict.cardBOpen;
+      document.getElementById("cardCDesc").textContent = dict.cardCDesc;
+      document.getElementById("cardCOpen").textContent = dict.cardCOpen;
+
+      // Update link parameters
+      document.getElementById("cardA").href = `template-a.html`;
+      document.getElementById("cardB").href = `template-b.html`;
+      document.getElementById("cardC").href = `template-c.html`;
+    }
+
+    function toggleIndexLang() {
+      applyIndexLang(idxLang === "en" ? "zh" : "en");
+    }
+
+    // Init
+    applyIndexLang(idxLang);
+  </script>
 </body>
 </html>

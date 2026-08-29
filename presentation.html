@@ -1,0 +1,1309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Project Indo-Phoenix — Executive Investor Presentation (WebPPT)</title>
+  
+  <!-- Premium Typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:ital,wght@0,300;0,400;0,600;0,700;1,400&family=Cormorant+Garamond:ital,wght@0,300;0,500;0,600;1,300&family=JetBrains+Mono:ital,wght@0,300;0,400;0,600;0,700;1,400&family=Jost:wght@200;300;400;500;600;700&family=Noto+Sans+TC:wght@300;400;500;700&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="assets/css/base.css">
+  
+  <style>
+    /* ═══════════════════════════════════════════════════════════════
+       THEME PALETTES & ADVANCED CSS VARIABLES
+       ═══════════════════════════════════════════════════════════════ */
+    body[data-template="a"] {
+      --bg: #09090b;
+      --bg-card: rgba(16, 16, 20, 0.22);
+      --bg-card-hover: rgba(201, 169, 110, 0.12);
+      --ink: #ecebe6;
+      --ink-sub: #a8a294;
+      --accent: #c9a96e;
+      --accent-glow: rgba(201, 169, 110, 0.35);
+      --accent-light: #f2e2c2;
+      --line: rgba(201, 169, 110, 0.32);
+      --line-subtle: rgba(201, 169, 110, 0.16);
+      --font-display: "Cormorant Garamond", Georgia, "Noto Sans TC", serif;
+      --font-body: "Jost", "Noto Sans TC", system-ui, sans-serif;
+      --font-mono: "JetBrains Mono", monospace;
+      --tag-radius: 999px;
+      --card-radius: 8px;
+    }
+    
+    body[data-template="b"] {
+      --bg: #040813;
+      --bg-card: rgba(6, 16, 32, 0.25);
+      --bg-card-hover: rgba(79, 209, 197, 0.14);
+      --ink: #dce7f0;
+      --ink-sub: #829ab1;
+      --accent: #4fd1c5;
+      --accent-glow: rgba(79, 209, 197, 0.38);
+      --accent-light: #a7f3d0;
+      --line: rgba(79, 209, 197, 0.35);
+      --line-subtle: rgba(79, 209, 197, 0.16);
+      --font-display: "Space Grotesk", "Noto Sans TC", sans-serif;
+      --font-body: "Space Grotesk", "Noto Sans TC", system-ui, sans-serif;
+      --font-mono: "JetBrains Mono", monospace;
+      --tag-radius: 3px;
+      --card-radius: 3px;
+    }
+    
+    body[data-template="c"] {
+      --bg: #06070c;
+      --bg-card: rgba(10, 13, 24, 0.25);
+      --bg-card-hover: rgba(53, 224, 255, 0.14);
+      --ink: #eaf6ff;
+      --ink-sub: #7a8fa6;
+      --accent: #35e0ff;
+      --accent-glow: rgba(53, 224, 255, 0.4);
+      --accent-light: #c084fc;
+      --line: rgba(94, 214, 255, 0.32);
+      --line-subtle: rgba(139, 123, 255, 0.2);
+      --font-display: "Chakra Petch", "Noto Sans TC", sans-serif;
+      --font-body: "Chakra Petch", "Noto Sans TC", system-ui, sans-serif;
+      --font-mono: "JetBrains Mono", monospace;
+      --tag-radius: 4px;
+      --card-radius: 4px;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--ink);
+      font-family: var(--font-body);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      overflow-x: hidden;
+      perspective: 1400px;
+      -webkit-font-smoothing: antialiased;
+      transition: background 0.6s var(--ease);
+    }
+
+    #bg-canvas { position: fixed; inset: 0; width: 100%; height: 100%; z-index: -2; }
+    #fx-canvas { position: fixed; inset: 0; width: 100%; height: 100%; z-index: 1; pointer-events: none; }
+    .grain {
+      position: fixed; inset: 0; z-index: 3; pointer-events: none; opacity: .055;
+      background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="240" height="240"><filter id="n"><feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="2" stitchTiles="stitch"/></filter><rect width="100%" height="100%" filter="url(%23n)"/></svg>');
+    }
+
+    /* ═══════════════════════════════════════════════════════════════
+       TOP CONTROL BAR & COCKPIT NAVIGATION
+       ═══════════════════════════════════════════════════════════════ */
+    .deck-topbar {
+      position: relative; z-index: 30;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 14px clamp(20px, 4vw, 56px);
+      border-bottom: 1px solid var(--line-subtle);
+      background: rgba(8, 9, 13, 0.75);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+    }
+    .brand-group { display: flex; align-items: center; gap: 14px; }
+    .brand-title {
+      font-family: var(--font-display);
+      font-size: 19px; letter-spacing: 0.18em; text-transform: uppercase;
+      font-weight: 400; text-decoration: none; color: var(--ink);
+    }
+    .brand-title em { color: var(--accent); font-style: normal; font-weight: 600; }
+    .btn-exit-landing {
+      font-family: var(--font-mono); font-size: 10.5px; letter-spacing: 0.15em;
+      text-transform: uppercase; text-decoration: none; color: var(--ink-sub);
+      border: 1px solid var(--line-subtle); padding: 4px 12px;
+      border-radius: var(--tag-radius); transition: all 0.3s var(--ease);
+      display: flex; align-items: center; gap: 6px;
+    }
+    .btn-exit-landing:hover {
+      color: var(--ink); border-color: var(--accent);
+      background: rgba(255,255,255,0.04);
+    }
+    
+    .deck-controls { display: flex; align-items: center; gap: 14px; }
+    .control-group {
+      display: flex; align-items: center; gap: 4px;
+      background: rgba(255,255,255,0.03);
+      padding: 3px; border-radius: 999px;
+      border: 1px solid var(--line-subtle);
+    }
+    .btn-ctrl {
+      background: transparent; border: none; color: var(--ink-sub);
+      font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.1em;
+      padding: 5px 12px; border-radius: 999px; cursor: pointer;
+      transition: all 0.3s var(--ease);
+    }
+    .btn-ctrl:hover { color: var(--ink); }
+    .btn-ctrl.active {
+      background: var(--accent); color: var(--bg); font-weight: 600;
+      box-shadow: 0 0 14px var(--accent-glow);
+    }
+
+    /* ═══════════════════════════════════════════════════════════════
+       STAGE & 3D HOLOGRAPHIC STAGE CONTAINER
+       ═══════════════════════════════════════════════════════════════ */
+    .deck-stage {
+      position: relative; z-index: 10;
+      flex: 1; display: flex; align-items: center; justify-content: center;
+      padding: clamp(16px, 2.5vh, 40px) clamp(20px, 4vw, 56px);
+      perspective: 1600px;
+    }
+    .slide-wrapper {
+      width: 100%; max-width: 1320px; min-height: 640px;
+      background: var(--bg-card);
+      border: 1px solid var(--line);
+      border-radius: var(--card-radius);
+      box-shadow: 0 24px 80px rgba(0, 0, 0, 0.45), 0 0 36px var(--accent-glow);
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
+      display: flex; flex-direction: column; justify-content: space-between;
+      padding: clamp(28px, 3.6vw, 48px);
+      position: relative;
+      overflow: hidden;
+      transform-style: preserve-3d;
+      transition: border-color 0.4s var(--ease), box-shadow 0.4s var(--ease);
+    }
+
+    /* Corner Sci-Fi Tech Notches */
+    body[data-template="b"] .slide-wrapper::before,
+    body[data-template="b"] .slide-wrapper::after,
+    body[data-template="c"] .slide-wrapper::before,
+    body[data-template="c"] .slide-wrapper::after {
+      content: ""; position: absolute; width: 16px; height: 16px;
+      border-color: var(--accent); border-style: solid; pointer-events: none;
+    }
+    body[data-template="b"] .slide-wrapper::before,
+    body[data-template="c"] .slide-wrapper::before {
+      top: 8px; left: 8px; border-width: 2px 0 0 2px;
+    }
+    body[data-template="b"] .slide-wrapper::after,
+    body[data-template="c"] .slide-wrapper::after {
+      bottom: 8px; right: 8px; border-width: 0 2px 2px 0;
+    }
+
+    /* Laser Scanner Beam sweep across stage */
+    .scan-beam {
+      position: absolute; top: 0; left: -100%; width: 60%; height: 100%;
+      background: linear-gradient(90deg, transparent, var(--accent-glow), transparent);
+      pointer-events: none; z-index: 50; opacity: 0;
+      transform: skewX(-25deg);
+    }
+
+    /* Slide Header */
+    .slide-meta {
+      display: flex; align-items: center; justify-content: space-between;
+      margin-bottom: 16px;
+    }
+    .slide-tag {
+      font-family: var(--font-mono); font-size: 11px;
+      letter-spacing: 0.3em; text-transform: uppercase; color: var(--accent);
+      display: flex; align-items: center; gap: 8px;
+    }
+    .slide-tag::before {
+      content: ""; display: inline-block; width: 7px; height: 7px;
+      border-radius: 50%; background: var(--accent);
+      box-shadow: 0 0 10px var(--accent);
+      animation: pulseDot 2s infinite ease-in-out;
+    }
+    @keyframes pulseDot {
+      0%, 100% { transform: scale(1); opacity: 0.8; }
+      50% { transform: scale(1.4); opacity: 1; box-shadow: 0 0 14px var(--accent); }
+    }
+    .slide-page-num {
+      font-family: var(--font-mono); font-size: 12px; color: var(--ink-sub);
+      background: rgba(255,255,255,0.03); padding: 4px 10px;
+      border-radius: var(--tag-radius); border: 1px solid var(--line-subtle);
+    }
+
+    .slide-title {
+      font-family: var(--font-display);
+      font-size: clamp(30px, 3.6vw, 46px);
+      font-weight: 400; line-height: 1.1;
+      letter-spacing: -0.01em; margin-bottom: 10px;
+      color: var(--ink);
+    }
+    .slide-desc {
+      font-size: clamp(13.5px, 1.15vw, 16px);
+      color: var(--ink-sub); line-height: 1.6; max-width: 980px;
+      margin-bottom: 24px;
+    }
+
+    /* ═══════════════════════════════════════════════════════════════
+       COMPONENT SYSTEM: HERO, TABLES, MATRICES, GAUGES & TIMELINES
+       ═══════════════════════════════════════════════════════════════ */
+    
+    /* 1. Hero Showcase (Slide 1 & Slide 8) */
+    .hero-metric-box {
+      display: grid; grid-template-columns: 1.2fr 2fr; gap: 20px;
+      align-items: stretch; margin-bottom: 16px;
+    }
+    .main-anchor-stat {
+      background: linear-gradient(135deg, rgba(255,255,255,0.04) 0%, rgba(0,0,0,0.4) 100%);
+      border: 1px solid var(--accent);
+      border-radius: var(--card-radius);
+      padding: 28px 24px;
+      display: flex; flex-direction: column; justify-content: center;
+      box-shadow: 0 12px 36px var(--accent-glow);
+      position: relative; overflow: hidden;
+    }
+    .main-anchor-stat::after {
+      content: ""; position: absolute; inset: 0;
+      background: radial-gradient(circle at top right, var(--accent-glow), transparent 70%);
+      pointer-events: none;
+    }
+    .main-stat-label {
+      font-family: var(--font-mono); font-size: 11.5px;
+      letter-spacing: 0.25em; text-transform: uppercase; color: var(--ink-sub);
+      margin-bottom: 10px;
+    }
+    .main-stat-num {
+      font-family: var(--font-display); font-size: clamp(44px, 4.4vw, 70px);
+      color: var(--accent); font-weight: 600; line-height: 1; margin-bottom: 10px;
+    }
+    .main-stat-desc { font-size: 13px; color: var(--ink-sub); line-height: 1.5; }
+
+    .sub-stat-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 14px;
+    }
+
+    /* 2. Precision Data Table (Slide 2 Product Mix, Slide 4 Space Allocation) */
+    .deck-table-wrap {
+      width: 100%; border: 1px solid var(--line-subtle);
+      border-radius: var(--card-radius); overflow: hidden;
+      background: rgba(10, 15, 25, 0.15); margin-bottom: 16px;
+    }
+    .deck-table {
+      width: 100%; border-collapse: collapse; text-align: left;
+      font-size: 13px;
+    }
+    .deck-table th {
+      background: rgba(255,255,255,0.03); color: var(--accent);
+      font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.15em;
+      text-transform: uppercase; padding: 12px 16px; border-bottom: 1px solid var(--line-subtle);
+    }
+    .deck-table td {
+      padding: 12px 16px; border-bottom: 1px solid rgba(255,255,255,0.04);
+      color: var(--ink-sub); line-height: 1.4;
+    }
+    .deck-table tr:hover td { background: var(--bg-card-hover); color: var(--ink); }
+    .deck-table td.strong { color: var(--ink); font-weight: 500; font-family: var(--font-mono); }
+    .deck-table td.accent { color: var(--accent); font-weight: 600; font-family: var(--font-mono); }
+
+    /* 3. VS Matrix (Slide 3 Market Gap) */
+    .vs-matrix {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 16px;
+    }
+    .vs-col {
+      border-radius: var(--card-radius); padding: 22px;
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid var(--line-subtle);
+      transition: all 0.3s var(--ease);
+    }
+    .vs-col.bad { border-left: 4px solid #ef4444; }
+    .vs-col.good {
+      border-left: 4px solid var(--accent);
+      background: linear-gradient(135deg, rgba(79, 209, 197, 0.05) 0%, rgba(0,0,0,0.3) 100%);
+      box-shadow: 0 8px 32px var(--accent-glow);
+    }
+    .vs-header {
+      font-family: var(--font-mono); font-size: 12px; font-weight: 600;
+      letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 14px;
+    }
+    .vs-list { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+    .vs-item {
+      display: flex; align-items: flex-start; gap: 10px;
+      font-size: 13px; line-height: 1.45; color: var(--ink-sub);
+    }
+    .vs-item strong { color: var(--ink); font-weight: 500; }
+    .vs-badge {
+      font-family: var(--font-mono); font-size: 10.5px; padding: 2px 7px;
+      border-radius: var(--tag-radius); flex-shrink: 0; font-weight: 600;
+    }
+    .badge-bad { background: rgba(239, 68, 68, 0.15); color: #f87171; border: 1px solid rgba(239,68,68,0.3); }
+    .badge-good { background: var(--accent-glow); color: var(--accent); border: 1px solid var(--accent); }
+
+    /* 4. CapEx & OpEx Waterfall Bars (Slide 5 & Slide 6) */
+    .capex-waterfall {
+      display: flex; flex-direction: column; gap: 14px; margin-bottom: 16px;
+    }
+    .waterfall-bar-group { display: flex; flex-direction: column; gap: 5px; }
+    .bar-meta {
+      display: flex; justify-content: space-between; font-family: var(--font-mono);
+      font-size: 11.5px; color: var(--ink-sub);
+    }
+    .bar-meta strong { color: var(--ink); }
+    .bar-track {
+      width: 100%; height: 14px; background: rgba(255,255,255,0.04);
+      border-radius: 999px; overflow: hidden; border: 1px solid var(--line-subtle);
+      position: relative;
+    }
+    .bar-fill {
+      height: 100%; border-radius: 999px; width: 0%;
+      background: var(--accent);
+      box-shadow: 0 0 14px var(--accent-glow);
+      transition: width 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .bar-fill.subsidy {
+      background: linear-gradient(90deg, #10b981, #34d399);
+      box-shadow: 0 0 14px rgba(16, 185, 129, 0.4);
+    }
+    .bar-fill.net {
+      background: linear-gradient(90deg, var(--accent), var(--accent-light));
+    }
+
+    /* 5. BEP Meter Gauge Cockpit (Slide 7) */
+    .bep-cockpit {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 24px; align-items: center;
+      margin-bottom: 16px;
+    }
+    .gauge-container {
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      background: rgba(255,255,255,0.02); border: 1px solid var(--line-subtle);
+      border-radius: var(--card-radius); padding: 24px;
+    }
+    .gauge-circle {
+      position: relative; width: 170px; height: 85px; overflow: hidden;
+      display: flex; align-items: flex-end; justify-content: center;
+    }
+    .gauge-arc {
+      width: 170px; height: 170px; border-radius: 50%;
+      border: 14px solid rgba(255,255,255,0.05);
+      border-top-color: var(--accent); border-left-color: var(--accent);
+      position: absolute; top: 0; left: 0;
+      transform: rotate(-45deg);
+      box-shadow: 0 0 24px var(--accent-glow);
+      transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .gauge-value {
+      font-family: var(--font-display); font-size: 36px; font-weight: 600;
+      color: var(--accent); line-height: 1; z-index: 2; margin-bottom: 4px;
+    }
+    .gauge-label {
+      font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.2em;
+      text-transform: uppercase; color: var(--ink-sub); margin-top: 12px;
+    }
+
+    /* 6. Multi-Step Flow Pipeline & Roadmap Timeline (Slide 8 & Slide 9) */
+    .flow-pipeline {
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px;
+      margin-bottom: 16px;
+    }
+    .flow-card {
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid var(--line-subtle);
+      border-radius: var(--card-radius); padding: 20px 16px;
+      position: relative; transition: all 0.3s var(--ease);
+    }
+    .flow-card:hover {
+      background: var(--bg-card-hover); border-color: var(--accent);
+      transform: translateY(-4px); box-shadow: 0 10px 30px var(--accent-glow);
+    }
+    .flow-step-num {
+      font-family: var(--font-mono); font-size: 22px; font-weight: 700;
+      color: var(--accent); line-height: 1; margin-bottom: 10px; opacity: 0.85;
+    }
+    .flow-title { font-size: 14px; font-weight: 600; margin-bottom: 6px; color: var(--ink); }
+    .flow-desc { font-size: 12px; color: var(--ink-sub); line-height: 1.45; }
+
+    /* 7. Action Hub Call-To-Action Box (Slide 10) */
+    .cta-hub-box {
+      background: linear-gradient(135deg, rgba(201,169,110,.12) 0%, rgba(20,20,28,.8) 100%);
+      border: 1px solid var(--accent); border-radius: var(--card-radius);
+      padding: 32px; display: flex; flex-direction: column; align-items: center;
+      text-align: center; box-shadow: 0 16px 48px var(--accent-glow);
+      margin-bottom: 16px;
+    }
+    .cta-hub-title { font-family: var(--font-display); font-size: 32px; color: var(--ink); margin-bottom: 12px; }
+    .cta-hub-desc { font-size: 15px; color: var(--ink-sub); max-width: 680px; line-height: 1.6; margin-bottom: 24px; }
+    .cta-btn-group { display: flex; gap: 16px; }
+    .btn-cta-primary {
+      background: var(--accent); color: var(--bg); font-family: var(--font-mono);
+      font-size: 12px; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase;
+      padding: 12px 28px; border-radius: var(--tag-radius); border: none; cursor: pointer;
+      box-shadow: 0 0 20px var(--accent-glow); transition: all 0.3s var(--ease);
+      text-decoration: none;
+    }
+    .btn-cta-primary:hover { background: #fff; color: #000; box-shadow: 0 0 28px rgba(255,255,255,0.7); }
+
+    /* Generic Card */
+    .stat-card {
+      background: rgba(10, 15, 25, 0.18);
+      border: 1px solid var(--line-subtle);
+      border-radius: var(--card-radius);
+      padding: 20px; transition: all 0.3s var(--ease);
+      display: flex; flex-direction: column; justify-content: space-between;
+    }
+    .stat-card:hover {
+      background: var(--bg-card-hover); border-color: var(--accent);
+      transform: translateY(-3px); box-shadow: 0 8px 24px var(--accent-glow);
+    }
+    .stat-card-label {
+      font-family: var(--font-mono); font-size: 11px;
+      letter-spacing: 0.2em; text-transform: uppercase; color: var(--ink-sub);
+      margin-bottom: 8px;
+    }
+    .stat-card-value {
+      font-family: var(--font-display); font-size: clamp(28px, 2.6vw, 38px);
+      font-weight: 500; color: var(--accent); line-height: 1.0; margin-bottom: 8px;
+      display: flex; align-items: baseline;
+    }
+    .stat-card-unit {
+      font-size: 13px; font-weight: 300; color: var(--ink-sub); margin-left: 6px;
+      font-family: var(--font-body);
+    }
+    .stat-card-desc { font-size: 12px; color: var(--ink-sub); line-height: 1.45; }
+
+    /* ═══════════════════════════════════════════════════════════════
+       DECK NAVIGATION FOOTER
+       ═══════════════════════════════════════════════════════════════ */
+    .deck-footer {
+      position: relative; z-index: 30;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 14px clamp(20px, 4vw, 56px);
+      background: rgba(8, 9, 13, 0.85);
+      border-top: 1px solid var(--line-subtle);
+      backdrop-filter: blur(12px);
+    }
+    .timeline-steps { display: flex; align-items: center; gap: 8px; }
+    .step-pill {
+      height: 4px; border-radius: 2px;
+      background: var(--line-subtle); width: 26px;
+      transition: all 0.4s var(--ease); cursor: pointer;
+    }
+    .step-pill.active {
+      background: var(--accent); width: 52px;
+      box-shadow: 0 0 12px var(--accent-glow);
+    }
+    .nav-actions { display: flex; align-items: center; gap: 12px; }
+    .btn-nav {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--line);
+      color: var(--ink);
+      font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.15em;
+      padding: 8px 18px; border-radius: var(--tag-radius);
+      cursor: pointer; transition: all 0.3s var(--ease);
+    }
+    .btn-nav:hover {
+      background: var(--accent); color: var(--bg);
+      box-shadow: 0 0 16px var(--accent-glow);
+    }
+  </style>
+</head>
+<body data-template="a">
+  <canvas id="bg-canvas"></canvas>
+  <canvas id="fx-canvas"></canvas>
+  <div class="grain"></div>
+
+  <!-- Top Control Bar -->
+  <header class="deck-topbar">
+    <div class="brand-group">
+      <a class="brand-title" href="index.html">INDO<em>·</em>PHOENIX</a>
+      <a class="btn-exit-landing" id="btnExitLanding" href="template-a.html">✕ <span data-i18n="exitLanding">Landing Page</span></a>
+    </div>
+
+    <div class="deck-controls">
+      <!-- Bilingual Language Toggle (Preserves active theme) -->
+      <div class="control-group">
+        <button class="btn-ctrl active" id="btn-lang-en" onclick="setLang('en')">EN</button>
+        <button class="btn-ctrl" id="btn-lang-zh" onclick="setLang('zh')">繁中</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Presentation Stage Area -->
+  <main class="deck-stage">
+    <div class="slide-wrapper" id="slideWrapper">
+      <div class="scan-beam" id="scanBeam"></div>
+      
+      <!-- Dynamic Slide Content (10 Distinct Archetypes) -->
+      <div id="slideContent"></div>
+    </div>
+  </main>
+
+  <!-- Deck Navigation Footer -->
+  <footer class="deck-footer">
+    <div class="timeline-steps" id="timelineSteps"></div>
+    <div class="nav-actions">
+      <button class="btn-nav" onclick="prevSlide()" data-i18n="btnPrev">◄ PREV</button>
+      <button class="btn-nav" onclick="nextSlide()" data-i18n="btnNext">NEXT ►</button>
+    </div>
+  </footer>
+
+  <!-- Core Libraries -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="assets/js/data.js"></script>
+  <script src="assets/js/content-engine.js"></script>
+  <script src="assets/js/app.js"></script>
+
+  <!-- Dynamic SSOT Presentation Deck Engine -->
+  <script>
+    // SSOT Data Accessor
+    function getLiveStat(key, fallback) {
+      if (window.IPX_DATA && window.IPX_DATA.stats && window.IPX_DATA.stats[key] !== undefined) {
+        return window.IPX_DATA.stats[key];
+      }
+      return fallback;
+    }
+
+    function getI18NDeck() {
+      const revAnnual = (getLiveStat("annualRevenue", 28800000) / 1000000).toFixed(1);
+      const capMonthly = Number(getLiveStat("capacityMonthlyM2", 15000)).toLocaleString();
+      const capAnnual = Number(getLiveStat("annualVolumeM2", 180000)).toLocaleString();
+      const weightedPrice = getLiveStat("weightedPrice", 160);
+      const netCapEx = (getLiveStat("netCapex", 17250000) / 1000000).toFixed(2);
+      const totCapEx = (getLiveStat("totalCapex", 23000000) / 1000000).toFixed(1);
+      const specsSub = (getLiveStat("specsSubsidy", 5750000) / 1000000).toFixed(2);
+      const ebitMarg = Number(getLiveStat("ebitMargin", 23.1)).toFixed(1);
+      const ebitMo = (getLiveStat("ebitMonthly", 555000) / 1000).toFixed(0);
+      const opexMo = (getLiveStat("monthlyOpex", 1845000) / 1000000).toFixed(3);
+      const bepUtil = Number(getLiveStat("bep", 50.8)).toFixed(1);
+      const bepRev = (getLiveStat("bepRevenue", 1218543) / 1000000).toFixed(2);
+      const irrRange = `${getLiveStat("irrLow", 21.3)}% – ${getLiveStat("irrHigh", 24.8)}%`;
+      const paybackYrs = getLiveStat("payback", 4.2);
+      const paybackNoSub = getLiveStat("paybackRaw", 5.2);
+      const totalArea = Number(getLiveStat("factoryArea", 13000)).toLocaleString();
+
+      return {
+        en: {
+          exitLanding: "Landing Page",
+          btnPrev: "◄ PREV",
+          btnNext: "NEXT ►",
+          slides: [
+            // Slide 01: Executive Vision & Anchor
+            {
+              type: "hero-showcase",
+              tag: "SLIDE 01 / EXECUTIVE SUMMARY",
+              title: "India's 1st Strategic Aerospace & Defense FPC Hub",
+              desc: "Seizing the China+1 global relocation window. Building India's first end-to-end wet-process bare-board manufacturing plant with 0% domestic competition.",
+              mainStat: { label: "Full Capacity Annual Revenue", val: `$${revAnnual}M`, desc: `Targeted on ${capMonthly} m²/mo volume at $${weightedPrice}/m² weighted ASP.` },
+              subStats: [
+                { label: "Net Investor CapEx", val: `$${netCapEx}M`, desc: `Total $${totCapEx}M less 25% SPECS Government Cash Refund ($${specsSub}M).` },
+                { label: "EBIT Margin", val: `${ebitMarg}%`, desc: `Generating $${(ebitMo*12/1000).toFixed(2)}M annual operating profit at scale.` },
+                { label: "Static Payback", val: `${paybackYrs} Yrs`, desc: `Rapid recovery with SPECS subsidy (${paybackNoSub} yrs without).` },
+                { label: "Internal Rate of Return", val: irrRange, desc: "Substantially outperforms global electronics manufacturing benchmarks." }
+              ]
+            },
+            // Slide 02: Module 1 Product Capacity Mix Table
+            {
+              type: "data-table",
+              tag: "SLIDE 02 / CAPACITY & REVENUE MODEL",
+              title: "Module 1: Dynamic Capacity & Revenue Architecture",
+              desc: "Product line optimized for aerospace, automotive battery CCS and defense rigid-flex circuits. Scaled to 180,000 m² annual volume.",
+              headers: ["Product Type", "Production Share", "Monthly Volume", "Unit Price (ASP)", "Monthly Revenue", "Annual Revenue"],
+              rows: [
+                ["Single-sided FPC (1L)", "40.0%", "6,000 m²", "$100 / m²", "$600,000", "$7,200,000"],
+                ["Double-sided FPC (2L)", "50.0%", "7,500 m²", "$180 / m²", "$1,350,000", "$16,200,000"],
+                ["Multi-layer FPC (3L+)", "10.0%", "1,500 m²", "$300 / m²", "$450,000", "$5,400,000"],
+                ["Total / Weighted Benchmark", "100.0%", `${capMonthly} m²`, `$${weightedPrice} / m²`, `$${(getLiveStat("monthlyRevenue",2400000)/1000000).toFixed(1)}M`, `$${revAnnual}M`]
+              ]
+            },
+            // Slide 03: Market Gap & Dual Sourcing Matrix
+            {
+              type: "vs-matrix",
+              tag: "SLIDE 03 / MARKET OPPORTUNITY",
+              title: "0% Domestic Competition & 48-Hour Sampling Edge",
+              desc: "India currently imports 100% of high-end aerospace/defense and automotive CCS flex circuits. Indo-Phoenix provides local design agility and direct duty exemption.",
+              badHeader: "Traditional Cross-Border Import",
+              badList: [
+                { badge: "3+ Weeks", text: "Long overseas prototype and engineering turnaround." },
+                { badge: "+10~20%", text: "Heavy import tariffs and expensive international air freight." },
+                { badge: "Geopolitical Risk", text: "Supply chain vulnerable to foreign currency exposure." }
+              ],
+              goodHeader: "Indo-Phoenix Local Advantage",
+              goodList: [
+                { badge: "48~72 Hrs", text: "Rapid prototyping directly inside Indian industrial corridor." },
+                { badge: "0% Tariff", text: "100% local basic chemicals sourcing + duty exemption." },
+                { badge: "Tier-1 Pipeline", text: "Direct alignment with Waaree (Energy Storage) & EV clients." }
+              ]
+            },
+            // Slide 04: Module 2 Factory Space Allocation Table
+            {
+              type: "data-table",
+              tag: "SLIDE 04 / PLANT INFRASTRUCTURE",
+              title: `Module 2: Factory Area & Space Division (${totalArea} m²)`,
+              desc: "Industrial-grade layout designed for heavy wet-chemical processes, micro-vibration isolated drilling, and strict SPCB zero-liquid discharge mandates.",
+              headers: ["Factory Space Division", "India Project Area", "Cleanroom / Standard", "Key Processes / Equipments", "Strategic Infrastructure Notes"],
+              rows: [
+                ["Cleanroom Yellow Light", "1,500 m²", "Class 10K, 22±2°C, 55±5%", "LDI Direct Imaging, Dry Film", "+40% HVAC capacity for Indian ambient conditions"],
+                ["Wet Process Chemical Area", "4,500 m²", "FRP Anti-acid, Exhaust", "VCP Continuous Plating, DES Line", "Local pollution control (SPCB) CTE/CTO approval"],
+                ["Drilling & Vacuum Lamination", "2,000 m²", "Floor Load 1.5 tons/m²", "Laser Drill, Vacuum Hot Press", "Micro-vibration isolated base required"],
+                ["Raw Material Temp Warehouse", "2,000 m²", "Cold Storage 2-10°C", "FCCL, Coverlay, Chemicals", "45-60 Days Safety Stock buffer in India"],
+                ["Wastewater & ZLD Facility", "3,000 m²", "Zero Liquid Discharge (ZLD)", "MVR Evaporators, Multi-stage RO", "3x larger footprint than standard. Mandatory filter"]
+              ]
+            },
+            // Slide 05: Module 3 CapEx & SPECS Subsidy Waterfall
+            {
+              type: "capex-waterfall",
+              tag: "SLIDE 05 / CAPITAL EXPENDITURE & SUBSIDY",
+              title: `Module 3: Total CapEx $${totCapEx}M with 25% SPECS Cash Refund`,
+              desc: "Capital-efficient modular deployment. Taiwan technical team verifies machines via CEC green channel. Government cash refund directly protects investor capital.",
+              bars: [
+                { label: "Core Production & Test Equipment (71.7%)", val: "$16.5M", pct: 72, fillClass: "" },
+                { label: "Plant & Environmental Infrastructure (ZLD) (15.2%)", val: "$3.5M", pct: 15, fillClass: "" },
+                { label: "Plant Building & Class 10K Cleanroom (13.0%)", val: "$3.0M", pct: 13, fillClass: "" },
+                { label: "SPECS Government Subsidy Cash-Back (-25%)", val: `-$${specsSub}M`, pct: 25, fillClass: "subsidy" },
+                { label: "Net Investor Capital Outlay", val: `$${netCapEx}M`, pct: 75, fillClass: "net" }
+              ]
+            },
+            // Slide 06: Module 4 Dynamic OpEx Breakdown Table
+            {
+              type: "data-table",
+              tag: "SLIDE 06 / MONTHLY OPERATING EXPENSES",
+              title: `Module 4: Dynamic Monthly OpEx Structure ($${opexMo}M / mo)`,
+              desc: "Cost behavior modeled with dual-vendor procurement. Variable costs account for 69.0% ($1.27M), providing outstanding operational flexibility.",
+              headers: ["OpEx Cost Classification", "Monthly Cost (USD)", "Share %", "Variable %", "Variable Portion", "Fixed Portion"],
+              rows: [
+                ["Direct Material Cost (Chemicals/Films)", "$900,000", "48.8%", "100.0%", "$900,000", "$0"],
+                ["Direct & Indirect Labor (30 Specialists)", "$430,000", "23.3%", "40.0%", "$172,000", "$258,000"],
+                ["Manufacturing & Utilities (Power/Water)", "$265,000", "14.4%", "75.7%", "$200,579", "$64,421"],
+                ["Fixed Depreciation & Amortization", "$250,000", "13.6%", "0.0%", "$0", "$250,000"],
+                ["Total Monthly OpEx", `$${opexMo}M`, "100.0%", "69.0%", "$1,272,579", "$572,421"]
+              ]
+            },
+            // Slide 07: Module 5 Profitability & BEP Cockpit
+            {
+              type: "bep-cockpit",
+              tag: "SLIDE 07 / PROFITABILITY & BREAK-EVEN",
+              title: `Module 5: ${bepUtil}% Break-Even Point & Robust ROI`,
+              desc: `Crossing into profitability at only $${bepRev}M monthly revenue (${(getLiveStat("bep",50.8)*150).toFixed(0)} m² utilization).`,
+              bepVal: `${bepUtil}%`,
+              bepDesc: `BEP achieved at $${bepRev}M monthly revenue. Standard for highly capitalized wet-process plants.`,
+              cards: [
+                { label: "Target Monthly Revenue", val: `$${(getLiveStat("monthlyRevenue",2400000)/1000000).toFixed(1)}M`, unit: "/ mo", desc: "At full 15,000 m²/month operation." },
+                { label: "Full Capacity EBIT", val: `$${ebitMo}K`, unit: "/ mo", desc: `${ebitMarg}% margin delivering $${(ebitMo*12/1000).toFixed(2)}M annual EBIT.` },
+                { label: "Internal Rate of Return", val: irrRange, unit: "", desc: "Substantially outperforms benchmark electronics manufacturing." },
+                { label: "Static Payback Period", val: `${paybackYrs}`, unit: "Years", desc: `With SPECS 25% subsidy (${paybackNoSub} yrs without).` }
+              ]
+            },
+            // Slide 08: Smart Factory 4-Step Pipeline Flow
+            {
+              type: "flow-pipeline",
+              tag: "SLIDE 08 / TECHNOLOGY & AI SMART FACTORY",
+              title: "AI-Controlled ACC & SFC Smart Manufacturing Architecture",
+              desc: "Eliminating manual deformation and etching variance in wet chemical processes through automated shop floor controls and machine learning closed loops.",
+              steps: [
+                { num: "01", title: "Dual Supply Sourcing", desc: "100% local basic chemicals + Taiwan/Japan strategic PI film & copper foil." },
+                { num: "02", title: "Yellow Room & LDI", desc: "Class 10,000 cleanroom, LDI direct laser imaging & dry film lamination." },
+                { num: "03", title: "AI Closed-Loop ACC", desc: "VCP continuous plating & DES etching with real-time AI yield calibration." },
+                { num: "04", title: "ZLD Green Facility", desc: "Zero Liquid Discharge 3,000 m² water treatment complying with SPCB norms." }
+              ]
+            },
+            // Slide 09: Implementation Roadmap
+            {
+              type: "flow-pipeline",
+              tag: "SLIDE 09 / EXECUTION ROADMAP",
+              title: "Phase-Gated Ramp-Up & Scaling Milestones",
+              desc: "From brownfield retrofitting to full commercial production within 24 months, achieving break-even at Month 12.",
+              steps: [
+                { num: "T+6M", title: "Plant Setup & Sampling", desc: "Cleanroom construction, CEC machine verification, customer prototype audits." },
+                { num: "T+12M", title: "Scale Production (70%)", desc: "Pass 50.8% BEP threshold. Achieve monthly cash flow profitability." },
+                { num: "T+18M", title: "IATF 16949 / AEC-Q", desc: "Complete Tier-1 automotive and defense customer supplier qualifications." },
+                { num: "T+24M", title: "Full Capacity (95%+)", desc: "Deliver $28.8M annual revenue and begin SaaS AI manufacturing export." }
+              ]
+            },
+            // Slide 10: Call to Action & Data Room Access
+            {
+              type: "cta-hub",
+              tag: "SLIDE 10 / STRATEGIC PARTNERSHIP",
+              title: "Position Your Capital at the Origin of India's Defense Supply Chain",
+              desc: "Indo-Phoenix represents a defensible, first-mover opportunity in India's advanced electronics infrastructure with government backing.",
+              primaryBtn: "Request Investor Data Room Access",
+              landingBtn: "Return to Landing Page Portal"
+            }
+          ]
+        },
+        zh: {
+          exitLanding: "返回落地頁",
+          btnPrev: "◄ 上一頁",
+          btnNext: "下一頁 ►",
+          slides: [
+            // Slide 01: 執行摘要
+            {
+              type: "hero-showcase",
+              tag: "簡報 01 / 執行摘要與願景",
+              title: "印度首座戰略性航太與國防 FPC 智慧製造樞紐",
+              desc: "搶佔全球供應鏈 China+1 歷史機遇，填補全印度高階軟板在地產能為 0% 之空白，專注高毛利濕製程製造。",
+              mainStat: { label: "滿載年度營收規模", val: `$${revAnnual}M`, desc: `以每月 ${capMonthly} m² 產能與 $${weightedPrice}/m² 加權單價推算。` },
+              subStats: [
+                { label: "投資人淨資本支出", val: `$${netCapEx}M`, desc: `總預算 $${totCapEx}M 扣除 SPECS 25% 現金返還 ($${specsSub}M)。` },
+                { label: "息稅前利潤率 (EBIT)", val: `${ebitMarg}%`, desc: `滿載年貢獻營業利潤達 $${(ebitMo*12/1000).toFixed(2)}M 美元。` },
+                { label: "靜態投資回收期", val: `${paybackYrs} 年`, desc: `含 SPECS 補貼 ${paybackYrs} 年回本（未含補貼為 ${paybackNoSub} 年）。` },
+                { label: "內部報酬率 (IRR)", val: irrRange, desc: "大幅超越傳統電子代工與製造業回報基準。" }
+              ]
+            },
+            // Slide 02: 模組 1 產銷模型表
+            {
+              type: "data-table",
+              tag: "簡報 02 / 產能與營收結構模型",
+              title: "模組 1：產能配置與動態營收結構",
+              desc: "產品結構鎖定航太、車載電池 CCS 與國防多層軟板剛需，年規劃產能達 18 萬平方公尺。",
+              headers: ["產品類型", "生產比例", "預估月產量", "加權單價 (ASP)", "預估月營收", "預估年營收"],
+              rows: [
+                ["單面板 (1L)", "40.0%", "6,000 m²", "$100 / m²", "$600,000", "$7,200,000"],
+                ["雙面板 (2L)", "50.0%", "7,500 m²", "$180 / m²", "$1,350,000", "$16,200,000"],
+                ["多層板 (3L+)", "10.0%", "1,500 m²", "$300 / m²", "$450,000", "$5,400,000"],
+                ["合計 / 綜合平均基準", "100.0%", `${capMonthly} m²`, `$${weightedPrice} / m²`, `$${(getLiveStat("monthlyRevenue",2400000)/1000000).toFixed(1)}M`, `$${revAnnual}M`]
+              ]
+            },
+            // Slide 03: 市場痛點與雙軌對比
+            {
+              type: "vs-matrix",
+              tag: "簡報 03 / 市場剛需與核心優勢",
+              title: "在地競爭 0% 空白與極速 48 小時打樣交期",
+              desc: "印度目前高階車載、儲能 BMS 與國防 FPC 100% 依賴海外進口。Indo-Phoenix 提供在地設計響應與零關稅優勢。",
+              badHeader: "傳統跨國進口痛點",
+              badList: [
+                { badge: "3 週以上", text: "打樣跨國寄送與工程溝通週期冗長。" },
+                { badge: "+10~20%", text: "負擔高昂進口關稅與國際航空昂貴運費。" },
+                { badge: "地緣風險", text: "供應鏈高度依賴外匯與跨國地緣政治曝險。" }
+              ],
+              goodHeader: "Indo-Phoenix 本地化優勢",
+              goodList: [
+                { badge: "48~72 小時", text: "印度在地快速打樣與車規工程驗證響應。" },
+                { badge: "0% 關稅", text: "基礎化學原料 100% 本地採購，享有極高成本防禦。" },
+                { badge: "剛需客群", text: "直通 Waaree (儲能電池 CCS) 與車載 Tier-1 供應鏈。" }
+              ]
+            },
+            // Slide 04: 模組 2 廠房空間分配表
+            {
+              type: "data-table",
+              tag: "簡報 04 / 廠房面積與空間分配",
+              title: `模組 2：廠房面積與空間分區 (${totalArea} m²)`,
+              desc: "重工業濕製程標準規模，萬級黃光無塵室、防微震鑽孔區與 3 倍大 ZLD 環保廢水零排放設施。",
+              headers: ["廠房空間分區", "印度預估面積", "溫濕度與潔淨度", "核心工藝與設備", "環保與基建備註"],
+              rows: [
+                ["黃光曝光區", "1,500 m²", "萬級無塵室, 22±2°C, 55±5%", "LDI 直接成像，乾膜壓膜", "印度高環境溫度需增加 40% HVAC 容量"],
+                ["濕製程化學區", "4,500 m²", "FRP 防酸地板，專用排氣", "VCP 連續電鍍，DES 生產線", "需取得當地污染控制局 SPCB CTE/CTO 批准"],
+                ["鑽孔與壓合區", "2,000 m²", "地板載重 1.5 噸/m²", "雷射鑽孔，真空熱壓合", "需具備微震隔離功能之地板基座"],
+                ["低溫材料倉", "2,000 m²", "冷藏室 2-10°C 嚴格控濕", "FCCL、覆蓋膜、化學品儲存", "備置 45-60 天印度安全庫存（崑山僅需7-14天）"],
+                ["廢水與環保區 (ZLD)", "3,000 m²", "廢水零排放 (ZLD) 強制要求", "MVR 蒸發器，多級逆滲透 RO", "佔地為崑山 3 倍。為符合法規之必要設施"]
+              ]
+            },
+            // Slide 05: 模組 3 CapEx 瀑布圖
+            {
+              type: "capex-waterfall",
+              tag: "簡報 05 / 資本支出與 SPECS 政府補貼",
+              title: `模組 3：建廠總 CapEx $${totCapEx}M 搭配 25% 現金補貼`,
+              desc: "模組化棕地投資模式，台方技術團隊透過 CEC 綠色通道於原廠驗機，政府現金返還直接將淨曝險降至 $17.25M。",
+              bars: [
+                { label: "核心生產與測試設備 (71.7%)", val: "$16.5M", pct: 72, fillClass: "" },
+                { label: "廠房與環保基礎設施 ZLD (15.2%)", val: "$3.5M", pct: 15, fillClass: "" },
+                { label: "廠房建築與萬級無塵室 (13.0%)", val: "$3.0M", pct: 13, fillClass: "" },
+                { label: "SPECS 政府補貼現金返還 (-25%)", val: `-$${specsSub}M`, pct: 25, fillClass: "subsidy" },
+                { label: "投資人淨資本支出", val: `$${netCapEx}M`, pct: 75, fillClass: "net" }
+              ]
+            },
+            // Slide 06: 模組 4 OpEx 成本拆解表
+            {
+              type: "data-table",
+              tag: "簡報 06 / 單月營運成本結構",
+              title: `模組 4：動態單月營運成本與變動分析 ($${opexMo}M / 月)`,
+              desc: "雙軌供應鏈模型，變動成本佔 69.0% ($1.27M/月)，折舊佔比 13.6%，具備極強的抗景氣循環韌性。",
+              headers: ["營運成本項目", "印度單月成本 (USD)", "佔比 %", "變動成本 %", "變動成本部分", "固定成本部分"],
+              rows: [
+                ["原料與化學耗材 (本地+進口)", "$900,000", "48.8%", "100.0%", "$900,000", "$0"],
+                ["生產與專家人工 (30人團隊)", "$430,000", "23.3%", "40.0%", "$172,000", "$258,000"],
+                ["製造水電能耗 (暖通/動力)", "$265,000", "14.4%", "75.7%", "$200,579", "$64,421"],
+                ["固定資產折舊攤銷 (直線法)", "$250,000", "13.6%", "0.0%", "$0", "$250,000"],
+                ["單月總營運成本", `$${opexMo}M`, "100.0%", "69.0%", "$1,272,579", "$572,421"]
+              ]
+            },
+            // Slide 07: 模組 5 損益兩平
+            {
+              type: "bep-cockpit",
+              tag: "簡報 07 / 獲利能力與損益平衡分析",
+              title: `模組 5：損益兩平點 ${bepUtil}% · 安全邊際極高`,
+              desc: `單月營收達 $${bepRev}M 美元（稼動率 ${(getLiveStat("bep",50.8)*150).toFixed(0)} m²/月）即跨入淨獲利階段。`,
+              bepVal: `${bepUtil}%`,
+              bepDesc: `月營收達 $${bepRev}M 達成損益兩平。高度資本化濕製程工廠標準。`,
+              cards: [
+                { label: "目標月營業收入", val: `$${(getLiveStat("monthlyRevenue",2400000)/1000000).toFixed(1)}M`, unit: "/ 月", desc: "在每月 15,000 平方公尺滿載運營下達成。" },
+                { label: "滿載單月營業利潤", val: `$${ebitMo}K`, unit: "/ 月", desc: `${ebitMarg}% 利潤率，年化營業利潤達 $${(ebitMo*12/1000).toFixed(2)}M 美元。` },
+                { label: "內部報酬率 (IRR)", val: irrRange, unit: "", desc: "遠超過標準電子製造業基準，回報極具吸引力。" },
+                { label: "靜態投資回收期", val: `${paybackYrs}`, unit: "年", desc: `含 SPECS 25% 補貼（未含補貼為 ${paybackNoSub} 年）。` }
+              ]
+            },
+            // Slide 08: 智慧工廠 4 步管線
+            {
+              type: "flow-pipeline",
+              tag: "簡報 08 / 核心技術與 AI 智慧製造",
+              title: "AI 閉環 ACC / SFC 智慧製造控制架構",
+              desc: "導入新一代製程監控與智慧工廠稽核系統，將傳統軟板濕製程人為不良率與形變降至最低。",
+              steps: [
+                { num: "01", title: "雙軌原料採購", desc: "100% 本地化學品 + 台日高階 PI 膜與壓延銅箔進口。" },
+                { num: "02", title: "萬級黃光曝光", desc: "Class 10,000 無塵室、LDI 雷射直接成像與乾膜壓合。" },
+                { num: "03", title: "AI 閉環 ACC", desc: "VCP 連續電鍍與 DES 蝕刻，即時良率自校準。" },
+                { num: "04", title: "ZLD 環保零排放", desc: "3,000 m² 廢水處理與 MVR 蒸發，完全符合 SPCB 規範。" }
+              ]
+            },
+            // Slide 09: 實施里程碑
+            {
+              type: "flow-pipeline",
+              tag: "簡報 09 / 落地時程與階段目標",
+              title: "階段性爬坡時程與放量里程碑",
+              desc: "棕地改造後 24 個月內達到全產能滿載，第 12 個月即跨越損益平衡點。",
+              steps: [
+                { num: "T+6M", title: "建廠與打樣認證", desc: "無塵室建置完工、CEC 原廠驗機、客戶送樣與環境耐受測試。" },
+                { num: "T+12M", title: "規模量產 (70%)", desc: "跨越 50.8% 損益兩平門檻，實現單月正現金流獲利。" },
+                { num: "T+18M", title: "IATF 16949 認證", desc: "通過車載 Tier-1 與國防供應商資格稽核，擴大訂單份額。" },
+                { num: "T+24M", title: "滿載運營 (95%+)", desc: "實現年營收 2,880 萬美元，並啟動 AI 智慧工廠模組技術輸出。" }
+              ]
+            },
+            // Slide 10: 策略合作與 Data Room
+            {
+              type: "cta-hub",
+              tag: "簡報 10 / 投資人洽商與意向提交",
+              title: "將您的資本，佈局在印度國防電子供應鏈的起點",
+              desc: "Indo-Phoenix 具備政策紅利、在地 0% 競爭先發壁壘與嚴謹財務防禦，歡迎戰略機構投資人申請完整資料室。",
+              primaryBtn: "申請投資人資料室 (Data Room)",
+              landingBtn: "返回主題落地頁總覽"
+            }
+          ]
+        }
+      };
+    }
+
+    let currentTheme = "a";
+    let currentLang = "en";
+    let currentSlide = 0;
+    let slideDirection = "next";
+    let isTransitioning = false;
+
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.get("theme")) currentTheme = urlParams.get("theme").toLowerCase();
+    if (urlParams.get("lang")) currentLang = urlParams.get("lang").toLowerCase();
+
+    function setLang(lang) {
+      currentLang = lang;
+      localStorage.setItem("ipx-lang", lang);
+      document.getElementById("btn-lang-en").classList.toggle("active", lang === "en");
+      document.getElementById("btn-lang-zh").classList.toggle("active", lang === "zh");
+      
+      // Update exit landing page link
+      document.getElementById("btnExitLanding").href = `template-${currentTheme}.html`;
+
+      const dict = getI18NDeck()[lang];
+      document.querySelectorAll("[data-i18n]").forEach(el => {
+        const key = el.getAttribute("data-i18n");
+        if (dict[key]) el.textContent = dict[key];
+      });
+
+      renderSlide(false);
+    }
+
+    /* ═══════════════════════════════════════════════════════════════
+       MASTER RENDER ENGINE (DYNAMIC ARCHETYPES PER SLIDE)
+       ═══════════════════════════════════════════════════════════════ */
+    function renderSlide(animate = true) {
+      const slides = getI18NDeck()[currentLang].slides;
+      const slide = slides[currentSlide];
+      const container = document.getElementById("slideContent");
+      
+      let html = `
+        <div class="slide-meta">
+          <div class="slide-tag">${slide.tag}</div>
+          <div class="slide-page-num">${currentSlide + 1} / ${slides.length}</div>
+        </div>
+        <h1 class="slide-title gs-anim-title">${slide.title}</h1>
+        <p class="slide-desc gs-anim-desc">${slide.desc}</p>
+      `;
+
+      // 1. Hero Showcase
+      if (slide.type === "hero-showcase") {
+        html += `
+          <div class="hero-metric-box">
+            <div class="main-anchor-stat gs-anim-hero">
+              <div class="main-stat-label">${slide.mainStat.label}</div>
+              <div class="main-stat-num count-target" data-target="${slide.mainStat.val}">0</div>
+              <div class="main-stat-desc">${slide.mainStat.desc}</div>
+            </div>
+            <div class="sub-stat-grid">
+              ${slide.subStats.map(s => `
+                <div class="stat-card gs-anim-card">
+                  <div class="stat-card-label">${s.label}</div>
+                  <div class="stat-card-value count-target" data-target="${s.val}">0</div>
+                  <div class="stat-card-desc">${s.desc}</div>
+                </div>
+              `).join("")}
+            </div>
+          </div>
+        `;
+      }
+      // 2. Precision Data Table
+      else if (slide.type === "data-table") {
+        html += `
+          <div class="deck-table-wrap gs-anim-hero">
+            <table class="deck-table">
+              <thead>
+                <tr>${slide.headers.map(h => `<th>${h}</th>`).join("")}</tr>
+              </thead>
+              <tbody>
+                ${slide.rows.map(r => `
+                  <tr>
+                    ${r.map((col, ci) => `
+                      <td class="${ci === 0 ? 'strong' : (ci === r.length - 1 ? 'accent' : '')}">${col}</td>
+                    `).join("")}
+                  </tr>
+                `).join("")}
+              </tbody>
+            </table>
+          </div>
+        `;
+      }
+      // 3. VS Matrix
+      else if (slide.type === "vs-matrix") {
+        html += `
+          <div class="vs-matrix">
+            <div class="vs-col bad gs-anim-left">
+              <div class="vs-header" style="color: #f87171;">${slide.badHeader}</div>
+              <ul class="vs-list">
+                ${slide.badList.map(item => `
+                  <li class="vs-item">
+                    <span class="vs-badge badge-bad">${item.badge}</span>
+                    <span>${item.text}</span>
+                  </li>
+                `).join("")}
+              </ul>
+            </div>
+            <div class="vs-col good gs-anim-right">
+              <div class="vs-header" style="color: var(--accent);">${slide.goodHeader}</div>
+              <ul class="vs-list">
+                ${slide.goodList.map(item => `
+                  <li class="vs-item">
+                    <span class="vs-badge badge-good">${item.badge}</span>
+                    <span><strong>${item.text}</strong></span>
+                  </li>
+                `).join("")}
+              </ul>
+            </div>
+          </div>
+        `;
+      }
+      // 4. CapEx Waterfall Bars
+      else if (slide.type === "capex-waterfall") {
+        html += `
+          <div class="capex-waterfall">
+            ${slide.bars.map(b => `
+              <div class="waterfall-bar-group gs-anim-bar">
+                <div class="bar-meta">
+                  <span>${b.label}</span>
+                  <strong>${b.val}</strong>
+                </div>
+                <div class="bar-track">
+                  <div class="bar-fill ${b.fillClass}" data-pct="${b.pct}"></div>
+                </div>
+              </div>
+            `).join("")}
+          </div>
+        `;
+      }
+      // 5. BEP Cockpit Meter
+      else if (slide.type === "bep-cockpit") {
+        html += `
+          <div class="bep-cockpit">
+            <div class="gauge-container gs-anim-gauge">
+              <div class="gauge-circle">
+                <div class="gauge-arc" id="gaugeArc"></div>
+                <div class="gauge-value count-target" data-target="${slide.bepVal}">0</div>
+              </div>
+              <div class="gauge-label">${slide.bepDesc}</div>
+            </div>
+            <div class="sub-stat-grid">
+              ${slide.cards.map(c => `
+                <div class="stat-card gs-anim-card">
+                  <div class="stat-card-label">${c.label}</div>
+                  <div class="stat-card-value">
+                    <span class="count-target" data-target="${c.val}">0</span>
+                    <span class="stat-card-unit">${c.unit}</span>
+                  </div>
+                  <div class="stat-card-desc">${c.desc}</div>
+                </div>
+              `).join("")}
+            </div>
+          </div>
+        `;
+      }
+      // 6. Flow Pipeline
+      else if (slide.type === "flow-pipeline") {
+        html += `
+          <div class="flow-pipeline">
+            ${slide.steps.map(st => `
+              <div class="flow-card gs-anim-flow">
+                <div class="flow-step-num">${st.num}</div>
+                <div class="flow-title">${st.title}</div>
+                <div class="flow-desc">${st.desc}</div>
+              </div>
+            `).join("")}
+          </div>
+        `;
+      }
+      // 7. CTA Hub Box
+      else if (slide.type === "cta-hub") {
+        html += `
+          <div class="cta-hub-box gs-anim-hero">
+            <div class="cta-hub-title">${slide.title}</div>
+            <div class="cta-hub-desc">${slide.desc}</div>
+            <div class="cta-btn-group">
+              <a href="#contact" class="btn-cta-primary" onclick="alert(currentLang==='zh'?'已為您登記申請，投資專員將於 24 小時內與您聯繫。':'Access request received. An investor relations manager will reach out within 24 hours.')">${slide.primaryBtn}</a>
+              <a href="template-${currentTheme}.html" class="btn-nav">${slide.landingBtn}</a>
+            </div>
+          </div>
+        `;
+      }
+
+      container.innerHTML = html;
+      renderTimeline();
+
+      if (animate && window.gsap) {
+        executeCinematicTimeline();
+      } else {
+        animateNumbers();
+        animateBars();
+      }
+    }
+
+    /* ═══════════════════════════════════════════════════════════════
+       CINEMATIC 3D GSAP TRANSITION TIMELINE
+       ═══════════════════════════════════════════════════════════════ */
+    function executeCinematicTimeline() {
+      isTransitioning = true;
+      const rotY = slideDirection === "next" ? 16 : -16;
+      const transX = slideDirection === "next" ? 70 : -70;
+
+      // 1. Sweep Laser Beam
+      gsap.fromTo("#scanBeam", 
+        { left: "-100%", opacity: 0.8 },
+        { left: "140%", opacity: 0, duration: 0.65, ease: "power2.out" }
+      );
+
+      // 2. 3D Stage Origami Pivot
+      gsap.fromTo("#slideWrapper",
+        { rotateY: rotY, scale: 0.95, filter: "brightness(1.3)" },
+        { rotateY: 0, scale: 1, filter: "brightness(1)", duration: 0.6, ease: "power3.out" }
+      );
+
+      // 3. Elements Timeline
+      const tl = gsap.timeline({
+        onComplete: () => { isTransitioning = false; }
+      });
+
+      tl.fromTo(".gs-anim-title",
+        { opacity: 0, x: transX, filter: "blur(6px)" },
+        { opacity: 1, x: 0, filter: "blur(0px)", duration: 0.45, ease: "power3.out" }
+      );
+
+      tl.fromTo(".gs-anim-desc",
+        { opacity: 0, y: 14 },
+        { opacity: 1, y: 0, duration: 0.35, ease: "power2.out" },
+        "-=0.25"
+      );
+
+      if (document.querySelector(".gs-anim-hero")) {
+        tl.fromTo(".gs-anim-hero",
+          { opacity: 0, scale: 0.92, y: 24 },
+          { opacity: 1, scale: 1, y: 0, duration: 0.5, ease: "back.out(1.4)" },
+          "-=0.2"
+        );
+      }
+      if (document.querySelectorAll(".gs-anim-card").length) {
+        tl.fromTo(".gs-anim-card",
+          { opacity: 0, y: 24, scale: 0.94 },
+          { opacity: 1, y: 0, scale: 1, duration: 0.42, stagger: 0.06, ease: "back.out(1.3)" },
+          "-=0.25"
+        );
+      }
+      if (document.querySelector(".gs-anim-left")) {
+        tl.fromTo(".gs-anim-left",
+          { opacity: 0, x: -40 },
+          { opacity: 1, x: 0, duration: 0.45, ease: "power3.out" },
+          "-=0.25"
+        );
+        tl.fromTo(".gs-anim-right",
+          { opacity: 0, x: 40 },
+          { opacity: 1, x: 0, duration: 0.45, ease: "power3.out" },
+          "-=0.35"
+        );
+      }
+      if (document.querySelectorAll(".gs-anim-flow").length) {
+        tl.fromTo(".gs-anim-flow",
+          { opacity: 0, y: 30, rotateX: 20 },
+          { opacity: 1, y: 0, rotateX: 0, duration: 0.45, stagger: 0.07, ease: "back.out(1.4)" },
+          "-=0.25"
+        );
+      }
+      if (document.querySelectorAll(".gs-anim-bar").length) {
+        tl.fromTo(".gs-anim-bar",
+          { opacity: 0, x: -25 },
+          { opacity: 1, x: 0, duration: 0.38, stagger: 0.05, ease: "power2.out" },
+          "-=0.2"
+        );
+      }
+      if (document.querySelector(".gs-anim-gauge")) {
+        tl.fromTo(".gs-anim-gauge",
+          { opacity: 0, scale: 0.88 },
+          { opacity: 1, scale: 1, duration: 0.55, ease: "back.out(1.5)" },
+          "-=0.25"
+        );
+      }
+
+      triggerFxPulse();
+      animateNumbers();
+      animateBars();
+    }
+
+    function triggerFxPulse() {
+      try {
+        if (currentTheme === "a" && window.IPX_SMOKE && window.IPX_SMOKE.boost) {
+          window.IPX_SMOKE.boost(2.4);
+          setTimeout(() => window.IPX_SMOKE.boost(0), 450);
+        } else if (currentTheme === "b" && window.IPX_ORBIT && window.IPX_ORBIT.pulse) {
+          window.IPX_ORBIT.pulse(window.innerWidth / 2, window.innerHeight / 2);
+        } else if (currentTheme === "c" && window.IPX_HOLO && window.IPX_HOLO.warp) {
+          window.IPX_HOLO.warp(1.5);
+        }
+      } catch (e) {}
+    }
+
+    function animateBars() {
+      setTimeout(() => {
+        document.querySelectorAll(".bar-fill").forEach(bar => {
+          const pct = bar.getAttribute("data-pct");
+          bar.style.width = pct + "%";
+        });
+      }, 120);
+    }
+
+    function animateNumbers() {
+      document.querySelectorAll(".count-target").forEach(el => {
+        const raw = el.getAttribute("data-target");
+        if (!raw) return;
+        const clean = raw.replace(/[$,%M]/g, "").trim();
+        const num = parseFloat(clean);
+        if (isNaN(num)) {
+          el.textContent = raw;
+          return;
+        }
+
+        const prefix = raw.startsWith("$") ? "$" : "";
+        const suffix = raw.includes("%") ? "%" : (raw.includes("M") ? "M" : (raw.includes("年") ? " 年" : (raw.includes("Yrs") ? " Yrs" : "")));
+        const isDecimal = clean.includes(".");
+        const decimals = isDecimal ? clean.split(".")[1].length : 0;
+        
+        const duration = 750;
+        const start = performance.now();
+
+        function tick(now) {
+          const t = Math.min(1, (now - start) / duration);
+          const ease = 1 - Math.pow(1 - t, 4);
+          const current = num * ease;
+          
+          if (decimals > 0) {
+            el.textContent = prefix + current.toFixed(decimals) + suffix;
+          } else {
+            el.textContent = prefix + Math.round(current).toLocaleString() + suffix;
+          }
+
+          if (t < 1) requestAnimationFrame(tick);
+          else el.textContent = raw;
+        }
+        requestAnimationFrame(tick);
+      });
+    }
+
+    function renderTimeline() {
+      const slides = getI18NDeck()[currentLang].slides;
+      const container = document.getElementById("timelineSteps");
+      container.innerHTML = slides.map((_, idx) => `
+        <div class="step-pill ${idx === currentSlide ? 'active' : ''}" onclick="goToSlide(${idx})"></div>
+      `).join("");
+    }
+
+    function goToSlide(idx) {
+      if (idx === currentSlide || isTransitioning) return;
+      slideDirection = idx > currentSlide ? "next" : "prev";
+      currentSlide = idx;
+      renderSlide(true);
+    }
+    function nextSlide() {
+      const slides = getI18NDeck()[currentLang].slides;
+      if (currentSlide < slides.length - 1 && !isTransitioning) {
+        slideDirection = "next";
+        currentSlide++;
+        renderSlide(true);
+      }
+    }
+    function prevSlide() {
+      if (currentSlide > 0 && !isTransitioning) {
+        slideDirection = "prev";
+        currentSlide--;
+        renderSlide(true);
+      }
+    }
+
+    window.addEventListener("keydown", (e) => {
+      if (e.key === "ArrowRight" || e.key === " " || e.key === "PageDown") nextSlide();
+      if (e.key === "ArrowLeft" || e.key === "PageUp") prevSlide();
+    });
+
+    function switchTheme(theme) {
+      if (theme !== currentTheme) {
+        const url = new URL(window.location.href);
+        url.searchParams.set("theme", theme);
+        url.searchParams.set("lang", currentLang);
+        window.location.href = url.toString();
+      }
+    }
+
+    function loadActiveThemeScene(theme) {
+      document.body.setAttribute("data-template", theme);
+      
+      // Update Exit button href
+      document.getElementById("btnExitLanding").href = `template-${theme}.html`;
+
+      document.querySelectorAll(".control-group .btn-ctrl").forEach(btn => {
+        if (btn.textContent.toLowerCase().includes(theme + ":")) {
+          btn.classList.add("active");
+        } else if (btn.textContent.includes("A:") || btn.textContent.includes("B:") || btn.textContent.includes("C:")) {
+          btn.classList.remove("active");
+        }
+      });
+
+      const sceneScript = document.createElement("script");
+      const fxScript = document.createElement("script");
+
+      if (theme === "a") {
+        sceneScript.src = "assets/js/scene-a.js";
+        fxScript.src = "assets/js/fx.js";
+      } else if (theme === "b") {
+        sceneScript.src = "assets/js/scene-b.js";
+        const fxCore = document.createElement("script");
+        fxCore.src = "assets/js/fx-core.js";
+        document.body.appendChild(fxCore);
+        fxScript.src = "assets/js/fx-b.js";
+      } else if (theme === "c") {
+        sceneScript.src = "assets/js/scene-c.js";
+        const fxCore = document.createElement("script");
+        fxCore.src = "assets/js/fx-core.js";
+        document.body.appendChild(fxCore);
+        fxScript.src = "assets/js/fx-c.js";
+      }
+
+      document.body.appendChild(sceneScript);
+      document.body.appendChild(fxScript);
+    }
+
+    // Connect Live SSOT Cloud Data Engine
+    window.addEventListener("DOMContentLoaded", () => {
+      setLang(currentLang);
+      loadActiveThemeScene(currentTheme);
+    });
+
+    // Re-render when Live Content Engine updates from Google Sheet
+    document.addEventListener("ipx:ready", () => {
+      renderSlide(false);
+    });
+  </script>
+</body>
+</html>

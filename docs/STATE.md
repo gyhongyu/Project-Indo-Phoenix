@@ -52,7 +52,8 @@
 ## 🗺️ 4. 目錄結構與模組地圖 (Directory SSOT)
 ```text
 Project Indo-Phoenix/
-├── index.html              ← 網站入口 (根目錄部署 GitHub Pages, 自定義網域 fpc.teaforia.in)
+├── index.html              ← 網站入口 (含雙語切換與 WebPPT 旗艦入口)
+├── presentation.html       ← 商業計劃演示共同頁 (10 頁全息 3D 劇院轉場 WebPPT，直連線上 Sheet SSOT)
 ├── template-a.html         ← 模板 A: 黑金編輯風 (OBSIDIAN) — data-template="a"
 ├── template-b.html         ← 模板 B: 航太 HUD 風 (MISSION CONTROL) — data-template="b"
 ├── template-c.html         ← 模板 C: 全息點雲科幻風 (HOLOGRAM) — data-template="c"

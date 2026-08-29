@@ -39,7 +39,7 @@ window.IPX_DATA = {
 
 window.IPX_I18N = {
   en: {
-    nav: { mission: "Mission", metrics: "The Numbers", contact: "Contact" },
+    nav: { mission: "Mission", metrics: "The Numbers", deck: "Pitch Deck", contact: "Contact" },
     hero: {
       kicker: "India's Strategic Aerospace &amp; Defense FPC Hub",
       titleA: "Project",
@@ -80,7 +80,7 @@ window.IPX_I18N = {
   },
 
   zh: {
-    nav: { mission: "戰略使命", metrics: "核心數據", contact: "聯絡" },
+    nav: { mission: "戰略使命", metrics: "核心數據", deck: "商業計劃", contact: "聯絡" },
     hero: {
       kicker: "印度戰略性航太與國防 FPC 樞紐",
       titleA: "Project",

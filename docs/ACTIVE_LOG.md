@@ -121,6 +121,14 @@
   - 修復判定邏輯為 `vis = "Private" if (target and target['private']) else "Public"`，並增加 `--visibility` 參數支援，成功將台帳更新為 `Public`。
 - **踩坑 / 失敗模式**:
   - 寫檔 ternary operator 筆誤造成展示層與 GitHub 真實狀態（Public）脫節。
-- **防禦手段 / 測試背書**:
-  - 執行 `--update "Project-Indo-Phoenix" --visibility "Public"` 並以 `--list` 驗證回傳 `[Public]` 成功。
+### [2026-08-29] [presentation / index / app] 交付：商業計劃 10 頁旗艦 WebPPT 演示頁 + 首頁雙語導航 + 雙向狀態互通
+- **類型**: `FEATURE`
+- **代碼錨點**: `presentation.html`（新增 10 頁全息動態 Deck）；`index.html`（首頁升級獨立雙語切換＋WebPPT 旗艦入口卡片）；`template-a/b/c.html`（nav-links 注入 `nav.deck` 商業計劃連結）；`assets/js/app.js`（Lang.apply 同步更新 `nav-deck-link` 帶參 `?theme=...&lang=...`）；`docs/STATE.md`（目錄 SSOT 同步更新）
+- **核心事實 / 決策理由**:
+  - 頂級機構 CEO 演示規格：10 頁涵蓋執行摘要、產銷模型、痛點對比、廠房分區、CapEx 補貼、OpEx 成本、BEP 儀表盤、AI 智慧工廠管線、落地時程、Data Room 入口。
+  - 線上 Google Sheet 單一真源連動：全站財務數據封裝於 `getLiveStat()`，實時掛載 `IPX_DATA.stats` 與 `ipx:ready` 監聽，後端改表前端簡報自動動態重算渲染。
+  - 3D 空間折疊轉場（Origami Pivot）：GSAP Timeline 控制 16° Y 軸透視折疊＋雷射掃掠光束＋次級物件錯落彈入＋數字滾動計數器（Count-up）。
+  - 雙向狀態無損保持：A/B/C 模板導航欄與首頁進入 WebPPT 時自動帶上主題與語系，WebPPT 頂部「✕ 返回落地頁」精準回溯來源模板。
+- **驗證**: 5 份核心 HTML 與 JS 語法通過檢查；移除框內冗餘說明列；雙向跳轉路徑 100% 吻合。
+- **狀態**: `✅ 實體落盤完工，交付人類總監審閱`
 
