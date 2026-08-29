@@ -559,6 +559,45 @@
     .mini-card-sub { font-size: 11.5px; color: var(--ink-sub); line-height: 1.35; }
 
     /* Non-intrusive Contextual Floating Explanation Box */
+    
+    /* Completely Hide Bottom Floating Explanation Bar (0% layout space used) */
+    .cockpit-floating-bar { display: none !important; }
+
+    /* Desktop Smart Hover Tooltip Balloon (Plan B - Zero layout consumption) */
+    .card-smart-tooltip {
+      position: absolute; bottom: calc(100% + 10px); left: 50%; transform: translateX(-50%) translateY(4px);
+      width: clamp(260px, 24vw, 320px); background: rgba(10, 14, 24, 0.95);
+      border: 1px solid var(--accent); border-radius: 8px; padding: 10px 14px;
+      box-shadow: 0 12px 32px rgba(0,0,0,0.8), 0 0 20px var(--accent-glow);
+      backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+      opacity: 0; pointer-events: none; transition: all 0.25s var(--ease);
+      z-index: 50; text-align: left;
+    }
+    .card-smart-tooltip::after {
+      content: ''; position: absolute; top: 100%; left: 50%; transform: translateX(-50%);
+      border-width: 6px; border-style: solid;
+      border-color: var(--accent) transparent transparent transparent;
+    }
+    .tooltip-tag {
+      font-family: var(--font-mono); font-size: 9.5px; color: var(--accent);
+      letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 4px; display: flex; align-items: center; gap: 4px;
+    }
+    .tooltip-text { font-size: 11.5px; color: var(--ink); line-height: 1.45; }
+
+    @media (hover: hover) and (pointer: fine) {
+      .feature-card-item:hover .card-smart-tooltip,
+      .product-spec-card:hover .card-smart-tooltip,
+      .space-tile-card:hover .card-smart-tooltip,
+      .opex-cost-card:hover .card-smart-tooltip,
+      .capex-row-card:hover .card-smart-tooltip,
+      .cockpit-mini-card:hover .card-smart-tooltip {
+        opacity: 1; transform: translateX(-50%) translateY(0); pointer-events: auto;
+      }
+    }
+    @media (hover: none), (pointer: coarse), (max-width: 768px) {
+      .card-smart-tooltip { display: none !important; }
+    }
+
     .cockpit-floating-bar {
       margin-top: 10px; background: linear-gradient(90deg, rgba(201,169,110,0.08) 0%, rgba(20,24,36,0.5) 100%);
       border: 1px solid var(--line-subtle); border-left: 3px solid var(--accent);
@@ -606,7 +645,7 @@
       background: rgba(10, 15, 25, 0.2); border: 1px solid var(--line-subtle);
       border-radius: var(--card-radius); padding: clamp(12px, 1.6vh, 20px) clamp(14px, 1.5vw, 20px);
       display: flex; flex-direction: column; justify-content: space-between;
-      cursor: pointer; transition: all 0.25s var(--ease); min-height: 0;
+      cursor: pointer; transition: all 0.25s var(--ease); min-height: 0; position: relative;
     }
     .feature-card-item:hover, .feature-card-item.active {
       background: var(--bg-card-hover); border-color: var(--accent);
@@ -2747,6 +2786,11 @@
                     <div class="spec-val-num" style="color:var(--ink);">${p.revYr}</div>
                     <div class="spec-val-sub">${currentLang === 'zh' ? '年化預估營收' : 'Annual Run-Rate'}</div>
                   </div>
+
+                  <div class="card-smart-tooltip">
+                    <div class="tooltip-tag">💎 ${currentLang === 'zh' ? '規格與技術依據' : 'Specification Insight'}</div>
+                    <div class="tooltip-text">${p.detail}</div>
+                  </div>
                 </div>
               `).join("")}
             </div>
@@ -2776,6 +2820,11 @@
                 </div>
                 <div class="space-tile-std">${s.std}</div>
                 <div class="space-tile-desc">${s.desc}</div>
+
+                <div class="card-smart-tooltip">
+                    <div class="tooltip-tag">🏗️ ${currentLang === 'zh' ? '廠房基建規劃依據' : 'Infrastructure & Compliance'}</div>
+                    <div class="tooltip-text">${s.detail}</div>
+                </div>
               </div>
             `).join("")}
           </div>
@@ -2814,6 +2863,11 @@
                   </div>
                 </div>
                 <div style="font-size:11.5px; color:var(--ink-sub); line-height:1.4; margin-top:8px;">${c.sub}</div>
+
+                <div class="card-smart-tooltip">
+                    <div class="tooltip-tag">📊 ${currentLang === 'zh' ? '成本行為與供應鏈洞察' : 'Cost Behavior Insight'}</div>
+                    <div class="tooltip-text">${c.detail}</div>
+                </div>
               </div>
             `).join("")}
           </div>
@@ -2902,6 +2956,13 @@
                         <span class="buyer-data-lbl">${m.lbl}</span>
                       </div>
                     `).join("")}
+                  </div>
+                ` : ''}
+
+                ${c.detail ? `
+                  <div class="card-smart-tooltip">
+                    <div class="tooltip-tag">🔍 ${currentLang === 'zh' ? '戰略深度洞察' : 'Strategic Insight'}</div>
+                    <div class="tooltip-text">${c.detail}</div>
                   </div>
                 ` : ''}
               </div>
@@ -3004,6 +3065,11 @@
                   <div class="capex-val-num" style="color:var(--ink);">${it.net}</div>
                   <div class="capex-val-sub">${currentLang === 'zh' ? '投資人淨投入' : 'Net Investment'}</div>
                 </div>
+
+                <div class="card-smart-tooltip">
+                    <div class="tooltip-tag">🛡️ ${currentLang === 'zh' ? '台方責任邊界與風控依據' : 'Technical Boundary & Risk Control'}</div>
+                    <div class="tooltip-text">${it.detail}</div>
+                </div>
               </div>
             `).join("")}
           </div>
@@ -3064,6 +3130,11 @@
                   </div>
                   <div class="mini-card-val count-target" data-target="${c.val}">0</div>
                   <div class="mini-card-sub">${c.sub}</div>
+
+                  <div class="card-smart-tooltip">
+                    <div class="tooltip-tag">💡 ${currentLang === 'zh' ? '財務指標決策依據' : 'Strategic Insight'}</div>
+                    <div class="tooltip-text">${c.detail}</div>
+                  </div>
                 </div>
               `).join("")}
             </div>
