@@ -11,6 +11,7 @@ let currentTheme = "a";
 
     function setLang(lang) {
       currentLang = lang;
+      document.documentElement.lang = lang;
       localStorage.setItem("ipx-lang", lang);
       document.getElementById("btn-lang-en").classList.toggle("active", lang === "en");
       document.getElementById("btn-lang-zh").classList.toggle("active", lang === "zh");
@@ -576,7 +577,7 @@ let currentTheme = "a";
                   </div>
 
                   <div class="capex-boundary-col">
-                    <div class="space-row-sublbl">${currentLang === 'zh' ? '技術股責任與管理邊界' : 'Technical Boundary & Scope'}</div>
+                    <div class="space-row-sublbl">${currentLang === 'zh' ? '技術股責任與管理邊界' : 'Governance & Scope'}</div>
                     <div class="capex-boundary-text">${it.boundary || it.detail}</div>
                   </div>
 
