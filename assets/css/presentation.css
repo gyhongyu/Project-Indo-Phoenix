@@ -606,8 +606,6 @@
 
     @media (hover: hover) and (pointer: fine) {
       .feature-card-item:hover .card-smart-tooltip,
-      .split-hero-left:hover .card-smart-tooltip,
-      .split-moat-card:hover .card-smart-tooltip,
       .product-spec-card:hover .card-smart-tooltip,
       .space-tile-card:hover .card-smart-tooltip,
       .opex-cost-card:hover .card-smart-tooltip,
@@ -615,9 +613,33 @@
       .cockpit-mini-card:hover .card-smart-tooltip {
         opacity: 1; transform: translateX(-50%) translateY(0); pointer-events: auto;
       }
+      .split-moat-card:hover .card-smart-tooltip,
+      .split-hero-left:hover .card-smart-tooltip {
+        opacity: 1; transform: translateY(0); pointer-events: auto;
+      }
     }
     @media (hover: none), (pointer: coarse), (max-width: 768px) {
       .card-smart-tooltip { display: none !important; }
+    }
+
+    /* Scoped Embedded Bottom Tooltip for Split 2x2 Moat Cards (Slide 04 & 05) */
+    .split-moat-card .card-smart-tooltip {
+      position: absolute; bottom: 10px; left: 12px; right: 12px; top: auto;
+      width: auto; max-width: none; transform: translateY(6px);
+      background: rgba(8, 12, 20, 0.94);
+      border: 1px dashed var(--line-subtle); border-left: 3px solid var(--accent);
+      border-radius: 6px; padding: 7px 10px;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.6);
+      backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+    }
+    .split-moat-card .card-smart-tooltip::after {
+      display: none !important;
+    }
+    .split-moat-card .card-smart-tooltip .tooltip-tag {
+      font-size: 8.5px; margin-bottom: 2px;
+    }
+    .split-moat-card .card-smart-tooltip .tooltip-text {
+      font-size: 10.5px; line-height: 1.35; color: var(--ink-sub);
     }
 
     .cockpit-floating-bar {
