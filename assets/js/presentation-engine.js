@@ -845,10 +845,10 @@ let currentTheme = "a";
                 ${slide.timelineLabel || '時間線 + 損益平衡線'}
               </div>
 
-              <!-- Orange Nodes (Top region: 4 interactive points) -->
+              <!-- Orange Nodes (Positioned ABOVE the orange curve) -->
               <div class="crossover-node-layer orange-layer">
                 ${(slide.orangeNodes || []).map((n, idx) => `
-                  <div class="crossover-point-item orange-point" style="left:${idx === 0 ? '6%' : idx === 1 ? '28%' : idx === 2 ? '50%' : '72%'}; top:${idx === 0 ? '14%' : idx === 1 ? '38%' : idx === 2 ? '58%' : '78%'};"
+                  <div class="crossover-point-item orange-point" style="left:${idx === 0 ? '5%' : idx === 1 ? '24%' : idx === 2 ? '50%' : '70%'}; top:${idx === 0 ? '8%' : idx === 1 ? '26%' : idx === 2 ? '44%' : '66%'};"
                        onclick="selectGenericCard('orangePt', ${idx}, '${n.detail.replace(/'/g, "\\'")}')"
                        onmouseenter="selectGenericCard('orangePt', ${idx}, '${n.detail.replace(/'/g, "\\'")}')">
                     <span class="point-bullet orange"></span>
@@ -867,16 +867,16 @@ let currentTheme = "a";
               <!-- Central Timeline T-Labels (Mounted along central blue line) -->
               <div class="crossover-time-labels">
                 <span style="left:6%;">T+0</span>
-                <span style="left:28%;">T+6</span>
+                <span style="left:26%;">T+6</span>
                 <span style="left:50%; color:var(--accent); font-weight:800; font-size:12.5px;">T+12 (BEP)</span>
-                <span style="left:72%;">T+18</span>
+                <span style="left:74%;">T+18</span>
                 <span style="left:94%;">T+24</span>
               </div>
 
-              <!-- Green Nodes (Bottom region: 4 interactive points) -->
+              <!-- Green Nodes (Positioned BELOW the green curve on left, ABOVE on right) -->
               <div class="crossover-node-layer green-layer">
                 ${(slide.greenNodes || []).map((n, idx) => `
-                  <div class="crossover-point-item green-point" style="left:${idx === 0 ? '6%' : idx === 1 ? '28%' : idx === 2 ? '50%' : '72%'}; top:${idx === 0 ? '78%' : idx === 1 ? '60%' : idx === 2 ? '44%' : '20%'};"
+                  <div class="crossover-point-item green-point" style="left:${idx === 0 ? '5%' : idx === 1 ? '24%' : idx === 2 ? '50%' : '70%'}; top:${idx === 0 ? '84%' : idx === 1 ? '66%' : idx === 2 ? '30%' : '8%'};"
                        onclick="selectGenericCard('greenPt', ${idx}, '${n.detail.replace(/'/g, "\\'")}')"
                        onmouseenter="selectGenericCard('greenPt', ${idx}, '${n.detail.replace(/'/g, "\\'")}')">
                     <span class="point-bullet green"></span>
