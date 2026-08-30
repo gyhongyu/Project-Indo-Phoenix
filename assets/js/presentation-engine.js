@@ -834,29 +834,30 @@ let currentTheme = "a";
                 <!-- Central Solid Blue Horizontal Axis Line with Arrow (y=175) -->
                 <line x1="40" y1="175" x2="965" y2="175" stroke="#2563eb" stroke-width="4.5" marker-end="url(#arrowTimelineBlue)" />
 
-                <!-- Realistic Orange CapEx Curve (Rises to $17.25M at Y1, then flattens across Y1-Y5) -->
-                <path d="M 40,305 C 60,305 70,250 80,210 C 180,135 240,${capY1} 280,${capY1} L 740,${capY1} L 960,${capY1}" 
+                <!-- Realistic Smooth Orange CapEx Curve (S-Curve to $17.25M at Y1, then flat) -->
+                <path d="M 40,305 C 55,300 70,220 80,185 C 160,135 220,${capY1} 280,${capY1} L 740,${capY1} L 960,${capY1}" 
                       fill="none" stroke="url(#orangeCapGrad)" stroke-width="3.5" filter="url(#macroCurveGlow)" opacity="0.85" />
 
                 <!-- 1:1 Scale Synchronized Green Cumulative Cash Flow Curve (Crosses Orange Line exactly at Year 4.2: (740, ${capY1})) -->
-                <path d="M 40,305 C 70,305 80,305 180,${revY1} C 280,${revY1} 380,${revY2} 480,${revY2} C 580,${revY3} 660,${capY1} 740,${capY1} C 820,${capY1} 880,${revY5} 960,${revY5}" 
+                <path d="M 40,305 C 70,305 80,305 180,${revY1} C 280,${revY1} 380,${revY2} 480,${revY2} C 580,${revY3} 660,${capY1} 740,${capY1} C 800,${capY1} 860,110 960,105" 
                       fill="none" stroke="url(#greenCashGrad)" stroke-width="4" filter="url(#macroCurveGlow)" opacity="0.9" />
-
-                <!-- True Payback Golden Crossover Node Pulse Exactly at Intersection (740, ${capY1}) -->
-                <circle cx="740" cy="${capY1}" r="16" fill="none" stroke="var(--accent)" stroke-width="2.5" class="pulse-ring" />
-                <circle cx="740" cy="${capY1}" r="7" fill="#0f172a" stroke="var(--accent)" stroke-width="3" />
-                <circle cx="740" cy="${capY1}" r="3" fill="#fff" />
               </svg>
 
               <!-- Category Legend Badges -->
               <div class="crossover-title-badge orange-badge">
-                ${slide.orangeLabel || '累積資本支出 ($17.25M 淨額)'}
+                ${slide.orangeLabel || '累積資本支出'}
               </div>
               <div class="crossover-title-badge green-badge">
                 ${slide.greenLabel || '累積營運淨現金流'}
               </div>
               <div class="timeline-legend-tag">
                 ${slide.timelineLabel || '5 年戰略投資全景時間軸'}
+              </div>
+
+              <!-- True Payback Golden Crossover: 100% PERFECT 1:1 CSS CIRCLE (Zero distortion on fullscreen/resize) -->
+              <div class="payback-perfect-pulse" style="left: 74%; top: ${((capY1 / 350) * 100).toFixed(1)}%;">
+                <div class="pulse-core-dot"></div>
+                <div class="pulse-wave-ring"></div>
               </div>
 
               <!-- LAYER 3 FOREGROUND: Top Orange Milestones (5 Evenly Spaced Macro Nodes at top: 16%) -->
@@ -885,7 +886,7 @@ let currentTheme = "a";
                 <span style="left:8%;">Year 0</span>
                 <span style="left:28%;">Year 1 (CTO)</span>
                 <span style="left:48%;">Year 2 (Full)</span>
-                <span style="left:74%; color:var(--accent); font-weight:800; font-size:12.5px;">${currentLang === 'zh' ? 'Year 4.2 (🎯 4.2年回本)' : 'Year 4.2 (🎯 Full Payback)'}</span>
+                <span style="left:74%; color:var(--accent); font-weight:800; font-size:12px;">${currentLang === 'zh' ? 'Year 4.2 (🎯 4.2年回本)' : 'Year 4.2 (🎯 Payback)'}</span>
                 <span style="left:92%;">Year 5</span>
               </div>
 
@@ -908,6 +909,11 @@ let currentTheme = "a";
                     </div>
                   </div>
                 `).join("")}
+              </div>
+
+              <!-- Discreet Bottom Disclaimer Bar (Financial & Legal Rigor) -->
+              <div class="deck-disclaimer-note">
+                ${slide.disclaimer || ''}
               </div>
 
             </div>

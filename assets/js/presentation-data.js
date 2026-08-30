@@ -741,9 +741,10 @@ function getI18NDeck() {
               title: "5-Year Phased Horizon: Trade-to-Manufacture to Full CapEx Payback",
               desc: "Day-one commercial trade bridges cash flow, switching to local manufacturing at Year 1, achieving 100% full investment payback at Year 4.2.",
               defaultExplanation: "5-Year Full Investment Horizon: Cumulative operating net cash flow scales from Year 1 local manufacturing to fully recoup the $17.25M net CapEx at Year 4.2, delivering long-term compounding equity value.",
-              orangeLabel: "Cumulative CapEx ($17.25M Net)",
+              orangeLabel: "Cumulative CapEx",
               greenLabel: "Cumulative Net Cash Flow",
               timelineLabel: "5-Year Strategic Investment Horizon",
+              disclaimer: "* Note: 4.2-Yr Payback assumes SPECS 25% CapEx cash-back subsidy ($5.75M). Baseline Payback without subsidy is 5.2 Yrs. Approval subject to statutory clearances.",
               liveStats: {
                 totCapEx: `$${totCapEx}M`,
                 netCapEx: `$${netCapEx}M`,
@@ -1993,9 +1994,10 @@ function getI18NDeck() {
               title: "5 年宏觀投資時程：以貿促工 ✕ 本地製造 ✕ 4.2 年全額回本",
               desc: "首期透過代銷貿易產生現金流，第 1 年轉本土製造，第 4.2 年累積淨利全額抵消 $17.25M 總投資，邁向純淨利爆發！",
               defaultExplanation: "5 年投資全額回收藍圖：累積營運淨現金流自第 1 年本土投產後快速爬坡，於第 4.2 年累積達到 $17.25M，正式超越累積建廠總資本支出，實現 100% 投資全額靜態回收！",
-              orangeLabel: "累積資本支出 (淨額 $17.25M)",
+              orangeLabel: "累積資本支出",
               greenLabel: "累積營運淨現金流",
               timelineLabel: "5 年戰略投資全景時間軸",
+              disclaimer: "📌 註：4.2 年回本期係基於取得印度 SPECS 25% 資本補貼 ($5.75M) 之測算結果；無補貼時基準回收期為 5.2 年。實際核准依主管機關審查為準。",
               liveStats: {
                 totCapEx: `$${totCapEx}M`,
                 netCapEx: `$${netCapEx}M`,
