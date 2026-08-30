@@ -110,8 +110,18 @@
         entry.target.querySelectorAll("[data-count]").forEach(runCounter);
         io.unobserve(entry.target);
       });
-    }, { threshold: 0.18 });
-    els.forEach((el) => io.observe(el));
+    }, { threshold: 0.05, rootMargin: "0px 0px 50px 0px" });
+    els.forEach((el) => {
+      io.observe(el);
+      // Immediate reveal for elements already near viewport top (e.g. Hero on mobile)
+      const rect = el.getBoundingClientRect();
+      if (rect.top < window.innerHeight * 1.1) {
+        setTimeout(() => {
+          el.classList.add("is-visible");
+          el.querySelectorAll("[data-count]").forEach(runCounter);
+        }, 100);
+      }
+    });
   }
 
   function runCounter(el) {

@@ -85,6 +85,9 @@ Project Indo-Phoenix/
 3. **i18n Key 缺漏防禦**：所有 HTML `data-i18n` 鍵值必須在 `data.js` 的 `en` 與 `zh` 中 100% 對齊。
 4. **FX 迴圈啟動鐵律（2026-08-26 教訓）**：每個 rAF 迴圈必須有**初始 kickoff 呼叫**，不可只依賴
    visibilitychange 重啟（fx.js 曾因此載入後全靜、切窗才復活）；FX 驗收必須「載入後不切窗直接測互動」。
+5. **手機端 WebPPT 橫屏全螢幕保護機制（2026-08-30 固化）**：
+   - 直屏偵測（`orientation: portrait`）：自動升起 `.rotate-shield` 毛玻璃引導遮罩，提供 `[ ⛶ 一鍵進入全螢幕橫屏 ]` 主動觸發 Fullscreen API 與 `screen.orientation.lock('landscape')`。
+   - 橫屏極窄視口救援（`max-height: 580px`）：解除 `.slide-wrapper` 剛性高度鎖定，開啟舞台垂直平滑滾動（`overflow-y: auto`），保證 16:9 表單與按鈕 100% 完整可視與互動，嚴禁回退為固定高度。
 
 ---
 
