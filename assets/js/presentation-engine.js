@@ -813,30 +813,30 @@ let currentTheme = "a";
                 </defs>
 
                 <!-- LAYER 2: 5 Vertical Time Grid Lines Connecting Top and Bottom Milestones -->
-                <line x1="80" y1="40" x2="80" y2="310" stroke="rgba(249,115,22,0.4)" stroke-width="1.5" stroke-dasharray="4 3" />
-                <line x1="300" y1="40" x2="300" y2="310" stroke="rgba(249,115,22,0.4)" stroke-width="1.5" stroke-dasharray="4 3" />
-                <line x1="520" y1="40" x2="520" y2="310" stroke="rgba(201,169,110,0.5)" stroke-width="2" stroke-dasharray="4 3" />
-                <line x1="740" y1="40" x2="740" y2="310" stroke="rgba(34,197,94,0.4)" stroke-width="1.5" stroke-dasharray="4 3" />
-                <line x1="930" y1="40" x2="930" y2="310" stroke="rgba(34,197,94,0.4)" stroke-width="1.5" stroke-dasharray="4 3" />
+                <line x1="80" y1="50" x2="80" y2="300" stroke="rgba(249,115,22,0.35)" stroke-width="1.5" stroke-dasharray="4 3" />
+                <line x1="300" y1="50" x2="300" y2="300" stroke="rgba(249,115,22,0.35)" stroke-width="1.5" stroke-dasharray="4 3" />
+                <line x1="520" y1="50" x2="520" y2="300" stroke="rgba(201,169,110,0.5)" stroke-width="2" stroke-dasharray="4 3" />
+                <line x1="740" y1="50" x2="740" y2="300" stroke="rgba(34,197,94,0.35)" stroke-width="1.5" stroke-dasharray="4 3" />
+                <line x1="930" y1="50" x2="930" y2="300" stroke="rgba(34,197,94,0.35)" stroke-width="1.5" stroke-dasharray="4 3" />
 
                 <!-- Central Solid Blue Horizontal Axis Line with Arrow (y=175) -->
                 <line x1="40" y1="175" x2="965" y2="175" stroke="#2563eb" stroke-width="5" marker-end="url(#arrowBlue)" />
 
-                <!-- Background Orange Falling Expenditure Curve (Z-Index Background) -->
-                <path d="M 50,55 C 160,85 240,140 300,165 C 380,195 450,220 520,230 C 640,250 800,280 960,290" 
+                <!-- Realistic Orange CapEx Curve (Starts high, declines gently towards T+12, then stabilizes) -->
+                <path d="M 40,65 C 160,85 240,135 300,155 C 400,185 460,205 520,210 C 640,220 800,240 960,250" 
                       fill="none" stroke="url(#orangeCurveGrad)" stroke-width="3" filter="url(#crossoverGlow)" opacity="0.8" />
 
-                <!-- Background Green Rising Revenue S-Curve (Z-Index Background) -->
-                <path d="M 50,300 C 160,285 230,255 300,225 C 400,175 460,165 520,165 C 620,135 720,95 740,95 C 820,80 880,55 960,40" 
+                <!-- Realistic Green Revenue Curve (Starts low & flat at T+0-T+6, accelerates at T+12, crosses at (520, 210), scales to top-right) -->
+                <path d="M 40,310 C 160,305 240,290 300,275 C 400,245 460,215 520,210 C 620,155 740,105 760,100 C 840,75 900,55 960,45" 
                       fill="none" stroke="url(#greenCurveGrad)" stroke-width="3" filter="url(#crossoverGlow)" opacity="0.8" />
 
-                <!-- Golden Breakeven Crossover Node Pulse at (520, 165) -->
-                <circle cx="520" cy="165" r="15" fill="none" stroke="var(--accent)" stroke-width="2" class="pulse-ring" />
-                <circle cx="520" cy="165" r="7" fill="#0f172a" stroke="var(--accent)" stroke-width="3" />
-                <circle cx="520" cy="165" r="3" fill="#fff" />
+                <!-- Golden Breakeven Crossover Node Pulse Exactly at Intersection (520, 210) -->
+                <circle cx="520" cy="210" r="15" fill="none" stroke="var(--accent)" stroke-width="2" class="pulse-ring" />
+                <circle cx="520" cy="210" r="7" fill="#0f172a" stroke="var(--accent)" stroke-width="3" />
+                <circle cx="520" cy="210" r="3" fill="#fff" />
               </svg>
 
-              <!-- Category Labels in Neutral Corners -->
+              <!-- Category Labels in Neutral Corners (Completely separated from nodes) -->
               <div class="crossover-title-badge orange-badge">
                 ${slide.orangeLabel || '建廠(支出)'}
               </div>
@@ -847,10 +847,10 @@ let currentTheme = "a";
                 ${slide.timelineLabel || '時間線 + 損益平衡線'}
               </div>
 
-              <!-- LAYER 3 FOREGROUND: Top Orange Factory Milestones (2-Row Clean Stack) -->
+              <!-- LAYER 3 FOREGROUND: Top Orange Factory Milestones (Gathered towards center at top: 18%) -->
               <div class="crossover-node-layer orange-layer">
                 ${(slide.orangeNodes || []).map((n, idx) => `
-                  <div class="crossover-point-item orange-point" style="left:${idx === 0 ? '8%' : idx === 1 ? '30%' : idx === 2 ? '52%' : '74%'}; top: 4%; transform: translateX(-50%);"
+                  <div class="crossover-point-item orange-point" style="left:${idx === 0 ? '8%' : idx === 1 ? '30%' : idx === 2 ? '52%' : '74%'}; top: 18%; transform: translateX(-50%);"
                        onclick="selectGenericCard('orangePt', ${idx}, '${n.detail.replace(/'/g, "\\'")}')"
                        onmouseenter="selectGenericCard('orangePt', ${idx}, '${n.detail.replace(/'/g, "\\'")}')">
                     <div class="point-header-line">
@@ -877,10 +877,10 @@ let currentTheme = "a";
                 <span style="left:93%;">T+24</span>
               </div>
 
-              <!-- LAYER 3 FOREGROUND: Bottom Green Commercial Milestones (2-Row Clean Stack) -->
+              <!-- LAYER 3 FOREGROUND: Bottom Green Commercial Milestones (Gathered towards center at bottom: 18%) -->
               <div class="crossover-node-layer green-layer">
                 ${(slide.greenNodes || []).map((n, idx) => `
-                  <div class="crossover-point-item green-point" style="left:${idx === 0 ? '8%' : idx === 1 ? '30%' : idx === 2 ? '52%' : '74%'}; bottom: 4%; transform: translateX(-50%);"
+                  <div class="crossover-point-item green-point" style="left:${idx === 0 ? '8%' : idx === 1 ? '30%' : idx === 2 ? '52%' : '74%'}; bottom: 18%; transform: translateX(-50%);"
                        onclick="selectGenericCard('greenPt', ${idx}, '${n.detail.replace(/'/g, "\\'")}')"
                        onmouseenter="selectGenericCard('greenPt', ${idx}, '${n.detail.replace(/'/g, "\\'")}')">
                     <div class="point-header-line">

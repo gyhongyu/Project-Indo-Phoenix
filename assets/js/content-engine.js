@@ -83,7 +83,9 @@
       if (!r.key) return;
       var v = r.value;
       if (v === "" || v === null || v === undefined) return;
-      var n = parseFloat(String(v).replace(/,/g, ""));
+      var cleanStr = String(v).replace(/,/g, "").trim();
+      var match = cleanStr.match(/^[-+]?[0-9]*\.?[0-9]+/);
+      var n = match ? parseFloat(match[0]) : NaN;
       p.stats[String(r.key).trim()] = isNaN(n) ? String(v) : n;
     });
     (textRows || []).forEach(function (r) {
