@@ -661,14 +661,14 @@ let currentTheme = "a";
       }
 
       // 4. CapEx Waterfall Bars (Fallback)
-      // 5. Master BEP Financial Cockpit (Slide 7)
+      // 5. Master BEP Financial Cockpit (Slide 11 Overhaul)
       else if (slide.type === "bep-master-cockpit") {
         html += `
           <div class="bep-cockpit-grid">
-            <!-- Left: Master BEP Gauge & Sensitivity Simulation -->
+            <!-- Left 38%: Master BEP Gauge & Sensitivity Simulation -->
             <div class="gauge-card-master gs-anim-card">
               <div>
-                <div class="slide-tag" style="font-size:10px; margin-bottom:8px;">BREAK-EVEN METER</div>
+                <div class="slide-tag" style="font-size:10px; margin-bottom:6px;">BREAK-EVEN METER</div>
                 <div class="gauge-main-wrap">
                   <div class="gauge-circle">
                     <div class="gauge-arc" id="cockpitGaugeArc"></div>
@@ -692,25 +692,52 @@ let currentTheme = "a";
                   <span>${currentLang === 'zh' ? '預估月獲利' : 'Est. EBIT'}: <strong id="simEbit" style="color:var(--accent);">$322K</strong></span>
                 </div>
               </div>
+
+              <!-- Bottom Double Returns Badges -->
+              <div class="bep-returns-ribbon">
+                <div class="bep-return-item">
+                  <span class="bep-ret-lbl">IRR ${currentLang === 'zh' ? '內部報酬率' : 'Return'}</span>
+                  <span class="bep-ret-val" style="color:#34d399;">21.3% ~ 24.8%</span>
+                </div>
+                <div class="bep-return-divider"></div>
+                <div class="bep-return-item">
+                  <span class="bep-ret-lbl">${currentLang === 'zh' ? '靜態投資回收期' : 'Static Payback'}</span>
+                  <span class="bep-ret-val" style="color:var(--accent);">4.2 ${currentLang === 'zh' ? '年' : 'Yrs'}</span>
+                </div>
+              </div>
             </div>
 
-            <!-- Right: 6 Modular Financial Metrics Cards -->
-            <div class="cockpit-cards-grid">
-              ${slide.cards.map((c, idx) => `
-                <div class="cockpit-mini-card gs-anim-card ${idx === 0 ? 'active' : ''}" 
-                     id="cockpitCard_${idx}" 
-                     onclick="selectCockpitCard(${idx})"
-                     onmouseenter="previewCockpitCard(${idx})">
-                  <div class="mini-card-header">
-                    <div class="mini-card-label">${c.label}</div>
-                    <span style="font-size:10px; color:var(--accent); opacity:0.7;">●</span>
+            <!-- Right 62%: Complete Financial Statement Metrics Rows -->
+            <div class="bep-metrics-rows-list">
+              ${(slide.metricsTable || []).map((m, idx) => `
+                <div class="bep-metric-row-card gs-anim-card ${idx === 2 ? 'ebit-row' : ''} ${idx === 3 ? 'bep-row' : ''}"
+                     id="bepRow_${idx}"
+                     onclick="selectGenericCard('bepRow', ${idx}, '${m.bench.replace(/'/g, "\\'")}')"
+                     onmouseenter="selectGenericCard('bepRow', ${idx}, '${m.bench.replace(/'/g, "\\'")}')">
+                  
+                  <div class="bep-metric-title-col">
+                    <span class="bep-metric-dot ${idx === 2 ? 'accent' : ''}"></span>
+                    <span class="bep-metric-title">${m.metric}</span>
                   </div>
-                  <div class="mini-card-val count-target" data-target="${c.val}">0</div>
-                  <div class="mini-card-sub">${c.sub}</div>
 
-                  <div class="card-smart-tooltip">
-                    <div class="tooltip-tag">💡 ${currentLang === 'zh' ? '財務指標決策依據' : 'Strategic Insight'}</div>
-                    <div class="tooltip-text">${c.detail}</div>
+                  <div class="bep-val-col">
+                    <div class="space-row-sublbl">${currentLang === 'zh' ? '單月預估' : 'Monthly'}</div>
+                    <div class="bep-val-num ${idx === 2 ? 'accent' : ''}">${m.monthly}</div>
+                  </div>
+
+                  <div class="bep-val-col">
+                    <div class="space-row-sublbl">${currentLang === 'zh' ? '年度預估' : 'Annual'}</div>
+                    <div class="bep-val-num ${idx === 2 ? 'accent' : ''}">${m.annual}</div>
+                  </div>
+
+                  <div class="bep-val-col margin-col">
+                    <div class="space-row-sublbl">${currentLang === 'zh' ? '毛利/比率' : 'Margin/Val'}</div>
+                    <div class="bep-val-num ${idx === 2 ? 'highlight' : ''}">${m.margin}</div>
+                  </div>
+
+                  <div class="bep-bench-col">
+                    <div class="space-row-sublbl">${currentLang === 'zh' ? '業界標準與決策依據' : 'Benchmark & Strategic Note'}</div>
+                    <div class="bep-bench-text">${m.bench}</div>
                   </div>
                 </div>
               `).join("")}
@@ -720,8 +747,8 @@ let currentTheme = "a";
           <!-- Non-Intrusive Floating Context Explanation Bar -->
           <div class="cockpit-floating-bar" id="cockpitFloatingBar">
             <div class="floating-bar-icon">💡</div>
-            <div class="floating-bar-text" id="cockpitFloatingText">
-              <strong>${currentLang === 'zh' ? '決策依據' : 'Strategic Insight'}:</strong> ${slide.cards[0].detail}
+            <div class="floating-bar-text" id="genericFloatingText">
+              <strong>${currentLang === 'zh' ? '財務模型決策依據' : 'Financial Statement Insight'}:</strong> ${slide.defaultExplanation}
             </div>
           </div>
         `;

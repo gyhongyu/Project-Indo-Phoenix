@@ -583,14 +583,14 @@
 
     /* 5. BEP Master Cockpit (Slide 11 Overhaul) */
     .bep-cockpit-grid {
-      flex: 1; display: grid; grid-template-columns: 1.15fr 2fr; gap: 20px;
-      align-items: stretch; margin-bottom: 12px; min-height: 0;
+      flex: 1; display: grid; grid-template-columns: 0.95fr 2.05fr; gap: 14px;
+      align-items: stretch; margin-bottom: 10px; min-height: 0;
     }
     .gauge-card-master {
       background: linear-gradient(135deg, rgba(255,255,255,0.03) 0%, rgba(0,0,0,0.4) 100%);
       border: 1px solid var(--accent); border-radius: var(--card-radius);
-      padding: clamp(16px, 2vh, 24px) 20px; display: flex; flex-direction: column;
-      justify-content: space-between; box-shadow: 0 12px 36px var(--accent-glow);
+      padding: clamp(10px, 1.2vh, 14px) 16px; display: flex; flex-direction: column;
+      justify-content: space-between; box-shadow: 0 8px 24px var(--accent-glow);
       position: relative; overflow: hidden;
     }
     .gauge-card-master::after {
@@ -600,85 +600,109 @@
     }
     .gauge-main-wrap {
       display: flex; flex-direction: column; align-items: center; justify-content: center;
-      margin: 4px 0;
+      margin: 2px 0;
     }
     .gauge-circle {
-      position: relative; width: 170px; height: 85px; overflow: hidden;
+      position: relative; width: 140px; height: 70px; overflow: hidden;
       display: flex; align-items: flex-end; justify-content: center;
     }
     .gauge-arc {
-      width: 170px; height: 170px; border-radius: 50%;
-      border: 14px solid rgba(255,255,255,0.05);
+      width: 140px; height: 140px; border-radius: 50%;
+      border: 12px solid rgba(255,255,255,0.05);
       border-top-color: var(--accent); border-left-color: var(--accent);
       position: absolute; top: 0; left: 0;
       transform: rotate(-45deg);
-      box-shadow: 0 0 24px var(--accent-glow);
+      box-shadow: 0 0 20px var(--accent-glow);
       transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
     }
     .gauge-value {
-      font-family: var(--font-display); font-size: 36px; font-weight: 600;
-      color: var(--accent); line-height: 1; z-index: 2; margin-bottom: 4px;
+      font-family: var(--font-display); font-size: 30px; font-weight: 600;
+      color: var(--accent); line-height: 1; z-index: 2; margin-bottom: 2px;
     }
     .gauge-threshold-text {
-      font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.15em;
-      text-transform: uppercase; color: var(--accent-light); margin-top: 6px;
+      font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.12em;
+      text-transform: uppercase; color: var(--accent-light); margin-top: 4px;
       text-align: center;
     }
 
     /* BEP Sensitivity Slider */
     .slider-box {
-      margin-top: 10px; padding-top: 10px; border-top: 1px solid rgba(255,255,255,0.08);
+      margin-top: 6px; padding-top: 6px; border-top: 1px solid rgba(255,255,255,0.08);
     }
     .slider-header {
       display: flex; justify-content: space-between; font-family: var(--font-mono);
-      font-size: 11px; color: var(--ink-sub); margin-bottom: 6px;
+      font-size: 10px; color: var(--ink-sub); margin-bottom: 4px;
     }
     .slider-header strong { color: var(--accent); }
     .cockpit-slider {
       width: 100%; -webkit-appearance: none; appearance: none;
-      height: 6px; border-radius: 3px; background: rgba(255,255,255,0.1);
+      height: 5px; border-radius: 3px; background: rgba(255,255,255,0.1);
       outline: none; transition: background 0.3s;
     }
     .cockpit-slider::-webkit-slider-thumb {
       -webkit-appearance: none; appearance: none;
-      width: 16px; height: 16px; border-radius: 50%;
+      width: 14px; height: 14px; border-radius: 50%;
       background: var(--accent); cursor: pointer;
-      box-shadow: 0 0 10px var(--accent);
+      box-shadow: 0 0 8px var(--accent);
     }
     .slider-result-row {
       display: flex; justify-content: space-between; font-family: var(--font-mono);
-      font-size: 11px; color: var(--ink-sub); margin-top: 6px;
+      font-size: 10px; color: var(--ink-sub); margin-top: 4px;
     }
     .slider-result-row strong { color: var(--ink); }
 
-    /* 6 Mini Metrics Grid */
-    .cockpit-cards-grid {
-      display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px;
+    /* Bottom Double Returns Ribbon */
+    .bep-returns-ribbon {
+      background: rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 4px; padding: 6px 10px; display: flex;
+      justify-content: space-around; align-items: center; margin-top: 6px;
     }
-    .cockpit-mini-card {
-      background: rgba(10, 15, 25, 0.2);
-      border: 1px solid var(--line-subtle);
-      border-radius: var(--card-radius);
-      padding: clamp(12px, 1.6vh, 18px) 16px; display: flex; flex-direction: column;
-      justify-content: space-between; cursor: pointer;
-      transition: all 0.25s var(--ease); position: relative;
+    .bep-return-item { display: flex; flex-direction: column; align-items: center; }
+    .bep-ret-lbl { font-family: var(--font-mono); font-size: 8.5px; color: var(--ink-sub); text-transform: uppercase; }
+    .bep-ret-val { font-family: var(--font-mono); font-size: 12px; font-weight: 700; }
+    .bep-return-divider { width: 1px; height: 16px; background: rgba(255,255,255,0.08); }
+
+    /* 6 Financial Rows on Right */
+    .bep-metrics-rows-list {
+      display: grid; grid-template-rows: repeat(6, 1fr); gap: 5px;
+      min-height: 0;
     }
-    .cockpit-mini-card:hover, .cockpit-mini-card.active {
+    .bep-metric-row-card {
+      background: rgba(10, 15, 25, 0.2); border: 1px solid var(--line-subtle);
+      border-radius: 6px; padding: clamp(4px, 0.7vh, 8px) clamp(10px, 1vw, 14px);
+      display: grid; grid-template-columns: 1.5fr 0.9fr 0.9fr 0.9fr 2fr; gap: 10px;
+      align-items: center; cursor: pointer; transition: all 0.25s var(--ease);
+      position: relative; min-height: 0;
+    }
+    /* English-specific layout tuning */
+    html[lang="en"] .bep-metric-row-card {
+      grid-template-columns: 1.4fr 0.9fr 0.9fr 0.9fr 1.9fr;
+      gap: 10px;
+    }
+    .bep-metric-row-card:hover, .bep-metric-row-card.active {
       background: var(--bg-card-hover); border-color: var(--accent);
-      transform: translateY(-2px); box-shadow: 0 6px 20px var(--accent-glow);
+      transform: translateX(4px); box-shadow: 0 4px 16px var(--accent-glow);
     }
-    .cockpit-mini-card.active::before {
-      content: ""; position: absolute; top: 0; left: 0; right: 0; height: 2px;
-      background: var(--accent); box-shadow: 0 0 8px var(--accent);
+    .bep-metric-row-card.ebit-row {
+      background: linear-gradient(90deg, rgba(201, 169, 110, 0.14) 0%, rgba(10, 15, 25, 0.4) 100%);
+      border-color: var(--accent); border-left: 3px solid var(--accent);
     }
-    .mini-card-header {
-      display: flex; justify-content: space-between; align-items: flex-start;
-      margin-bottom: 4px;
+    .bep-metric-row-card.bep-row {
+      background: linear-gradient(90deg, rgba(56, 189, 248, 0.1) 0%, rgba(10, 15, 25, 0.4) 100%);
+      border-color: #38bdf8; border-left: 3px solid #38bdf8;
     }
-    .mini-card-label {
-      font-family: var(--font-mono); font-size: 10.5px; letter-spacing: 0.15em;
-      text-transform: uppercase; color: var(--ink-sub);
-    }
+    .bep-metric-title-col { display: flex; align-items: center; gap: 8px; }
+    .bep-metric-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--ink-sub); flex-shrink: 0; }
+    .bep-metric-dot.accent { background: var(--accent); box-shadow: 0 0 6px var(--accent); }
+    .bep-metric-title { font-size: 12.5px; font-weight: 600; color: var(--ink); white-space: nowrap; }
+
+    .bep-bench-col { display: flex; flex-direction: column; justify-content: center; }
+    .bep-bench-text { font-size: 10.5px; color: var(--ink-sub); line-height: 1.3; }
+
+    .bep-val-col { display: flex; flex-direction: column; justify-content: center; }
+    .bep-val-num { font-family: var(--font-mono); font-size: 12.5px; font-weight: 600; color: var(--ink); }
+    .bep-val-num.accent { color: var(--accent); font-weight: 700; }
+    .bep-val-num.highlight { color: #34d399; font-weight: 700; }
     .mini-card-val {
       font-family: var(--font-display); font-size: clamp(22px, 2vw, 28px);
       font-weight: 600; color: var(--accent); line-height: 1; margin-bottom: 4px;

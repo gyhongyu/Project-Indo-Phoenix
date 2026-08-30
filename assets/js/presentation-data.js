@@ -657,30 +657,74 @@ function getI18NDeck() {
               bepVal: `${bepUtil}%`,
               thresholdRevMo: `$${bepRev}M`,
               defaultExplanation: "The business crosses into net profit at just 50.8% capacity ($1.22M monthly revenue), delivering exceptional downside defense.",
-              cards: [
+              metricsTable: [
                 {
-                  label: "Break-Even Utilization",
-                  val: `${bepUtil}%`,
-                  sub: `Capacity: ${Math.round(15000*bepUtil/100).toLocaleString()} m²/mo`,
-                  detail: "At only 50.8% capacity utilization (7,616 m²/mo), project revenue covers 100% of all fixed and variable monthly expenses."
+                  metric: "Target Sales Revenue",
+                  monthly: "$2,400,000",
+                  annual: "$28,800,000",
+                  margin: "100.0%",
+                  bench: "At 15,000 m²/mo full capacity, weighted avg ASP is $160/m²."
                 },
                 {
-                  label: "EBIT Operating Profit",
+                  metric: "Operating Expenses (OpEx)",
+                  monthly: "$1,845,000",
+                  annual: "$22,140,000",
+                  margin: "76.9%",
+                  bench: "Includes materials, labor, power, water, and straight-line depreciation."
+                },
+                {
+                  metric: "Operating Profit (EBIT)",
+                  monthly: "$555,000",
+                  annual: "$6,660,000",
+                  margin: "23.1%",
+                  bench: "EBIT Margin of 23.1% demonstrates robust scale profitability."
+                },
+                {
+                  metric: "Break-Even Point (BEP)",
+                  monthly: "$1,218,543",
+                  annual: "$14,622,516",
+                  margin: "50.8%",
+                  bench: "Factory enters dynamic net profit at only $1.22M/mo revenue."
+                },
+                {
+                  metric: "Internal Rate of Return (IRR)",
+                  monthly: "--",
+                  annual: "--",
+                  margin: "21.3% ~ 24.8%",
+                  bench: "Far exceeds standard electronics manufacturing benchmarks (12-15%)."
+                },
+                {
+                  metric: "Static Payback Period",
+                  monthly: "--",
+                  annual: "--",
+                  margin: "4.2 Years",
+                  bench: "Assumes SPECS 25% refund ($5.75M). Without subsidy: 5.2 Years."
+                }
+              ],
+              cards: [
+                {
+                  label: "Target Revenue (100%)",
+                  val: `$${(getLiveStat("monthlyRevenue",2400000)/1000000).toFixed(1)}M`,
+                  sub: `Annual: $${((getLiveStat("monthlyRevenue",2400000)*12)/1000000).toFixed(1)}M`,
+                  detail: "At 15,000 m²/mo full capacity, weighted average ASP is $160/m², delivering $28.8M annual revenue."
+                },
+                {
+                  label: "Operating Profit (EBIT)",
                   val: `$${ebitMo}K`,
                   sub: `${ebitMarg}% Margin ($${(ebitMo*12/1000).toFixed(2)}M/yr)`,
                   detail: "EBIT Margin of 23.1% delivers $6.66M annualized profit at full capacity, proving extraordinary scale returns."
                 },
                 {
-                  label: "BEP Revenue Threshold",
-                  val: `$${bepRev}M`,
-                  sub: `Annualized: $${(bepRev*12).toFixed(2)}M`,
-                  detail: "The factory crosses into dynamic net profit at only $1.22M monthly revenue. Standard for highly capitalized modern wet-process electronics plants."
+                  label: "Break-Even Utilization",
+                  val: `${bepUtil}%`,
+                  sub: `Monthly: $${bepRev}M`,
+                  detail: "The factory crosses into dynamic net profit at only $1.22M monthly revenue (50.8% capacity, 7,616 m²/mo)."
                 },
                 {
                   label: "Internal Rate of Return",
                   val: irrRange,
                   sub: "Benchmark: 12% - 15%",
-                  detail: "Projected IRR between 21.3% and 24.8% far exceeds standard electronics manufacturing benchmarks, offering superior risk-adjusted alpha."
+                  detail: "Projected IRR between 21.3% and 24.8% far exceeds standard electronics manufacturing benchmarks (12-15%)."
                 },
                 {
                   label: "Static Payback",
@@ -1805,6 +1849,50 @@ function getI18NDeck() {
               thresholdRevMo: `$${bepRev}M`,
               thresholdRevYr: `$${(bepRev * 12).toFixed(2)}M`,
               defaultExplanation: "包含原料、人工、電力水資源及直線法折舊。產能稼動率只要超過 50.8%，即刻產生充沛淨現金流。",
+              metricsTable: [
+                {
+                  metric: "目標營業收入",
+                  monthly: "$2,400,000",
+                  annual: "$28,800,000",
+                  margin: "100.0%",
+                  bench: "在每月 15,000 m² 滿載運營下，加權平均價格為 160 美元/m²。"
+                },
+                {
+                  metric: "單月營運成本 (OpEx)",
+                  monthly: "$1,845,000",
+                  annual: "$22,140,000",
+                  margin: "76.9%",
+                  bench: "包含原料、人工、電力、水資源及直線法資產折舊。"
+                },
+                {
+                  metric: "營業利潤 (EBIT)",
+                  monthly: "$555,000",
+                  annual: "$6,660,000",
+                  margin: "23.1%",
+                  bench: "23.1% 的息稅前利潤率 (EBIT Margin) 顯示滿載時具有極佳的規模獲利能力。"
+                },
+                {
+                  metric: "損益兩平點 (BEP)",
+                  monthly: "$1,218,543",
+                  annual: "$14,622,516",
+                  margin: "50.8%",
+                  bench: "當月營收達到 122 萬美元時，工廠即跨入動態淨獲利階段。"
+                },
+                {
+                  metric: "內部報酬率 (IRR)",
+                  monthly: "--",
+                  annual: "--",
+                  margin: "21.3% ~ 24.8%",
+                  bench: "遠超標準電子製造業基準 (12-15%)，極具吸引力。"
+                },
+                {
+                  metric: "靜態投資回收期",
+                  monthly: "--",
+                  annual: "--",
+                  margin: "4.2 年",
+                  bench: "假設已取得 SPECS 25% 資本支出補貼 ($5.75M)。若無補貼，回收期為 5.2 年。"
+                }
+              ],
               cards: [
                 {
                   label: "目標營業收入",
@@ -1813,21 +1901,15 @@ function getI18NDeck() {
                   detail: "在每月 15,000 平方公尺滿載運營下，加權平均價格為 160 美元/平方公尺。代表雙班制連續生產下的總產值規模。"
                 },
                 {
-                  label: "單月營運成本",
-                  val: `$${opexMo}M`,
-                  sub: "佔總營收比例 76.9%",
-                  detail: "單月總營運成本為 184.5 萬美元（年化 2,214 萬美元）。變動成本佔 69.0%（單月 127 萬美元），具備極強的抗景氣循環韌性。"
-                },
-                {
                   label: "營業利潤 (EBIT)",
                   val: `$${ebitMo}K`,
                   sub: `${ebitMarg}% 利潤率（年化 $${(ebitMo*12/1000).toFixed(2)}M）`,
                   detail: "23.1% 的息稅前利潤率 (EBIT Margin)，滿載時年化息稅前利潤達 666 萬美元，展現卓越的規模獲利優勢。"
                 },
                 {
-                  label: "損益平衡營收門檻",
-                  val: `$${bepRev}M`,
-                  sub: `年化門檻：$${(bepRev*12).toFixed(2)}M`,
+                  label: "損益平衡稼動率",
+                  val: `${bepUtil}%`,
+                  sub: `單月門檻：$${bepRev}M`,
                   detail: "工廠僅需每月 122 萬美元營收（稼動率 50.8%）即跨越損益平衡點。此為現代高資本化濕製程電子工廠的頂尖水準。"
                 },
                 {
