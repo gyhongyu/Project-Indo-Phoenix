@@ -744,59 +744,59 @@ function getI18NDeck() {
               orangeLabel: "Plant Setup (Expenditure)",
               greenLabel: "Trade & Sales (Revenue)",
               timelineLabel: "24-Month Phased Timeline",
-              // Live Dynamic Numbers for Curves & Nodes (Direct from Google Sheet WEB_DATA)
+              // Live Dynamic Numbers Derived Automatically from Core Financial Formulas (SSOT)
               liveStats: {
                 totCapEx: `$${totCapEx}M`,
                 bepRevMo: `$${bepRev}M`,
                 fullRevMo: `$${(getLiveStat("monthlyRevenue",2400000)/1000000).toFixed(2)}M`,
-                s0: getLiveStat("tradeSales_T0", 0),
-                s6: getLiveStat("tradeSales_T6", 250000),
-                s12: getLiveStat("tradeSales_T12", 750000),
-                s18: getLiveStat("tradeSales_T18", 1218543),
-                s24: getLiveStat("tradeSales_T24", 2040000)
+                s0: (getLiveStat("monthlyRevenue", 2400000) * 0.10),
+                s6: (getLiveStat("monthlyRevenue", 2400000) * 0.25),
+                s12: getLiveStat("bepRevenue", 1218543),
+                s18: (getLiveStat("monthlyRevenue", 2400000) * 0.85),
+                s24: getLiveStat("monthlyRevenue", 2400000)
               },
               orangeNodes: [
                 {
-                  title: "Company Setup & Capital Injection",
-                  metric: `$${totCapEx}M Initial CapEx`,
-                  detail: "Promoter secures JV incorporation, site leasehold, initial equity funding, and SPCB CTE application."
+                  title: "Company Setup & Equity Injection",
+                  metric: "SPCB CTE Filing",
+                  detail: `Promoter secures JV incorporation, site leasehold, initial equity funding ($${totCapEx}M Total CapEx), and submits SPCB CTE environmental application.`
                 },
                 {
-                  title: "Civil Retrofit & Machine CEC",
+                  title: "Civil Retrofit & Machine Import",
                   metric: "CEC Machine Clearance",
-                  detail: "Plant civil engineering, cleanroom partition setup, and CEC green-channel machine source inspection."
+                  detail: "Cleanroom partition construction, HVAC utilities installation, and CEC green-channel machine inspection & customs clearance."
                 },
                 {
-                  title: "Cleanroom Clearance & Trial Run",
-                  metric: "13,000 m² Commissioning",
-                  detail: "万-class cleanroom commissioned, plating chemistry line calibration, and edge ACC loop deployment."
+                  title: "Cleanroom Clearance & SPCB CTO",
+                  metric: "13,000 m² Commissioned",
+                  detail: "万-class cleanroom commissioned, ZLD water recycling operational, and SPCB CTO statutory consent to operate granted for production."
                 },
                 {
-                  title: "Regularized Autonomous Operation",
-                  metric: "SPCB CTO Regularized",
-                  detail: "SPCB CTO finalized; AR dynamic SOPs implemented with local engineering team operating autonomously."
+                  title: "Autonomous Local Operation",
+                  metric: "100% Local Engineering",
+                  detail: "Full production regularization; local Indian engineering team achieves 100% autonomous operation with AR smart dynamic SOPs."
                 }
               ],
               greenNodes: [
                 {
                   title: "Launch Trade Distribution",
-                  metric: `$${(getLiveStat("tradeSales_T0", 0)/1000).toFixed(0)}K/mo Initial Run-Rate`,
-                  detail: "Initiate commercial trading sales via mature supply chain; establish direct engagements with consumer clients."
+                  metric: "Market Cash Flow Entry",
+                  detail: `Initiate upfront trading distribution via mature supply chain ($${((getLiveStat("monthlyRevenue", 2400000) * 0.10)/1000).toFixed(0)}K/mo), seeding market engagements.`
                 },
                 {
                   title: "Vendor Codes & NPI Sampling",
-                  metric: `$${(getLiveStat("tradeSales_T6", 250000)/1000).toFixed(0)}K/mo (48h Turnaround)`,
-                  detail: "Lock in tier-1 client vendor codes and provide 48h prototype sampling for smartphone & CCM modules."
+                  metric: "48h Quick Turnaround",
+                  detail: `Lock in tier-1 consumer & camera module vendor codes with 48h rapid prototype sampling ($${((getLiveStat("monthlyRevenue", 2400000) * 0.25)/1000).toFixed(0)}K/mo).`
                 },
                 {
-                  title: "Switch to 100% Local Production",
-                  metric: `$${(getLiveStat("tradeSales_T12", 750000)/1000).toFixed(0)}K/mo Local Switch`,
-                  detail: "Transition import orders to 100% India local production; prepare ramp up towards factory breakeven."
+                  title: "100% Local Manufacturing Switch",
+                  metric: "Zero-Downtime Order Transition",
+                  detail: `Seamlessly transition trading import volume to 100% India local production upon cleanroom clearance ($${bepRev}M/mo BEP threshold).`
                 },
                 {
-                  title: "Full Capacity Scale & Expansion",
-                  metric: `$${(getLiveStat("tradeSales_T24", 2040000)/1000000).toFixed(2)}M/mo Scale Run-Rate`,
-                  detail: "Achieve scalable capacity delivery, ramp up EV battery pack CCS, and evaluate Phase 2 rigid-flex expansion."
+                  title: "Full Scale Capacity Run-Rate",
+                  metric: "Full Plant Production",
+                  detail: `Achieve $${(getLiveStat("monthlyRevenue",2400000)/1000000).toFixed(2)}M/mo run-rate ($28.8M/yr), scale EV battery CCS, and evaluate Phase 2 rigid-flex expansion.`
                 }
               ],
               milestones: [
@@ -1995,22 +1995,22 @@ function getI18NDeck() {
               orangeLabel: "建廠(支出)",
               greenLabel: "貿易(收入)",
               timelineLabel: "24 個月雙軌推進時間軸",
-              // Live Dynamic Numbers for Curves & Nodes（直接連動 Google Sheet WEB_DATA）
+              // Live Dynamic Numbers Derived Automatically from Core Financial Formulas (SSOT)
               liveStats: {
                 totCapEx: `$${totCapEx}M`,
                 bepRevMo: `$${bepRev}M`,
                 fullRevMo: `$${(getLiveStat("monthlyRevenue",2400000)/1000000).toFixed(2)}M`,
-                s0: getLiveStat("tradeSales_T0", 0),
-                s6: getLiveStat("tradeSales_T6", 250000),
-                s12: getLiveStat("tradeSales_T12", 750000),
-                s18: getLiveStat("tradeSales_T18", 1218543),
-                s24: getLiveStat("tradeSales_T24", 2040000)
+                s0: (getLiveStat("monthlyRevenue", 2400000) * 0.10),
+                s6: (getLiveStat("monthlyRevenue", 2400000) * 0.25),
+                s12: getLiveStat("bepRevenue", 1218543),
+                s18: (getLiveStat("monthlyRevenue", 2400000) * 0.85),
+                s24: getLiveStat("monthlyRevenue", 2400000)
               },
               orangeNodes: [
                 {
                   title: "公司設立與注資",
-                  metric: `總資本支出 $${totCapEx}M`,
-                  detail: "印度發起人主導 JV 公司設立、土地廠房租賃、首期股權注資到位，並遞交 SPCB CTE 環評申請。"
+                  metric: "SPCB CTE 環評送件",
+                  detail: `印度發起人主導 JV 公司設立、土地廠房租賃、首期股權注資到位 (總 CapEx $${totCapEx}M)，並遞交 SPCB CTE 環評申請。`
                 },
                 {
                   title: "廠房改裝與設備進場",
@@ -2018,36 +2018,36 @@ function getI18NDeck() {
                   detail: "無塵室土建隔間施工、暖通電力公用工程改裝，台方團隊透過 CEC 綠色通道完成原廠設備驗收。"
                 },
                 {
-                  title: "潔淨室完工通線",
-                  metric: "13,000 m² 竣工投產",
-                  detail: "萬級無塵室竣工交付，電鍍濕製程化學配方調試完成，部署 PolarFire SoC 邊緣自適應閉環控制 (ACC)。"
+                  title: "潔淨室竣工 ✕ SPCB CTO",
+                  metric: "13,000 m² 正式投產",
+                  detail: "萬級無塵室竣工交付，ZLD 廢水零排放驗收通過，正式取得 SPCB CTO 排污許可證，具備合法量產資格。"
                 },
                 {
                   title: "常態化自主運營",
-                  metric: "SPCB CTO 正式排污許可",
-                  detail: "SPCB CTO 正式排污許可常態化，導入 AR 智慧眼鏡動態 SOP，印度在地工程師團隊實現 100% 獨立自主運轉。"
+                  metric: "在地團隊 100% 獨立自主",
+                  detail: "常態化連續量產；導入 AR 智慧眼鏡動態 SOP，印度在地工程師團隊實現 100% 獨立自主運轉。"
                 }
               ],
               greenNodes: [
                 {
                   title: "啟動代銷貿易",
-                  metric: `月化營收 $${(getLiveStat("tradeSales_T0", 0)/1000).toFixed(0)}K 啟動`,
-                  detail: "依託成熟供應鏈優勢供貨，以貿易代銷先行跑通市場，預先建立印度終端客戶代碼 (Vendor Code)。"
+                  metric: "即時現金流切入",
+                  detail: `依託成熟供應鏈優勢供貨，以貿易代銷先行跑通市場 ($${((getLiveStat("monthlyRevenue", 2400000) * 0.10)/1000).toFixed(0)}K/月)，預先建立印度終端客戶代碼 (Vendor Code)。`
                 },
                 {
                   title: "客戶代碼與打樣",
-                  metric: `月化營收 $${(getLiveStat("tradeSales_T6", 250000)/1000).toFixed(0)}K (48h極速打樣)`,
-                  detail: "鎖定一級消費電子與鏡頭模組客戶，展開 48 小時工程極速打樣 (NPI) 與工廠體系預審。"
+                  metric: "48h 極速工程打樣",
+                  detail: `鎖定一級消費電子與鏡頭模組客戶，展開 48 小時工程極速打樣 (NPI) 與工廠體系預審 ($${((getLiveStat("monthlyRevenue", 2400000) * 0.25)/1000).toFixed(0)}K/月)。`
                 },
                 {
-                  title: "轉本土量產",
-                  metric: `月化營收 $${(getLiveStat("tradeSales_T12", 750000)/1000).toFixed(0)}K 本土切換`,
-                  detail: "將既有進口代銷訂單 100% 無縫切換為印度本土製造，穩步邁向工廠損益平衡。"
+                  title: "轉 100% 本土自主量產",
+                  metric: "訂單零延遲原地轉化",
+                  detail: `無塵室取證通線，將既有進口代銷訂單 100% 無縫切換為印度本土製造 ($${bepRev}M/月 損益平衡門檻)。`
                 },
                 {
-                  title: "滿載規模運營",
-                  metric: `月化營收 $${(getLiveStat("tradeSales_T24", 2040000)/1000000).toFixed(2)}M 放量產值`,
-                  detail: "規模化連續生產達成高產值，切入高毛利 EV 電池包 CCS，奠定全印度第一大本土軟板龍頭。"
+                  title: "滿載規模化運營",
+                  metric: "全廠滿載產能交付",
+                  detail: `雙班制達成 $${(getLiveStat("monthlyRevenue",2400000)/1000000).toFixed(2)}M/月 ($28.8M/年) 滿載營收，放量 EV 電池包 CCS，奠定全印度第一大本土軟板龍頭。`
                 }
               ],
               milestones: [

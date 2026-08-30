@@ -860,11 +860,6 @@ let currentTheme = "a";
                 <!-- 100% Dynamic Mathematically Interpolated Green Revenue Curve from Google Sheet Values -->
                 <path d="M 40,${revY0} C 160,${revY0} 240,${revY6} 300,${revY6} C 400,${revY6} 460,${revY12} 520,${revY12} C 620,${revY18} 740,${revY18} 760,${revY18} C 840,${revY24} 900,${revY24} 960,${revY24}" 
                       fill="none" stroke="url(#greenCurveGrad)" stroke-width="3" filter="url(#crossoverGlow)" opacity="0.8" />
-
-                <!-- Golden Breakeven Crossover Node Pulse Exactly at Dynamic Intersection Point -->
-                <circle cx="${bepCrossX}" cy="${bepCrossY}" r="15" fill="none" stroke="var(--accent)" stroke-width="2" class="pulse-ring" />
-                <circle cx="${bepCrossX}" cy="${bepCrossY}" r="7" fill="#0f172a" stroke="var(--accent)" stroke-width="3" />
-                <circle cx="${bepCrossX}" cy="${bepCrossY}" r="3" fill="#fff" />
               </svg>
 
               <!-- Category Labels in Neutral Corners (Completely separated from nodes) -->
