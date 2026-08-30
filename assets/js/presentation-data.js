@@ -536,33 +536,33 @@ function getI18NDeck() {
               },
               items: [
                 {
-                  title: "Core Production & Test Equipment",
+                  title: "Core Production Machinery",
                   pct: "71.7%",
                   kunshan: "$15,000,000",
                   india: "$16,500,000",
                   subsidy: "-$4,125,000",
                   net: "$12,375,000",
-                  boundary: "Direct Vendor-code support (DuPont, Taiflex, Panasonic). Machine source verified via CEC green channel.",
+                  boundary: "DuPont/Taiflex/Panasonic vendor-code support; CEC source verification.",
                   detail: "Direct vendor-code support (DuPont, Taiflex, Panasonic). Taiwan technical group verifies machines at source via CEC green channel."
                 },
                 {
-                  title: "Plant & Environmental (ZLD) Infrastructure",
+                  title: "Plant & ZLD Infrastructure",
                   pct: "15.2%",
                   kunshan: "$1,000,000",
                   india: "$3,500,000",
                   subsidy: "-$875,000",
                   net: "$2,625,000",
-                  boundary: "Define design specifications & chemical inputs. Local civil engineering & SPCB consent (CTE/CTO) by Promoter.",
+                  boundary: "Define process & chemical inputs; Promoter leads civil engineering & SPCB.",
                   detail: "Define design specifications & chemical inputs. Local civil engineering & SPCB consent to establish (CTE/CTO) executed by Promoter."
                 },
                 {
-                  title: "Plant Building & Cleanroom Facilities",
+                  title: "Cleanroom & HVAC Facilities",
                   pct: "13.0%",
                   kunshan: "$2,500,000",
                   india: "$3,000,000",
                   subsidy: "-$750,000",
                   net: "$2,250,000",
-                  boundary: "Output plant layout, Class 10K/100K cleanliness, and HVAC specs. Actual building civil works by Promoter.",
+                  boundary: "Output 10K/100K layout & +40% HVAC specs; Promoter leads civil construction.",
                   detail: "Output factory layout, Class 10K/100K cleanliness, and +40% HVAC humidity specs. Actual building civil works managed by local promoter."
                 },
                 {
@@ -572,7 +572,7 @@ function getI18NDeck() {
                   india: "$23,000,000",
                   subsidy: "-$5,750,000",
                   net: "$17,250,000",
-                  boundary: "SPECS 25% cash-back applies strictly to machinery & factory assets. Net capital exposure compressed to $17.25M.",
+                  boundary: "SPECS 25% cash-back locks in a $5.75M capital cushion, protecting investor downside.",
                   detail: "SPECS 25% cash rebate provides an unassailable $5.75M capital cushion, protecting investor downside."
                 }
               ]
