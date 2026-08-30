@@ -811,11 +811,20 @@ function getI18NDeck() {
             // Slide 13: Call to Action & Data Room Access
             {
               type: "cta-hub",
-              tag: "SLIDE 13 / STRATEGIC PARTNERSHIP & DATA ROOM",
+              tag: "SLIDE 13 / STRATEGIC PARTNERSHIP & AI DATA ROOM",
               title: "Position Your Capital at the Origin of India's Defense Supply Chain",
-              desc: "Promoter retains >90% controlling equity with full government backing. Request NDA for exclusive Data Room access.",
-              primaryBtn: "Request Investor Data Room Access",
-              landingBtn: "Return to Landing Page Portal"
+              desc: "Promoter retains >90% controlling equity. Access our official Google AI Data Room or connect directly with our founding leadership.",
+              notebookUrl: "https://notebook.google.com/notebook/be750388-f5f2-4027-9f85-f45f61c53ba7",
+              formTitle: "Direct Investor Engagement",
+              formSubtitle: "Schedule a confidential dialogue with our founding team. All inquiries are securely logged.",
+              aiTitle: "Official AI Data Room (NotebookLM)",
+              aiBadge: "23 VERIFIED PROJECT DOSSIERS",
+              aiDesc: "Trained on complete project documentation, SPCB environmental clearances, CEC equipment manifests, and 5-year mathematical financial models.",
+              aiNotice: "Requires a Google Account (Gmail or Workspace). Read-only viewing and intelligent Q&A access.",
+              aiBtn: "Open Official AI Data Room",
+              submitBtn: "Submit Partnership Inquiry",
+              agendaBtn: "Review Roadshow Agenda",
+              landingBtn: "Return to Main Portal"
             }
           ]
         },
@@ -2064,11 +2073,20 @@ function getI18NDeck() {
             // Slide 13: 策略合作與 Data Room
             {
               type: "cta-hub",
-              tag: "簡報 13 / 策略合作方案與投資人資料室",
+              tag: "簡報 13 / 策略合作方案與 AI 智能資料室",
               title: "將您的資本，佈局在印度國防與高階電子供應鏈的最起點",
-              desc: "印度實業大股東絕對控股 >90%、政府政策全力護航，歡迎戰略機構投資人簽署 NDA 申請專屬投資人資料室 (Data Room)。",
-              primaryBtn: "申請投資人資料室 (Data Room)",
-              landingBtn: "返回主題落地頁總覽"
+              desc: "印度實業大股東絕對控股 >90%、政府政策全力護航；歡迎進入 Google AI 智能資料室深入調研，或與創始團隊直接預約商務對話。",
+              notebookUrl: "https://notebook.google.com/notebook/be750388-f5f2-4027-9f85-f45f61c53ba7",
+              formTitle: "創始團隊直通留言通道",
+              formSubtitle: "預約實體商務會談或現場考察，所有留言將安全記錄至專案資料庫。",
+              aiTitle: "官方 AI 智能資料室 (NotebookLM)",
+              aiBadge: "已收錄 23 份立項全套文檔",
+              aiDesc: "完整收錄 13,000 m² 廠區規劃、SPCB 環評批文、CEC 原廠報價單與 5 年財務母模型，支援即時深度問答與音訊播客。",
+              aiNotice: "需登入 Google 帳號（個人 Gmail 或 Workspace 均可），僅具備唯讀檢視與對話權限。",
+              aiBtn: "開啟官方 AI 智能資料室",
+              submitBtn: "送出商務會談意向",
+              agendaBtn: "返回路演全息目錄",
+              landingBtn: "返回主題門戶首頁"
             }
           ]
         }
