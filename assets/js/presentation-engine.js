@@ -753,130 +753,116 @@ let currentTheme = "a";
           </div>
         `;
       }
-      // 6. Authentic Data-Driven Scissors Crossover Financial Horizon (Slide 12: Real-time Mathematical Curve Interpolator)
+      // 6. Authentic 5-Year Full Investment Payback Horizon (Consistent $0M-$25M Scale & Evenly Spaced Macro Nodes)
       else if (slide.type === "flow-pipeline") {
         const ls = slide.liveStats || {};
         
-        // Dynamic Mathematical Curve Interpolation:
-        // CapEx (Orange) reference points at X = [40, 80, 300, 520, 740, 930, 960]
-        const capY0 = 65, capY6 = 155, capY12 = 210, capY18 = 235, capY24 = 250;
+        // Exact 1:1 Synchronized Dollar Scale ($0M -> SVG_Y 305, $25M -> SVG_Y 45)
+        const capExVal = Number(ls.cCapEx) || 17.25; // $17.25M net capex
+        const annualEbit = Number(ls.annualEbit) || 6.66; // $6.66M annual EBIT
         
-        // Revenue (Green) Live Data Scaling:
-        // Max capacity ceiling: 2,400,000 USD/mo -> Y = 45 (top). Min: 0 USD -> Y = 310 (bottom).
-        const maxVal = Math.max(Number(ls.s24) || 2400000, 2400000);
-        function valToY(v) {
-          const num = Number(v) || 0;
-          const ratio = Math.min(Math.max(num / maxVal, 0), 1);
-          return (310 - ratio * 265).toFixed(1);
+        function dollarToY(val) {
+          const ratio = Math.min(Math.max(val / 25.0, 0), 1);
+          return (305 - ratio * 260).toFixed(1);
         }
         
-        const revY0 = valToY(ls.s0);
-        const revY6 = valToY(ls.s6);
-        const revY12 = valToY(ls.s12);
-        const revY18 = valToY(ls.s18);
-        const revY24 = valToY(ls.s24);
+        // Orange Cumulative CapEx curve points (X = [80 (Y0), 280 (Y1), 480 (Y2), 680 (Y3), 740 (Y4.2), 920 (Y5)])
+        // Y0 starts at 0 -> jumps to $17.25M at Y1 upon full cleanroom commissioning -> stays flat at $17.25M
+        const capY0 = dollarToY(0);
+        const capY1 = dollarToY(capExVal); // $17.25M (around Y=125)
+        const capY2 = capY1;
+        const capY3 = capY1;
+        const capY42 = capY1;
+        const capY5 = capY1;
 
-        // Find Dynamic Crossover Point (BEP Intersection between CapEx & Revenue)
-        let bepCrossX = 520, bepCrossY = 210;
-        // Check segment T6-T12 (300 to 520)
-        if (Number(ls.s6) <= 250000 && Number(ls.s12) >= 750000) {
-          bepCrossX = 520; bepCrossY = revY12;
-        } else if (Number(ls.s18) >= 1218543 && Number(ls.s12) < 1218543) {
-          // If BEP happens between T12 and T18 (520 to 740)
-          bepCrossX = 640; bepCrossY = ((Number(capY12) + Number(capY18))/2).toFixed(1);
-        } else if (Number(ls.s24) >= 2040000 && Number(ls.s18) < 1845000) {
-          bepCrossX = 740; bepCrossY = revY18;
-        }
+        // Green Cumulative Net Cash Flow curve points:
+        // Y0 = $0M
+        // Y1 = $0.40M (initial trading profit)
+        // Y2 = $0.40M + $3.40M = $3.80M (ramping local production)
+        // Y3 = $3.80M + $6.66M = $10.46M (full scale run-rate)
+        // Y4.2 = $10.46M + 1.2 * $6.66M = $18.45M -> Exact Crossover at Y4.2 ($17.25M)!
+        // Y5 = $10.46M + 2.0 * $6.66M = $23.78M
+        const revY0 = dollarToY(0);
+        const revY1 = dollarToY(0.4);
+        const revY2 = dollarToY(3.8);
+        const revY3 = dollarToY(10.46);
+        const revY42 = capY1; // EXACT 1:1 INTERSECTION AT YEAR 4.2 ($17.25M)
+        const revY5 = dollarToY(23.5);
+
+        // Coordinates of 5 Evenly Spaced Macro Nodes:
+        // Y0 (80px / 8%), Y1 (280px / 28%), Y2 (480px / 48%), Y4.2 (740px / 74%), Y5 (920px / 92%)
+        const nodePositions = ['8%', '28%', '48%', '74%', '92%'];
 
         html += `
-          <div class="crossover-chart-container">
+          <div class="crossover-chart-container macro-5yr-container">
             
-            <!-- Real-Time Top Financial KPI Ribbon -->
-            <div class="space-kpi-ribbon" style="margin-bottom:6px;">
-              <div class="space-kpi-block">
-                <span class="space-kpi-lbl">${currentLang === 'zh' ? '初期總建廠資本開銷' : 'Initial Plant CapEx'}</span>
-                <span class="space-kpi-val" style="color:#f97316;">${ls.totCapEx || '$23.0M'}</span>
-              </div>
-              <div class="space-kpi-divider"></div>
-              <div class="space-kpi-block">
-                <span class="space-kpi-lbl">${currentLang === 'zh' ? '第12個月損益兩平營收門檻' : 'M12 BEP Monthly Revenue'}</span>
-                <span class="space-kpi-val" style="color:var(--accent);">${ls.bepRevMo || '$1.22M'}/mo</span>
-              </div>
-              <div class="space-kpi-divider"></div>
-              <div class="space-kpi-block">
-                <span class="space-kpi-lbl">${currentLang === 'zh' ? '第24個月滿載單月產值' : 'M24 Full Capacity Run-Rate'}</span>
-                <span class="space-kpi-val" style="color:#22c55e;">${ls.fullRevMo || '$2.40M'}/mo</span>
-              </div>
-              <div class="space-kpi-divider"></div>
-              <div class="space-kpi-block">
-                <span class="space-kpi-lbl">${currentLang === 'zh' ? '滿載年化營業利潤 (EBIT)' : 'Full Scale Annual EBIT'}</span>
-                <span class="space-kpi-val" style="color:#34d399;">$6.66M (23.1%)</span>
-              </div>
-            </div>
-
-            <!-- Dual-Curve Interactive Canvas -->
-            <div class="crossover-board-wrap">
+            <!-- Dual-Curve Interactive Canvas (Radical Slimming & Full Height Breathing Room) -->
+            <div class="crossover-board-wrap macro-board-wrap">
               
-              <!-- LAYER 1: Pure Background SVG Dual Curves & Central Baseline -->
+              <!-- LAYER 1: Pure Background SVG Dual Curves & Central Timeline Axis -->
               <svg class="crossover-svg" viewBox="0 0 1000 350" preserveAspectRatio="none">
                 <defs>
-                  <!-- Orange Expenditure Gradient (Soft Background Glow) -->
-                  <linearGradient id="orangeCurveGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                  <!-- Orange Expenditure Gradient ($17.25M CapEx Ceiling) -->
+                  <linearGradient id="orangeCapGrad" x1="0%" y1="0%" x2="100%" y2="0%">
                     <stop offset="0%" stop-color="#f97316" stop-opacity="0.9" />
-                    <stop offset="35%" stop-color="#fb923c" stop-opacity="0.75" />
-                    <stop offset="60%" stop-color="#fdba74" stop-opacity="0.6" />
-                    <stop offset="100%" stop-color="#ea580c" stop-opacity="0.45" />
+                    <stop offset="30%" stop-color="#fb923c" stop-opacity="0.8" />
+                    <stop offset="100%" stop-color="#fdba74" stop-opacity="0.5" />
                   </linearGradient>
-                  <!-- Green Revenue Gradient (Soft Background Glow) -->
-                  <linearGradient id="greenCurveGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-                    <stop offset="0%" stop-color="#22c55e" stop-opacity="0.45" />
-                    <stop offset="40%" stop-color="#4ade80" stop-opacity="0.7" />
-                    <stop offset="70%" stop-color="#86efac" stop-opacity="0.85" />
-                    <stop offset="100%" stop-color="#16a34a" stop-opacity="0.95" />
+                  <!-- Green Cumulative Cash Flow Gradient (Upward Compounding) -->
+                  <linearGradient id="greenCashGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                    <stop offset="0%" stop-color="#22c55e" stop-opacity="0.4" />
+                    <stop offset="50%" stop-color="#4ade80" stop-opacity="0.75" />
+                    <stop offset="80%" stop-color="#86efac" stop-opacity="0.95" />
+                    <stop offset="100%" stop-color="#10b981" stop-opacity="1" />
                   </linearGradient>
-                  <filter id="crossoverGlow" x="-20%" y="-20%" width="140%" height="140%">
+                  <filter id="macroCurveGlow" x="-20%" y="-20%" width="140%" height="140%">
                     <feGaussianBlur stdDeviation="2.5" result="blur" />
                     <feComposite in="SourceGraphic" in2="blur" operator="over" />
                   </filter>
-                  <marker id="arrowBlue" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                  <marker id="arrowTimelineBlue" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
                     <path d="M 0 1 L 10 5 L 0 9 z" fill="#2563eb" />
                   </marker>
                 </defs>
 
-                <!-- LAYER 2: 5 Vertical Time Grid Lines Connecting Top and Bottom Milestones -->
-                <line x1="80" y1="50" x2="80" y2="300" stroke="rgba(249,115,22,0.35)" stroke-width="1.5" stroke-dasharray="4 3" />
-                <line x1="300" y1="50" x2="300" y2="300" stroke="rgba(249,115,22,0.35)" stroke-width="1.5" stroke-dasharray="4 3" />
-                <line x1="520" y1="50" x2="520" y2="300" stroke="rgba(201,169,110,0.5)" stroke-width="2" stroke-dasharray="4 3" />
-                <line x1="740" y1="50" x2="740" y2="300" stroke="rgba(34,197,94,0.35)" stroke-width="1.5" stroke-dasharray="4 3" />
-                <line x1="930" y1="50" x2="930" y2="300" stroke="rgba(34,197,94,0.35)" stroke-width="1.5" stroke-dasharray="4 3" />
+                <!-- LAYER 2: 5 Vertical Time Grid Lines for 5 Macro Years -->
+                <line x1="80" y1="35" x2="80" y2="315" stroke="rgba(249,115,22,0.3)" stroke-width="1.5" stroke-dasharray="4 3" />
+                <line x1="280" y1="35" x2="280" y2="315" stroke="rgba(249,115,22,0.3)" stroke-width="1.5" stroke-dasharray="4 3" />
+                <line x1="480" y1="35" x2="480" y2="315" stroke="rgba(201,169,110,0.3)" stroke-width="1.5" stroke-dasharray="4 3" />
+                <line x1="740" y1="35" x2="740" y2="315" stroke="rgba(201,169,110,0.6)" stroke-width="2" stroke-dasharray="4 3" />
+                <line x1="920" y1="35" x2="920" y2="315" stroke="rgba(34,197,94,0.3)" stroke-width="1.5" stroke-dasharray="4 3" />
 
                 <!-- Central Solid Blue Horizontal Axis Line with Arrow (y=175) -->
-                <line x1="40" y1="175" x2="965" y2="175" stroke="#2563eb" stroke-width="5" marker-end="url(#arrowBlue)" />
+                <line x1="40" y1="175" x2="965" y2="175" stroke="#2563eb" stroke-width="4.5" marker-end="url(#arrowTimelineBlue)" />
 
-                <!-- Realistic Orange CapEx Curve (Starts high, declines towards T+12, then stabilizes) -->
-                <path d="M 40,${capY0} C 160,85 240,135 300,${capY6} C 400,185 460,205 520,${capY12} C 640,220 800,240 960,${capY24}" 
-                      fill="none" stroke="url(#orangeCurveGrad)" stroke-width="3" filter="url(#crossoverGlow)" opacity="0.8" />
+                <!-- Realistic Orange CapEx Curve (Rises to $17.25M at Y1, then flattens across Y1-Y5) -->
+                <path d="M 40,305 C 60,305 70,250 80,210 C 180,135 240,${capY1} 280,${capY1} L 740,${capY1} L 960,${capY1}" 
+                      fill="none" stroke="url(#orangeCapGrad)" stroke-width="3.5" filter="url(#macroCurveGlow)" opacity="0.85" />
 
-                <!-- 100% Dynamic Mathematically Interpolated Green Revenue Curve from Google Sheet Values -->
-                <path d="M 40,${revY0} C 160,${revY0} 240,${revY6} 300,${revY6} C 400,${revY6} 460,${revY12} 520,${revY12} C 620,${revY18} 740,${revY18} 760,${revY18} C 840,${revY24} 900,${revY24} 960,${revY24}" 
-                      fill="none" stroke="url(#greenCurveGrad)" stroke-width="3" filter="url(#crossoverGlow)" opacity="0.8" />
+                <!-- 1:1 Scale Synchronized Green Cumulative Cash Flow Curve (Crosses Orange Line exactly at Year 4.2: (740, ${capY1})) -->
+                <path d="M 40,305 C 70,305 80,305 180,${revY1} C 280,${revY1} 380,${revY2} 480,${revY2} C 580,${revY3} 660,${capY1} 740,${capY1} C 820,${capY1} 880,${revY5} 960,${revY5}" 
+                      fill="none" stroke="url(#greenCashGrad)" stroke-width="4" filter="url(#macroCurveGlow)" opacity="0.9" />
+
+                <!-- True Payback Golden Crossover Node Pulse Exactly at Intersection (740, ${capY1}) -->
+                <circle cx="740" cy="${capY1}" r="16" fill="none" stroke="var(--accent)" stroke-width="2.5" class="pulse-ring" />
+                <circle cx="740" cy="${capY1}" r="7" fill="#0f172a" stroke="var(--accent)" stroke-width="3" />
+                <circle cx="740" cy="${capY1}" r="3" fill="#fff" />
               </svg>
 
-              <!-- Category Labels in Neutral Corners (Completely separated from nodes) -->
+              <!-- Category Legend Badges -->
               <div class="crossover-title-badge orange-badge">
-                ${slide.orangeLabel || '建廠(支出)'}
+                ${slide.orangeLabel || '累積資本支出 ($17.25M 淨額)'}
               </div>
               <div class="crossover-title-badge green-badge">
-                ${slide.greenLabel || '貿易(收入)'}
+                ${slide.greenLabel || '累積營運淨現金流'}
               </div>
               <div class="timeline-legend-tag">
-                ${slide.timelineLabel || '時間線 + 損益平衡線'}
+                ${slide.timelineLabel || '5 年戰略投資全景時間軸'}
               </div>
 
-              <!-- LAYER 3 FOREGROUND: Top Orange Factory Milestones (Gathered towards center at top: 18%) -->
+              <!-- LAYER 3 FOREGROUND: Top Orange Milestones (5 Evenly Spaced Macro Nodes at top: 16%) -->
               <div class="crossover-node-layer orange-layer">
                 ${(slide.orangeNodes || []).map((n, idx) => `
-                  <div class="crossover-point-item orange-point" style="left:${idx === 0 ? '8%' : idx === 1 ? '30%' : idx === 2 ? '52%' : '74%'}; top: 18%; transform: translateX(-50%);"
+                  <div class="crossover-point-item orange-point" style="left:${nodePositions[idx] || '50%'}; top: 16%; transform: translateX(-50%);"
                        onclick="selectGenericCard('orangePt', ${idx}, '${n.detail.replace(/'/g, "\\'")}')"
                        onmouseenter="selectGenericCard('orangePt', ${idx}, '${n.detail.replace(/'/g, "\\'")}')">
                     <div class="point-header-line">
@@ -885,28 +871,28 @@ let currentTheme = "a";
                     </div>
                     <span class="point-metric-pill orange">${n.metric}</span>
 
-                    <!-- Smart Hover Popover -->
+                    <!-- Smart Hover Popover with Live Financial Context -->
                     <div class="card-smart-tooltip">
-                      <div class="tooltip-tag" style="color:#f97316;">🏗️ ${currentLang === 'zh' ? '建廠與工程支出階段' : 'Plant CapEx Milestone'}</div>
+                      <div class="tooltip-tag" style="color:#f97316;">🏗️ ${currentLang === 'zh' ? '資本與建廠里程碑' : 'CapEx & Facility Milestone'}</div>
                       <div class="tooltip-text">${n.detail}</div>
                     </div>
                   </div>
                 `).join("")}
               </div>
 
-              <!-- LAYER 3 FOREGROUND: Central Timeline T-Labels (Mounted along central blue line) -->
+              <!-- LAYER 3 FOREGROUND: Central 5-Year Macro Timeline Labels -->
               <div class="crossover-time-labels">
-                <span style="left:8%;">T+0</span>
-                <span style="left:30%;">T+6</span>
-                <span style="left:52%; color:var(--accent); font-weight:800; font-size:12px;">${currentLang === 'zh' ? 'T+12 (本土切換)' : 'T+12 (Local Switch)'}</span>
-                <span style="left:74%;">T+18</span>
-                <span style="left:93%;">T+24</span>
+                <span style="left:8%;">Year 0</span>
+                <span style="left:28%;">Year 1 (CTO)</span>
+                <span style="left:48%;">Year 2 (Full)</span>
+                <span style="left:74%; color:var(--accent); font-weight:800; font-size:12.5px;">${currentLang === 'zh' ? 'Year 4.2 (🎯 4.2年回本)' : 'Year 4.2 (🎯 Full Payback)'}</span>
+                <span style="left:92%;">Year 5</span>
               </div>
 
-              <!-- LAYER 3 FOREGROUND: Bottom Green Commercial Milestones (Gathered towards center at bottom: 18%) -->
+              <!-- LAYER 3 FOREGROUND: Bottom Green Commercial Milestones (5 Evenly Spaced Macro Nodes at bottom: 16%) -->
               <div class="crossover-node-layer green-layer">
                 ${(slide.greenNodes || []).map((n, idx) => `
-                  <div class="crossover-point-item green-point" style="left:${idx === 0 ? '8%' : idx === 1 ? '30%' : idx === 2 ? '52%' : '74%'}; bottom: 18%; transform: translateX(-50%);"
+                  <div class="crossover-point-item green-point" style="left:${nodePositions[idx] || '50%'}; bottom: 16%; transform: translateX(-50%);"
                        onclick="selectGenericCard('greenPt', ${idx}, '${n.detail.replace(/'/g, "\\'")}')"
                        onmouseenter="selectGenericCard('greenPt', ${idx}, '${n.detail.replace(/'/g, "\\'")}')">
                     <div class="point-header-line">
@@ -915,9 +901,9 @@ let currentTheme = "a";
                     </div>
                     <span class="point-metric-pill green">${n.metric}</span>
 
-                    <!-- Smart Hover Popover -->
+                    <!-- Smart Hover Popover with Live Financial Context -->
                     <div class="card-smart-tooltip">
-                      <div class="tooltip-tag" style="color:#22c55e;">📈 ${currentLang === 'zh' ? '業務與營收放量階段' : 'Revenue & Sales Milestone'}</div>
+                      <div class="tooltip-tag" style="color:#22c55e;">📈 ${currentLang === 'zh' ? '營收與現金流里程碑' : 'Cash Flow & Value Milestone'}</div>
                       <div class="tooltip-text">${n.detail}</div>
                     </div>
                   </div>
@@ -926,24 +912,6 @@ let currentTheme = "a";
 
             </div>
 
-            <!-- Bottom 4 Financial Milestones Ribbon -->
-            <div class="crossover-fin-ribbon">
-              ${(slide.milestones || []).map((m, idx) => `
-                <div class="crossover-fin-pill ${m.class || ''}">
-                  <span class="fin-pill-idx">T+${idx * 6}M</span>
-                  <span class="fin-pill-text">${m.badge}</span>
-                </div>
-              `).join("")}
-            </div>
-
-          </div>
-
-          <!-- Non-Intrusive Floating Context Explanation Bar -->
-          <div class="cockpit-floating-bar" id="cockpitFloatingBar">
-            <div class="floating-bar-icon">⏱️</div>
-            <div class="floating-bar-text" id="genericFloatingText">
-              <strong>${currentLang === 'zh' ? '雙軌放量戰略依據' : 'Dual-Track Strategy'}:</strong> ${slide.defaultExplanation}
-            </div>
           </div>
         `;
       }

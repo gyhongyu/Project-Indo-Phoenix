@@ -737,74 +737,75 @@ function getI18NDeck() {
             // Slide 12: Dynamic Data-Driven Scissors Crossover Breakeven Horizon
             {
               type: "flow-pipeline",
-              tag: "SLIDE 12 / 24-MONTH DUAL-TRACK PHASED TIMELINE & ROADMAP",
-              title: "24-Month Phased Ramp-Up: Trade-to-Manufacture Bridge",
-              desc: "Day-one commercial cash flow via mature trade supply, seamless switch to local manufacturing upon cleanroom clearance.",
-              defaultExplanation: "24-Month Dual-Track Execution: Day-1 commercial trade bridges market cash flow & client vendor codes, seamlessly transitioning to 100% India local manufacturing at Month 12 upon cleanroom clearance.",
-              orangeLabel: "Plant Setup (Expenditure)",
-              greenLabel: "Trade & Sales (Revenue)",
-              timelineLabel: "24-Month Phased Timeline",
-              // Live Dynamic Numbers Derived Automatically from Core Financial Formulas (SSOT)
+              tag: "SLIDE 12 / 5-YEAR FULL INVESTMENT PAYBACK & FINANCIAL HORIZON",
+              title: "5-Year Phased Horizon: Trade-to-Manufacture to Full CapEx Payback",
+              desc: "Day-one commercial trade bridges cash flow, switching to local manufacturing at Year 1, achieving 100% full investment payback at Year 4.2.",
+              defaultExplanation: "5-Year Full Investment Horizon: Cumulative operating net cash flow scales from Year 1 local manufacturing to fully recoup the $17.25M net CapEx at Year 4.2, delivering long-term compounding equity value.",
+              orangeLabel: "Cumulative CapEx ($17.25M Net)",
+              greenLabel: "Cumulative Net Cash Flow",
+              timelineLabel: "5-Year Strategic Investment Horizon",
               liveStats: {
                 totCapEx: `$${totCapEx}M`,
-                bepRevMo: `$${bepRev}M`,
-                fullRevMo: `$${(getLiveStat("monthlyRevenue",2400000)/1000000).toFixed(2)}M`,
-                s0: (getLiveStat("monthlyRevenue", 2400000) * 0.10),
-                s6: (getLiveStat("monthlyRevenue", 2400000) * 0.25),
-                s12: getLiveStat("bepRevenue", 1218543),
-                s18: (getLiveStat("monthlyRevenue", 2400000) * 0.85),
-                s24: getLiveStat("monthlyRevenue", 2400000)
+                netCapEx: `$${netCapEx}M`,
+                ebitAnnual: `$${(ebitMo * 12 / 1000).toFixed(2)}M`,
+                paybackYrs: `${paybackYrs} Yrs`,
+                cCapEx: Number(netCapEx) || 17.25,
+                annualEbit: Number((ebitMo * 12 / 1000).toFixed(2)) || 6.66
               },
               orangeNodes: [
                 {
-                  title: "Company Setup & Equity Injection",
+                  title: "Company Setup & Equity",
                   metric: "SPCB CTE Filing",
-                  detail: `Promoter secures JV incorporation, site leasehold, initial equity funding ($${totCapEx}M Total CapEx), and submits SPCB CTE environmental application.`
+                  detail: `Promoter secures JV incorporation, site leasehold, initial funding, and SPCB CTE application ($${totCapEx}M Total / $${netCapEx}M Net CapEx).`
                 },
                 {
-                  title: "Civil Retrofit & Machine Import",
-                  metric: "CEC Machine Clearance",
-                  detail: "Cleanroom partition construction, HVAC utilities installation, and CEC green-channel machine inspection & customs clearance."
+                  title: "Cleanroom Ready & CTO",
+                  metric: "$17.25M CapEx Ceiling",
+                  detail: "Cleanroom commissioned, equipment installed, and SPCB CTO statutory consent to operate granted. CapEx spending concludes."
                 },
                 {
-                  title: "Cleanroom Clearance & SPCB CTO",
-                  metric: "13,000 m² Commissioned",
-                  detail: "万-class cleanroom commissioned, ZLD water recycling operational, and SPCB CTO statutory consent to operate granted for production."
+                  title: "Full Capacity Run-Rate",
+                  metric: "180,000 m²/yr Scale",
+                  detail: "Two-shift continuous operation achieves full capacity delivery ($28.8M annual revenue / $6.66M EBIT), generating high free cash flow."
                 },
                 {
-                  title: "Autonomous Local Operation",
-                  metric: "100% Local Engineering",
-                  detail: "Full production regularization; local Indian engineering team achieves 100% autonomous operation with AR smart dynamic SOPs."
+                  title: "🎯 100% CapEx Payback",
+                  metric: "Breakeven Crossover",
+                  detail: "Cumulative net operating cash flow surpasses $17.25M net capital investment. Project reaches full static capital payback!"
+                },
+                {
+                  title: "Phase 2 Expansion",
+                  metric: "High Equity Compounding",
+                  detail: "Evaluate Phase 2 rigid-flex expansion, defense-grade HDI certification, and shareholder dividend distribution."
                 }
               ],
               greenNodes: [
                 {
-                  title: "Launch Trade Distribution",
-                  metric: "Market Cash Flow Entry",
-                  detail: `Initiate upfront trading distribution via mature supply chain ($${((getLiveStat("monthlyRevenue", 2400000) * 0.10)/1000).toFixed(0)}K/mo), seeding market engagements.`
+                  title: "Trade Cash Flow Entry",
+                  metric: "Seeding Market Codes",
+                  detail: "Initiate commercial trading sales via mature supply chain, establishing tier-1 customer vendor codes and 48h prototype sampling."
                 },
                 {
-                  title: "Vendor Codes & NPI Sampling",
-                  metric: "48h Quick Turnaround",
-                  detail: `Lock in tier-1 consumer & camera module vendor codes with 48h rapid prototype sampling ($${((getLiveStat("monthlyRevenue", 2400000) * 0.25)/1000).toFixed(0)}K/mo).`
+                  title: "100% Local Switch",
+                  metric: "Zero-Downtime Transition",
+                  detail: "Transition import orders to 100% India local manufacturing upon cleanroom clearance, kicking off high-margin local production."
                 },
                 {
-                  title: "100% Local Manufacturing Switch",
-                  metric: "Zero-Downtime Order Transition",
-                  detail: `Seamlessly transition trading import volume to 100% India local production upon cleanroom clearance ($${bepRev}M/mo BEP threshold).`
+                  title: "Operating Cash Engine",
+                  metric: "+$6.66M/yr Cash Inflow",
+                  detail: "Annualized EBIT reaches $6.66M (23.1% margin). Factory operates as an autonomous, self-sustaining high-cash-generation engine."
                 },
                 {
-                  title: "Full Scale Capacity Run-Rate",
-                  metric: "Full Plant Production",
-                  detail: `Achieve $${(getLiveStat("monthlyRevenue",2400000)/1000000).toFixed(2)}M/mo run-rate ($28.8M/yr), scale EV battery CCS, and evaluate Phase 2 rigid-flex expansion.`
+                  title: "Net Capital Surplus",
+                  metric: "Cumulative Surplus > $17.25M",
+                  detail: "Operating cash fully offsets all initial capital expenditure; business enters pure net positive compounding growth."
+                },
+                {
+                  title: "Global Supply Leadership",
+                  metric: "Cumulative Cash > $22.5M",
+                  detail: "Consolidate position as India's #1 indigenous FPC manufacturer across automotive CCS, defense aerospace, and consumer electronics."
                 }
               ],
-              milestones: [
-                { badge: "Trading Cash Flow", class: "neutral" },
-                { badge: `Crosses 50.8% BEP ($${bepRev}M/mo)`, class: "accent" },
-                { badge: "Gross Margin > 25%", class: "good" },
-                { badge: `$${revAnnual}M Rev / $${(ebitMo*12/1000).toFixed(2)}M EBIT`, class: "gold" }
-              ]
             },
             // Slide 13: Call to Action & Data Room Access
             {
@@ -1988,74 +1989,75 @@ function getI18NDeck() {
             // Slide 12: 雙曲線剪刀差財務與時程交叉模型（動態真實數據連動）
             {
               type: "flow-pipeline",
-              tag: "簡報 12 / 24 個月雙軌放量落地時程與無縫切換模型",
-              title: "24 個月雙軌放量時程：以貿促工 ✕ 本地製造無縫切換",
-              desc: "首期透過成熟供應鏈代銷先行建立客戶代碼，無塵室完工即刻無縫切換為 100% 印度本土製造。",
-              defaultExplanation: "24 個月雙軌推進戰略：公司成立首日即啟動代銷貿易產生現金流並鎖定客戶代碼；第 12 個月無塵室取證通線，訂單 100% 原地轉為印度本土自主製造！",
-              orangeLabel: "建廠(支出)",
-              greenLabel: "貿易(收入)",
-              timelineLabel: "24 個月雙軌推進時間軸",
-              // Live Dynamic Numbers Derived Automatically from Core Financial Formulas (SSOT)
+              tag: "簡報 12 / 5 年投資全額回收與宏觀財務時程模型",
+              title: "5 年宏觀投資時程：以貿促工 ✕ 本地製造 ✕ 4.2 年全額回本",
+              desc: "首期透過代銷貿易產生現金流，第 1 年轉本土製造，第 4.2 年累積淨利全額抵消 $17.25M 總投資，邁向純淨利爆發！",
+              defaultExplanation: "5 年投資全額回收藍圖：累積營運淨現金流自第 1 年本土投產後快速爬坡，於第 4.2 年累積達到 $17.25M，正式超越累積建廠總資本支出，實現 100% 投資全額靜態回收！",
+              orangeLabel: "累積資本支出 (淨額 $17.25M)",
+              greenLabel: "累積營運淨現金流",
+              timelineLabel: "5 年戰略投資全景時間軸",
               liveStats: {
                 totCapEx: `$${totCapEx}M`,
-                bepRevMo: `$${bepRev}M`,
-                fullRevMo: `$${(getLiveStat("monthlyRevenue",2400000)/1000000).toFixed(2)}M`,
-                s0: (getLiveStat("monthlyRevenue", 2400000) * 0.10),
-                s6: (getLiveStat("monthlyRevenue", 2400000) * 0.25),
-                s12: getLiveStat("bepRevenue", 1218543),
-                s18: (getLiveStat("monthlyRevenue", 2400000) * 0.85),
-                s24: getLiveStat("monthlyRevenue", 2400000)
+                netCapEx: `$${netCapEx}M`,
+                ebitAnnual: `$${(ebitMo * 12 / 1000).toFixed(2)}M`,
+                paybackYrs: `${paybackYrs} 年`,
+                cCapEx: Number(netCapEx) || 17.25,
+                annualEbit: Number((ebitMo * 12 / 1000).toFixed(2)) || 6.66
               },
               orangeNodes: [
                 {
                   title: "公司設立與注資",
                   metric: "SPCB CTE 環評送件",
-                  detail: `印度發起人主導 JV 公司設立、土地廠房租賃、首期股權注資到位 (總 CapEx $${totCapEx}M)，並遞交 SPCB CTE 環評申請。`
+                  detail: `印度發起人主導 JV 公司設立、土地廠房租賃、首期股權注資到位 (總 CapEx $${totCapEx}M / 淨 CapEx $${netCapEx}M)，並遞交 SPCB CTE 環評申請。`
                 },
                 {
-                  title: "廠房改裝與設備進場",
-                  metric: "CEC 綠色通道驗收",
-                  detail: "無塵室土建隔間施工、暖通電力公用工程改裝，台方團隊透過 CEC 綠色通道完成原廠設備驗收。"
+                  title: "潔淨室竣工 ✕ CTO 取證",
+                  metric: "CapEx $17.25M 封頂",
+                  detail: "萬級無塵室竣工，原廠設備完成進場驗收，取得 SPCB CTO 正式排污許可證，資本開銷正式結束封頂。"
                 },
                 {
-                  title: "潔淨室竣工 ✕ SPCB CTO",
-                  metric: "13,000 m² 正式投產",
-                  detail: "萬級無塵室竣工交付，ZLD 廢水零排放驗收通過，正式取得 SPCB CTO 排污許可證，具備合法量產資格。"
+                  title: "全廠雙班制滿載運轉",
+                  metric: "年產能 180,000 m²",
+                  detail: "連續化滿載運轉，年營收達 $28.8M，年產生 $6.66M 營業淨利潤 (EBIT)，自我造血能力極強。"
                 },
                 {
-                  title: "常態化自主運營",
-                  metric: "在地團隊 100% 獨立自主",
-                  detail: "常態化連續量產；導入 AR 智慧眼鏡動態 SOP，印度在地工程師團隊實現 100% 獨立自主運轉。"
+                  title: "🎯 100% 投資全額回收",
+                  metric: "回本黃金交叉點",
+                  detail: "累積營運淨現金流達到 $17.25M，正式全額抵消初期淨資本支出，達成 100% 靜態投資全額回收！"
+                },
+                {
+                  title: "二期擴建與股東分紅",
+                  metric: "股權超額複利回報",
+                  detail: "累積現金流突破 $22.5M，啟動二期高階剛撓結合板擴產評估，實現股東高額現金分紅與資本增值。"
                 }
               ],
               greenNodes: [
                 {
                   title: "啟動代銷貿易",
                   metric: "即時現金流切入",
-                  detail: `依託成熟供應鏈優勢供貨，以貿易代銷先行跑通市場 ($${((getLiveStat("monthlyRevenue", 2400000) * 0.10)/1000).toFixed(0)}K/月)，預先建立印度終端客戶代碼 (Vendor Code)。`
+                  detail: "依託成熟供應鏈優勢供貨，以貿易代銷先行跑通市場，預先建立印度終端客戶代碼 (Vendor Code) 與 48h 極速打樣。"
                 },
                 {
-                  title: "客戶代碼與打樣",
-                  metric: "48h 極速工程打樣",
-                  detail: `鎖定一級消費電子與鏡頭模組客戶，展開 48 小時工程極速打樣 (NPI) 與工廠體系預審 ($${((getLiveStat("monthlyRevenue", 2400000) * 0.25)/1000).toFixed(0)}K/月)。`
-                },
-                {
-                  title: "轉 100% 本土自主量產",
+                  title: "轉 100% 本土自主製造",
                   metric: "訂單零延遲原地轉化",
-                  detail: `無塵室取證通線，將既有進口代銷訂單 100% 無縫切換為印度本土製造 ($${bepRev}M/月 損益平衡門檻)。`
+                  detail: "無塵室取證通線，將既有進口代銷訂單 100% 無縫切換為印度本土製造，正式邁向高毛利本土量產。"
                 },
                 {
-                  title: "滿載規模化運營",
-                  metric: "全廠滿載產能交付",
-                  detail: `雙班制達成 $${(getLiveStat("monthlyRevenue",2400000)/1000000).toFixed(2)}M/月 ($28.8M/年) 滿載營收，放量 EV 電池包 CCS，奠定全印度第一大本土軟板龍頭。`
+                  title: "高現金流營運引擎",
+                  metric: "每年淨流入 +$6.66M",
+                  detail: "工廠常態化獨立自主運轉，年化 EBIT 達 666 萬美元 (23.1% 利潤率)，成為高回報的自我造血現金引擎。"
+                },
+                {
+                  title: "全額回本淨盈餘衝刺",
+                  metric: "累積盈餘 > $17.25M",
+                  detail: "累積賺進來的淨現金流超越所有建廠本金，公司正式進入零負擔的純利潤高速滾動增長階段！"
+                },
+                {
+                  title: "全印軟板龍頭霸主",
+                  metric: "累積現金 > $22.5M",
+                  detail: "穩居全印度第一大本土 FPC 龍頭，全面主導車規電池包 CCS、國防航太與高階消費電子供應鏈。"
                 }
               ],
-              milestones: [
-                { badge: "貿易代銷即時現金流", class: "neutral" },
-                { badge: `跨越 50.8% BEP ($${bepRev}M/月)`, class: "accent" },
-                { badge: "綜合毛利率突破 25%", class: "good" },
-                { badge: `$${revAnnual}M 營收 / $${(ebitMo*12/1000).toFixed(2)}M EBIT`, class: "gold" }
-              ]
             },
             // Slide 13: 策略合作與 Data Room
             {
