@@ -330,15 +330,47 @@ function getI18NDeck() {
             },
             // Slide 05: Closed-Loop AI / ACC Smart Factory
             {
-              type: "flow-pipeline",
+              type: "split-hero-matrix",
               tag: "SLIDE 05 / CLOSED-LOOP SMART MANUFACTURING",
               title: "Closed-Loop Edge AI ACC: 92% Yield & Zero-Defect Line",
               desc: "Predictive chemical dosing (ACC) and AOI computer vision auto-correct etch speed within 50ms, eliminating human error.",
-              steps: [
-                { num: "01", title: "Smart SFC Traceability", desc: "Every bare board etched with micro-QR code; real-time process sensor tracking." },
-                { num: "02", title: "Edge AI Auto-Dosing", desc: "Analyzes bath pH, Cu²⁺ concentration, and ORP to auto-inject chemistry." },
-                { num: "03", title: "Auto-Correct Etch (ACC)", desc: "Vision AOI detects line-width drift and adjusts conveyor speed in 50ms." },
-                { num: "04", title: "Predictive Maintenance", desc: "Vibration and thermal sensors alert pump and filter health 72 hours before failure." }
+              defaultExplanation: "We replaced unpredictable manual guesswork with Edge AI closed-loop control and digitalized SOPs, achieving self-healing yield curves.",
+              heroCard: {
+                tag: "AI INDUSTRIAL BRAIN",
+                title: "Closed-Loop Edge AI Architecture",
+                desc: "Edge computing nodes and LLM process memory govern real-time etching, chemical auto-dosing, and predictive defect elimination.",
+                img: "assets/samples/ai_smart_factory.png",
+                detail: "We replaced unpredictable manual guesswork with Edge AI closed-loop control and digitalized SOPs, achieving self-healing yield curves immune to high local operator turnover."
+              },
+              cards: [
+                {
+                  iconSvg: `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2"><path d="M3 7V5a2 2 0 0 1 2-2h2"/><path d="M17 3h2a2 2 0 0 1 2 2v2"/><path d="M21 17v2a2 2 0 0 1-2 2h-2"/><path d="M7 21H5a2 2 0 0 1-2-2v-2"/><rect width="10" height="10" x="7" y="7" rx="2"/></svg>`,
+                  tag: "TRACEABILITY",
+                  title: "Smart SFC 1-Board-1-Code",
+                  desc: "Every bare board etched with micro-QR code; real-time tracking across chemical baths and optical inspection.",
+                  detail: "Instant traceability pinpoints exact machine parameters and chemical bath history for any board within 3 seconds."
+                },
+                {
+                  iconSvg: `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2"><path d="M13 2 3 14h9l-1 8 10-12h-9l1-8z"/></svg>`,
+                  tag: "CLOSED-LOOP ACC",
+                  title: "50ms Auto-Correct Etching",
+                  desc: "3D AOI vision detects line-width drift at 25μm pitch, auto-tuning conveyor speed in 50ms before scrap occurs.",
+                  detail: "Eliminates batch over-etching and line necking, guaranteeing consistent SpaceX-grade impedance tolerance."
+                },
+                {
+                  iconSvg: `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2"><path d="M2 12h20"/><path d="M20 12v8H4v-8"/><circle cx="8" cy="7" r="3"/><circle cx="16" cy="7" r="3"/></svg>`,
+                  tag: "POKA-YOKE",
+                  title: "AR Vision Dynamic SOP",
+                  desc: "Operators wear AR smart glasses with dynamic Poka-yoke overlays, slashing training onboarding from 2 weeks to 4 hours.",
+                  detail: "Immune to local workforce turnover; step-by-step visual guidance guarantees zero-defect execution on complex setups."
+                },
+                {
+                  iconSvg: `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2"><path d="M12 2a10 10 0 1 0 10 10H12V2z"/><path d="M12 12 2.1 10.5"/></svg>`,
+                  tag: "DIGITAL ASSET",
+                  title: "Industrial LLM Knowledge Brain",
+                  desc: "Every troubleshooting incident auto-indexed into RAG expert system; process IP permanently retained on-premise.",
+                  detail: "Zero technical dependency on individual engineers. Factory institutional knowledge compounds automatically over time."
+                }
               ]
             },
             // Slide 06: Brownfield Facility & Environmental Moat
@@ -1385,30 +1417,44 @@ function getI18NDeck() {
             },
             // Slide 05: Edge AI 智慧工廠壁壘
             {
-              type: "feature-cards-visual",
+              type: "split-hero-matrix",
               tag: "簡報 05 / 核心技術與 AI 智慧製造",
               title: "AI / ACC 智慧工廠體系：徹底免疫「人員流失、技術清零」魔咒",
               desc: "邊緣閉環毫秒補償與 AR 動態防呆，將數十年老師傅經驗固化為數位資產。點選卡片查看技術支柱。",
               defaultExplanation: "我們用 AI 演算法與硬體防呆接管了品質控制，讓精密製造不再依賴不可控的人工熟練度，實現良率自動自癒。",
+              heroCard: {
+                tag: "工廠工業大腦",
+                title: "閉環邊緣 AI 智慧產線架構",
+                desc: "邊緣運算晶片結合 LLM 專家知識庫，全面接管即時蝕刻補償、化學自動注藥與預測性防呆。",
+                img: "assets/samples/ai_smart_factory.png",
+                detail: "徹底打破印度新廠「人員流失、技術清零」的痛點，以硬體閉環與算法自適應替代不可靠的人工作業摸索。"
+              },
               cards: [
                 {
-                  icon: "⚡",
-                  tag: "毫秒閉環",
-                  title: "毫秒級邊緣閉環控制 (Edge ACC)",
-                  desc: "PolarFire SoC 節點即時捕捉微觀偏差，在批量報廢發生前，自動向曝光機/鑽孔機發送伺服補償指令。",
-                  detail: "微米級即時補償，把傳統軟板容易因人工作業導致的形變、貼合偏移、蝕刻不均降至最低。"
+                  iconSvg: `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2"><path d="M3 7V5a2 2 0 0 1 2-2h2"/><path d="M17 3h2a2 2 0 0 1 2 2v2"/><path d="M21 17v2a2 2 0 0 1-2 2h-2"/><path d="M7 21H5a2 2 0 0 1-2-2v-2"/><rect width="10" height="10" x="7" y="7" rx="2"/></svg>`,
+                  tag: "全製程溯源",
+                  title: "Smart SFC 一板一碼",
+                  desc: "每片軟板雷射微雕 QR Code，精準追蹤機台參數、化學槽歷史與 3D AOI 光學數據。",
+                  detail: "3 秒內精確調取任一出廠軟板的完整生命週期與製程波動日誌，實現車規級 100% 溯源。"
                 },
                 {
-                  icon: "🥽",
+                  iconSvg: `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2"><path d="M13 2 3 14h9l-1 8 10-12h-9l1-8z"/></svg>`,
+                  tag: "毫秒閉環",
+                  title: "50ms ACC 蝕刻自適應補償",
+                  desc: "3D AOI 微米級捕捉線寬偏移，50 毫秒內自動向伺服傳動發送調速補償指令，杜絕批量報廢。",
+                  detail: "微米級即時補償，把傳統軟板容易因人工作業導致的過蝕、貼合偏移降至最低。"
+                },
+                {
+                  iconSvg: `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2"><path d="M2 12h20"/><path d="M20 12v8H4v-8"/><circle cx="8" cy="7" r="3"/><circle cx="16" cy="7" r="3"/></svg>`,
                   tag: "動態防呆",
                   title: "AR 智慧眼鏡與動態 SOP",
-                  desc: "作業員配戴 AR 眼鏡進行動態防呆 (Poka-yoke) 視覺指引，培訓週期由 2 週大幅壓縮至 4 小時。",
+                  desc: "作業員配戴 AR 眼鏡進行 Poka-yoke 視覺防呆指引，人員培訓週期由 2 週大幅壓縮至 4 小時。",
                   detail: "即便面對印度基層人員高流動性，產線作業仍能維持零差錯、標準化執行。"
                 },
                 {
-                  icon: "🧠",
-                  tag: "工廠大腦",
-                  title: "工業專家大腦 (LLM / RAG 知識庫)",
+                  iconSvg: `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2"><path d="M12 2a10 10 0 1 0 10 10H12V2z"/><path d="M12 12 2.1 10.5"/></svg>`,
+                  tag: "數位資產",
+                  title: "工業專家大腦 (LLM / RAG)",
                   desc: "每一次排障經驗即時轉化為可對話的工業專家庫，工藝資產 100% 在地留存。",
                   detail: "工廠知識永久沉澱在系統大腦中，徹底打破「工程師一走、工廠癱瘓」的魔咒。"
                 }
