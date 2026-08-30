@@ -667,14 +667,14 @@ let currentTheme = "a";
           <div class="bep-cockpit-grid">
             <!-- Left 38%: Master BEP Gauge & Sensitivity Simulation -->
             <div class="gauge-card-master gs-anim-card">
-              <div>
-                <div class="slide-tag" style="font-size:10px; margin-bottom:6px;">BREAK-EVEN METER</div>
+              <div class="gauge-top-section">
+                <div class="slide-tag" style="font-size:11px; margin-bottom:10px;">BREAK-EVEN SIMULATOR</div>
                 <div class="gauge-main-wrap">
                   <div class="gauge-circle">
                     <div class="gauge-arc" id="cockpitGaugeArc"></div>
-                    <div class="gauge-value count-target" data-target="${slide.bepVal}">0</div>
+                    <div class="gauge-value" id="cockpitGaugeVal">${slide.bepVal}</div>
                   </div>
-                  <div class="gauge-threshold-text">
+                  <div class="gauge-threshold-text" id="cockpitThresholdText">
                     ${currentLang === 'zh' ? '損益平衡月門檻' : 'Threshold'}: <strong>${slide.thresholdRevMo}</strong> / mo
                   </div>
                 </div>
@@ -1053,6 +1053,37 @@ let currentTheme = "a";
       } else {
         ebitEl.textContent = `-$${Math.abs(Math.round(ebit))}K`;
         ebitEl.style.color = "#ef4444";
+      }
+
+      // Live Interactive Gauge Animation Linkage
+      const gaugeValEl = document.getElementById("cockpitGaugeVal");
+      const gaugeArcEl = document.getElementById("cockpitGaugeArc");
+      const gaugeThresholdText = document.getElementById("cockpitThresholdText");
+      if (gaugeValEl) {
+        gaugeValEl.textContent = `${capPct}%`;
+      }
+      if (gaugeArcEl) {
+        // -45deg is 0%, +135deg is 100% (total 180deg range)
+        const targetDeg = -45 + (capPct / 100) * 180;
+        gaugeArcEl.style.transform = `rotate(${targetDeg}deg)`;
+        if (capPct < 50.8) {
+          gaugeArcEl.style.borderTopColor = "#ef4444";
+          gaugeArcEl.style.borderLeftColor = "#ef4444";
+          gaugeArcEl.style.boxShadow = "0 0 20px rgba(239,68,68,0.5)";
+          if (gaugeValEl) gaugeValEl.style.color = "#ef4444";
+        } else {
+          gaugeArcEl.style.borderTopColor = "var(--accent)";
+          gaugeArcEl.style.borderLeftColor = "var(--accent)";
+          gaugeArcEl.style.boxShadow = "0 0 20px var(--accent-glow)";
+          if (gaugeValEl) gaugeValEl.style.color = "var(--accent)";
+        }
+      }
+      if (gaugeThresholdText) {
+        if (capPct < 50.8) {
+          gaugeThresholdText.innerHTML = `<span style="color:#ef4444;">${currentLang === 'zh' ? '未達損益兩平 (虧損)' : 'BELOW BREAK-EVEN (LOSS)'}</span>`;
+        } else {
+          gaugeThresholdText.innerHTML = `${currentLang === 'zh' ? '損益平衡月門檻' : 'Threshold'}: <strong>$1.22M</strong> / mo`;
+        }
       }
     }
 

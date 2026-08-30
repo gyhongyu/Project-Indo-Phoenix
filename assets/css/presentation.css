@@ -583,13 +583,13 @@
 
     /* 5. BEP Master Cockpit (Slide 11 Overhaul) */
     .bep-cockpit-grid {
-      flex: 1; display: grid; grid-template-columns: 0.95fr 2.05fr; gap: 14px;
+      flex: 1; display: grid; grid-template-columns: 1.05fr 1.95fr; gap: 14px;
       align-items: stretch; margin-bottom: 10px; min-height: 0;
     }
     .gauge-card-master {
       background: linear-gradient(135deg, rgba(255,255,255,0.03) 0%, rgba(0,0,0,0.4) 100%);
       border: 1px solid var(--accent); border-radius: var(--card-radius);
-      padding: clamp(10px, 1.2vh, 14px) 16px; display: flex; flex-direction: column;
+      padding: clamp(14px, 1.8vh, 20px) 18px; display: flex; flex-direction: column;
       justify-content: space-between; box-shadow: 0 8px 24px var(--accent-glow);
       position: relative; overflow: hidden;
     }
@@ -598,69 +598,74 @@
       background: radial-gradient(circle at top right, var(--accent-glow), transparent 70%);
       pointer-events: none;
     }
+    .gauge-top-section {
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      flex: 1; margin: 4px 0;
+    }
     .gauge-main-wrap {
       display: flex; flex-direction: column; align-items: center; justify-content: center;
-      margin: 2px 0;
+      margin: 8px 0 4px 0;
     }
     .gauge-circle {
-      position: relative; width: 140px; height: 70px; overflow: hidden;
+      position: relative; width: 210px; height: 105px; overflow: hidden;
       display: flex; align-items: flex-end; justify-content: center;
     }
     .gauge-arc {
-      width: 140px; height: 140px; border-radius: 50%;
-      border: 12px solid rgba(255,255,255,0.05);
+      width: 210px; height: 210px; border-radius: 50%;
+      border: 16px solid rgba(255,255,255,0.06);
       border-top-color: var(--accent); border-left-color: var(--accent);
       position: absolute; top: 0; left: 0;
-      transform: rotate(-45deg);
-      box-shadow: 0 0 20px var(--accent-glow);
-      transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+      transform: rotate(46.44deg); /* 50.8% default: -45 + (50.8/100)*180 = 46.44deg */
+      box-shadow: 0 0 24px var(--accent-glow);
+      transition: transform 0.15s ease-out, border-color 0.25s, box-shadow 0.25s;
     }
     .gauge-value {
-      font-family: var(--font-display); font-size: 30px; font-weight: 600;
-      color: var(--accent); line-height: 1; z-index: 2; margin-bottom: 2px;
+      font-family: var(--font-display); font-size: 42px; font-weight: 600;
+      color: var(--accent); line-height: 1; z-index: 2; margin-bottom: 4px;
+      transition: color 0.25s;
     }
     .gauge-threshold-text {
-      font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.12em;
-      text-transform: uppercase; color: var(--accent-light); margin-top: 4px;
+      font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.12em;
+      text-transform: uppercase; color: var(--accent-light); margin-top: 8px;
       text-align: center;
     }
 
     /* BEP Sensitivity Slider */
     .slider-box {
-      margin-top: 6px; padding-top: 6px; border-top: 1px solid rgba(255,255,255,0.08);
+      margin-top: 10px; padding-top: 10px; border-top: 1px solid rgba(255,255,255,0.08);
     }
     .slider-header {
       display: flex; justify-content: space-between; font-family: var(--font-mono);
-      font-size: 10px; color: var(--ink-sub); margin-bottom: 4px;
+      font-size: 11px; color: var(--ink-sub); margin-bottom: 6px;
     }
     .slider-header strong { color: var(--accent); }
     .cockpit-slider {
       width: 100%; -webkit-appearance: none; appearance: none;
-      height: 5px; border-radius: 3px; background: rgba(255,255,255,0.1);
+      height: 6px; border-radius: 3px; background: rgba(255,255,255,0.1);
       outline: none; transition: background 0.3s;
     }
     .cockpit-slider::-webkit-slider-thumb {
       -webkit-appearance: none; appearance: none;
-      width: 14px; height: 14px; border-radius: 50%;
+      width: 16px; height: 16px; border-radius: 50%;
       background: var(--accent); cursor: pointer;
-      box-shadow: 0 0 8px var(--accent);
+      box-shadow: 0 0 10px var(--accent);
     }
     .slider-result-row {
       display: flex; justify-content: space-between; font-family: var(--font-mono);
-      font-size: 10px; color: var(--ink-sub); margin-top: 4px;
+      font-size: 11px; color: var(--ink-sub); margin-top: 6px;
     }
     .slider-result-row strong { color: var(--ink); }
 
     /* Bottom Double Returns Ribbon */
     .bep-returns-ribbon {
       background: rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.06);
-      border-radius: 4px; padding: 6px 10px; display: flex;
-      justify-content: space-around; align-items: center; margin-top: 6px;
+      border-radius: 4px; padding: 8px 12px; display: flex;
+      justify-content: space-around; align-items: center; margin-top: 10px;
     }
     .bep-return-item { display: flex; flex-direction: column; align-items: center; }
-    .bep-ret-lbl { font-family: var(--font-mono); font-size: 8.5px; color: var(--ink-sub); text-transform: uppercase; }
-    .bep-ret-val { font-family: var(--font-mono); font-size: 12px; font-weight: 700; }
-    .bep-return-divider { width: 1px; height: 16px; background: rgba(255,255,255,0.08); }
+    .bep-ret-lbl { font-family: var(--font-mono); font-size: 9px; color: var(--ink-sub); text-transform: uppercase; }
+    .bep-ret-val { font-family: var(--font-mono); font-size: 13px; font-weight: 700; }
+    .bep-return-divider { width: 1px; height: 18px; background: rgba(255,255,255,0.08); }
 
     /* 6 Financial Rows on Right */
     .bep-metrics-rows-list {
