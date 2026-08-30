@@ -920,11 +920,12 @@
       100% { transform: scale(1.8); opacity: 0; }
     }
 
-    /* Bottom Disclaimer Note Bar (Legal/Financial Rigor) */
+    /* Bottom Disclaimer Note Bar (Legal/Financial Rigor Outside Chart Canvas) */
     .deck-disclaimer-note {
-      position: absolute; bottom: 8px; right: 28px;
+      margin-top: 10px; text-align: right; width: 100%;
       font-family: var(--font-mono); font-size: 10px; color: var(--ink-sub);
       opacity: 0.65; letter-spacing: 0.03em; pointer-events: none; z-index: 10;
+      padding-right: 15px;
     }
 
     /* Bottom 4 Financial Milestones Ribbon */

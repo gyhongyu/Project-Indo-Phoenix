@@ -911,11 +911,11 @@ let currentTheme = "a";
                 `).join("")}
               </div>
 
-              <!-- Discreet Bottom Disclaimer Bar (Financial & Legal Rigor) -->
-              <div class="deck-disclaimer-note">
-                ${slide.disclaimer || ''}
-              </div>
+            </div>
 
+            <!-- Discreet Bottom Disclaimer Bar (Financial & Legal Rigor Outside Canvas) -->
+            <div class="deck-disclaimer-note">
+              ${slide.disclaimer || ''}
             </div>
 
           </div>
