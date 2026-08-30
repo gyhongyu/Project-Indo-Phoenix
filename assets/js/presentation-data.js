@@ -284,41 +284,47 @@ function getI18NDeck() {
             },
             // Slide 04: Top 5 Technology Moats & Sweat Equity
             {
-              type: "feature-cards-visual",
+              type: "split-hero-matrix",
               tag: "SLIDE 04 / TECHNOLOGY MOATS & GOVERNANCE",
               title: "Indian Promoter Majority Control (>90%) with 5% Sweat Equity",
               desc: "Taiwanese tier-1 team full-time commitment, breaking global vendor-code quotas and guaranteeing SpaceX-grade yield.",
               defaultExplanation: "Promoter retains absolute equity and asset control (>90%), while technical team stakes careers on 90%+ production yield.",
+              heroCard: {
+                tag: "GOVERNANCE PROTOCOL",
+                title: "5% Sweat Equity Alignment",
+                desc: "Indian industrial family retains >90% absolute controlling equity and board veto. Technical team stakes careers on 90%+ yield milestones with zero cash equity drain.",
+                img: "assets/samples/equity_pie.png",
+                imgLabel: "EQUITY SPLIT: >90% VS 5%",
+                detail: "Zero cash equity drain on promoter. Indian industrial family holds >90% absolute controlling interest with complete operational veto; equity strictly tied to 85%-95% ramp-up yield deliverables."
+              },
               cards: [
-                {
-                  iconSvg: `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2"><path d="m11 17 2 2a1 1 0 0 0 1.4 0l6.6-6.6a1 1 0 0 0 0-1.4l-5-5a1 1 0 0 0-1.4 0L11 9"/><path d="m18 13-1.5-7.5L2 2l3.5 14.5L13 18"/></svg>`,
-                  tag: "GOVERNANCE",
-                  title: "5% Sweat Equity Alignment",
-                  desc: "Core executives resign full-time under non-compete to co-found; equity strictly tied to 85%-95% ramp-up yield deliverables.",
-                  blueprintImg: "assets/samples/equity_pie.png",
-                  blueprintLabel: "GOVERNANCE: >90% VS 5%",
-                  detail: "Zero cash equity drain on promoter. Indian industrial family holds >90% absolute controlling interest with complete operational veto."
-                },
                 {
                   iconSvg: `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2"><circle cx="7.5" cy="15.5" r="5.5"/><path d="m21 2-9.6 9.6"/><path d="m15.5 7.5 3 3L22 7l-3-3"/></svg>`,
                   tag: "SUPPLY CHAIN",
                   title: "Global Vendor-Code Access",
-                  desc: "Leverages decades-long relations with DuPont, Taiflex, and Panasonic to secure controlled FCCL quotas and credit terms.",
+                  desc: "Decades-long tier-1 relations secure direct FCCL quotas from DuPont, Taiflex, and Panasonic with 30-60 day credit lines.",
                   detail: "Breaks international allocation barriers, securing tier-1 baseline pricing and eliminating 100% cash prepayment constraints."
                 },
                 {
                   iconSvg: `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>`,
                   tag: "COPY EXACTLY",
                   title: "Copy Exactly Process Transfer",
-                  desc: "Direct blueprint replication of mature Taiwan DES, VCP, black-hole, and NiPdAu plating parameters to compress learning curves.",
+                  desc: "Direct blueprint replication of mature Taiwan DES, VCP, and black-hole parameters to skip 2 years of learning curve.",
                   detail: "Eliminates 2 years of trial-and-error yield losses common in greenfield Indian electronics setups."
                 },
                 {
                   iconSvg: `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>`,
                   tag: "QUALIFICATION",
                   title: "Turnkey Tier-1 Certifications",
-                  desc: "Turnkey delivery of IATF 16949 (Auto), AS9100 (Aero), ISO 26262, and IPC Class 3 defense certifications.",
+                  desc: "Pre-audited turnkey delivery of IATF 16949 (Auto), AS9100 (Aero), and IPC Class 3 defense certifications.",
                   detail: "Provides instant credibility to win high-margin global aerospace, automotive, and medical supplier contracts."
+                },
+                {
+                  iconSvg: `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>`,
+                  tag: "DEFENSE OFFSET",
+                  title: "100% Non-China Sovereignty",
+                  desc: "Fulfills DAP 2020 mandatory 30%-50% offset requirement, locking 5-7x higher margins across defense fleets.",
+                  detail: "Raphe mPhibr and ideaForge strictly ban Chinese parts, delivering 5-7x higher margins for verified indigenous suppliers."
                 }
               ]
             },
@@ -1333,33 +1339,32 @@ function getI18NDeck() {
             },
             // Slide 04: 技術股 5 大護城河
             {
-              type: "feature-cards-visual",
+              type: "split-hero-matrix",
               tag: "簡報 04 / 技術股護城河與合資治理",
               title: "印度資本絕對控股 >90%：台灣技術團隊以 5% 讓利對賭 SpaceX 級良率",
               desc: "成熟量產體系毫無偏差整廠移植，打破國際材料配額封鎖與體系認證高牆。點選卡片查看邊界。",
               defaultExplanation: "大股東持有超過 90% 股權與實體資產，技術團隊用職業生涯對賭 90%+ 良率，這是利益極致捆綁的最優合資治理架構。",
+              heroCard: {
+                tag: "合資治理法理",
+                title: "5% Sweat Equity 汗水股讓利",
+                desc: "印方實業大股東持有 >90% 絕對控股權與資產處分權。台灣核心團隊全職離職簽訂競業對賭 90%+ 量產爬坡良率。",
+                img: "assets/samples/equity_pie.png",
+                imgLabel: "合資股權：>90% 控股 VS 5% 乾股",
+                detail: "不拿現金、不搶控制權，印度實業家族持有合資公司 >90% 絕對控股權與資本主導權；技術團隊以良率爬坡為唯一對賭條件。"
+              },
               cards: [
-                {
-                  iconSvg: `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2"><path d="m11 17 2 2a1 1 0 0 0 1.4 0l6.6-6.6a1 1 0 0 0 0-1.4l-5-5a1 1 0 0 0-1.4 0L11 9"/><path d="m18 13-1.5-7.5L2 2l3.5 14.5L13 18"/></svg>`,
-                  tag: "股權架構",
-                  title: "5% Sweat Equity 商業法理",
-                  desc: "核心高管簽署競業禁止集體離職全職投入；讓利實業股東控股，將股權與 85%~95% 爬坡良率終身對賭。",
-                  blueprintImg: "assets/samples/equity_pie.png",
-                  blueprintLabel: "合資治理：>90% 控股 VS 5% 乾股",
-                  detail: "不拿現金、不搶控制權，印度實業家族持有合資公司 >90% 絕對控股權與資本主導權。"
-                },
                 {
                   iconSvg: `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2"><circle cx="7.5" cy="15.5" r="5.5"/><path d="m21 2-9.6 9.6"/><path d="m15.5 7.5 3 3L22 7l-3-3"/></svg>`,
                   tag: "供應鏈通道",
                   title: "突破國際 Vendor Code 壁壘",
-                  desc: "沿用杜邦 (DuPont)、台虹 (Taiflex)、松下 (Panasonic) 信任基礎，取得高階 FCCL/PI 配額與優惠帳期。",
+                  desc: "沿用數十年原廠信任基礎，取得杜邦 (DuPont)、台虹、松下高階材料配額與 30~60 天信用帳期。",
                   detail: "突破新廠現金 100% 預付與原廠配額封鎖，保障戰略物料不缺料、不斷供。"
                 },
                 {
                   iconSvg: `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>`,
                   tag: "整廠移植",
                   title: "Copy Exactly 精確工藝複製",
-                  desc: "成熟機台參數、DES/VCP/黑孔化/NiPdAu 化學藥水配方零偏差輸出，壓縮 2 年試錯期。",
+                  desc: "成熟機台參數、DES/VCP/黑孔化化學藥水配方零偏差輸出，直接壓縮 2 年試錯期。",
                   detail: "將台灣前五大上市基地經過驗證的製程參數標準化導入，杜絕印度新廠土法摸索之巨額損失。"
                 },
                 {
@@ -1368,6 +1373,13 @@ function getI18NDeck() {
                   title: "全套國際體系認證接單能力",
                   desc: "輔導一次性通過 IATF 16949（車規）、AS9100（航太）、ISO 26262 及 IPC Class 3 認證。",
                   detail: "賦予工廠最高等級接單硬實力，無縫承接全球車廠與印度國防訂單。"
+                },
+                {
+                  iconSvg: `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>`,
+                  tag: "國防自主相抵",
+                  title: "100% 國防無中化自主實體",
+                  desc: "符合 DAP 2020 強制 30%-50% 本地採購相抵，獲取軍用無人機與雷達 5~7 倍超額利潤。",
+                  detail: "印度國防無人機巨頭嚴格排斥中國零件，Indo-Phoenix 提供在地化 Class 3 剛撓結合板。"
                 }
               ]
             },

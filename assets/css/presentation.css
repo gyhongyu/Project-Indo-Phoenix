@@ -192,15 +192,15 @@
 
     .slide-title {
       font-family: var(--font-display);
-      font-size: clamp(26px, 2.8vw, 42px);
+      font-size: clamp(24px, 2.5vw, 38px);
       font-weight: 500; line-height: 1.15;
-      letter-spacing: -0.01em; margin-bottom: 8px;
+      letter-spacing: -0.01em; margin-bottom: 6px;
       color: var(--ink); flex-shrink: 0;
     }
     .slide-desc {
-      font-size: clamp(13.5px, 1.05vw, 15.5px);
-      color: var(--ink-sub); line-height: 1.55; max-width: 1080px;
-      margin-bottom: clamp(12px, 1.6vh, 20px); flex-shrink: 0;
+      font-size: clamp(13px, 0.95vw, 14.5px);
+      color: var(--ink-sub); line-height: 1.45; max-width: 1080px;
+      margin-bottom: clamp(8px, 1.2vh, 14px); flex-shrink: 0;
     }
 
     /* ═══════════════════════════════════════════════════════════════
@@ -606,6 +606,8 @@
 
     @media (hover: hover) and (pointer: fine) {
       .feature-card-item:hover .card-smart-tooltip,
+      .split-hero-left:hover .card-smart-tooltip,
+      .split-moat-card:hover .card-smart-tooltip,
       .product-spec-card:hover .card-smart-tooltip,
       .space-tile-card:hover .card-smart-tooltip,
       .opex-cost-card:hover .card-smart-tooltip,
@@ -655,6 +657,67 @@
     }
     .flow-title { font-size: 15px; font-weight: 600; margin-bottom: 6px; color: var(--ink); }
     .flow-desc { font-size: 13px; color: var(--ink-sub); line-height: 1.5; }
+
+    /* 2.5 Split Hero Matrix Layout (Slide 04 Overhaul: Left 45% Hero + Right 55% 2x2 Grid) */
+    .split-hero-layout {
+      flex: 1; display: grid; grid-template-columns: 1.15fr 1.35fr; gap: clamp(12px, 1.6vw, 20px);
+      margin-bottom: 4px; min-height: 0; align-items: stretch;
+    }
+    .split-hero-left {
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.03) 0%, rgba(10, 15, 25, 0.35) 100%);
+      border: 1px solid var(--accent);
+      border-radius: var(--card-radius);
+      padding: clamp(14px, 1.8vh, 20px) clamp(16px, 1.6vw, 22px);
+      display: flex; flex-direction: column; justify-content: space-between;
+      box-shadow: 0 10px 30px var(--accent-glow);
+      position: relative; cursor: pointer; transition: all 0.3s var(--ease);
+      min-height: 0;
+    }
+    .split-hero-left:hover {
+      background: var(--bg-card-hover);
+      transform: translateY(-2px); box-shadow: 0 12px 36px var(--accent-glow);
+    }
+    .split-hero-title {
+      font-size: clamp(15px, 1.25vw, 18px); font-weight: 600; color: var(--ink);
+      margin: 4px 0 2px 0;
+    }
+    .split-hero-desc {
+      font-size: clamp(11.5px, 0.9vw, 13px); color: var(--ink-sub); line-height: 1.45;
+    }
+    .split-hero-img-wrap {
+      width: 100%; flex: 1; min-height: clamp(160px, 24vh, 260px);
+      border-radius: 8px; overflow: hidden; margin-top: clamp(8px, 1.2vh, 14px);
+      border: 1px solid var(--line-subtle); position: relative;
+      background: rgba(0, 0, 0, 0.4); display: flex; align-items: center; justify-content: center;
+      pointer-events: none;
+    }
+    .split-hero-img {
+      width: 100%; height: 100%; object-fit: contain; object-position: center;
+      transition: transform 0.4s var(--ease);
+    }
+
+    .split-hero-right-grid {
+      display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: 1fr 1fr;
+      gap: clamp(10px, 1.2vw, 14px); min-height: 0;
+    }
+    .split-moat-card {
+      background: rgba(10, 15, 25, 0.2); border: 1px solid var(--line-subtle);
+      border-radius: var(--card-radius); padding: clamp(12px, 1.6vh, 18px) clamp(14px, 1.3vw, 18px);
+      display: flex; flex-direction: column; justify-content: flex-start;
+      cursor: pointer; transition: all 0.25s var(--ease); position: relative;
+      min-height: 0;
+    }
+    .split-moat-card:hover, .split-moat-card.active {
+      background: var(--bg-card-hover); border-color: var(--accent);
+      transform: translateY(-2px); box-shadow: 0 6px 20px var(--accent-glow);
+    }
+    .split-moat-title {
+      font-size: clamp(13.5px, 1.1vw, 15px); font-weight: 600; color: var(--ink);
+      margin: 6px 0 4px 0;
+    }
+    .split-moat-desc {
+      font-size: clamp(11px, 0.88vw, 12.5px); color: var(--ink-sub); line-height: 1.45;
+    }
 
     /* 6. Feature Cards Grid (Slide 3 Market Verticals, Slide 4 Moats, Slide 5 AI) */
     .feature-cards-grid {

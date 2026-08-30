@@ -289,7 +289,62 @@ let currentTheme = "a";
           </div>
         `;
       }
-      // 3. Feature Cards Visual (Slide 3 Market Verticals, Slide 4 Moats, Slide 5 AI)
+      // 2.5. Split Hero Matrix (Slide 4: Left Hero Showcase + Right 2x2 Moat Grid)
+      else if (slide.type === "split-hero-matrix") {
+        html += `
+          <div class="split-hero-layout">
+            <!-- Left: Strategic Hero Card (Pie Chart & Governance) -->
+            <div class="split-hero-left gs-anim-card" 
+                 onclick="selectGenericCard('heroCard', 0, '${slide.heroCard.detail.replace(/'/g, "\\'")}')"
+                 onmouseenter="selectGenericCard('heroCard', 0, '${slide.heroCard.detail.replace(/'/g, "\\'")}')">
+              <div>
+                <div class="feature-card-top">
+                  <div class="feature-card-icon">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2"><path d="m11 17 2 2a1 1 0 0 0 1.4 0l6.6-6.6a1 1 0 0 0 0-1.4l-5-5a1 1 0 0 0-1.4 0L11 9"/><path d="m18 13-1.5-7.5L2 2l3.5 14.5L13 18"/></svg>
+                  </div>
+                  <div class="feature-card-tag">${slide.heroCard.tag}</div>
+                </div>
+                <div class="split-hero-title">${slide.heroCard.title}</div>
+                <div class="split-hero-desc">${slide.heroCard.desc}</div>
+              </div>
+
+              <div class="split-hero-img-wrap">
+                <img class="split-hero-img" src="${slide.heroCard.img}" alt="Equity Split" loading="lazy" />
+              </div>
+
+              <div class="card-smart-tooltip">
+                <div class="tooltip-tag">⚖️ ${currentLang === 'zh' ? '合資治理深度解析' : 'Governance Insight'}</div>
+                <div class="tooltip-text">${slide.heroCard.detail}</div>
+              </div>
+            </div>
+
+            <!-- Right: 2x2 Moat Grid Cards -->
+            <div class="split-hero-right-grid">
+              ${slide.cards.map((c, idx) => `
+                <div class="split-moat-card gs-anim-card ${idx === 0 ? 'active' : ''}" 
+                     id="moatCard_${idx}"
+                     onclick="selectGenericCard('moatCard', ${idx}, '${c.detail.replace(/'/g, "\\'")}')"
+                     onmouseenter="selectGenericCard('moatCard', ${idx}, '${c.detail.replace(/'/g, "\\'")}')">
+                  <div>
+                    <div class="feature-card-top">
+                      <div class="feature-card-icon">${c.iconSvg ? c.iconSvg : (c.icon || '💎')}</div>
+                      <div class="feature-card-tag">${c.tag}</div>
+                    </div>
+                    <div class="split-moat-title">${c.title}</div>
+                    <div class="split-moat-desc">${c.desc}</div>
+                  </div>
+
+                  <div class="card-smart-tooltip">
+                    <div class="tooltip-tag">🛡️ ${currentLang === 'zh' ? '核心護城河洞察' : 'Moat Insight'}</div>
+                    <div class="tooltip-text">${c.detail}</div>
+                  </div>
+                </div>
+              `).join("")}
+            </div>
+          </div>
+        `;
+      }
+      // 3. Feature Cards Visual (Slide 3 Market Verticals, Slide 5 AI)
       else if (slide.type === "feature-cards-visual") {
         html += `
           <div class="feature-cards-grid">
