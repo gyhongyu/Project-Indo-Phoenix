@@ -375,45 +375,46 @@ function getI18NDeck() {
             },
             // Slide 06: Brownfield Facility & Environmental Moat
             {
-              type: "space-matrix-visual",
+              type: "split-hero-matrix",
               tag: "SLIDE 06 / BROWNFIELD RETROFITTING & SPCB PERMITS",
               title: "13,000 m² Facility with 3x ZLD (Zero Liquid Discharge) Clearance",
               desc: "100% compliant with SPCB red-category chemical plating permits. Advanced MVR + RO water recycling creates insurmountable barrier.",
-              spaces: [
+              defaultExplanation: "In India, environmental permits are the ultimate operating license; a 3,000 m² ZLD water recycling system ensures non-stop production.",
+              heroCard: {
+                tag: "ENVIRONMENTAL MOAT",
+                title: "13,000 m² Modern Heavy Plant",
+                desc: "Equipped with 3x standard ZLD zero liquid discharge, +40% HVAC thermal redundancy, and deep anti-vibration laser foundations.",
+                img: "assets/samples/facility_zld.png",
+                detail: "In India, environmental permits are the ultimate operating license; our 3,000 m² ZLD recycling system guarantees zero shutdown risk under SPCB red-category rules."
+              },
+              cards: [
                 {
-                  title: "Heavy Wet Chemistry",
-                  area: "4,500 m²",
-                  std: "Class 100K Cleanroom",
-                  desc: "High-capacity VCP plating, DES etching lines, black-hole direct metallization.",
-                  detail: "Houses the full chemical wet-process line. Fully permitted under State Pollution Control Board (SPCB) red-category industrial standards."
+                  iconSvg: `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2"><path d="M10 2v7.31"/><path d="M14 9.3V1.99"/><path d="M8.5 2h7"/><path d="M14 9.3a6.5 6.5 0 1 1-4 0"/><path d="M5.52 16h12.96"/></svg>`,
+                  tag: "4,500 M² / FRP FLOOR",
+                  title: "Heavy Wet Chemistry (VCP/DES)",
+                  desc: "High-capacity VCP plating, DES continuous etching lines, and acid-mist scrubbers over heavy FRP acid-proof flooring.",
+                  detail: "Fully permitted under State Pollution Control Board (SPCB) red-category industrial plating standards."
                 },
                 {
-                  title: "Dry Process & Yellow Room",
-                  area: "3,500 m²",
-                  std: "Class 10K / 1K Cleanroom",
-                  desc: "Direct imaging (LDI), automated coverlay alignment, and vacuum laminators.",
-                  detail: "Temperature & humidity strictly controlled (21±1°C, 55±5% RH) to achieve 25μm ultra-fine line pitch without yield degradation."
+                  iconSvg: `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>`,
+                  tag: "3,500 M² / CLASS 10K",
+                  title: "Yellow Room (+40% HVAC)",
+                  desc: "Direct imaging (LDI) and vacuum laminators with +40% cooling redundancy against 45°C+ Indian summer heat.",
+                  detail: "Strict temperature & humidity control (21±1°C, 55±5% RH) guarantees 25μm ultra-fine line precision."
                 },
                 {
-                  title: "Inspection, SMT & Lab",
-                  area: "2,000 m²",
-                  std: "Class 10K ESD Protected",
-                  desc: "High-speed SMT placement, flying probe testing, and metallurgical cross-section lab.",
-                  detail: "Zero-defect quality gate featuring 3D AOI, ionic contamination testing, and automated micro-short inspection."
+                  iconSvg: `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>`,
+                  tag: "2,000 M² / 3D AOI",
+                  title: "SMT, Laser & Test Lab",
+                  desc: "High-speed SMT placement, flying probe test, and isolated deep anti-vibration foundations for micro-via drilling.",
+                  detail: "Zero-defect quality gate with ionic contamination testing and metallurgical cross-section analysis."
                 },
                 {
-                  title: "Warehouse & Cold Storage",
-                  area: "1,500 m²",
-                  std: "Cold Storage 2-10°C",
-                  desc: "FCCL base laminates, coverlays, and pure chemicals.",
-                  detail: "Maintains 45-60 days of strategic safety inventory in India to eliminate international logistics disruptions."
-                },
-                {
-                  title: "Wastewater & ZLD",
-                  area: "3,000 m²",
-                  std: "Zero Liquid Discharge",
-                  desc: "MVR mechanical vapor recompression and multi-stage RO.",
-                  detail: "3x larger footprint than standard factories. Mandatory environmental installation for green project approvals in India."
+                  iconSvg: `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2"><path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"/><path d="m3.3 7 8.7 5 8.7-5"/><path d="M12 22V12"/></svg>`,
+                  tag: "3,000 M² / BUFFER",
+                  title: "Cold Storage & Buffer Depot",
+                  desc: "Temperature-controlled 2-10°C storage maintaining 45-60 days of strategic FCCL inventory in India.",
+                  detail: "Completely eliminates global air/sea freight disruption risks, ensuring uninterrupted automotive supply."
                 }
               ]
             },
@@ -1462,46 +1463,46 @@ function getI18NDeck() {
             },
             // Slide 06: 廠房基建規劃與 SPCB 環保壁壘
             {
-              type: "space-matrix-visual",
+              type: "split-hero-matrix",
               tag: "簡報 06 / 廠房基建規劃與 SPCB 環保壁壘",
               title: `13,000 m² 專業重工廠房：3 倍標準 ZLD 築起印度最高環評門檻`,
               desc: "重工業級濕製程、防微震微盲孔鑽孔及符合印度 SPCB 零液體排放 (ZLD) 環保法規的現代化空間佈局。",
               defaultExplanation: "在印度，環評牌照就是最大的特許經營權；3,000 平方米的零排放系統是我們合法持續量產的終極防禦工事。",
-              spaces: [
+              heroCard: {
+                tag: "最高環評特許",
+                title: "13,000 m² 現代化重工廠房",
+                desc: "配備 3 倍標準 ZLD 零液體排放、+40% HVAC 暖通冗餘及獨立隔震深地基，全印唯一合規綠色重工基地。",
+                img: "assets/samples/facility_zld.png",
+                detail: "在印度，環評牌照就是最大的特許經營權；3,000 平方米的零排放系統是我們合法持續量產的終極防禦工事。"
+              },
+              cards: [
                 {
-                  title: "萬級無塵黃光區",
-                  area: "1,500 m²",
-                  std: "Class 10K / 22±2°C",
-                  desc: "LDI 雷射直接成像與乾膜壓合。",
-                  detail: "配置 +40% HVAC 暖通冗餘空調制冷能力，專門克服印度夏季 45°C+ 極端高溫環境。"
+                  iconSvg: `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2"><path d="M10 2v7.31"/><path d="M14 9.3V1.99"/><path d="M8.5 2h7"/><path d="M14 9.3a6.5 6.5 0 1 1-4 0"/><path d="M5.52 16h12.96"/></svg>`,
+                  tag: "4,500 M² / FRP 防腐",
+                  title: "濕製程電鍍蝕刻區 (VCP/DES)",
+                  desc: "VCP 垂直連續電鍍、DES 連續蝕刻線與酸霧洗滌塔，全區鋪設 FRP 重防腐耐酸鹼地坪。",
+                  detail: "採用重防腐玻璃鋼 (FRP) 防護地坪，配備多級負壓酸霧洗滌塔，確保順利通過 SPCB 紅色重污染審查。"
                 },
                 {
-                  title: "濕製程電鍍蝕刻區",
-                  area: "4,500 m²",
-                  std: "FRP 耐酸鹼地坪",
-                  desc: "VCP 垂直連續電鍍與 DES 連續蝕刻線。",
-                  detail: "採用重防腐玻璃鋼 (FRP) 防護地坪，配備多級負壓酸霧洗滌塔，確保順利通過 SPCB 環評。"
+                  iconSvg: `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>`,
+                  tag: "3,500 M² / 萬級無塵",
+                  title: "黃光乾製程 (+40% HVAC)",
+                  desc: "LDI 雷射直接成像與真空壓合，配置 +40% HVAC 暖通空調專門克服印度 45°C+ 極端高溫。",
+                  detail: "恆溫恆濕嚴格受控（21±1°C, 55±5% RH），確保 25μm 超微細線路曝光精度不衰減。"
                 },
                 {
-                  title: "機械鑽孔與真空壓合",
-                  area: "2,000 m²",
-                  std: "承重 1.5 噸/m²",
-                  desc: "雷射微盲孔鑽孔機與高精度真空熱壓機。",
-                  detail: "獨立隔震深地基設計，徹底隔絕微震動對高精密雷射微盲孔鑽孔良率的干擾。"
+                  iconSvg: `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>`,
+                  tag: "2,000 M² / 3D AOI",
+                  title: "SMT、雷射鑽孔與檢測中心",
+                  desc: "高速 SMT 貼片、飛針測試，雷射微盲孔專區採用獨立隔震深地基，隔絕重工震動干擾。",
+                  detail: "配置離子污染度檢測與金相切片實驗室，執行航太與車規級 100% 零缺陷出廠門禁。"
                 },
                 {
-                  title: "低溫精密材料倉",
-                  area: "2,000 m²",
-                  std: "冷藏室 2-10°C",
-                  desc: "FCCL 銅箔基板、覆蓋膜及化學耗材儲存。",
+                  iconSvg: `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2"><path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"/><path d="m3.3 7 8.7 5 8.7-5"/><path d="M12 22V12"/></svg>`,
+                  tag: "3,000 M² / 恆溫儲備",
+                  title: "低溫精密材料倉與戰略緩衝",
+                  desc: "冷藏室 2-10°C 儲存杜邦 FCCL 基材，常態備置 45-60 天安全庫存，消除斷鏈風險。",
                   detail: "常態備置 45-60 天印度在地戰略安全庫存，徹底消除國際海空運物流斷鏈風險。"
-                },
-                {
-                  title: "廢水與零排放 (ZLD)",
-                  area: "3,000 m²",
-                  std: "Zero Liquid Discharge",
-                  desc: "MVR 機械蒸汽再壓縮蒸發器與多級逆滲透 RO。",
-                  detail: "佔地面積達傳統標準 3 倍，為印度綠色高科技項目核准之法定強制環保設施。"
                 }
               ]
             },
