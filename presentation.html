@@ -14,6 +14,21 @@
   <link rel="stylesheet" href="assets/css/presentation.css">
 </head>
 <body data-template="a">
+  <!-- Mobile Portrait Rotate Shield (Auto hides on Landscape / Desktop) -->
+  <div class="rotate-shield" id="rotateShield">
+    <div class="rotate-shield-box">
+      <div class="rotate-icon-anim">
+        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2">
+          <rect x="4" y="2" width="16" height="20" rx="2" ry="2" transform="rotate(0 12 12)"></rect>
+          <path d="M12 18h.01"></path>
+        </svg>
+        <span class="rotate-arrow">↻</span>
+      </div>
+      <div class="rotate-title">請將手機橫向旋轉瀏覽</div>
+      <div class="rotate-sub">Rotate device for 16:9 Executive Pitch Deck</div>
+    </div>
+  </div>
+
   <canvas id="bg-canvas"></canvas>
   <div class="grain"></div>
 

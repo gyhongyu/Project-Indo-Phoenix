@@ -1543,3 +1543,59 @@
       background: var(--accent); color: var(--bg);
       box-shadow: 0 0 16px var(--accent-glow);
     }
+
+    /* ═══════════════════════════════════════════════════════════════
+       MOBILE PORTRAIT ROTATE SHIELD (100% Zero Impact on Desktop)
+       ═══════════════════════════════════════════════════════════════ */
+    .rotate-shield {
+      display: none;
+    }
+    @media screen and (orientation: portrait) and (max-width: 900px) {
+      .rotate-shield {
+        display: flex;
+        position: fixed; inset: 0; z-index: 99999;
+        background: rgba(9, 9, 11, 0.96);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        align-items: center; justify-content: center;
+        padding: 30px; text-align: center;
+      }
+      .rotate-shield-box {
+        background: var(--bg-card);
+        border: 1px solid var(--line);
+        border-radius: var(--card-radius);
+        padding: 36px 28px;
+        box-shadow: 0 20px 50px rgba(0,0,0,0.8), 0 0 30px var(--accent-glow);
+        display: flex; flex-direction: column; align-items: center; gap: 16px;
+      }
+      .rotate-icon-anim {
+        position: relative; width: 60px; height: 60px;
+        display: flex; align-items: center; justify-content: center;
+      }
+      .rotate-icon-anim svg {
+        animation: phoneSpin 2.4s ease-in-out infinite;
+      }
+      .rotate-arrow {
+        position: absolute; right: -8px; top: -4px;
+        font-size: 20px; color: var(--accent);
+        animation: arrowSpin 2.4s linear infinite;
+      }
+      .rotate-title {
+        font-family: var(--font-display); font-size: 20px; font-weight: 600;
+        color: var(--ink); letter-spacing: 0.05em;
+      }
+      .rotate-sub {
+        font-size: 13px; color: var(--ink-sub); line-height: 1.5;
+        max-width: 240px;
+      }
+      @keyframes phoneSpin {
+        0%, 20% { transform: rotate(0deg); }
+        50%, 80% { transform: rotate(-90deg); }
+        100% { transform: rotate(0deg); }
+      }
+      @keyframes arrowSpin {
+        0% { transform: rotate(0deg); opacity: 0.3; }
+        50% { transform: rotate(180deg); opacity: 1; }
+        100% { transform: rotate(360deg); opacity: 0.3; }
+      }
+    }
