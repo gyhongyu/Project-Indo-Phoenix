@@ -722,6 +722,9 @@ let currentTheme = "a";
 
                   <div class="bep-val-col">
                     <div class="space-row-sublbl">${currentLang === 'zh' ? '單月預估' : 'Monthly'}</div>
+                    <div class="bep-val-num ${idx === 2 ? 'accent' : ''}">${m.monthly}</div>
+                  </div>
+
                   <div class="bep-val-col">
                     <div class="space-row-sublbl">${currentLang === 'zh' ? '年度預估' : 'Annual'}</div>
                     <div class="bep-val-num ${idx === 2 ? 'accent' : ''}">${m.annual}</div>
