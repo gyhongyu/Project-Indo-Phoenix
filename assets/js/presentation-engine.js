@@ -1453,6 +1453,15 @@ let currentTheme = "a";
 
     // Connect Live SSOT Cloud Data Engine
     window.addEventListener("DOMContentLoaded", () => {
+      // Support direct jump via hash or query param (e.g. presentation.html#13 or ?slide=13)
+      const hashSlide = parseInt(window.location.hash.replace("#", ""), 10);
+      const paramSlide = parseInt(urlParams.get("slide"), 10);
+      if (!isNaN(hashSlide) && hashSlide >= 0 && hashSlide <= 13) {
+        currentSlide = hashSlide;
+      } else if (!isNaN(paramSlide) && paramSlide >= 0 && paramSlide <= 13) {
+        currentSlide = paramSlide;
+      }
+
       setLang(currentLang);
       loadActiveThemeScene(currentTheme);
     });
