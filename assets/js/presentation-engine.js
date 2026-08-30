@@ -530,45 +530,78 @@ let currentTheme = "a";
           </div>
         `;
       }
-      // 4. CapEx & SPECS Subsidy Comparison Cockpit (Slide 5)
+      // 4. CapEx & SPECS Subsidy Comparison Cockpit (Slide 9 Overhaul)
       else if (slide.type === "capex-cockpit-visual") {
         html += `
-          <div class="capex-cockpit-grid">
-            ${slide.items.map((it, idx) => `
-              <div class="capex-row-card gs-anim-card ${idx === 0 ? 'active' : ''}" 
-                   id="capexCard_${idx}"
-                   onclick="selectGenericCard('capexCard', ${idx}, '${it.detail.replace(/'/g, "\\'")}')"
-                   onmouseenter="selectGenericCard('capexCard', ${idx}, '${it.detail.replace(/'/g, "\\'")}')">
-                <div class="capex-title-block">
-                  <span class="capex-icon">🏛️</span>
-                  <div>
-                    <div class="capex-title">${it.title}</div>
-                    <div class="capex-pct">${it.pct} ${currentLang === 'zh' ? '佔比' : 'Share'}</div>
-                  </div>
+          <div class="capex-cockpit-container">
+            <!-- Top KPI Ribbon -->
+            ${slide.kpiSummary ? `
+              <div class="space-kpi-ribbon">
+                <div class="space-kpi-block">
+                  <span class="space-kpi-lbl">${currentLang === 'zh' ? '建廠總 CapEx 預算' : 'Total Project CapEx'}</span>
+                  <span class="space-kpi-val" style="color:var(--accent);">${slide.kpiSummary.totalBudget}</span>
                 </div>
-                <div class="capex-val-col">
-                  <div class="capex-val-num">${it.kunshan}</div>
-                  <div class="capex-val-sub">${currentLang === 'zh' ? '崑山參考基準' : 'Kunshan Ref'}</div>
+                <div class="space-kpi-divider"></div>
+                <div class="space-kpi-block">
+                  <span class="space-kpi-lbl">${currentLang === 'zh' ? '昆山參考預算' : 'Kunshan Ref Budget'}</span>
+                  <span class="space-kpi-val" style="color:var(--ink-sub);">${slide.kpiSummary.kunshanRef}</span>
                 </div>
-                <div class="capex-val-col">
-                  <div class="capex-val-num accent">${it.india}</div>
-                  <div class="capex-val-sub">${currentLang === 'zh' ? '印度建廠預算' : 'India Budget'}</div>
+                <div class="space-kpi-divider"></div>
+                <div class="space-kpi-block">
+                  <span class="space-kpi-lbl">${currentLang === 'zh' ? 'SPECS 25% 現金返還' : 'SPECS 25% Cash Refund'}</span>
+                  <span class="space-kpi-val" style="color:#34d399;">${slide.kpiSummary.specsRefund}</span>
                 </div>
-                <div class="capex-val-col">
-                  <div class="capex-val-num subsidy">${it.subsidy}</div>
-                  <div class="capex-val-sub">${currentLang === 'zh' ? 'SPECS 25% 返還' : 'SPECS 25% Cash'}</div>
-                </div>
-                <div class="capex-val-col">
-                  <div class="capex-val-num" style="color:var(--ink);">${it.net}</div>
-                  <div class="capex-val-sub">${currentLang === 'zh' ? '投資人淨投入' : 'Net Investment'}</div>
-                </div>
-
-                <div class="card-smart-tooltip">
-                    <div class="tooltip-tag">🛡️ ${currentLang === 'zh' ? '台方責任邊界與風控依據' : 'Technical Boundary & Risk Control'}</div>
-                    <div class="tooltip-text">${it.detail}</div>
+                <div class="space-kpi-divider"></div>
+                <div class="space-kpi-block">
+                  <span class="space-kpi-lbl">${currentLang === 'zh' ? '投資人淨資本投入' : 'Net Investor CapEx'}</span>
+                  <span class="space-kpi-val" style="color:var(--ink);">${slide.kpiSummary.netInvestment}</span>
                 </div>
               </div>
-            `).join("")}
+            ` : ''}
+
+            <!-- 4 CapEx Rows -->
+            <div class="capex-rows-list">
+              ${slide.items.map((it, idx) => `
+                <div class="capex-row-card gs-anim-card ${idx === 0 ? 'active' : ''} ${idx === 3 ? 'total-row' : ''}" 
+                     id="capexCard_${idx}"
+                     onclick="selectGenericCard('capexCard', ${idx}, '${it.detail.replace(/'/g, "\\'")}')"
+                     onmouseenter="selectGenericCard('capexCard', ${idx}, '${it.detail.replace(/'/g, "\\'")}')">
+                  
+                  <div class="capex-title-block">
+                    <span class="capex-icon">${idx === 3 ? '💎' : '🏛️'}</span>
+                    <div>
+                      <div class="capex-title">${it.title}</div>
+                      <div class="capex-pct">${it.pct} ${currentLang === 'zh' ? '佔比' : 'Share'}</div>
+                    </div>
+                  </div>
+
+                  <div class="capex-boundary-col">
+                    <div class="space-row-sublbl">${currentLang === 'zh' ? '技術股責任與管理邊界' : 'Technical Boundary & Scope'}</div>
+                    <div class="capex-boundary-text">${it.boundary || it.detail}</div>
+                  </div>
+
+                  <div class="capex-val-col">
+                    <div class="space-row-sublbl">${currentLang === 'zh' ? '昆山參考' : 'Kunshan'}</div>
+                    <div class="capex-val-num kunshan">${it.kunshan}</div>
+                  </div>
+
+                  <div class="capex-val-col">
+                    <div class="space-row-sublbl">${currentLang === 'zh' ? '印度在地' : 'India'}</div>
+                    <div class="capex-val-num accent">${it.india}</div>
+                  </div>
+
+                  <div class="capex-val-col">
+                    <div class="space-row-sublbl">${currentLang === 'zh' ? 'SPECS 25%' : 'Subsidy'}</div>
+                    <div class="capex-val-num subsidy">${it.subsidy}</div>
+                  </div>
+
+                  <div class="capex-val-col net-col">
+                    <div class="space-row-sublbl">${currentLang === 'zh' ? '淨投入' : 'Net CapEx'}</div>
+                    <div class="capex-val-num net">${it.net}</div>
+                  </div>
+                </div>
+              `).join("")}
+            </div>
           </div>
 
           <div class="cockpit-floating-bar">

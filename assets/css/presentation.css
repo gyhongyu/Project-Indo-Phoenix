@@ -520,29 +520,43 @@
     .badge-good { background: var(--accent-glow); color: var(--accent); border: 1px solid var(--accent); }
 
     /* 4. CapEx & SPECS Comparison Master Cockpit (Slide 9 Overhaul) */
-    .capex-cockpit-grid {
-      flex: 1; display: grid; grid-template-columns: 1fr; gap: 10px;
-      margin-bottom: 12px; min-height: 0;
+    .capex-cockpit-container {
+      flex: 1; display: flex; flex-direction: column; gap: 8px;
+      margin-bottom: 10px; min-height: 0;
+    }
+    .capex-rows-list {
+      flex: 1; display: grid; grid-template-rows: repeat(4, 1fr); gap: 6px;
+      min-height: 0;
     }
     .capex-row-card {
       background: rgba(10, 15, 25, 0.2); border: 1px solid var(--line-subtle);
-      border-radius: var(--card-radius); padding: clamp(12px, 1.8vh, 18px) 20px;
-      display: grid; grid-template-columns: 1.4fr 1fr 1fr 1fr 1.1fr; gap: 14px;
+      border-radius: 6px; padding: clamp(6px, 1vh, 10px) clamp(12px, 1.2vw, 16px);
+      display: grid; grid-template-columns: 1.4fr 2.1fr 0.9fr 0.9fr 0.9fr 1fr; gap: 12px;
       align-items: center; cursor: pointer; transition: all 0.25s var(--ease);
+      position: relative; min-height: 0;
     }
     .capex-row-card:hover, .capex-row-card.active {
       background: var(--bg-card-hover); border-color: var(--accent);
-      transform: translateX(4px); box-shadow: 0 4px 18px var(--accent-glow);
+      transform: translateX(4px); box-shadow: 0 4px 16px var(--accent-glow);
     }
-    .capex-title-block { display: flex; align-items: center; gap: 12px; }
-    .capex-icon { font-size: 18px; color: var(--accent); }
-    .capex-title { font-size: 14.5px; font-weight: 600; color: var(--ink); }
-    .capex-pct { font-family: var(--font-mono); font-size: 11.5px; color: var(--ink-sub); }
-    .capex-val-col { display: flex; flex-direction: column; }
-    .capex-val-num { font-family: var(--font-mono); font-size: 14.5px; font-weight: 600; color: var(--ink); }
-    .capex-val-sub { font-size: 11px; color: var(--ink-sub); }
+    .capex-row-card.total-row {
+      background: linear-gradient(90deg, rgba(201, 169, 110, 0.12) 0%, rgba(10, 15, 25, 0.4) 100%);
+      border-color: var(--accent); border-left: 3px solid var(--accent);
+    }
+    .capex-title-block { display: flex; align-items: center; gap: 10px; }
+    .capex-icon { font-size: 16px; color: var(--accent); flex-shrink: 0; }
+    .capex-title { font-size: 13px; font-weight: 600; color: var(--ink); white-space: nowrap; }
+    .capex-pct { font-family: var(--font-mono); font-size: 10px; color: var(--ink-sub); margin-top: 1px; }
+
+    .capex-boundary-col { display: flex; flex-direction: column; justify-content: center; }
+    .capex-boundary-text { font-size: 11px; color: var(--ink-sub); line-height: 1.35; }
+
+    .capex-val-col { display: flex; flex-direction: column; justify-content: center; }
+    .capex-val-num { font-family: var(--font-mono); font-size: 13px; font-weight: 600; color: var(--ink); }
+    .capex-val-num.kunshan { color: var(--ink-sub); font-size: 12px; }
     .capex-val-num.accent { color: var(--accent); font-weight: 700; }
     .capex-val-num.subsidy { color: #34d399; font-weight: 700; }
+    .capex-val-num.net { color: var(--ink); font-weight: 700; font-size: 13.5px; }
 
     /* 5. BEP Master Cockpit (Slide 11 Overhaul) */
     .bep-cockpit-grid {

@@ -528,6 +528,12 @@ function getI18NDeck() {
               title: `Module 3: Total CapEx $${totCapEx}M with 25% SPECS Cash Refund`,
               desc: `Net investment reduced to $${netCapEx}M via SPECS 25% government subsidy. Taiwan technical team manages source verification and engineering boundaries.`,
               defaultExplanation: "SPECS 25% cash-back strictly applies to production machinery and factory environmental assets. Net capital exposure compressed to $17.25M.",
+              kpiSummary: {
+                totalBudget: `$${totCapEx}M`,
+                kunshanRef: "$18.5M",
+                specsRefund: `-$${specsSub}M (25% Cash)`,
+                netInvestment: `$${netCapEx}M`
+              },
               items: [
                 {
                   title: "Core Production & Test Equipment",
@@ -536,6 +542,7 @@ function getI18NDeck() {
                   india: "$16,500,000",
                   subsidy: "-$4,125,000",
                   net: "$12,375,000",
+                  boundary: "Direct Vendor-code support (DuPont, Taiflex, Panasonic). Machine source verified via CEC green channel.",
                   detail: "Direct vendor-code support (DuPont, Taiflex, Panasonic). Taiwan technical group verifies machines at source via CEC green channel."
                 },
                 {
@@ -545,6 +552,7 @@ function getI18NDeck() {
                   india: "$3,500,000",
                   subsidy: "-$875,000",
                   net: "$2,625,000",
+                  boundary: "Define design specifications & chemical inputs. Local civil engineering & SPCB consent (CTE/CTO) by Promoter.",
                   detail: "Define design specifications & chemical inputs. Local civil engineering & SPCB consent to establish (CTE/CTO) executed by Promoter."
                 },
                 {
@@ -554,15 +562,17 @@ function getI18NDeck() {
                   india: "$3,000,000",
                   subsidy: "-$750,000",
                   net: "$2,250,000",
+                  boundary: "Output plant layout, Class 10K/100K cleanliness, and HVAC specs. Actual building civil works by Promoter.",
                   detail: "Output factory layout, Class 10K/100K cleanliness, and +40% HVAC humidity specs. Actual building civil works managed by local promoter."
                 },
                 {
                   title: "Total Initial Project CapEx",
                   pct: "100.0%",
                   kunshan: "$18,500,000",
-                  india: `$${totCapEx}M`,
-                  subsidy: `-$${specsSub}M`,
-                  net: `$${netCapEx}M`,
+                  india: "$23,000,000",
+                  subsidy: "-$5,750,000",
+                  net: "$17,250,000",
+                  boundary: "SPECS 25% cash-back applies strictly to machinery & factory assets. Net capital exposure compressed to $17.25M.",
                   detail: "SPECS 25% cash rebate provides an unassailable $5.75M capital cushion, protecting investor downside."
                 }
               ]
@@ -1640,6 +1650,12 @@ function getI18NDeck() {
               title: `模組 3：建廠總 CapEx $${totCapEx}M 搭配 25% 現金補貼`,
               desc: `透過 SPECS 25% 現金補貼直接將淨曝險降至 $${netCapEx}M。台方團隊把控核心原廠機台驗收與工程責任邊界。`,
               defaultExplanation: "SPECS 25% 現金返還嚴格適用於機器設備與廠房資產。扣除補貼後投資人淨資本支出僅為 $17.25M。",
+              kpiSummary: {
+                totalBudget: `$${totCapEx}M 總預算`,
+                kunshanRef: "$18.5M 昆山參考",
+                specsRefund: `-$${specsSub}M (25% 現金返還)`,
+                netInvestment: `$${netCapEx}M 淨資本支出`
+              },
               items: [
                 {
                   title: "核心生產與測試設備",
@@ -1648,6 +1664,7 @@ function getI18NDeck() {
                   india: "$16,500,000",
                   subsidy: "-$4,125,000",
                   net: "$12,375,000",
+                  boundary: "直接供應商代碼支援 (杜邦、台虹、松下)。透過 CEC 綠色通道於原廠進行機台驗證與技術封裝。",
                   detail: "直接供應商代碼支援 (杜邦、台虹、松下)。透過 CEC 綠色通道於原廠進行機台驗證與技術封裝。"
                 },
                 {
@@ -1657,6 +1674,7 @@ function getI18NDeck() {
                   india: "$3,500,000",
                   subsidy: "-$875,000",
                   net: "$2,625,000",
+                  boundary: "制定設計規範與水處理化學品標準。實際在地工程及 CTE/CTO (建照/營運同意書) 由發起人負責。",
                   detail: "制定設計規範、水處理化學品投入。實際在地工程及 CTE/CTO (建照/營運同意書) 由發起人全權負責。"
                 },
                 {
@@ -1666,15 +1684,17 @@ function getI18NDeck() {
                   india: "$3,000,000",
                   subsidy: "-$750,000",
                   net: "$2,250,000",
+                  boundary: "輸出廠房佈局、萬級無塵室潔淨度與暖通空調 (HVAC) 濕度規範。實際土建工程由發起人負責。",
                   detail: "輸出廠房佈局、萬級/十萬級無塵室潔淨度與暖通空調 (HVAC) 濕度規範。實際土建工程由發起人負責。"
                 },
                 {
                   title: "建廠總資本支出合計",
                   pct: "100.0%",
                   kunshan: "$18,500,000",
-                  india: `$${totCapEx}M`,
-                  subsidy: `-$${specsSub}M`,
-                  net: `$${netCapEx}M`,
+                  india: "$23,000,000",
+                  subsidy: "-$5,750,000",
+                  net: "$17,250,000",
+                  boundary: "SPECS 25% 官方現金補貼提供堅不可摧的 575 萬美元安全邊際，極大化投資人下行保護。",
                   detail: "SPECS 25% 官方現金補貼提供堅不可摧的 575 萬美元資本安全邊際，極大化投資人下行保護。"
                 }
               ]
