@@ -797,28 +797,95 @@
     }
     .floating-bar-text strong { color: var(--ink); font-weight: 600; }
 
-    /* 6. Multi-Step Flow Pipeline & Roadmap Timeline (Slide 12) */
-    .flow-pipeline {
-      flex: 1; display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px;
-      margin-bottom: 12px; min-height: 0;
+    /* 6. Dual-Track Execution Matrix Cockpit (Slide 12 Overhaul) */
+    .roadmap-cockpit-container {
+      flex: 1; display: flex; flex-direction: column; gap: 8px;
+      margin-bottom: 8px; min-height: 0;
     }
-    .flow-card {
-      background: rgba(255, 255, 255, 0.02);
-      border: 1px solid var(--line-subtle);
-      border-radius: var(--card-radius); padding: clamp(18px, 2.2vh, 26px) 18px;
+    .roadmap-phases-grid {
+      flex: 1; display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px;
+      min-height: 0;
+    }
+    .roadmap-phase-card {
+      background: rgba(10, 15, 25, 0.25); border: 1px solid var(--line-subtle);
+      border-radius: var(--card-radius); padding: clamp(10px, 1.4vh, 16px) clamp(12px, 1.1vw, 16px);
       display: flex; flex-direction: column; justify-content: space-between;
-      position: relative; transition: all 0.3s var(--ease);
+      cursor: pointer; transition: all 0.25s var(--ease); position: relative; min-height: 0;
     }
-    .flow-card:hover {
+    .roadmap-phase-card:hover, .roadmap-phase-card.active {
       background: var(--bg-card-hover); border-color: var(--accent);
-      transform: translateY(-4px); box-shadow: 0 10px 30px var(--accent-glow);
+      transform: translateY(-2px); box-shadow: 0 8px 24px var(--accent-glow);
     }
-    .flow-step-num {
-      font-family: var(--font-mono); font-size: 26px; font-weight: 700;
-      color: var(--accent); line-height: 1; margin-bottom: 8px; opacity: 0.9;
+    .roadmap-phase-card.bep-phase {
+      background: linear-gradient(180deg, rgba(56, 189, 248, 0.08) 0%, rgba(10, 15, 25, 0.4) 100%);
+      border-color: #38bdf8;
     }
-    .flow-title { font-size: 15px; font-weight: 600; margin-bottom: 6px; color: var(--ink); }
-    .flow-desc { font-size: 13px; color: var(--ink-sub); line-height: 1.5; }
+    .roadmap-phase-card.gold-phase {
+      background: linear-gradient(180deg, rgba(201, 169, 110, 0.1) 0%, rgba(10, 15, 25, 0.4) 100%);
+      border-color: var(--accent);
+    }
+    .phase-card-top {
+      display: flex; justify-content: space-between; align-items: center; margin-bottom: 2px;
+    }
+    .phase-badge {
+      font-family: var(--font-mono); font-size: 11px; font-weight: 700;
+      color: var(--accent);
+    }
+    .phase-tag-lbl {
+      font-family: var(--font-mono); font-size: 8.5px; color: var(--ink-sub);
+      letter-spacing: 0.06em; text-transform: uppercase;
+    }
+    .phase-card-title {
+      font-size: 13.5px; font-weight: 700; color: var(--ink); margin-bottom: 4px;
+    }
+    .phase-cap-util-row {
+      display: flex; justify-content: space-between; align-items: center;
+      background: rgba(255,255,255,0.03); border-radius: 4px; padding: 2px 6px;
+      margin-bottom: 6px;
+    }
+    .phase-cap-val {
+      font-family: var(--font-mono); font-size: 11px; font-weight: 700; color: var(--accent);
+    }
+
+    /* Dual Track Sub-blocks */
+    .phase-track-block {
+      border-radius: 5px; padding: 6px 8px; margin-bottom: 5px;
+      display: flex; flex-direction: column; gap: 2px;
+    }
+    .phase-track-block.commercial {
+      background: rgba(56, 189, 248, 0.05); border-left: 2.5px solid #38bdf8;
+    }
+    .phase-track-block.infra {
+      background: rgba(201, 169, 110, 0.05); border-left: 2.5px solid var(--accent);
+    }
+    .track-tag-lbl {
+      font-family: var(--font-mono); font-size: 8.5px; font-weight: 700;
+      letter-spacing: 0.04em; color: var(--ink);
+    }
+    .phase-track-block.commercial .track-tag-lbl { color: #38bdf8; }
+    .phase-track-block.infra .track-tag-lbl { color: var(--accent); }
+    .track-desc-text {
+      font-size: 10px; color: var(--ink-sub); line-height: 1.35;
+    }
+
+    /* Financial Milestone Pill */
+    .phase-fin-pill {
+      font-family: var(--font-mono); font-size: 10px; font-weight: 700;
+      text-align: center; padding: 4px 8px; border-radius: 4px;
+      margin-top: 2px; border: 1px solid rgba(255,255,255,0.08);
+      background: rgba(0,0,0,0.25); color: var(--ink-sub);
+    }
+    .phase-fin-pill.accent {
+      background: rgba(56, 189, 248, 0.15); color: #38bdf8; border-color: #38bdf8;
+      box-shadow: 0 0 10px rgba(56, 189, 248, 0.2);
+    }
+    .phase-fin-pill.good {
+      background: rgba(52, 211, 153, 0.15); color: #34d399; border-color: #34d399;
+    }
+    .phase-fin-pill.gold {
+      background: var(--accent-glow); color: var(--accent); border-color: var(--accent);
+      box-shadow: 0 0 12px var(--accent-glow);
+    }
 
     /* 2.5 Split Hero Matrix Layout (Slide 04 Overhaul: Left 45% Hero + Right 55% 2x2 Grid) */
     .split-hero-layout {

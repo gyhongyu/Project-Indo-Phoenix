@@ -734,17 +734,64 @@ function getI18NDeck() {
                 }
               ]
             },
-            // Slide 12: Implementation Roadmap
+            // Slide 12: Implementation Roadmap & Dual-Track Execution Matrix
             {
               type: "flow-pipeline",
-              tag: "SLIDE 12 / EXECUTION ROADMAP & MILESTONES",
-              title: "24-Month Phased Ramp-Up: Break-Even at Month 12",
-              desc: "From brownfield retrofitting to full commercial production within 24 months, achieving scale net profits.",
-              steps: [
-                { num: "T+6M", title: "Plant Setup & Sampling", desc: "Cleanroom construction, CEC machine verification, customer prototype audits." },
-                { num: "T+12M", title: "Scale Production (70%)", desc: "Pass 50.8% BEP threshold. Achieve monthly cash flow profitability." },
-                { num: "T+18M", title: "IATF 16949 / AEC-Q", desc: "Complete Tier-1 automotive and defense customer supplier qualifications." },
-                { num: "T+24M", title: "Full Capacity (95%+)", desc: "Deliver $28.8M annual revenue and begin SaaS AI manufacturing export." }
+              tag: "SLIDE 12 / 24-MONTH EXECUTION ROADMAP & COMMERCIAL BRIDGE",
+              title: "24-Month Dual-Track Ramp-Up: Trade-to-Manufacture Bridge",
+              desc: "Immediate commercial revenue via Taiwan tier-1 trade supply, seamless switch to local manufacturing upon cleanroom clearance.",
+              defaultExplanation: "Trade-to-Manufacture bridge unlocks day-one sales cash flow, pre-qualifying customers before local mass production kicks in.",
+              kpiSummary: {
+                phase1: "T+0~6M Trade Bridge",
+                phase2: "T+6~12M BEP 50.8% Switch",
+                phase3: "T+12~18M Automotive CCS",
+                phase4: "T+18~24M Full $28.8M Scale"
+              },
+              phases: [
+                {
+                  num: "Phase 1: T+0 ~ T+6M",
+                  phaseTag: "SETUP & TRADE BRIDGE",
+                  title: "Plant Setup & Trade Supply",
+                  capUtil: "20% (3,000 m²)",
+                  commercialTrack: "Leverage Taiwan Tier-1 supply to initiate trading sales; secure vendor codes & start NPI sampling with local consumer/CCM clients.",
+                  infraTrack: "Promoter leads civil retrofitting & SPCB approval; Taiwan team verifies machines at source via CEC green channel.",
+                  finStatus: "Pre-Revenue Trading Cash Flow",
+                  finClass: "neutral",
+                  detail: "Day-one commercial engagement: Trade supply pre-qualifies vendor codes while factory undergoes brownfield cleanroom construction."
+                },
+                {
+                  num: "Phase 2: T+6 ~ T+12M",
+                  phaseTag: "LOCAL SWITCH & BEP CROSS",
+                  title: "Mass Production & BEP Cross",
+                  capUtil: "70% (10,500 m²)",
+                  commercialTrack: "Seamlessly switch imported trade orders to 100% India local production; expand delivery to smartphone & tablet CCM buyers.",
+                  infraTrack: "Cleanroom operational; Taiwan team calibrates chemical plating lines & deploys PolarFire SoC closed-loop ACC controls.",
+                  finStatus: "🎯 Crosses 50.8% BEP ($1.22M/mo)",
+                  finClass: "accent",
+                  detail: "Cleanroom commissioning completed. Factory crosses 50.8% BEP at Month 12, achieving self-sustaining operational net profits."
+                },
+                {
+                  num: "Phase 3: T+12 ~ T+18M",
+                  phaseTag: "AUTOMOTIVE TIER-1 QUAL",
+                  title: "Automotive & EV Battery CCS",
+                  capUtil: "85% (12,750 m²)",
+                  commercialTrack: "Qualify IATF 16949 & AEC-Q100; scale high-margin EV battery pack CCS (1.5-2.0m long FPC) & industrial IoT modules.",
+                  infraTrack: "SPCB CTO regularized; roll out AR-guided dynamic SOPs and local engineering team autonomous operations.",
+                  finStatus: "High-Margin Product Ramp-Up",
+                  finClass: "good",
+                  detail: "Automotive qualification unlocks high-margin EV battery CCS contracts, elevating corporate gross margins beyond 25%."
+                },
+                {
+                  num: "Phase 4: T+18 ~ T+24M",
+                  phaseTag: "FULL SCALE & GLOBAL EXPORT",
+                  title: "Full Capacity & Global Export",
+                  capUtil: "95%+ (15,000 m²)",
+                  commercialTrack: "Full capacity delivery ($28.8M/yr); begin export channel supply to global markets via international tier-1 partner network.",
+                  infraTrack: "Full factory closed-loop AI integration; evaluate Phase 2 high-layer rigid-flex capacity expansion.",
+                  finStatus: "💎 $28.8M Rev / $6.66M EBIT",
+                  finClass: "gold",
+                  detail: "Full scale operations generating $6.66M annual EBIT. Foundation established for defense class-3 qualifications and export expansion."
+                }
               ]
             },
             // Slide 13: Call to Action & Data Room Access
@@ -1926,17 +1973,64 @@ function getI18NDeck() {
                 }
               ]
             },
-            // Slide 12: 實施里程碑
+            // Slide 12: 實施里程碑與雙軌並行放量模型
             {
               type: "flow-pipeline",
-              tag: "簡報 12 / 落地時程與階段里程碑",
-              title: "24 個月放量路徑圖：T+12M 跨越損益平衡，實現規模淨獲利",
-              desc: "嚴格的階段關卡治理，確保設備進場、客戶認證與產能爬坡精確受控。",
-              steps: [
-                { num: "T+6M", title: "建廠與打樣認證", desc: "無塵室建置完工、CEC 原廠驗機、通過首批客戶工廠審核。" },
-                { num: "T+12M", title: "規模量產 (70%)", desc: "跨越 50.8% 損益兩平門檻，實現單月正現金流獲利。" },
-                { num: "T+18M", title: "國際車規與軍規認證", desc: "取得 IATF 16949 / AEC-Q100 及航太 AS9100 認證，全面承接車載 Tier-1 訂單。" },
-                { num: "T+24M", title: "滿載運營 (95%+)", desc: "實現年營收 2,880 萬美元，並啟動 AI 智慧工廠模組技術輸出。" }
+              tag: "簡報 12 / 24 個月雙軌放量路徑圖與以貿促工模型",
+              title: "24 個月雙軌放量路徑：以貿促工 ✕ 本地製造無縫切換",
+              desc: "第一天透過台灣一級大廠供應鏈進行貿易代銷預先建立客戶代碼，無塵室完工即刻無縫切換為 100% 印度本土製造。",
+              defaultExplanation: "以貿促工策略消除建廠空窗期：首期即有代銷現金流並鎖定客戶認證，完工次月直上量產，T+12M 跨越 50.8% 損益兩平點。",
+              kpiSummary: {
+                phase1: "T+0~6M 以貿促工代銷",
+                phase2: "T+6~12M 切換量產·跨越BEP",
+                phase3: "T+12~18M 車規CCS放量",
+                phase4: "T+18~24M 滿載·國際外銷"
+              },
+              phases: [
+                {
+                  num: "第一階段：T+0 ~ T+6M",
+                  phaseTag: "建廠基建 ✕ 貿易代銷先行",
+                  title: "基建土建與貿易先行",
+                  capUtil: "20% (3,000 m²)",
+                  commercialTrack: "業務線：依託台灣一級供應鏈優勢供貨，以貿易代銷先行跑通市場；建立終端客戶代碼 (Vendor Code) 並展開 48h 工程樣品打樣。",
+                  infraTrack: "工廠線：印度發起人主導土地租賃、土建改裝與 SPCB 環評；台方技術團隊同步於原廠透過 CEC 綠色通道完成設備驗收。",
+                  finStatus: "貿易代銷即時現金流",
+                  finClass: "neutral",
+                  detail: "消滅建廠空窗期：工廠打地基時業務已先行跑通，預先鎖定消費電子與 CCM 模組客戶代碼，為本土量產鋪平道路。"
+                },
+                {
+                  num: "第二階段：T+6 ~ T+12M",
+                  phaseTag: "在地切換 ✕ 跨越損益兩平",
+                  title: "本土切換與規模量產",
+                  capUtil: "70% (10,500 m²)",
+                  commercialTrack: "業務線：將既有進口代銷訂單 100% 無縫切換為印度本土在地製造；擴大向智慧手機、平板與穿戴終端批量交付。",
+                  infraTrack: "工廠線：萬級無塵室竣工投產；台方專家進駐調試電鍍化學蝕刻線，部署 PolarFire SoC 邊緣閉環自適應控制 (ACC)。",
+                  finStatus: "🎯 跨越 50.8% BEP ($1.22M/月)",
+                  finClass: "accent",
+                  detail: "無塵室通線即量產：第 12 個月產能爬坡至 70%，直接跨越 50.8% 損益平衡門檻，工廠全面實現單月正現金流獲利！"
+                },
+                {
+                  num: "第三階段：T+12 ~ T+18M",
+                  phaseTag: "車規認證 ✕ EV 動力電池 CCS",
+                  title: "車規認證與高毛利放量",
+                  capUtil: "85% (12,750 m²)",
+                  commercialTrack: "業務線：通過 IATF 16949 及 AEC-Q100 車規認證；切入高單價 EV 電池包 CCS (1.5-2.0m 長尺寸軟板) 與工業物聯網。",
+                  infraTrack: "工廠線：SPCB CTO 正式常態化；全面導入 AR 智慧眼鏡動態 SOP，印度在地工程師團隊實現 100% 獨立自主運轉。",
+                  finStatus: "高毛利產品結構放量",
+                  finClass: "good",
+                  detail: "車規資質解鎖高毛利：長尺寸 EV 電池採樣軟板與車載模組放量，帶動全廠毛利率顯著突破 25% 以上。"
+                },
+                {
+                  num: "第四階段：T+18 ~ T+24M",
+                  phaseTag: "滿載滿銷 ✕ 國際出口外銷",
+                  title: "滿載運營與全球外銷",
+                  capUtil: "95%+ (15,000 m²)",
+                  commercialTrack: "業務線：實現年化 2,880 萬美元滿載營收；國內市場穩固後，依託國際夥伴通路啟動歐美日高階電子外銷出口訂單。",
+                  infraTrack: "工廠線：全廠 AI 數位大腦專家系統成熟；啟動技術專利授權輸出，並評估二期高多層軟硬結合板擴產規劃。",
+                  finStatus: "💎 $28.8M 營收 / $6.66M EBIT",
+                  finClass: "gold",
+                  detail: "滿載運營達成年息稅前利潤 666 萬美元。穩健奠定全印度第一家本土 FPC 製造龍頭地位，具備長期軍規與海外出口擴張底氣。"
+                }
               ]
             },
             // Slide 13: 策略合作與 Data Room

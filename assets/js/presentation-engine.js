@@ -753,17 +753,82 @@ let currentTheme = "a";
           </div>
         `;
       }
-      // 6. Flow Pipeline
+      // 6. Dual-Track Execution Matrix (Slide 12 Overhaul)
       else if (slide.type === "flow-pipeline") {
         html += `
-          <div class="flow-pipeline">
-            ${slide.steps.map(st => `
-              <div class="flow-card gs-anim-flow">
-                <div class="flow-step-num">${st.num}</div>
-                <div class="flow-title">${st.title}</div>
-                <div class="flow-desc">${st.desc}</div>
+          <div class="roadmap-cockpit-container">
+            <!-- Top KPI Ribbon -->
+            ${slide.kpiSummary ? `
+              <div class="space-kpi-ribbon">
+                <div class="space-kpi-block">
+                  <span class="space-kpi-lbl">${currentLang === 'zh' ? '階段一：基建與代銷' : 'Phase 1: Setup & Trade'}</span>
+                  <span class="space-kpi-val" style="color:var(--ink-sub);">${slide.kpiSummary.phase1}</span>
+                </div>
+                <div class="space-kpi-divider"></div>
+                <div class="space-kpi-block">
+                  <span class="space-kpi-lbl">${currentLang === 'zh' ? '階段二：切換與跨越BEP' : 'Phase 2: BEP 50.8% Switch'}</span>
+                  <span class="space-kpi-val" style="color:#38bdf8;">${slide.kpiSummary.phase2}</span>
+                </div>
+                <div class="space-kpi-divider"></div>
+                <div class="space-kpi-block">
+                  <span class="space-kpi-lbl">${currentLang === 'zh' ? '階段三：車規高毛利放量' : 'Phase 3: Automotive CCS'}</span>
+                  <span class="space-kpi-val" style="color:#34d399;">${slide.kpiSummary.phase3}</span>
+                </div>
+                <div class="space-kpi-divider"></div>
+                <div class="space-kpi-block">
+                  <span class="space-kpi-lbl">${currentLang === 'zh' ? '階段四：滿載與國際外銷' : 'Phase 4: Full $28.8M Scale'}</span>
+                  <span class="space-kpi-val" style="color:var(--accent);">${slide.kpiSummary.phase4}</span>
+                </div>
               </div>
-            `).join("")}
+            ` : ''}
+
+            <!-- 4 Dual-Track Phase Cards -->
+            <div class="roadmap-phases-grid">
+              ${(slide.phases || slide.steps || []).map((p, idx) => `
+                <div class="roadmap-phase-card gs-anim-flow ${idx === 1 ? 'bep-phase' : ''} ${idx === 3 ? 'gold-phase' : ''}"
+                     id="phaseCard_${idx}"
+                     onclick="selectGenericCard('phaseCard', ${idx}, '${(p.detail || p.desc).replace(/'/g, "\\'")}')"
+                     onmouseenter="selectGenericCard('phaseCard', ${idx}, '${(p.detail || p.desc).replace(/'/g, "\\'")}')">
+                  
+                  <div class="phase-card-top">
+                    <span class="phase-badge">${p.num || `Phase ${idx+1}`}</span>
+                    <span class="phase-tag-lbl">${p.phaseTag || ''}</span>
+                  </div>
+
+                  <div class="phase-card-title">${p.title}</div>
+                  
+                  <div class="phase-cap-util-row">
+                    <span class="space-row-sublbl">${currentLang === 'zh' ? '目標產能稼動率' : 'Capacity Target'}</span>
+                    <span class="phase-cap-val">${p.capUtil || ''}</span>
+                  </div>
+
+                  <!-- Dual Track 1: Commercial Sales -->
+                  <div class="phase-track-block commercial">
+                    <div class="track-tag-lbl">🚢 ${currentLang === 'zh' ? '業務線 (以貿促工·代銷先行)' : 'Commercial Track (Trade Bridge)'}</div>
+                    <div class="track-desc-text">${p.commercialTrack || p.desc}</div>
+                  </div>
+
+                  <!-- Dual Track 2: Factory & Engineering -->
+                  <div class="phase-track-block infra">
+                    <div class="track-tag-lbl">🏭 ${currentLang === 'zh' ? '工廠線 (台印權責·基建落盤)' : 'Factory Track (Gov & Tech Scope)'}</div>
+                    <div class="track-desc-text">${p.infraTrack || ''}</div>
+                  </div>
+
+                  <!-- Bottom Financial Milestone Pill -->
+                  <div class="phase-fin-pill ${p.finClass || ''}">
+                    ${p.finStatus || ''}
+                  </div>
+                </div>
+              `).join("")}
+            </div>
+          </div>
+
+          <!-- Non-Intrusive Floating Context Explanation Bar -->
+          <div class="cockpit-floating-bar">
+            <div class="floating-bar-icon">⏱️</div>
+            <div class="floating-bar-text" id="genericFloatingText">
+              <strong>${currentLang === 'zh' ? '雙軌放量戰略依據' : 'Dual-Track Strategy'}:</strong> ${slide.defaultExplanation || (slide.phases ? slide.phases[0].detail : '')}
+            </div>
           </div>
         `;
       }
