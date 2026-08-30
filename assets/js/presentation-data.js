@@ -85,10 +85,10 @@ function getI18NDeck() {
                   targetSlide: 12,
                   badge: "ROADMAP & PARTNERSHIP",
                   pages: "Slide 12 – 13",
-                  title: "24-Month Roadmap & Data Room",
-                  desc: "Phase-gated execution to reach cash flow break-even at Month 12; invitation to exclusive investor Data Room.",
+                  title: "5-Year Horizon & Data Room",
+                  desc: "Dual-track trade-to-manufacture bridge, achieving 100% full investment payback at Year 4.2; invitation to exclusive Data Room.",
                   subitems: [
-                    "12. 24-Month Phased Ramp-Up Milestones",
+                    "12. 5-Year Phased Horizon & 4.2-Yr Payback",
                     "13. Strategic Terms & Data Room Access"
                   ]
                 }
@@ -1400,10 +1400,10 @@ function getI18NDeck() {
                   targetSlide: 12,
                   badge: "放量里程碑與合作",
                   pages: "簡報 12 – 13",
-                  title: "24 個月放量時程與 Data Room",
-                  desc: "嚴格階段關卡治理，T+12M 跨越損益平衡實現規模淨獲利；受邀進入投資人專屬資料室。",
+                  title: "5 年投資回本與 Data Room",
+                  desc: "以貿促工雙軌無縫切換，第 4.2 年實現 100% 投資全額回收；受邀進入投資人專屬資料室。",
                   subitems: [
-                    "12. 24 個月階段性放量里程碑",
+                    "12. 5 年宏觀投資時程與 4.2 年回本",
                     "13. 策略合作方案與 Data Room 申請"
                   ]
                 }
