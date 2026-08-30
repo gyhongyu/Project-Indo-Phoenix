@@ -1586,7 +1586,35 @@
       }
       .rotate-sub {
         font-size: 13px; color: var(--ink-sub); line-height: 1.5;
-        max-width: 240px;
+        max-width: 260px;
+      }
+      .btn-rotate-fullscreen {
+        margin-top: 6px;
+        background: var(--accent);
+        color: var(--bg);
+        border: none;
+        padding: 12px 24px;
+        border-radius: var(--tag-radius);
+        font-family: var(--font-display);
+        font-size: 15px; font-weight: 700;
+        letter-spacing: 0.05em;
+        cursor: pointer;
+        display: flex; align-items: center; gap: 8px;
+        box-shadow: 0 0 20px var(--accent-glow);
+        transition: transform 0.2s var(--ease);
+      }
+      .btn-rotate-fullscreen:active {
+        transform: scale(0.96);
+      }
+      .btn-rotate-dismiss {
+        background: transparent;
+        border: none;
+        color: var(--ink-sub);
+        font-size: 12px;
+        text-decoration: underline;
+        cursor: pointer;
+        padding: 6px 12px;
+        margin-top: -4px;
       }
       @keyframes phoneSpin {
         0%, 20% { transform: rotate(0deg); }
@@ -1597,5 +1625,44 @@
         0% { transform: rotate(0deg); opacity: 0.3; }
         50% { transform: rotate(180deg); opacity: 1; }
         100% { transform: rotate(360deg); opacity: 0.3; }
+      }
+    }
+
+    /* ═══════════════════════════════════════════════════════════════
+       MOBILE LANDSCAPE / SHORT SCREEN RESCUE (Fix Height Clipping)
+       ═══════════════════════════════════════════════════════════════ */
+    @media screen and (max-height: 580px) {
+      .deck-stage {
+        padding: 8px 14px;
+        align-items: flex-start;
+        overflow-y: auto;
+      }
+      .slide-wrapper {
+        height: auto;
+        min-height: calc(100vh - 70px);
+        max-height: none;
+        padding: 16px 20px;
+        overflow: visible;
+      }
+      .deck-topbar {
+        padding: 6px 16px;
+      }
+      .deck-footer {
+        padding: 8px 16px;
+      }
+      .cta-hub-grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+      }
+      .cta-form-card, .cta-ai-card {
+        padding: 16px;
+      }
+      .slide-title {
+        font-size: 20px;
+        margin-bottom: 4px;
+      }
+      .slide-desc {
+        font-size: 12px;
+        margin-bottom: 10px;
       }
     }

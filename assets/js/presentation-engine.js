@@ -1633,3 +1633,33 @@ let currentTheme = "a";
         }
       }
     }
+
+    /* ═══════════════════════════════════════════════════════════════
+       MOBILE FULLSCREEN & ROTATE SHIELD CONTROLLER
+       ═══════════════════════════════════════════════════════════════ */
+    function requestDeckFullscreen() {
+      const docEl = document.documentElement;
+      if (docEl.requestFullscreen) {
+        docEl.requestFullscreen().catch(err => console.warn("Fullscreen error:", err));
+      } else if (docEl.webkitRequestFullscreen) {
+        docEl.webkitRequestFullscreen();
+      } else if (docEl.msRequestFullscreen) {
+        docEl.msRequestFullscreen();
+      }
+
+      // Try locking screen orientation to landscape if supported
+      try {
+        if (screen.orientation && screen.orientation.lock) {
+          screen.orientation.lock("landscape").catch(err => console.log("Orientation lock note:", err));
+        }
+      } catch (e) {}
+
+      dismissRotateShield();
+    }
+
+    function dismissRotateShield() {
+      const shield = document.getElementById("rotateShield");
+      if (shield) {
+        shield.style.display = "none";
+      }
+    }
