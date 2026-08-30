@@ -28,9 +28,72 @@ function getI18NDeck() {
       return {
         en: {
           exitLanding: "Landing Page",
+          navAgenda: "AGENDA",
           btnPrev: "◄ PREV",
           btnNext: "NEXT ►",
           slides: [
+            // Slide 00: Executive Agenda & Four-Act Navigator
+            {
+              type: "agenda-master-visual",
+              tag: "EXECUTIVE AGENDA / FOUR-ACT ROADSHOW MAP",
+              title: "Project Indo-Phoenix: Strategic Roadshow Navigator",
+              desc: "A comprehensive institutional briefing on building India's 1st high-reliability Aerospace & Defense FPC manufacturing hub. Click any Act to jump directly.",
+              acts: [
+                {
+                  actNum: "ACT I",
+                  targetSlide: 1,
+                  badge: "STRATEGY & DEMAND",
+                  pages: "Slide 01 – 03",
+                  title: "Strategic Gap & Real Demand",
+                  desc: "Debunking the 30% self-reliance myth; capturing 0% bare-board vacuum, 48h turnaround, and verified Tier-1 buyer pipeline.",
+                  subitems: [
+                    "01. Executive Vision & 0% Bare-Board Gap",
+                    "02. Pain Point Breakdown: 48h vs 3-Wk Lag",
+                    "03. 3 Core Verticals & Verified Buyer Pool"
+                  ]
+                },
+                {
+                  actNum: "ACT II",
+                  targetSlide: 4,
+                  badge: "MOATS & INFRASTRUCTURE",
+                  pages: "Slide 04 – 06",
+                  title: "Moats, AI SFC & SPCB Clearances",
+                  desc: "5% Sweat Equity governance with >90% promoter control; closed-loop Edge AI ACC, and 13,000m² ZLD environmental moat.",
+                  subitems: [
+                    "04. 5% Sweat Equity & >90% Control Governance",
+                    "05. AI / ACC Closed-Loop Smart Factory",
+                    "06. 13,000 m² Facility & 3x ZLD Clearance"
+                  ]
+                },
+                {
+                  actNum: "ACT III",
+                  targetSlide: 7,
+                  badge: "FINANCIAL PROOFS",
+                  pages: "Slide 07 – 11",
+                  title: "5 Sacred Financial Modules",
+                  desc: "Rock-solid single source of truth financials: $28.8M revenue, $23M CapEx, SPECS 25% refund, $1.845M OpEx, and 50.8% BEP.",
+                  subitems: [
+                    "07. Module 1: Product Capacity Mix ($28.8M)",
+                    "08. Module 2: Factory Space Engineering Standards",
+                    "09. Module 3: CapEx $23M & SPECS 25% Cash Refund",
+                    "10. Module 4: Dynamic OpEx ($1.845M/mo) Structure",
+                    "11. Module 5: Profitability Cockpit & 50.8% BEP"
+                  ]
+                },
+                {
+                  actNum: "ACT IV",
+                  targetSlide: 12,
+                  badge: "ROADMAP & PARTNERSHIP",
+                  pages: "Slide 12 – 13",
+                  title: "24-Month Roadmap & Data Room",
+                  desc: "Phase-gated execution to reach cash flow break-even at Month 12; invitation to exclusive investor Data Room.",
+                  subitems: [
+                    "12. 24-Month Phased Ramp-Up Milestones",
+                    "13. Strategic Terms & Data Room Access"
+                  ]
+                }
+              ]
+            },
             // Slide 01: Executive Vision & Anchor
             {
               type: "hero-showcase",
@@ -1079,9 +1142,72 @@ function getI18NDeck() {
         },
         zh: {
           exitLanding: "返回落地頁",
+          navAgenda: "目錄導航",
           btnPrev: "◄ 上一頁",
           btnNext: "下一頁 ►",
           slides: [
+            // 簡報 00: 全息總覽與目錄導航
+            {
+              type: "agenda-master-visual",
+              tag: "商業路演總覽 / 四大幕劇導航地圖",
+              title: "Project Indo-Phoenix：戰略路演全息目錄",
+              desc: "印度首座高可靠度航太與國防 FPC 智慧製造樞紐之完整機構級路演架構。點選任一幕劇即可一鍵直達。",
+              acts: [
+                {
+                  actNum: "第一幕",
+                  targetSlide: 1,
+                  badge: "戰略機遇與剛需",
+                  pages: "簡報 01 – 03",
+                  title: "國家戰略真空與點名買家",
+                  desc: "破除 30% 自給率假象；搶佔 0% 裸板絕對真空、48小時極速打樣，手握下游巨頭數十億採購池。",
+                  subitems: [
+                    "01. 執行摘要與高階裸板 0% 絕對真空",
+                    "02. 痛點破局：48h 打樣 vs 3週海外斷鏈",
+                    "03. 三大剛需賽道與點名買家名冊"
+                  ]
+                },
+                {
+                  actNum: "第二幕",
+                  targetSlide: 4,
+                  badge: "技術壁壘與重工基建",
+                  pages: "簡報 04 – 06",
+                  title: "技術股護城河與 ZLD 環保特許",
+                  desc: "台灣團隊 5% 讓利對賭良率、印度大股東 >90% 絕對控股；Edge AI 閉環工廠與 3 倍 ZLD 零排放。",
+                  subitems: [
+                    "04. 5% Sweat Equity 讓利與 >90% 控股治理",
+                    "05. AI / ACC 閉環智慧工廠體系",
+                    "06. 13,000 m² 廠房基建與 SPCB 環評門檻"
+                  ]
+                },
+                {
+                  actNum: "第三幕",
+                  targetSlide: 7,
+                  badge: "神聖五大財務模型",
+                  pages: "簡報 07 – 11",
+                  title: "五大財務模型連鎖真理閉環",
+                  desc: "嚴密閉環數據真源：$28.8M 年營收、CapEx $23M、SPECS 25% 返還、單月 OpEx $1.845M 與 50.8% BEP。",
+                  subitems: [
+                    "07. 模組一：產能規劃與產品營收模型 ($28.8M)",
+                    "08. 模組二：13,000 m² 空間工程標準",
+                    "09. 模組三：CapEx $23M 與 SPECS 25% 補貼",
+                    "10. 模組四：單月 OpEx ($1.845M) 成本結構",
+                    "11. 模組五：獲利駕駛艙與 50.8% 損益平衡點"
+                  ]
+                },
+                {
+                  actNum: "第四幕",
+                  targetSlide: 12,
+                  badge: "放量里程碑與合作",
+                  pages: "簡報 12 – 13",
+                  title: "24 個月放量時程與 Data Room",
+                  desc: "嚴格階段關卡治理，T+12M 跨越損益平衡實現規模淨獲利；受邀進入投資人專屬資料室。",
+                  subitems: [
+                    "12. 24 個月階段性放量里程碑",
+                    "13. 策略合作方案與 Data Room 申請"
+                  ]
+                }
+              ]
+            },
             // Slide 01: 執行摘要
             {
               type: "hero-showcase",
