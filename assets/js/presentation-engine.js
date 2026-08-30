@@ -1536,11 +1536,23 @@ let currentTheme = "a";
       const titleEl = document.getElementById("passcodeModalTitle");
       const descEl = document.getElementById("passcodeModalDesc");
       const hintEl = document.getElementById("passcodeModalHint");
+      const btnCancel = document.getElementById("btnPasscodeCancel");
+      const btnConfirm = document.getElementById("btnPasscodeConfirm");
       const inputEl = document.getElementById("passcodeInput");
 
-      if (titleEl) titleEl.textContent = currentLang === 'zh' ? '解鎖官方 AI 智能資料室' : 'Unlock Official AI Data Room';
-      if (descEl) descEl.textContent = currentLang === 'zh' ? '本資料室收錄 23 份深度研報與核心買家 KYC，請輸入訪問密碼進入：' : 'Access 23 deep-dive dossiers and buyer KYC profiles. Enter access passcode to proceed:';
-      if (hintEl) hintEl.innerHTML = currentLang === 'zh' ? '💡 <strong>通行提示</strong>：若您尚未取得密碼，請在左側留言板送出意向，系統將發送通行密碼至您的登記郵箱。' : '💡 <strong>Passcode Notice</strong>: If you do not have the passcode, please submit an inquiry on the left; the passcode will be dispatched to your email.';
+      if (currentLang === 'zh') {
+        if (titleEl) titleEl.textContent = '解鎖官方 AI 智能資料室';
+        if (descEl) descEl.textContent = '本資料室收錄 23 份市場研報與技術智庫，請輸入訪問密碼進入：';
+        if (hintEl) hintEl.innerHTML = '<strong>通行提示</strong>：若您尚未取得密碼，請在左側留言板送出意向，系統將發送通行密碼至您的登記郵箱。';
+        if (btnCancel) btnCancel.textContent = '取消';
+        if (btnConfirm) btnConfirm.textContent = '解鎖進入 ↗';
+      } else {
+        if (titleEl) titleEl.textContent = 'Unlock Official AI Data Room';
+        if (descEl) descEl.textContent = 'Access 23 deep-dive market intelligence dossiers and buyer KYC. Enter access passcode:';
+        if (hintEl) hintEl.innerHTML = '<strong>Passcode Notice</strong>: If you do not have the passcode, please submit an inquiry on the left; the passcode will be dispatched to your email.';
+        if (btnCancel) btnCancel.textContent = 'Cancel';
+        if (btnConfirm) btnConfirm.textContent = 'Unlock & Enter ↗';
+      }
       
       if (inputEl) {
         inputEl.value = "";
@@ -1574,7 +1586,7 @@ let currentTheme = "a";
         if (inputEl) {
           inputEl.style.borderColor = "#ef4444";
           inputEl.focus();
-          alert(currentLang === 'zh' ? '訪問密碼不正確。若您尚未取得密碼，請在左側留言板送出意向，系統將發送密碼至您的郵箱。' : 'Incorrect passcode. If you do not have the access code, please submit an inquiry on the left to receive it.');
+          alert(currentLang === 'zh' ? '訪問密碼不正確。若您尚未取得密碼，請在左側留言板送出意向，系統將發送密碼至您的登記郵箱。' : 'Incorrect passcode. If you do not have the access code, please submit an inquiry on the left to receive it.');
         }
       }
     }

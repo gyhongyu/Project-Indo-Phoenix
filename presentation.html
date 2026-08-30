@@ -80,13 +80,13 @@
       <div class="passcode-modal-desc" id="passcodeModalDesc">
         本資料室收錄 23 份專案深度研報與核心買家名冊，請輸入訪問密碼進入：
       </div>
-      <input type="text" id="passcodeInput" class="passcode-input" placeholder="MII" maxlength="10" autocomplete="off" onkeydown="if(event.key==='Enter') verifyPasscodeAndOpen();" />
+      <input type="password" id="passcodeInput" class="passcode-input" placeholder="••••" maxlength="10" autocomplete="off" onkeydown="if(event.key==='Enter') verifyPasscodeAndOpen();" />
       <div class="passcode-hint-box" id="passcodeModalHint">
-        💡 <strong>通行提示</strong>：若您尚未取得密碼，請在左側留言板送出意向，系統將自動發送通行密碼至您的登記郵箱。
+        <strong>通行提示</strong>：若您尚未取得密碼，請在左側留言板送出意向，系統將發送通行密碼至您的登記郵箱。
       </div>
       <div class="passcode-btn-row">
-        <button class="btn-modal-cancel" onclick="closePasscodeModal()">取消 / Cancel</button>
-        <button class="btn-modal-confirm" onclick="verifyPasscodeAndOpen()">解鎖進入 / Enter ↗</button>
+        <button class="btn-modal-cancel" id="btnPasscodeCancel" onclick="closePasscodeModal()">取消</button>
+        <button class="btn-modal-confirm" id="btnPasscodeConfirm" onclick="verifyPasscodeAndOpen()">解鎖進入 ↗</button>
       </div>
     </div>
   </div>
