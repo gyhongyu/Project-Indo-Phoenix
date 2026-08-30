@@ -744,16 +744,16 @@ function getI18NDeck() {
               orangeLabel: "Plant Setup (Expenditure)",
               greenLabel: "Trade & Sales (Revenue)",
               timelineLabel: "Timeline + Break-Even Horizon",
-              // Live Dynamic Numbers for Curves & Nodes
+              // Live Dynamic Numbers for Curves & Nodes (Direct from Google Sheet WEB_DATA)
               liveStats: {
                 totCapEx: `$${totCapEx}M`,
                 bepRevMo: `$${bepRev}M`,
                 fullRevMo: `$${(getLiveStat("monthlyRevenue",2400000)/1000000).toFixed(2)}M`,
-                s0: getLiveStat("stageSalesM0", 250000) / 1000000,
-                s6: getLiveStat("stageSalesM6", 750000) / 1000000,
-                s12: getLiveStat("stageSalesM12", 1218543) / 1000000,
-                s18: getLiveStat("stageSalesM18", 2040000) / 1000000,
-                s24: getLiveStat("stageSalesM24", 2400000) / 1000000
+                s0: getLiveStat("tradeSales_T0", 0),
+                s6: getLiveStat("tradeSales_T6", 250000),
+                s12: getLiveStat("tradeSales_T12", 750000),
+                s18: getLiveStat("tradeSales_T18", 1218543),
+                s24: getLiveStat("tradeSales_T24", 2040000)
               },
               orangeNodes: [
                 {
@@ -780,23 +780,23 @@ function getI18NDeck() {
               greenNodes: [
                 {
                   title: "Launch Trade Distribution",
-                  metric: `$${(getLiveStat("stageSalesM0", 250000)/1000).toFixed(0)}K/mo Initial Run-Rate`,
+                  metric: `$${(getLiveStat("tradeSales_T0", 0)/1000).toFixed(0)}K/mo Initial Run-Rate`,
                   detail: "Initiate commercial trading sales via mature supply chain; establish direct engagements with consumer clients."
                 },
                 {
                   title: "Vendor Codes & NPI Sampling",
-                  metric: `$${(getLiveStat("stageSalesM6", 750000)/1000).toFixed(0)}K/mo (48h Turnaround)`,
+                  metric: `$${(getLiveStat("tradeSales_T6", 250000)/1000).toFixed(0)}K/mo (48h Turnaround)`,
                   detail: "Lock in tier-1 client vendor codes and provide 48h prototype sampling for smartphone & CCM modules."
                 },
                 {
                   title: "Switch to 100% Local Production",
-                  metric: `$${bepRev}M/mo (50.8% BEP)`,
-                  detail: "Transition import orders to 100% India local production; cross 50.8% BEP threshold ($1.22M/mo) into net profitability."
+                  metric: `$${(getLiveStat("tradeSales_T12", 750000)/1000).toFixed(0)}K/mo Local Switch`,
+                  detail: "Transition import orders to 100% India local production; prepare ramp up towards factory breakeven."
                 },
                 {
                   title: "Full Capacity Scale & Expansion",
-                  metric: `$${(getLiveStat("monthlyRevenue",2400000)/1000000).toFixed(2)}M/mo ($28.8M/yr)`,
-                  detail: "Achieve $28.8M full annual capacity, scale EV battery pack CCS, and evaluate Phase 2 rigid-flex expansion."
+                  metric: `$${(getLiveStat("tradeSales_T24", 2040000)/1000000).toFixed(2)}M/mo Scale Run-Rate`,
+                  detail: "Achieve scalable capacity delivery, ramp up EV battery pack CCS, and evaluate Phase 2 rigid-flex expansion."
                 }
               ],
               milestones: [
@@ -1995,15 +1995,16 @@ function getI18NDeck() {
               orangeLabel: "建廠(支出)",
               greenLabel: "貿易(收入)",
               timelineLabel: "時間線 + 損益平衡線",
+              // Live Dynamic Numbers for Curves & Nodes（直接連動 Google Sheet WEB_DATA）
               liveStats: {
                 totCapEx: `$${totCapEx}M`,
                 bepRevMo: `$${bepRev}M`,
                 fullRevMo: `$${(getLiveStat("monthlyRevenue",2400000)/1000000).toFixed(2)}M`,
-                s0: getLiveStat("stageSalesM0", 250000) / 1000000,
-                s6: getLiveStat("stageSalesM6", 750000) / 1000000,
-                s12: getLiveStat("stageSalesM12", 1218543) / 1000000,
-                s18: getLiveStat("stageSalesM18", 2040000) / 1000000,
-                s24: getLiveStat("stageSalesM24", 2400000) / 1000000
+                s0: getLiveStat("tradeSales_T0", 0),
+                s6: getLiveStat("tradeSales_T6", 250000),
+                s12: getLiveStat("tradeSales_T12", 750000),
+                s18: getLiveStat("tradeSales_T18", 1218543),
+                s24: getLiveStat("tradeSales_T24", 2040000)
               },
               orangeNodes: [
                 {
@@ -2030,23 +2031,23 @@ function getI18NDeck() {
               greenNodes: [
                 {
                   title: "啟動代銷貿易",
-                  metric: `月化營收 $${(getLiveStat("stageSalesM0", 250000)/1000).toFixed(0)}K 啟動`,
+                  metric: `月化營收 $${(getLiveStat("tradeSales_T0", 0)/1000).toFixed(0)}K 啟動`,
                   detail: "依託成熟供應鏈優勢供貨，以貿易代銷先行跑通市場，預先建立印度終端客戶代碼 (Vendor Code)。"
                 },
                 {
                   title: "客戶代碼與打樣",
-                  metric: `月化營收 $${(getLiveStat("stageSalesM6", 750000)/1000).toFixed(0)}K (48h極速打樣)`,
+                  metric: `月化營收 $${(getLiveStat("tradeSales_T6", 250000)/1000).toFixed(0)}K (48h極速打樣)`,
                   detail: "鎖定一級消費電子與鏡頭模組客戶，展開 48 小時工程極速打樣 (NPI) 與工廠體系預審。"
                 },
                 {
                   title: "轉本土量產",
-                  metric: `月化營收 $${bepRev}M (🎯 50.8% BEP)`,
-                  detail: "將既有進口代銷訂單 100% 無縫切換為印度本土製造，第 12 個月跨越 50.8% BEP 門檻 ($1.22M/月)，全面轉入淨獲利！"
+                  metric: `月化營收 $${(getLiveStat("tradeSales_T12", 750000)/1000).toFixed(0)}K 本土切換`,
+                  detail: "將既有進口代銷訂單 100% 無縫切換為印度本土製造，穩步邁向工廠損益平衡。"
                 },
                 {
                   title: "滿載規模運營",
-                  metric: `月化營收 $${(getLiveStat("monthlyRevenue",2400000)/1000000).toFixed(2)}M (年化 $${revAnnual}M)`,
-                  detail: "雙班制連續生產達成 2,880 萬美元滿載年營收，切入高毛利 EV 電池包 CCS，奠定全印度第一大本土軟板龍頭。"
+                  metric: `月化營收 $${(getLiveStat("tradeSales_T24", 2040000)/1000000).toFixed(2)}M 放量產值`,
+                  detail: "規模化連續生產達成高產值，切入高毛利 EV 電池包 CCS，奠定全印度第一大本土軟板龍頭。"
                 }
               ],
               milestones: [

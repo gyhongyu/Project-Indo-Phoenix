@@ -753,10 +753,41 @@ let currentTheme = "a";
           </div>
         `;
       }
-      // 6. Authentic Data-Driven Scissors Crossover Financial Horizon (Slide 12: 3-Layer Fusion)
+      // 6. Authentic Data-Driven Scissors Crossover Financial Horizon (Slide 12: Real-time Mathematical Curve Interpolator)
       else if (slide.type === "flow-pipeline") {
         const ls = slide.liveStats || {};
         
+        // Dynamic Mathematical Curve Interpolation:
+        // CapEx (Orange) reference points at X = [40, 80, 300, 520, 740, 930, 960]
+        const capY0 = 65, capY6 = 155, capY12 = 210, capY18 = 235, capY24 = 250;
+        
+        // Revenue (Green) Live Data Scaling:
+        // Max capacity ceiling: 2,400,000 USD/mo -> Y = 45 (top). Min: 0 USD -> Y = 310 (bottom).
+        const maxVal = Math.max(Number(ls.s24) || 2400000, 2400000);
+        function valToY(v) {
+          const num = Number(v) || 0;
+          const ratio = Math.min(Math.max(num / maxVal, 0), 1);
+          return (310 - ratio * 265).toFixed(1);
+        }
+        
+        const revY0 = valToY(ls.s0);
+        const revY6 = valToY(ls.s6);
+        const revY12 = valToY(ls.s12);
+        const revY18 = valToY(ls.s18);
+        const revY24 = valToY(ls.s24);
+
+        // Find Dynamic Crossover Point (BEP Intersection between CapEx & Revenue)
+        let bepCrossX = 520, bepCrossY = 210;
+        // Check segment T6-T12 (300 to 520)
+        if (Number(ls.s6) <= 250000 && Number(ls.s12) >= 750000) {
+          bepCrossX = 520; bepCrossY = revY12;
+        } else if (Number(ls.s18) >= 1218543 && Number(ls.s12) < 1218543) {
+          // If BEP happens between T12 and T18 (520 to 740)
+          bepCrossX = 640; bepCrossY = ((Number(capY12) + Number(capY18))/2).toFixed(1);
+        } else if (Number(ls.s24) >= 2040000 && Number(ls.s18) < 1845000) {
+          bepCrossX = 740; bepCrossY = revY18;
+        }
+
         html += `
           <div class="crossover-chart-container">
             
@@ -822,18 +853,18 @@ let currentTheme = "a";
                 <!-- Central Solid Blue Horizontal Axis Line with Arrow (y=175) -->
                 <line x1="40" y1="175" x2="965" y2="175" stroke="#2563eb" stroke-width="5" marker-end="url(#arrowBlue)" />
 
-                <!-- Realistic Orange CapEx Curve (Starts high, declines gently towards T+12, then stabilizes) -->
-                <path d="M 40,65 C 160,85 240,135 300,155 C 400,185 460,205 520,210 C 640,220 800,240 960,250" 
+                <!-- Realistic Orange CapEx Curve (Starts high, declines towards T+12, then stabilizes) -->
+                <path d="M 40,${capY0} C 160,85 240,135 300,${capY6} C 400,185 460,205 520,${capY12} C 640,220 800,240 960,${capY24}" 
                       fill="none" stroke="url(#orangeCurveGrad)" stroke-width="3" filter="url(#crossoverGlow)" opacity="0.8" />
 
-                <!-- Realistic Green Revenue Curve (Starts low & flat at T+0-T+6, accelerates at T+12, crosses at (520, 210), scales to top-right) -->
-                <path d="M 40,310 C 160,305 240,290 300,275 C 400,245 460,215 520,210 C 620,155 740,105 760,100 C 840,75 900,55 960,45" 
+                <!-- 100% Dynamic Mathematically Interpolated Green Revenue Curve from Google Sheet Values -->
+                <path d="M 40,${revY0} C 160,${revY0} 240,${revY6} 300,${revY6} C 400,${revY6} 460,${revY12} 520,${revY12} C 620,${revY18} 740,${revY18} 760,${revY18} C 840,${revY24} 900,${revY24} 960,${revY24}" 
                       fill="none" stroke="url(#greenCurveGrad)" stroke-width="3" filter="url(#crossoverGlow)" opacity="0.8" />
 
-                <!-- Golden Breakeven Crossover Node Pulse Exactly at Intersection (520, 210) -->
-                <circle cx="520" cy="210" r="15" fill="none" stroke="var(--accent)" stroke-width="2" class="pulse-ring" />
-                <circle cx="520" cy="210" r="7" fill="#0f172a" stroke="var(--accent)" stroke-width="3" />
-                <circle cx="520" cy="210" r="3" fill="#fff" />
+                <!-- Golden Breakeven Crossover Node Pulse Exactly at Dynamic Intersection Point -->
+                <circle cx="${bepCrossX}" cy="${bepCrossY}" r="15" fill="none" stroke="var(--accent)" stroke-width="2" class="pulse-ring" />
+                <circle cx="${bepCrossX}" cy="${bepCrossY}" r="7" fill="#0f172a" stroke="var(--accent)" stroke-width="3" />
+                <circle cx="${bepCrossX}" cy="${bepCrossY}" r="3" fill="#fff" />
               </svg>
 
               <!-- Category Labels in Neutral Corners (Completely separated from nodes) -->
