@@ -203,28 +203,72 @@ let currentTheme = "a";
         `;
       }
 
-      // 3. Space Allocation Area Matrix Tiles (Slide 4)
+      // 3. Space Allocation Area Matrix Tiles (Slide 8 Overhaul - High-Density Engineering Table)
       else if (slide.type === "space-matrix-visual") {
         html += `
-          <div class="space-matrix-grid">
-            ${slide.spaces.map((s, idx) => `
-              <div class="space-tile-card gs-anim-card ${idx === 0 ? 'active' : ''}" 
-                   id="spaceCard_${idx}"
-                   onclick="selectGenericCard('spaceCard', ${idx}, '${s.detail.replace(/'/g, "\\'")}')"
-                   onmouseenter="selectGenericCard('spaceCard', ${idx}, '${s.detail.replace(/'/g, "\\'")}')">
-                <div class="space-tile-top">
-                  <div class="space-tile-title">${s.title}</div>
-                  <div class="space-tile-area">${s.area}</div>
+          <div class="space-cockpit-container">
+            <!-- Top KPI Ribbon -->
+            ${slide.kpiSummary ? `
+              <div class="space-kpi-ribbon">
+                <div class="space-kpi-block">
+                  <span class="space-kpi-lbl">${currentLang === 'zh' ? '印度總規劃面積' : 'India Total Built-Up'}</span>
+                  <span class="space-kpi-val">${slide.kpiSummary.totalArea}</span>
                 </div>
-                <div class="space-tile-std">${s.std}</div>
-                <div class="space-tile-desc">${s.desc}</div>
-
-                <div class="card-smart-tooltip">
-                    <div class="tooltip-tag">🏗️ ${currentLang === 'zh' ? '廠房基建規劃依據' : 'Infrastructure & Compliance'}</div>
-                    <div class="tooltip-text">${s.detail}</div>
+                <div class="space-kpi-divider"></div>
+                <div class="space-kpi-block">
+                  <span class="space-kpi-lbl">${currentLang === 'zh' ? '昆山參考面積' : 'Kunshan Ref Area'}</span>
+                  <span class="space-kpi-val" style="color:var(--ink-sub);">${slide.kpiSummary.kunshanRef}</span>
+                </div>
+                <div class="space-kpi-divider"></div>
+                <div class="space-kpi-block">
+                  <span class="space-kpi-lbl">${currentLang === 'zh' ? '在地化特化擴增' : 'Localization Redundancy'}</span>
+                  <span class="space-kpi-val" style="color:#34d399;">${slide.kpiSummary.redundancy}</span>
+                </div>
+                <div class="space-kpi-divider"></div>
+                <div class="space-kpi-block">
+                  <span class="space-kpi-lbl">${currentLang === 'zh' ? 'ZLD 零排放環評專區' : 'ZLD Environmental Area'}</span>
+                  <span class="space-kpi-val" style="color:var(--accent);">${slide.kpiSummary.zldArea}</span>
                 </div>
               </div>
-            `).join("")}
+            ` : ''}
+
+            <!-- 5 Detailed Engineering Rows -->
+            <div class="space-rows-list">
+              ${slide.spaces.map((s, idx) => `
+                <div class="space-row-card gs-anim-card ${idx === 0 ? 'active' : ''}" 
+                     id="spaceCard_${idx}"
+                     onclick="selectGenericCard('spaceCard', ${idx}, '${s.detail.replace(/'/g, "\\'")}')"
+                     onmouseenter="selectGenericCard('spaceCard', ${idx}, '${s.detail.replace(/'/g, "\\'")}')">
+                  
+                  <div class="space-row-title-col">
+                    <div class="space-row-idx">${idx + 1}</div>
+                    <div>
+                      <div class="space-row-title">${s.title}</div>
+                      <div class="space-row-std">${s.std}</div>
+                    </div>
+                  </div>
+
+                  <div class="space-row-equip-col">
+                    <div class="space-row-sublbl">${currentLang === 'zh' ? '核心工藝設備' : 'Key Equipment / Process'}</div>
+                    <div class="space-row-equip">${s.equip || s.desc}</div>
+                  </div>
+
+                  <div class="space-row-infra-col">
+                    <div class="space-row-sublbl">${currentLang === 'zh' ? '工程標準與環評亮點' : 'Infrastructure & SPCB Note'}</div>
+                    <div class="space-row-infra">${s.infra || s.detail}</div>
+                  </div>
+
+                  <div class="space-row-area-col">
+                    <div class="space-row-sublbl">${currentLang === 'zh' ? '昆山 ➔ 印度規劃' : 'Kunshan ➔ India Area'}</div>
+                    <div class="space-row-area-box">
+                      <span class="area-kunshan">${s.kunshan || '--'}</span>
+                      <span class="area-arrow">➔</span>
+                      <span class="area-india">${s.india || s.area}</span>
+                    </div>
+                  </div>
+                </div>
+              `).join("")}
+            </div>
           </div>
 
           <div class="cockpit-floating-bar">

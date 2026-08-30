@@ -465,42 +465,59 @@ function getI18NDeck() {
               type: "space-matrix-visual",
               tag: "SLIDE 08 / MODULE 2: FACTORY SPACE & CLEANROOM SPECS",
               title: `Module 2: 13,000 m² High-Reliability Cleanroom & ZLD Blueprint`,
-              desc: `Total built-up factory floor area of ${totalArea} m² engineered for zero cross-contamination and continuous roll-to-roll flow.`,
+              desc: `Total built-up factory floor area of ${totalArea} m² (vs 9,700 m² Kunshan ref, +34% localization redundancy). Engineered for heavy wet-process and zero contamination.`,
+              defaultExplanation: "13,000 m² layout includes 3x ZLD environmental footprint and +40% HVAC capacity for Indian climate resilience.",
+              kpiSummary: {
+                totalArea: `${totalArea} m²`,
+                kunshanRef: "9,700 m²",
+                redundancy: "+34% Redundancy",
+                zldArea: "3,000 m² (3x Kunshan)"
+              },
               spaces: [
                 {
-                  title: "Heavy Wet Chemistry",
-                  area: "4,500 m²",
-                  std: "Class 100K Cleanroom",
-                  desc: "High-capacity VCP plating, DES etching lines, black-hole direct metallization.",
-                  detail: "Houses the full chemical wet-process line. Fully permitted under State Pollution Control Board (SPCB) red-category industrial standards."
+                  title: "Cleanroom Yellow Light",
+                  kunshan: "1,200 m²",
+                  india: "1,500 m²",
+                  std: "Class 10,000 / 22±2°C / 55±5% RH",
+                  equip: "LDI Direct Imaging, Dry Film Vacuum Lamination",
+                  infra: "+40% HVAC capacity redundancy to conquer 45°C+ Indian ambient summer heat",
+                  detail: "High ambient temperature in India requires +40% higher HVAC capacity. Temperature & humidity strictly maintained at 21±1°C, 55±5% RH for 25μm line pitch."
                 },
                 {
-                  title: "Dry Process & Yellow Room",
-                  area: "3,500 m²",
-                  std: "Class 10K / 1K Cleanroom",
-                  desc: "Direct imaging (LDI), automated coverlay alignment, and vacuum laminators.",
-                  detail: "Temperature & humidity strictly controlled (21±1°C, 55±5% RH) to achieve 25μm ultra-fine line pitch without yield degradation."
+                  title: "Wet Process Chemical Area",
+                  kunshan: "4,000 m²",
+                  india: "4,500 m²",
+                  std: "FRP Anti-Acid Floor, Multi-Stage Acid Exhaust",
+                  equip: "VCP Continuous Plating Line, DES Etching Lines",
+                  infra: "Mandatory State Pollution Control Board (SPCB) CTE/CTO red-category compliance",
+                  detail: "Houses heavy chemical plating and DES etching. Heavy glass fiber reinforced polymer (FRP) flooring prevents chemical ground corrosion."
                 },
                 {
-                  title: "Inspection, SMT & Lab",
-                  area: "2,000 m²",
-                  std: "Class 10K ESD Protected",
-                  desc: "High-speed SMT placement, flying probe testing, and metallurgical cross-section lab.",
-                  detail: "Zero-defect quality gate featuring 3D AOI, ionic contamination testing, and automated micro-short inspection."
+                  title: "Drilling & Vacuum Lamination",
+                  kunshan: "1,500 m²",
+                  india: "2,000 m²",
+                  std: "Floor Load 1.5 tons/m², Isolated Deep Bed",
+                  equip: "Laser Micro-Via Driller, Vacuum Hot Press",
+                  infra: "Micro-vibration isolated floor base required to prevent micro-via drilling defect",
+                  detail: "Isolated deep foundation design completely shields laser drillers and vacuum laminators from external heavy industrial vibrations."
                 },
                 {
-                  title: "Warehouse & Cold Storage",
-                  area: "1,500 m²",
-                  std: "Cold Storage 2-10°C",
-                  desc: "FCCL base laminates, coverlays, and pure chemicals.",
-                  detail: "Maintains 45-60 days of strategic safety inventory in India to eliminate international logistics disruptions."
+                  title: "Raw Material Cold Warehouse",
+                  kunshan: "1,500 m²",
+                  india: "2,000 m²",
+                  std: "Cold Storage 2-10°C, Strict RH Control",
+                  equip: "DuPont FCCL, Coverlay & Chemical Depot",
+                  infra: "45-60 Days Safety Stock in India (vs 7-14 in Kunshan) to eliminate supply chain disruptions",
+                  detail: "Maintains 45-60 days of strategic raw material buffer in India, insulating factory operations from international customs and shipping delays."
                 },
                 {
-                  title: "Wastewater & ZLD",
-                  area: "3,000 m²",
-                  std: "Zero Liquid Discharge",
-                  desc: "MVR mechanical vapor recompression and multi-stage RO.",
-                  detail: "3x larger footprint than standard factories. Mandatory environmental installation for green project approvals in India."
+                  title: "Wastewater & ZLD Facility",
+                  kunshan: "1,500 m²",
+                  india: "3,000 m²",
+                  std: "Zero Liquid Discharge (ZLD) Mandate",
+                  equip: "MVR Evaporators, Multi-Stage Reverse Osmosis",
+                  infra: "3x larger footprint than Kunshan. Essential regulatory filter for SPCB red approval",
+                  detail: "3,000 m² dedicated zero liquid discharge installation recycles 100% of chemical and plating effluent on-premise, guaranteeing uninterrupted operations."
                 }
               ]
             },
@@ -1555,48 +1572,64 @@ function getI18NDeck() {
                 }
               ]
             },
-            // Slide 08: 模組 2 廠房空間分區磁貼
+            // Slide 08: 模組 2 廠房空間分區標準
             {
               type: "space-matrix-visual",
               tag: "簡報 08 / 模組二：廠房空間分區標準與規範",
-              title: `模組 2：13,000 m² 空間工程標準規劃`,
-              desc: "嚴格的潔淨室等級、樓板載重與環境控制參數，無縫支撐 15,000 m²/月之高效產出。",
-              defaultExplanation: "13,000 m² 總佔地佈局，完全符合印度國家污染控制委員會 (SPCB) 最高環保規範與高良率濕製程要求。",
+              title: `模組 2：13,000 m² 空間工程標準規劃（對比昆山 9,700 m²）`,
+              desc: `總建築面積 ${totalArea} m²（較昆山參考廠房擴增 +34% 在地特化冗餘），高標準滿足重工業級濕製程與零污染防線。`,
+              defaultExplanation: "13,000 m² 總佔地佈局，包含 3 倍 ZLD 零排放環保佔地與 +40% HVAC 暖通冗餘，專為印度高溫與法規特化設計。",
+              kpiSummary: {
+                totalArea: `${totalArea} m²`,
+                kunshanRef: "9,700 m²",
+                redundancy: "+34% 特化冗餘",
+                zldArea: "3,000 m² (昆山 3 倍)"
+              },
               spaces: [
                 {
                   title: "萬級無塵黃光區",
-                  area: "1,500 m²",
-                  std: "Class 10K / 22±2°C",
-                  desc: "LDI 雷射直接成像與乾膜壓合。",
-                  detail: "配置 +40% HVAC 暖通冗餘空調制冷能力，專門克服印度夏季 45°C+ 極端高溫環境。"
+                  kunshan: "1,200 m²",
+                  india: "1,500 m²",
+                  std: "萬級無塵室 / 22±2°C / 濕度 55±5%",
+                  equip: "LDI 雷射直接成像、乾膜真空壓膜機",
+                  infra: "印度環境溫度高，需增加 +40% 暖通空調 (HVAC) 冗餘容量制冷",
+                  detail: "配置 +40% HVAC 暖通冗餘空調制冷能力，嚴格受控（21±1°C, 55±5% RH），確保 25μm 微細線路曝光精度不衰減。"
                 },
                 {
-                  title: "濕製程電鍍蝕刻區",
-                  area: "4,500 m²",
-                  std: "FRP 耐酸鹼地坪",
-                  desc: "VCP 垂直連續電鍍與 DES 連續蝕刻線。",
-                  detail: "採用重防腐玻璃鋼 (FRP) 防護地坪，配備多級負壓酸霧洗滌塔，確保順利通過 SPCB 環評。"
+                  title: "濕製程化學區",
+                  kunshan: "4,000 m²",
+                  india: "4,500 m²",
+                  std: "FRP 防酸地坪、專用排氣洗滌塔",
+                  equip: "VCP 垂直連續電鍍、DES 連續蝕刻線",
+                  infra: "需取得當地污染控制局 (SPCB) CTE/CTO 紅色最高等級環評許可",
+                  detail: "採用重防腐玻璃鋼 (FRP) 防護地坪與多級負壓酸霧洗滌塔，100% 滿足印度 SPCB 紅色最高污染級別審批。"
                 },
                 {
-                  title: "機械鑽孔與真空壓合",
-                  area: "2,000 m²",
-                  std: "承重 1.5 噸/m²",
-                  desc: "雷射微盲孔鑽孔機與高精度真空熱壓機。",
-                  detail: "獨立隔震深地基設計，徹底隔絕微震動對高精密雷射微盲孔鑽孔良率的干擾。"
+                  title: "鑽孔與真空壓合區",
+                  kunshan: "1,500 m²",
+                  india: "2,000 m²",
+                  std: "樓板載重 1.5 噸/m²、獨立隔震地基",
+                  equip: "雷射微盲孔鑽孔機、高精度真空熱壓合",
+                  infra: "微盲孔雷射鑽孔需具備微震隔離功能之獨立深地基座",
+                  detail: "獨立隔震深地基設計，徹底隔絕外部重工微震動對雷射微盲孔加工良率的干擾。"
                 },
                 {
-                  title: "低溫精密材料倉",
-                  area: "2,000 m²",
-                  std: "冷藏室 2-10°C",
-                  desc: "FCCL 銅箔基板、覆蓋膜及化學耗材儲存。",
-                  detail: "常態備置 45-60 天印度在地戰略安全庫存，徹底消除國際海空運物流斷鏈風險。"
+                  title: "低溫原料與戰略緩衝倉",
+                  kunshan: "1,500 m²",
+                  india: "2,000 m²",
+                  std: "冷藏室 2-10°C、嚴格溫濕度控制",
+                  equip: "杜邦 FCCL 軟性銅箔基板、覆蓋膜儲存",
+                  infra: "印度在地常態安全庫存天數 45-60 天（昆山僅 7-14 天），消除斷鏈風險",
+                  detail: "常態備置 45-60 天印度在地戰略安全庫存，徹底消除國際海空運及海關物流斷鏈風險。"
                 },
                 {
-                  title: "廢水與零排放 (ZLD)",
-                  area: "3,000 m²",
-                  std: "Zero Liquid Discharge",
-                  desc: "MVR 機械蒸汽再壓縮蒸發器與多級逆滲透 RO。",
-                  detail: "佔地面積達傳統標準 3 倍，為印度綠色高科技項目核准之法定強制環保設施。"
+                  title: "廢水與環保 ZLD 設施",
+                  kunshan: "1,500 m²",
+                  india: "3,000 m²",
+                  std: "廢水零排放 (ZLD) 法定強制要求",
+                  equip: "MVR 機械蒸汽再蒸發器、多級逆滲透 RO",
+                  infra: "佔地面積為昆山 3 倍，為符合印度綠色法規之法定強制必備設施",
+                  detail: "佔地 3,000 m² 達到傳統 3 倍規格，化學與重金屬廢水 100% 廠內循環回用，零液體排出。"
                 }
               ]
             },
