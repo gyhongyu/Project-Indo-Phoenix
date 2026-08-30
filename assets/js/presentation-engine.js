@@ -1507,14 +1507,34 @@ let currentTheme = "a";
       };
 
       const gasUrl = (window.IPX_CONFIG && window.IPX_CONFIG.gasUrl) ? window.IPX_CONFIG.gasUrl : "";
+      const gmailUrl = (window.IPX_CONFIG && window.IPX_CONFIG.gmailGasUrl) ? window.IPX_CONFIG.gmailGasUrl : "";
 
-      // Send to Universal GAS Gateway via standard POST
+      // Pipeline 1: Record Lead into Google Sheet via Universal GAS Gateway
       if (gasUrl) {
         fetch(gasUrl, {
           method: "POST",
           headers: { "Content-Type": "text/plain;charset=utf-8" },
           body: JSON.stringify(payload)
-        }).catch(err => console.warn("GAS sync note:", err));
+        }).catch(err => console.warn("Google Sheet sync note:", err));
+      }
+
+      // Pipeline 2: Auto-dispatch MII Passcode Access Email via Universal Gmail Gateway
+      if (gmailUrl && email) {
+        const mailBody = `Dear ${name || 'Investor'},\n\nThank you for your interest in Project Indo-Phoenix (India's 1st Strategic Aerospace & Defense FPC Hub).\n\nHere is your official access credential for our interactive AI Data Room:\n\n* AI Data Room URL: https://notebook.google.com/notebook/be750388-f5f2-4027-9f85-f45f61c53ba7\n* Access Passcode: MII (Make In India Initiative)\n\nInside the AI Data Room, you can freely query 23 verified dossiers including pan-India Defense/EV market KYC profiles, 5-year mathematical financial models, and core technical team manufacturing capabilities.\n\nNote: Requires signing into any Google account for read-only interactive Q&A exploration.\n\n========================================\nBest regards,\nProject Indo-Phoenix Founding Team\nIndia Strategic Aerospace & Defense FPC Initiative\nDirect Contact: gyhongyu@gmail.com`;
+
+        const mailPayload = {
+          action: "send",
+          to: email,
+          subject: "[Project Indo-Phoenix] Official AI Data Room Access Key (Passcode: MII)",
+          body: mailBody,
+          no_signature: true
+        };
+
+        fetch(gmailUrl, {
+          method: "POST",
+          headers: { "Content-Type": "text/plain;charset=utf-8" },
+          body: JSON.stringify(mailPayload)
+        }).catch(err => console.warn("Gmail auto-responder note:", err));
       }
 
       // Render instant executive confirmation (Perfect Centered Card)
@@ -1534,7 +1554,7 @@ let currentTheme = "a";
                 ${currentLang === 'zh' ? '商務會談意向已成功登記！' : 'Inquiry Successfully Submitted!'}
               </div>
               <div style="font-size:12px; color:#cbd5e1; line-height:1.6;">
-                ${currentLang === 'zh' ? `感謝 <strong>${name}</strong> (${org}) 先進，已安全記錄至專案資料庫，創始合夥人團隊將於 24 小時內親自與您聯繫。` : `Thank you, <strong>${name}</strong> (${org}). Inquiries are recorded in our secure ledger; our founding partners will reach out within 24 hours.`}
+                ${currentLang === 'zh' ? `感謝 <strong>${name}</strong> (${org}) 先進，已記錄至專案資料庫，且通行金鑰已自動發送至 <strong>${email}</strong>。創始團隊將於 24 小時內親自與您聯繫。` : `Thank you, <strong>${name}</strong> (${org}). Inquiry recorded and access passkey dispatched to <strong>${email}</strong>. Our team will reach out within 24 hours.`}
               </div>
             </div>
           `;

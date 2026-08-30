@@ -7,7 +7,8 @@
    ============================================================ */
 
 window.IPX_CONFIG = {
-  gasUrl: "https://script.google.com/macros/s/AKfycbzPRGJ3gOlbro2YigiF5t1qoG3PEwUGXU9d-tWkrIGpiK7yfiCMNV3DxzKLvEC84mG9eQ/exec"   // <== TODO: paste your GAS Web App /exec URL here
+  gasUrl: "https://script.google.com/macros/s/AKfycbzPRGJ3gOlbro2YigiF5t1qoG3PEwUGXU9d-tWkrIGpiK7yfiCMNV3DxzKLvEC84mG9eQ/exec",   // Google Sheet SSOT Gateway
+  gmailGasUrl: "https://script.google.com/macros/s/AKfycbxT4RPGigxX6JWFyzEt2-wBGVI7Tx_0SNqMkjzpU1U9Mp_9N65epYCogRiRHtOPGJ7N/exec"  // Universal Gmail Gateway
 };
 
 window.IPX_DATA = {
