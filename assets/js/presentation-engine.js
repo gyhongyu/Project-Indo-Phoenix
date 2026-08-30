@@ -844,14 +844,16 @@ let currentTheme = "a";
                 ${slide.timelineLabel || '時間線 + 損益平衡線'}
               </div>
 
-              <!-- LAYER 3 FOREGROUND: Top Orange Factory Milestones (Pinned to Vertical Grid Top) -->
+              <!-- LAYER 3 FOREGROUND: Top Orange Factory Milestones (2-Row Clean Stack) -->
               <div class="crossover-node-layer orange-layer">
                 ${(slide.orangeNodes || []).map((n, idx) => `
-                  <div class="crossover-point-item orange-point" style="left:${idx === 0 ? '8%' : idx === 1 ? '30%' : idx === 2 ? '52%' : '74%'}; top: 6%;"
+                  <div class="crossover-point-item orange-point" style="left:${idx === 0 ? '8%' : idx === 1 ? '30%' : idx === 2 ? '52%' : '74%'}; top: 4%; transform: translateX(-50%);"
                        onclick="selectGenericCard('orangePt', ${idx}, '${n.detail.replace(/'/g, "\\'")}')"
                        onmouseenter="selectGenericCard('orangePt', ${idx}, '${n.detail.replace(/'/g, "\\'")}')">
-                    <span class="point-bullet orange"></span>
-                    <span class="point-text">${n.title}</span>
+                    <div class="point-header-line">
+                      <span class="point-bullet orange"></span>
+                      <span class="point-text">${n.title}</span>
+                    </div>
                     <span class="point-metric-pill orange">${n.metric}</span>
 
                     <!-- Smart Hover Popover -->
@@ -867,19 +869,21 @@ let currentTheme = "a";
               <div class="crossover-time-labels">
                 <span style="left:8%;">T+0</span>
                 <span style="left:30%;">T+6</span>
-                <span style="left:52%; color:var(--accent); font-weight:800; font-size:12.5px;">T+12 (BEP)</span>
+                <span style="left:52%; color:var(--accent); font-weight:800; font-size:12px;">T+12 (BEP)</span>
                 <span style="left:74%;">T+18</span>
                 <span style="left:93%;">T+24</span>
               </div>
 
-              <!-- LAYER 3 FOREGROUND: Bottom Green Commercial Milestones (Pinned to Vertical Grid Bottom) -->
+              <!-- LAYER 3 FOREGROUND: Bottom Green Commercial Milestones (2-Row Clean Stack) -->
               <div class="crossover-node-layer green-layer">
                 ${(slide.greenNodes || []).map((n, idx) => `
-                  <div class="crossover-point-item green-point" style="left:${idx === 0 ? '8%' : idx === 1 ? '30%' : idx === 2 ? '52%' : '74%'}; bottom: 6%;"
+                  <div class="crossover-point-item green-point" style="left:${idx === 0 ? '8%' : idx === 1 ? '30%' : idx === 2 ? '52%' : '74%'}; bottom: 4%; transform: translateX(-50%);"
                        onclick="selectGenericCard('greenPt', ${idx}, '${n.detail.replace(/'/g, "\\'")}')"
                        onmouseenter="selectGenericCard('greenPt', ${idx}, '${n.detail.replace(/'/g, "\\'")}')">
-                    <span class="point-bullet green"></span>
-                    <span class="point-text">${n.title}</span>
+                    <div class="point-header-line">
+                      <span class="point-bullet green"></span>
+                      <span class="point-text">${n.title}</span>
+                    </div>
                     <span class="point-metric-pill green">${n.metric}</span>
 
                     <!-- Smart Hover Popover -->
