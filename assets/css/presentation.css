@@ -445,42 +445,54 @@
     .area-arrow { font-size: 10px; color: var(--accent); }
     .area-india { font-size: 13.5px; font-weight: 700; color: var(--accent); }
 
-    /* 4. OpEx Cost Composition Master Grid (Slide 10) */
-    .opex-cockpit-grid {
-      flex: 1; display: grid; grid-template-columns: 1fr 1fr; gap: 14px;
-      margin-bottom: 12px; min-height: 0;
+    /* 4. OpEx Cost Composition Master Cockpit (Slide 10 Overhaul) */
+    .opex-cockpit-container {
+      flex: 1; display: flex; flex-direction: column; gap: 8px;
+      margin-bottom: 10px; min-height: 0;
     }
-    .opex-cost-card {
+    .opex-rows-list {
+      flex: 1; display: grid; grid-template-rows: repeat(5, 1fr); gap: 6px;
+      min-height: 0;
+    }
+    .opex-row-card {
       background: rgba(10, 15, 25, 0.2); border: 1px solid var(--line-subtle);
-      border-radius: var(--card-radius); padding: clamp(16px, 2vh, 22px) 20px;
-      display: flex; flex-direction: column; justify-content: space-between;
-      cursor: pointer; transition: all 0.25s var(--ease);
+      border-radius: 6px; padding: clamp(6px, 0.9vh, 10px) clamp(12px, 1.2vw, 16px);
+      display: grid; grid-template-columns: 1.4fr 1.6fr 0.9fr 0.9fr 1fr 1fr; gap: 12px;
+      align-items: center; cursor: pointer; transition: all 0.25s var(--ease);
+      position: relative; min-height: 0;
     }
-    .opex-cost-card:hover, .opex-cost-card.active {
+    /* English-specific layout tuning (Zero interference with Chinese mode) */
+    html[lang="en"] .opex-row-card {
+      grid-template-columns: 1.35fr 1.55fr 0.95fr 0.95fr 1.05fr 1.05fr;
+      gap: 12px;
+    }
+    .opex-row-card:hover, .opex-row-card.active {
       background: var(--bg-card-hover); border-color: var(--accent);
-      transform: translateY(-2px); box-shadow: 0 6px 20px var(--accent-glow);
+      transform: translateX(4px); box-shadow: 0 4px 16px var(--accent-glow);
     }
-    .opex-card-head {
-      display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 4px;
+    .opex-row-card.total-row {
+      background: linear-gradient(90deg, rgba(201, 169, 110, 0.12) 0%, rgba(10, 15, 25, 0.4) 100%);
+      border-color: var(--accent); border-left: 3px solid var(--accent);
     }
-    .opex-card-title { font-size: 15px; font-weight: 600; color: var(--ink); }
-    .opex-card-pct {
-      font-family: var(--font-mono); font-size: 13px; font-weight: 600; color: var(--accent);
-    }
-    .opex-card-amount {
-      font-family: var(--font-display); font-size: 28px; font-weight: 600;
-      color: var(--accent); line-height: 1; margin-bottom: 6px;
-    }
-    .opex-bar-ratio {
-      height: 8px; background: rgba(255,255,255,0.06); border-radius: 4px;
-      overflow: hidden; display: flex; margin: 8px 0;
+    .opex-title-block { display: flex; align-items: center; gap: 10px; }
+    .opex-icon { font-size: 16px; color: var(--accent); flex-shrink: 0; }
+    .opex-title { font-size: 13px; font-weight: 600; color: var(--ink); white-space: nowrap; }
+    .opex-pct { font-family: var(--font-mono); font-size: 10px; color: var(--ink-sub); margin-top: 1px; }
+
+    .opex-bar-col { display: flex; flex-direction: column; justify-content: center; gap: 3px; }
+    .opex-bar-ratio-mini {
+      height: 6px; background: rgba(255,255,255,0.06); border-radius: 3px;
+      overflow: hidden; display: flex; width: 100%;
     }
     .opex-var-bar { height: 100%; background: #38bdf8; }
-    .opex-fix-bar { height: 100%; background: #94a3b8; }
-    .opex-ratio-labels {
-      display: flex; justify-content: space-between; font-family: var(--font-mono);
-      font-size: 11px; color: var(--ink-sub);
-    }
+    .opex-fix-bar { height: 100%; background: rgba(255,255,255,0.18); }
+
+    .opex-val-col { display: flex; flex-direction: column; justify-content: center; }
+    .opex-val-num { font-family: var(--font-mono); font-size: 13px; font-weight: 600; color: var(--ink); }
+    .opex-val-num.kunshan { color: var(--ink-sub); font-size: 12px; }
+    .opex-val-num.accent { color: var(--accent); font-weight: 700; }
+    .opex-val-num.var-amt { color: #38bdf8; font-weight: 600; }
+    .opex-val-num.fix-amt { color: var(--ink-sub); font-weight: 600; }
 
     /* 3. VS Matrix (Slide 2 Market Gap Overhaul) */
     .vs-matrix {

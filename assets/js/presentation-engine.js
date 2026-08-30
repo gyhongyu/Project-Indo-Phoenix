@@ -281,38 +281,84 @@ let currentTheme = "a";
         `;
       }
 
-      // 4. OpEx Cost Composition Visual Cockpit (Slide 6)
+      // 4. OpEx Cost Composition Visual Cockpit (Slide 10 Overhaul)
       else if (slide.type === "opex-cockpit-visual") {
         html += `
-          <div class="opex-cockpit-grid">
-            ${slide.costs.map((c, idx) => `
-              <div class="opex-cost-card gs-anim-card ${idx === 0 ? 'active' : ''}" 
-                   id="opexCard_${idx}"
-                   onclick="selectGenericCard('opexCard', ${idx}, '${c.detail.replace(/'/g, "\\'")}')"
-                   onmouseenter="selectGenericCard('opexCard', ${idx}, '${c.detail.replace(/'/g, "\\'")}')">
-                <div>
-                  <div class="opex-card-head">
-                    <div class="opex-card-title">${c.title}</div>
-                    <div class="opex-card-pct">${c.pct}</div>
-                  </div>
-                  <div class="opex-card-amount">${c.amount} <span style="font-size:12px; font-family:var(--font-body); color:var(--ink-sub);">/ mo</span></div>
-                  <div class="opex-bar-ratio">
-                    <div class="opex-var-bar" style="width:${c.varPct};" title="Variable Cost"></div>
-                    <div class="opex-fix-bar" style="width:${c.fixPct};" title="Fixed Cost"></div>
-                  </div>
-                  <div class="opex-ratio-labels">
-                    <span>${currentLang === 'zh' ? '變動成本' : 'Var'}: ${c.varPct}</span>
-                    <span>${currentLang === 'zh' ? '固定成本' : 'Fix'}: ${c.fixPct}</span>
-                  </div>
+          <div class="opex-cockpit-container">
+            <!-- Top KPI Ribbon -->
+            ${slide.kpiSummary ? `
+              <div class="space-kpi-ribbon">
+                <div class="space-kpi-block">
+                  <span class="space-kpi-lbl">${currentLang === 'zh' ? '單月總營運成本' : 'Total Monthly OpEx'}</span>
+                  <span class="space-kpi-val" style="color:var(--accent);">${slide.kpiSummary.totalOpex}</span>
                 </div>
-                <div style="font-size:11.5px; color:var(--ink-sub); line-height:1.4; margin-top:8px;">${c.sub}</div>
-
-                <div class="card-smart-tooltip">
-                    <div class="tooltip-tag">📊 ${currentLang === 'zh' ? '成本行為與供應鏈洞察' : 'Cost Behavior Insight'}</div>
-                    <div class="tooltip-text">${c.detail}</div>
+                <div class="space-kpi-divider"></div>
+                <div class="space-kpi-block">
+                  <span class="space-kpi-lbl">${currentLang === 'zh' ? '昆山單月參考' : 'Kunshan Ref OpEx'}</span>
+                  <span class="space-kpi-val" style="color:var(--ink-sub);">${slide.kpiSummary.kunshanRef}</span>
+                </div>
+                <div class="space-kpi-divider"></div>
+                <div class="space-kpi-block">
+                  <span class="space-kpi-lbl">${currentLang === 'zh' ? '變動成本佔比 (極強抗風險)' : 'Variable Ratio (Agile Buffer)'}</span>
+                  <span class="space-kpi-val" style="color:#38bdf8;">${slide.kpiSummary.variableRatio}</span>
+                </div>
+                <div class="space-kpi-divider"></div>
+                <div class="space-kpi-block">
+                  <span class="space-kpi-lbl">${currentLang === 'zh' ? '固定成本負擔 (低折舊壓力)' : 'Fixed Ratio (Low Amort)'}</span>
+                  <span class="space-kpi-val" style="color:var(--ink);">${slide.kpiSummary.fixedRatio}</span>
                 </div>
               </div>
-            `).join("")}
+            ` : ''}
+
+            <!-- 5 OpEx Cost Behavior Rows -->
+            <div class="opex-rows-list">
+              ${slide.costs.map((c, idx) => `
+                <div class="opex-row-card gs-anim-card ${idx === 0 ? 'active' : ''} ${idx === 4 ? 'total-row' : ''}" 
+                     id="opexCard_${idx}"
+                     onclick="selectGenericCard('opexCard', ${idx}, '${c.detail.replace(/'/g, "\\'")}')"
+                     onmouseenter="selectGenericCard('opexCard', ${idx}, '${c.detail.replace(/'/g, "\\'")}')">
+                  
+                  <div class="opex-title-block">
+                    <span class="opex-icon">${idx === 4 ? '💎' : '📊'}</span>
+                    <div>
+                      <div class="opex-title">${c.title}</div>
+                      <div class="opex-pct">${c.pct} ${currentLang === 'zh' ? '佔比' : 'Share'}</div>
+                    </div>
+                  </div>
+
+                  <div class="opex-bar-col">
+                    <div class="space-row-sublbl">
+                      <span>${currentLang === 'zh' ? '變動比' : 'Var'}: <strong style="color:#38bdf8;">${c.varPct}</strong></span>
+                      <span>${currentLang === 'zh' ? '固定比' : 'Fix'}: <strong>${(100 - parseFloat(c.varPct)).toFixed(1)}%</strong></span>
+                    </div>
+                    <div class="opex-bar-ratio-mini">
+                      <div class="opex-var-bar" style="width:${c.varPct};" title="Variable"></div>
+                      <div class="opex-fix-bar" style="width:${(100 - parseFloat(c.varPct))}%;" title="Fixed"></div>
+                    </div>
+                  </div>
+
+                  <div class="opex-val-col">
+                    <div class="space-row-sublbl">${currentLang === 'zh' ? '昆山單月' : 'Kunshan'}</div>
+                    <div class="opex-val-num kunshan">${c.kunshan}</div>
+                  </div>
+
+                  <div class="opex-val-col">
+                    <div class="space-row-sublbl">${currentLang === 'zh' ? '印度單月' : 'India'}</div>
+                    <div class="opex-val-num accent">${c.india}</div>
+                  </div>
+
+                  <div class="opex-val-col">
+                    <div class="space-row-sublbl">${currentLang === 'zh' ? '變動部分 (Var $)' : 'Variable $'}</div>
+                    <div class="opex-val-num var-amt">${c.varAmt}</div>
+                  </div>
+
+                  <div class="opex-val-col">
+                    <div class="space-row-sublbl">${currentLang === 'zh' ? '固定部分 (Fix $)' : 'Fixed $'}</div>
+                    <div class="opex-val-num fix-amt">${c.fixAmt}</div>
+                  </div>
+                </div>
+              `).join("")}
+            </div>
           </div>
 
           <div class="cockpit-floating-bar">

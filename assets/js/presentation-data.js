@@ -582,44 +582,69 @@ function getI18NDeck() {
               type: "opex-cockpit-visual",
               tag: "SLIDE 10 / MODULE 4: MONTHLY OPERATING EXPENSES",
               title: `Module 4: Dynamic Monthly OpEx Structure ($${opexMo}M / mo)`,
-              desc: `Variable costs account for 69.0% ($1.27M/mo), ensuring extreme anti-cyclical agility. Click cost cards for depth.`,
+              desc: `Variable costs account for 68.97% ($1.27M/mo), ensuring extreme anti-cyclical agility. Click cost rows for depth.`,
               defaultExplanation: "Total monthly OpEx is $1.845M ($22.14M annual). Low fixed depreciation ratio (13.6%) ensures rapid scale profits.",
+              kpiSummary: {
+                totalOpex: `$${opexMo}M / mo`,
+                kunshanRef: "$1.38M / mo",
+                variableRatio: "68.97% ($1.27M Var)",
+                fixedRatio: "31.03% ($572K Fix)"
+              },
               costs: [
                 {
-                  title: "Direct Raw Materials",
-                  amount: "$900,000",
+                  title: "Direct Material Cost",
+                  kunshan: "$600,000",
+                  india: "$900,000",
                   pct: "48.8%",
-                  varPct: "100%",
-                  fixPct: "0%",
+                  varPct: "100.00%",
+                  varAmt: "$900,000",
+                  fixAmt: "$0",
                   sub: "FCCL copper clad, coverlay film, copper anodes & plating chemistry.",
                   detail: "100% variable cost. Dual-sourcing strategy (Taiwan base + local India chemicals) guarantees supply security and cost parity."
                 },
                 {
-                  title: "Labor & Technical Staff",
-                  amount: "$430,000",
+                  title: "Direct & Indirect Labor (30 Staff)",
+                  kunshan: "$450,000",
+                  india: "$430,000",
                   pct: "23.3%",
-                  varPct: "40%",
-                  fixPct: "60%",
-                  sub: "30 Taiwanese & Indian senior process specialists and operators.",
-                  detail: "Fixed senior engineering overhead ($258K) combined with variable shift labor ($172K), optimizing labor productivity."
+                  varPct: "40.00%",
+                  varAmt: "$172,000",
+                  fixAmt: "$258,000",
+                  sub: "30 Taiwanese & Indian senior process specialists and plant operators.",
+                  detail: "Fixed core engineering management ($258K) paired with flexible shift production labor ($172K), optimizing unit labor efficiency."
                 },
                 {
-                  title: "Utilities, Power & Water",
-                  amount: "$265,000",
+                  title: "Manufacturing & Utilities",
+                  kunshan: "$150,000",
+                  india: "$265,000",
                   pct: "14.4%",
-                  varPct: "75.7%",
-                  fixPct: "24.3%",
+                  varPct: "75.69%",
+                  varAmt: "$200,579",
+                  fixAmt: "$64,422",
                   sub: "High-power HVAC cooling, cleanroom air filtration, and RO recycling.",
-                  detail: "75.7% variable power consumption directly tracking production runs, protected by dedicated substation grid contracts."
+                  detail: "75.7% variable power & water consumption directly scales with production batches, protected by industrial tariff contracts."
                 },
                 {
-                  title: "Straight-line Depreciation",
-                  amount: "$250,000",
+                  title: "Fixed Depreciation & Amortization",
+                  kunshan: "$180,000",
+                  india: "$250,000",
                   pct: "13.6%",
-                  varPct: "0%",
-                  fixPct: "100%",
-                  sub: "10-year straight-line depreciation on production line and infrastructure.",
-                  detail: "100% fixed cost. Amortized over 10 years, creating huge operational leverage once capacity exceeds break-even."
+                  varPct: "0.00%",
+                  varAmt: "$0",
+                  fixAmt: "$250,000",
+                  sub: "10-year straight-line depreciation on production machinery and plant infrastructure.",
+                  detail: "100% fixed cost amortized over 10 years, creating strong operational leverage once capacity exceeds break-even."
+                },
+                {
+                  title: "Total Monthly OpEx Summary",
+                  kunshan: "$1,380,000",
+                  india: "$1,845,000",
+                  pct: "100.0%",
+                  varPct: "68.97%",
+                  varAmt: "$1,272,579",
+                  fixAmt: "$572,422",
+                  sub: "68.97% variable cost structure gives factory supreme resilience against market cycles.",
+                  detail: "High variable cost cushion ($1.27M/mo) allows factory to flexibly scale down operational burn during demand troughs without cash bleeding."
                 }
               ]
             },
@@ -1704,44 +1729,69 @@ function getI18NDeck() {
               type: "opex-cockpit-visual",
               tag: "簡報 10 / 模組四：單月營運成本結構",
               title: `模組 4：動態單月營運成本結構 ($${opexMo}M / 月)`,
-              desc: `變動成本佔比高達 69.0% ($1.27M/月)，具備極強抗景氣循環韌性。點選成本卡片查看洞察。`,
+              desc: `變動成本佔比高達 68.97% ($1.27M/月)，具備極強抗景氣循環韌性。點選成本項目查看洞察。`,
               defaultExplanation: "單月總營運成本為 184.5 萬美元（年化 2,214 萬美元）。折舊佔比僅 13.6%，產能放量獲利爆發力強。",
+              kpiSummary: {
+                totalOpex: `$${opexMo}M / 月`,
+                kunshanRef: "$1.38M / 月",
+                variableRatio: "68.97% ($1.27M 變動成本)",
+                fixedRatio: "31.03% ($572K 固定成本)"
+              },
               costs: [
                 {
                   title: "直接原料與化學耗材",
-                  amount: "$900,000",
+                  kunshan: "$600,000",
+                  india: "$900,000",
                   pct: "48.8%",
-                  varPct: "100%",
-                  fixPct: "0%",
+                  varPct: "100.00%",
+                  varAmt: "$900,000",
+                  fixAmt: "$0",
                   sub: "FCCL 銅箔基板、覆蓋膜、銅陽極及電鍍化學耗材。",
                   detail: "100% 變動成本。採用台印雙軌供應鏈（台灣核心膜材 + 印度本地基礎酸鹼），保證成本競爭力與供料安全。"
                 },
                 {
-                  title: "生產與台印專家團隊",
-                  amount: "$430,000",
+                  title: "生產與台印專家人工 (30人)",
+                  kunshan: "$450,000",
+                  india: "$430,000",
                   pct: "23.3%",
-                  varPct: "40%",
-                  fixPct: "60%",
-                  sub: "30 位台籍資深製程專家與在地高階技術工程師。",
-                  detail: "包含固定專家工程薪資 ($258K) 與隨班次變動之技術人力成本 ($172K)，實現人效最大化。"
+                  varPct: "40.00%",
+                  varAmt: "$172,000",
+                  fixAmt: "$258,000",
+                  sub: "30 位台籍資深製程專家與在地高階技術工程師及作業員。",
+                  detail: "固定核心工程管理薪資 ($258K) 結合隨班次彈性調度之生產人力 ($172K)，實現單位人效最大化。"
                 },
                 {
-                  title: "水電能耗與動力設施",
-                  amount: "$265,000",
+                  title: "製造水電與動力能耗",
+                  kunshan: "$150,000",
+                  india: "$265,000",
                   pct: "14.4%",
-                  varPct: "75.7%",
-                  fixPct: "24.3%",
+                  varPct: "75.69%",
+                  varAmt: "$200,579",
+                  fixAmt: "$64,422",
                   sub: "高功率暖通空調制冷、無塵室空氣過濾循環及水回收能耗。",
                   detail: "75.7% 為生產運轉變動用電，透過工業園區專屬變電站合約鎖定最優惠階梯電價。"
                 },
                 {
                   title: "固定資產直線法折舊",
-                  amount: "$250,000",
+                  kunshan: "$180,000",
+                  india: "$250,000",
                   pct: "13.6%",
-                  varPct: "0%",
-                  fixPct: "100%",
+                  varPct: "0.00%",
+                  varAmt: "$0",
+                  fixAmt: "$250,000",
                   sub: "生產線設備與廠房基礎設施 10 年直線法折舊攤提。",
                   detail: "非現金固定折舊攤提。13.6% 的低佔比使工廠在景氣低谷期仍能維持充沛的經營現金流。"
+                },
+                {
+                  title: "單月總營運成本合計",
+                  kunshan: "$1,380,000",
+                  india: "$1,845,000",
+                  pct: "100.0%",
+                  varPct: "68.97%",
+                  varAmt: "$1,272,579",
+                  fixAmt: "$572,422",
+                  sub: "高達 68.97% 的變動成本結構賦予工廠極強的抗景氣循環避險韌性。",
+                  detail: "高變動成本緩衝 ($1.27M/月) 讓工廠即使在需求波谷也能隨產量即時壓縮燒錢速度，絕不產生巨額虧損。"
                 }
               ]
             },
