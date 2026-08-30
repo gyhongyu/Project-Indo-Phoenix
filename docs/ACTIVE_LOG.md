@@ -5,6 +5,15 @@
 
 ---
 
+### [2026-08-30] [presentation] 功能復原：重新掛載 Slide 00 四大幕劇目錄導航頁 (Agenda Hub) 與頂部快速跳轉按鈕
+- **類型**: `FEATURE`
+- **代碼錨點**: `assets/js/presentation-data.js` (EN/ZH slides[0]), `presentation.html` (.btn-agenda-quick)
+- **核心事實 / 決策理由**:
+  - 排查發現歷史 commit ee8da69 曾暫時移除 Slide 00；本次依需求將四大幕劇（Act I~IV）全息目錄完整復原回 `presentation-data.js`。
+  - 頂部導航列新增 `☰ AGENDA / ☰ 目錄導航` 快速按鈕，支援在任何投影片隨時一鍵跳轉回全息目錄。
+- **驗證**: Node.js 執行環境驗收 14 頁投影片結構完整；目錄卡片一鍵直達對應幕劇與雙語切換正常。
+- **狀態**: `已驗收通過`
+
 ### [2026-08-30] [presentation] 重構：presentation.html 模組化解耦（3,500+ 行拆分為 css / data / engine 三大資產）
 - **類型**: `REFACTOR`
 - **代碼錨點**: `presentation.html` (L1~L97), `assets/css/presentation.css`, `assets/js/presentation-data.js`, `assets/js/presentation-engine.js`
