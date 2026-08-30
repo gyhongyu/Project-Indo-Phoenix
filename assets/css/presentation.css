@@ -799,115 +799,141 @@
     }
     .floating-bar-text strong { color: var(--ink); font-weight: 600; }
 
-    /* 6. Visual S-Curve Dual-Track Stream Pipeline (Slide 12 Overhaul) */
-    .scurve-pipeline-container {
+    /* 6. Authentic Data-Driven Scissors Crossover Financial Horizon (Slide 12) */
+    .crossover-chart-container {
       flex: 1; display: flex; flex-direction: column; justify-content: space-between;
       margin-bottom: 6px; min-height: 0; position: relative;
     }
-    .scurve-canvas-wrap {
-      flex: 1; position: relative; width: 100%; min-height: 280px;
-      display: flex; flex-direction: column; justify-content: space-between;
+    .crossover-board-wrap {
+      flex: 1; position: relative; width: 100%; min-height: 310px;
     }
-    .scurve-svg {
+    .crossover-svg {
       position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none;
       z-index: 1; overflow: visible;
     }
 
-    /* Track Identification Badges (Floating along curves) */
-    .track-flow-badge {
-      position: absolute; z-index: 5; font-family: var(--font-mono); font-size: 10px;
-      font-weight: 700; padding: 4px 10px; border-radius: 20px;
-      backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+    /* Main Chart Legend & Category Titles (Matching Sketch) */
+    .crossover-title-badge {
+      position: absolute; z-index: 10; font-family: var(--font-display);
+      font-size: clamp(15px, 1.3vw, 20px); font-weight: 700;
       letter-spacing: 0.05em; text-transform: uppercase;
     }
-    .track-flow-badge.comm-badge {
-      top: 10px; right: 20px; background: rgba(56, 189, 248, 0.15);
-      border: 1px solid #38bdf8; color: #38bdf8;
-      box-shadow: 0 0 16px rgba(56, 189, 248, 0.3);
+    .crossover-title-badge.orange-badge {
+      top: 10px; left: 30px; color: #f97316;
+      text-shadow: 0 0 16px rgba(249, 115, 22, 0.4);
     }
-    .track-flow-badge.infra-badge {
-      bottom: 10px; right: 20px; background: rgba(236, 72, 153, 0.15);
-      border: 1px solid #ec4899; color: #f472b6;
-      box-shadow: 0 0 16px rgba(236, 72, 153, 0.3);
+    .crossover-title-badge.green-badge {
+      bottom: 12px; left: 30px; color: #22c55e;
+      text-shadow: 0 0 16px rgba(34, 197, 94, 0.4);
     }
-
-    /* Pods Grid Containers (Top Row on Upper Curve, Bottom Row on Lower Curve) */
-    .scurve-pods-grid {
-      display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px;
-      position: relative; z-index: 10;
-    }
-    .scurve-pods-grid.top-row {
-      margin-top: 4px; padding-bottom: 25px;
-    }
-    .scurve-pods-grid.bottom-row {
-      margin-top: 25px; padding-bottom: 4px;
+    .timeline-legend-tag {
+      position: absolute; right: 35px; top: 50%; transform: translateY(-50%);
+      font-family: var(--font-mono); font-size: 11px; font-weight: 700;
+      color: #60a5fa; letter-spacing: 0.06em; text-shadow: 0 0 10px rgba(96, 165, 250, 0.3);
+      z-index: 10; text-align: right; line-height: 1.3;
     }
 
-    /* Interactive Pod Styling */
-    .scurve-pod-item {
-      background: rgba(10, 15, 25, 0.75); border: 1px solid rgba(255, 255, 255, 0.08);
-      border-radius: 8px; padding: 8px 12px; cursor: pointer;
-      position: relative; transition: all 0.25s var(--ease);
-      backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+    /* Interactive Points Layers (Zero Boxes, Pure Text + Bullet Points) */
+    .crossover-node-layer {
+      position: absolute; inset: 0; pointer-events: none; z-index: 15;
     }
-    .scurve-pod-item:hover, .scurve-pod-item.active {
-      transform: translateY(-3px); box-shadow: 0 8px 24px var(--accent-glow);
+    .crossover-point-item {
+      position: absolute; pointer-events: auto; cursor: pointer;
+      display: flex; align-items: center; gap: 6px;
+      padding: 3px 8px; border-radius: 4px; transition: all 0.25s var(--ease);
+      white-space: nowrap; background: rgba(10, 15, 25, 0.7);
+      border: 1px solid rgba(255, 255, 255, 0.08); backdrop-filter: blur(8px);
     }
-    .scurve-pod-item.comm-pod {
-      border-top: 3px solid #38bdf8;
+    .crossover-point-item:hover {
+      background: rgba(10, 15, 25, 0.95); transform: translateY(-2px);
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.6); border-color: var(--accent);
     }
-    .scurve-pod-item.comm-pod:hover {
-      border-color: #38bdf8; box-shadow: 0 8px 24px rgba(56, 189, 248, 0.3);
+    .point-bullet {
+      width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0;
     }
-    .scurve-pod-item.infra-pod {
-      border-bottom: 3px solid #ec4899;
+    .point-bullet.orange {
+      background: #f97316; box-shadow: 0 0 8px #f97316;
     }
-    .scurve-pod-item.infra-pod:hover {
-      border-color: #ec4899; box-shadow: 0 8px 24px rgba(236, 72, 153, 0.3);
+    .point-bullet.green {
+      background: #22c55e; box-shadow: 0 0 8px #22c55e;
+    }
+    .orange-point .point-text {
+      font-size: 11.5px; font-weight: 600; color: #fdba74;
+    }
+    .orange-point:hover .point-text {
+      color: #fff; text-shadow: 0 0 10px #f97316;
+    }
+    .green-point .point-text {
+      font-size: 11.5px; font-weight: 600; color: #86efac;
+    }
+    .green-point:hover .point-text {
+      color: #fff; text-shadow: 0 0 10px #22c55e;
+    }
+    .point-metric-pill {
+      font-family: var(--font-mono); font-size: 9.5px; font-weight: 700;
+      padding: 1px 5px; border-radius: 3px; margin-left: 2px;
+    }
+    .point-metric-pill.orange {
+      background: rgba(249, 115, 22, 0.15); color: #fb923c; border: 1px solid rgba(249, 115, 22, 0.3);
+    }
+    .point-metric-pill.green {
+      background: rgba(34, 197, 94, 0.15); color: #4ade80; border: 1px solid rgba(34, 197, 94, 0.3);
     }
 
-    .pod-header {
-      display: flex; justify-content: space-between; align-items: center; margin-bottom: 3px;
+    /* Timeline Labels on Central Blue Line */
+    .crossover-time-labels {
+      position: absolute; top: 50%; width: 100%; transform: translateY(-50%);
+      pointer-events: none; z-index: 12;
     }
-    .pod-period {
-      font-family: var(--font-mono); font-size: 10.5px; font-weight: 700; color: #38bdf8;
+    .crossover-time-labels span {
+      position: absolute; top: 10px; transform: translateX(-50%);
+      font-family: var(--font-mono); font-size: 11px; font-weight: 700; color: #94a3b8;
     }
-    .pod-period.infra { color: #f472b6; }
-    .pod-cap {
-      font-family: var(--font-mono); font-size: 9.5px; font-weight: 600; color: var(--accent);
-      background: rgba(255, 255, 255, 0.05); padding: 1px 5px; border-radius: 3px;
+
+    /* Pulse Ring for T+12M Crossover */
+    @keyframes pulseRing {
+      0% { r: 8px; opacity: 0.8; }
+      50% { r: 18px; opacity: 0.15; }
+      100% { r: 8px; opacity: 0.8; }
     }
-    .pod-infra-tag {
-      font-family: var(--font-mono); font-size: 9px; color: var(--ink-sub); text-transform: uppercase;
-    }
-    .pod-title {
-      font-size: 12.5px; font-weight: 700; color: var(--ink); line-height: 1.25; margin-bottom: 2px;
-    }
-    .pod-sub {
-      font-size: 10px; color: var(--ink-sub); line-height: 1.3;
+    .pulse-ring {
+      animation: pulseRing 2.4s infinite ease-in-out;
     }
 
     /* Bottom 4 Financial Milestones Ribbon */
-    .scurve-fin-ribbon {
+    .crossover-fin-ribbon {
       display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px;
-      margin-top: 10px; z-index: 10; position: relative;
+      margin-top: 6px; z-index: 20; position: relative;
     }
-    .scurve-fin-pill {
+    .crossover-fin-pill {
       background: rgba(0, 0, 0, 0.4); border: 1px solid rgba(255, 255, 255, 0.08);
       border-radius: 6px; padding: 6px 10px; display: flex; align-items: center; gap: 8px;
       transition: all 0.25s var(--ease);
     }
-    .scurve-fin-pill:hover {
+    .crossover-fin-pill:hover {
       border-color: var(--accent); transform: translateY(-1px);
     }
-    .fin-pill-idx {
+    .crossover-fin-pill .fin-pill-idx {
       font-family: var(--font-mono); font-size: 10px; font-weight: 800;
       color: var(--accent); background: rgba(255, 255, 255, 0.06);
       padding: 2px 6px; border-radius: 3px;
     }
-    .fin-pill-text {
+    .crossover-fin-pill .fin-pill-text {
       font-family: var(--font-mono); font-size: 10.5px; font-weight: 700; color: var(--ink);
     }
+    .crossover-fin-pill.accent {
+      border-color: #38bdf8; background: rgba(56, 189, 248, 0.1);
+    }
+    .crossover-fin-pill.accent .fin-pill-text { color: #38bdf8; }
+    .crossover-fin-pill.good {
+      border-color: #34d399; background: rgba(52, 211, 153, 0.1);
+    }
+    .crossover-fin-pill.good .fin-pill-text { color: #34d399; }
+    .crossover-fin-pill.gold {
+      border-color: var(--accent); background: rgba(201, 169, 110, 0.12);
+      box-shadow: 0 0 14px var(--accent-glow);
+    }
+    .crossover-fin-pill.gold .fin-pill-text { color: var(--accent); }
     .scurve-fin-pill.accent {
       border-color: #38bdf8; background: rgba(56, 189, 248, 0.1);
     }
