@@ -750,7 +750,7 @@ let currentTheme = "a";
           </div>
         `;
       }
-      // 6. Authentic Data-Driven Scissors Crossover Financial Horizon (Slide 12)
+      // 6. Authentic Data-Driven Scissors Crossover Financial Horizon (Slide 12: 3-Layer Fusion)
       else if (slide.type === "flow-pipeline") {
         const ls = slide.liveStats || {};
         
@@ -783,58 +783,57 @@ let currentTheme = "a";
             <!-- Dual-Curve Interactive Canvas -->
             <div class="crossover-board-wrap">
               
-              <!-- SVG Dual Curves & Central Baseline -->
+              <!-- LAYER 1: Pure Background SVG Dual Curves & Central Baseline -->
               <svg class="crossover-svg" viewBox="0 0 1000 350" preserveAspectRatio="none">
                 <defs>
-                  <!-- Orange Expenditure Gradient -->
+                  <!-- Orange Expenditure Gradient (Soft Background Glow) -->
                   <linearGradient id="orangeCurveGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-                    <stop offset="0%" stop-color="#f97316" stop-opacity="1" />
-                    <stop offset="35%" stop-color="#fb923c" stop-opacity="0.9" />
-                    <stop offset="60%" stop-color="#fdba74" stop-opacity="0.8" />
-                    <stop offset="100%" stop-color="#ea580c" stop-opacity="0.7" />
+                    <stop offset="0%" stop-color="#f97316" stop-opacity="0.9" />
+                    <stop offset="35%" stop-color="#fb923c" stop-opacity="0.75" />
+                    <stop offset="60%" stop-color="#fdba74" stop-opacity="0.6" />
+                    <stop offset="100%" stop-color="#ea580c" stop-opacity="0.45" />
                   </linearGradient>
-                  <!-- Green Revenue Gradient -->
+                  <!-- Green Revenue Gradient (Soft Background Glow) -->
                   <linearGradient id="greenCurveGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-                    <stop offset="0%" stop-color="#22c55e" stop-opacity="0.6" />
-                    <stop offset="40%" stop-color="#4ade80" stop-opacity="0.85" />
-                    <stop offset="70%" stop-color="#86efac" stop-opacity="0.95" />
-                    <stop offset="100%" stop-color="#16a34a" stop-opacity="1" />
+                    <stop offset="0%" stop-color="#22c55e" stop-opacity="0.45" />
+                    <stop offset="40%" stop-color="#4ade80" stop-opacity="0.7" />
+                    <stop offset="70%" stop-color="#86efac" stop-opacity="0.85" />
+                    <stop offset="100%" stop-color="#16a34a" stop-opacity="0.95" />
                   </linearGradient>
                   <filter id="crossoverGlow" x="-20%" y="-20%" width="140%" height="140%">
-                    <feGaussianBlur stdDeviation="3" result="blur" />
+                    <feGaussianBlur stdDeviation="2.5" result="blur" />
                     <feComposite in="SourceGraphic" in2="blur" operator="over" />
                   </filter>
-                  <!-- Marker Arrow for Timeline -->
                   <marker id="arrowBlue" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-                    <path d="M 0 1 L 10 5 L 0 9 z" fill="#3b82f6" />
+                    <path d="M 0 1 L 10 5 L 0 9 z" fill="#2563eb" />
                   </marker>
                 </defs>
 
-                <!-- Vertical Grid Alignment Lines -->
-                <line x1="60" y1="30" x2="60" y2="310" stroke="rgba(255,255,255,0.06)" stroke-width="1" stroke-dasharray="3 3" />
-                <line x1="280" y1="30" x2="280" y2="310" stroke="rgba(255,255,255,0.06)" stroke-width="1" stroke-dasharray="3 3" />
-                <line x1="500" y1="30" x2="500" y2="310" stroke="rgba(201,169,110,0.15)" stroke-width="1.5" stroke-dasharray="4 3" />
-                <line x1="720" y1="30" x2="720" y2="310" stroke="rgba(255,255,255,0.06)" stroke-width="1" stroke-dasharray="3 3" />
-                <line x1="940" y1="30" x2="940" y2="310" stroke="rgba(255,255,255,0.06)" stroke-width="1" stroke-dasharray="3 3" />
+                <!-- LAYER 2: 5 Vertical Time Grid Lines Connecting Top and Bottom Milestones -->
+                <line x1="80" y1="40" x2="80" y2="310" stroke="rgba(249,115,22,0.4)" stroke-width="1.5" stroke-dasharray="4 3" />
+                <line x1="300" y1="40" x2="300" y2="310" stroke="rgba(249,115,22,0.4)" stroke-width="1.5" stroke-dasharray="4 3" />
+                <line x1="520" y1="40" x2="520" y2="310" stroke="rgba(201,169,110,0.5)" stroke-width="2" stroke-dasharray="4 3" />
+                <line x1="740" y1="40" x2="740" y2="310" stroke="rgba(34,197,94,0.4)" stroke-width="1.5" stroke-dasharray="4 3" />
+                <line x1="930" y1="40" x2="930" y2="310" stroke="rgba(34,197,94,0.4)" stroke-width="1.5" stroke-dasharray="4 3" />
 
                 <!-- Central Solid Blue Horizontal Axis Line with Arrow (y=175) -->
-                <line x1="30" y1="175" x2="970" y2="175" stroke="#2563eb" stroke-width="4.5" marker-end="url(#arrowBlue)" />
+                <line x1="40" y1="175" x2="965" y2="175" stroke="#2563eb" stroke-width="5" marker-end="url(#arrowBlue)" />
 
-                <!-- Orange Falling Expenditure Curve (From Top-Left y=55 down to Bottom-Right y=295) -->
-                <path d="M 60,55 C 160,85 240,135 280,150 C 360,185 430,210 500,225 C 620,250 780,285 940,295" 
-                      fill="none" stroke="url(#orangeCurveGrad)" stroke-width="4" filter="url(#crossoverGlow)" />
+                <!-- Background Orange Falling Expenditure Curve (Z-Index Background) -->
+                <path d="M 50,55 C 160,85 240,140 300,165 C 380,195 450,220 520,230 C 640,250 800,280 960,290" 
+                      fill="none" stroke="url(#orangeCurveGrad)" stroke-width="3" filter="url(#crossoverGlow)" opacity="0.8" />
 
-                <!-- Green Rising Revenue S-Curve (From Bottom-Left y=295 up through Crossover at (500,175) to Top-Right y=55) -->
-                <path d="M 60,295 C 160,285 230,255 280,230 C 370,185 440,175 500,175 C 600,145 710,110 720,110 C 800,95 870,70 940,55" 
-                      fill="none" stroke="url(#greenCurveGrad)" stroke-width="4" filter="url(#crossoverGlow)" />
+                <!-- Background Green Rising Revenue S-Curve (Z-Index Background) -->
+                <path d="M 50,300 C 160,285 230,255 300,225 C 400,175 460,165 520,165 C 620,135 720,95 740,95 C 820,80 880,55 960,40" 
+                      fill="none" stroke="url(#greenCurveGrad)" stroke-width="3" filter="url(#crossoverGlow)" opacity="0.8" />
 
-                <!-- Golden Breakeven Crossover Node Pulse at (500, 175) -->
-                <circle cx="500" cy="175" r="16" fill="none" stroke="var(--accent)" stroke-width="2" class="pulse-ring" />
-                <circle cx="500" cy="175" r="8" fill="#0f172a" stroke="var(--accent)" stroke-width="3" />
-                <circle cx="500" cy="175" r="3.5" fill="#fff" />
+                <!-- Golden Breakeven Crossover Node Pulse at (520, 165) -->
+                <circle cx="520" cy="165" r="15" fill="none" stroke="var(--accent)" stroke-width="2" class="pulse-ring" />
+                <circle cx="520" cy="165" r="7" fill="#0f172a" stroke="var(--accent)" stroke-width="3" />
+                <circle cx="520" cy="165" r="3" fill="#fff" />
               </svg>
 
-              <!-- Main Curve Title Badges -->
+              <!-- Category Labels in Neutral Corners -->
               <div class="crossover-title-badge orange-badge">
                 ${slide.orangeLabel || '建廠(支出)'}
               </div>
@@ -845,10 +844,10 @@ let currentTheme = "a";
                 ${slide.timelineLabel || '時間線 + 損益平衡線'}
               </div>
 
-              <!-- Orange Nodes (Positioned ABOVE the orange curve) -->
+              <!-- LAYER 3 FOREGROUND: Top Orange Factory Milestones (Pinned to Vertical Grid Top) -->
               <div class="crossover-node-layer orange-layer">
                 ${(slide.orangeNodes || []).map((n, idx) => `
-                  <div class="crossover-point-item orange-point" style="left:${idx === 0 ? '5%' : idx === 1 ? '24%' : idx === 2 ? '50%' : '70%'}; top:${idx === 0 ? '8%' : idx === 1 ? '26%' : idx === 2 ? '44%' : '66%'};"
+                  <div class="crossover-point-item orange-point" style="left:${idx === 0 ? '8%' : idx === 1 ? '30%' : idx === 2 ? '52%' : '74%'}; top: 6%;"
                        onclick="selectGenericCard('orangePt', ${idx}, '${n.detail.replace(/'/g, "\\'")}')"
                        onmouseenter="selectGenericCard('orangePt', ${idx}, '${n.detail.replace(/'/g, "\\'")}')">
                     <span class="point-bullet orange"></span>
@@ -864,19 +863,19 @@ let currentTheme = "a";
                 `).join("")}
               </div>
 
-              <!-- Central Timeline T-Labels (Mounted along central blue line) -->
+              <!-- LAYER 3 FOREGROUND: Central Timeline T-Labels (Mounted along central blue line) -->
               <div class="crossover-time-labels">
-                <span style="left:6%;">T+0</span>
-                <span style="left:26%;">T+6</span>
-                <span style="left:50%; color:var(--accent); font-weight:800; font-size:12.5px;">T+12 (BEP)</span>
+                <span style="left:8%;">T+0</span>
+                <span style="left:30%;">T+6</span>
+                <span style="left:52%; color:var(--accent); font-weight:800; font-size:12.5px;">T+12 (BEP)</span>
                 <span style="left:74%;">T+18</span>
-                <span style="left:94%;">T+24</span>
+                <span style="left:93%;">T+24</span>
               </div>
 
-              <!-- Green Nodes (Positioned BELOW the green curve on left, ABOVE on right) -->
+              <!-- LAYER 3 FOREGROUND: Bottom Green Commercial Milestones (Pinned to Vertical Grid Bottom) -->
               <div class="crossover-node-layer green-layer">
                 ${(slide.greenNodes || []).map((n, idx) => `
-                  <div class="crossover-point-item green-point" style="left:${idx === 0 ? '5%' : idx === 1 ? '24%' : idx === 2 ? '50%' : '70%'}; top:${idx === 0 ? '84%' : idx === 1 ? '66%' : idx === 2 ? '30%' : '8%'};"
+                  <div class="crossover-point-item green-point" style="left:${idx === 0 ? '8%' : idx === 1 ? '30%' : idx === 2 ? '52%' : '74%'}; bottom: 6%;"
                        onclick="selectGenericCard('greenPt', ${idx}, '${n.detail.replace(/'/g, "\\'")}')"
                        onmouseenter="selectGenericCard('greenPt', ${idx}, '${n.detail.replace(/'/g, "\\'")}')">
                     <span class="point-bullet green"></span>
@@ -895,11 +894,11 @@ let currentTheme = "a";
             </div>
 
             <!-- Bottom 4 Financial Milestones Ribbon -->
-            <div class="scurve-fin-ribbon">
-              ${(slide.phases || []).map((p, idx) => `
-                <div class="scurve-fin-pill ${p.finClass || ''} ${idx === 1 ? 'bep-glow' : ''}">
-                  <span class="fin-pill-idx">M${(idx+1)*6}</span>
-                  <span class="fin-pill-text">${p.finBadge}</span>
+            <div class="crossover-fin-ribbon">
+              ${(slide.milestones || []).map((m, idx) => `
+                <div class="crossover-fin-pill ${m.class || ''}">
+                  <span class="fin-pill-idx">T+${idx * 6}M</span>
+                  <span class="fin-pill-text">${m.badge}</span>
                 </div>
               `).join("")}
             </div>
