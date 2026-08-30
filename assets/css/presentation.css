@@ -306,43 +306,62 @@
       justify-content: space-between; box-shadow: 0 12px 36px var(--accent-glow);
     }
     .donut-circle-wrap {
-      display: flex; flex-direction: column; align-items: center; justify-content: center;
-      margin: 4px 0; position: relative;
+      flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center;
+      margin: 8px 0; position: relative; min-height: 0;
     }
-    .donut-svg { width: clamp(180px, 15vw, 220px); height: clamp(180px, 15vw, 220px); transform: rotate(-90deg); }
-    .donut-bg { fill: none; stroke: rgba(255,255,255,0.05); stroke-width: 13; }
+    .donut-svg { width: clamp(230px, 20vw, 290px); height: clamp(230px, 20vw, 290px); transform: rotate(-90deg); }
+    .donut-bg { fill: none; stroke: rgba(255,255,255,0.05); stroke-width: 12; }
     .donut-segment {
-      fill: none; stroke-width: 13; stroke-linecap: round;
+      fill: none; stroke-width: 12; stroke-linecap: round;
       transition: stroke-dasharray 1.2s cubic-bezier(0.16, 1, 0.3, 1);
     }
     .donut-center-text {
       position: absolute; display: flex; flex-direction: column; align-items: center; justify-content: center;
     }
     .donut-center-val {
-      font-family: var(--font-display); font-size: clamp(28px, 2.5vw, 38px);
-      font-weight: 700; color: var(--accent); line-height: 1; margin-bottom: 2px;
+      font-family: var(--font-display); font-size: clamp(32px, 3vw, 44px);
+      font-weight: 700; color: var(--accent); line-height: 1; margin-bottom: 4px;
+      text-shadow: 0 0 20px var(--accent-glow);
     }
     .donut-center-lbl {
-      font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.2em; color: var(--ink-sub); text-transform: uppercase;
+      font-family: var(--font-mono); font-size: 11.5px; letter-spacing: 0.2em; color: var(--ink-sub); text-transform: uppercase;
     }
     .product-spec-grid {
-      display: grid; grid-template-columns: 1fr; gap: 10px;
+      display: grid; grid-template-columns: 1fr; gap: clamp(10px, 1.2vh, 14px);
+      min-height: 0;
     }
     .product-spec-card {
       background: rgba(10, 15, 25, 0.2); border: 1px solid var(--line-subtle);
-      border-radius: var(--card-radius); padding: clamp(12px, 1.8vh, 18px) 20px;
-      display: grid; grid-template-columns: 1.3fr 1fr 1fr 1.1fr; gap: 14px;
-      align-items: center; cursor: pointer; transition: all 0.25s var(--ease);
+      border-radius: var(--card-radius); padding: clamp(12px, 1.6vh, 16px) clamp(16px, 1.6vw, 22px);
+      display: flex; flex-direction: column; justify-content: space-between;
+      cursor: pointer; transition: all 0.25s var(--ease); position: relative;
     }
     .product-spec-card:hover, .product-spec-card.active {
       background: var(--bg-card-hover); border-color: var(--accent);
       transform: translateX(4px); box-shadow: 0 4px 18px var(--accent-glow);
     }
+    .product-spec-top-row {
+      display: grid; grid-template-columns: 1.4fr 1fr 1fr 1.1fr; gap: 14px;
+      align-items: center; width: 100%;
+    }
+    .product-pills-row {
+      display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px;
+    }
+    .product-app-pill {
+      font-family: var(--font-mono); font-size: 11px; font-weight: 600;
+      color: var(--ink); background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--line-subtle); padding: 3px 9px;
+      border-radius: 4px; display: inline-flex; align-items: center; gap: 4px;
+      transition: all 0.2s var(--ease);
+    }
+    .product-spec-card:hover .product-app-pill {
+      border-color: rgba(201, 169, 110, 0.35); background: rgba(255, 255, 255, 0.08);
+    }
     .spec-title-col { display: flex; align-items: center; gap: 10px; }
     .spec-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
-    .spec-name { font-weight: 600; font-size: 14px; color: var(--ink); }
+    .spec-name { font-weight: 600; font-size: 14.5px; color: var(--ink); }
     .spec-pct { font-family: var(--font-mono); font-size: 11.5px; color: var(--ink-sub); }
-    .spec-val-num { font-family: var(--font-mono); font-size: 14px; color: var(--ink); font-weight: 600; }
+    .spec-val-num { font-family: var(--font-mono); font-size: 14.5px; color: var(--ink); font-weight: 600; }
     .spec-val-sub { font-size: 11px; color: var(--ink-sub); }
 
     /* 3. Space Allocation Area Matrix Tiles (Slide 6 & Slide 8) */
@@ -622,23 +641,27 @@
       .card-smart-tooltip { display: none !important; }
     }
 
-    /* Scoped Embedded Bottom Tooltip for Split 2x2 Moat Cards (Slide 04 & 05) */
-    .split-moat-card .card-smart-tooltip {
-      position: absolute; bottom: 10px; left: 12px; right: 12px; top: auto;
+    /* Scoped Embedded Bottom Tooltip for Split 2x2 Moat Cards (Slide 04 & 05) and Product Spec Cards (Slide 07) */
+    .split-moat-card .card-smart-tooltip,
+    .product-spec-card .card-smart-tooltip {
+      position: absolute; bottom: 8px; left: 12px; right: 12px; top: auto;
       width: auto; max-width: none; transform: translateY(6px);
-      background: rgba(8, 12, 20, 0.94);
+      background: rgba(8, 12, 20, 0.96);
       border: 1px dashed var(--line-subtle); border-left: 3px solid var(--accent);
-      border-radius: 6px; padding: 7px 10px;
-      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.6);
-      backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+      border-radius: 6px; padding: 6px 12px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.7);
+      backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
     }
-    .split-moat-card .card-smart-tooltip::after {
+    .split-moat-card .card-smart-tooltip::after,
+    .product-spec-card .card-smart-tooltip::after {
       display: none !important;
     }
-    .split-moat-card .card-smart-tooltip .tooltip-tag {
+    .split-moat-card .card-smart-tooltip .tooltip-tag,
+    .product-spec-card .card-smart-tooltip .tooltip-tag {
       font-size: 8.5px; margin-bottom: 2px;
     }
-    .split-moat-card .card-smart-tooltip .tooltip-text {
+    .split-moat-card .card-smart-tooltip .tooltip-text,
+    .product-spec-card .card-smart-tooltip .tooltip-text {
       font-size: 10.5px; line-height: 1.35; color: var(--ink-sub);
     }
 

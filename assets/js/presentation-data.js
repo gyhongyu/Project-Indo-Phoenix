@@ -435,6 +435,7 @@ function getI18NDeck() {
                   volume: "6,000 m²",
                   asp: "$120 / m²",
                   revYr: "$8.64M",
+                  pills: ["📱 Mobile / Tablet", "⌚ Wearables", "🖥️ Central Touch Panel"],
                   detail: "High-volume basic interconnects for consumer electronics and automotive battery sensing wire replacement. 40% capacity share."
                 },
                 {
@@ -444,6 +445,7 @@ function getI18NDeck() {
                   volume: "7,500 m²",
                   asp: "$170 / m²",
                   revYr: "$15.30M",
+                  pills: ["🔋 EV Battery CCS", "⚡ BMS Power Control", "🚗 Cabin Radar"],
                   detail: "The volume backbone. Primary solution for EV Battery Pack CCS busbar sensing and IATF-16949 automotive wire harnesses. 50% capacity share."
                 },
                 {
@@ -453,6 +455,7 @@ function getI18NDeck() {
                   volume: "1,500 m²",
                   asp: "$270 / m²",
                   revYr: "$4.86M",
+                  pills: ["🛸 Drone Flight Controller", "📡 Phased Array Radar", "🛰️ Satellite Comms"],
                   detail: "High-density interconnects (HDI) for aerospace drones, radar seekers, and medical robotics. Ultra-high margin (50%+ gross margin). 10% share."
                 }
               ]
@@ -1521,30 +1524,33 @@ function getI18NDeck() {
                   name: "單面板 FPC (1L)",
                   pct: "40.0%",
                   volume: "6,000 m²/月",
-                  asp: "$100 / m²",
-                  revMo: "$600,000",
-                  revYr: "$7.20M",
+                  asp: "$120 / m²",
+                  revMo: "$720,000",
+                  revYr: "$8.64M",
                   color: "#38bdf8",
-                  detail: "單層高柔軟度 FPC 軟板。主要應用於車載標準感知器、消費級 LED 背光模組及工控儀表，具備極高性價比與放量速度。"
+                  pills: ["📱 智慧手機 / 平板", "⌚ 穿戴設備", "🖥️ 車載中控觸控"],
+                  detail: "單層高柔軟度 FPC 軟板。主要應用於車載標準感知器、中控觸控螢幕及智慧終端，具備極高性價比與放量速度。"
                 },
                 {
                   name: "雙面板 FPC (2L)",
                   pct: "50.0%",
                   volume: "7,500 m²/月",
-                  asp: "$180 / m²",
-                  revMo: "$1,350,000",
-                  revYr: "$16.20M",
+                  asp: "$170 / m²",
+                  revMo: "$1,275,000",
+                  revYr: "$15.30M",
                   color: "var(--accent)",
-                  detail: "雙面 PTH 貫孔軟板。為產能黃金主力，深度鎖定電動車 (EV) 電池管理系統 CCS 整合模組 (Waaree 儲能專案) 及航太遙測線束。"
+                  pills: ["🔋 EV 動力電池 CCS", "⚡ BMS 電控", "🚗 車載座艙雷達"],
+                  detail: "雙面 PTH 貫孔軟板。為產能黃金主力，深度鎖定電動車 (EV) 電池管理系統 CCS 整合模組 (Waaree 儲能專案) 及車載主線束。"
                 },
                 {
-                  name: "多層板 FPC (3L+)",
+                  name: "多層板 / 剛撓結合 (3L+)",
                   pct: "10.0%",
                   volume: "1,500 m²/月",
-                  asp: "$300 / m²",
-                  revMo: "$450,000",
-                  revYr: "$5.40M",
+                  asp: "$270 / m²",
+                  revMo: "$405,000",
+                  revYr: "$4.86M",
                   color: "#a855f7",
+                  pills: ["🛸 軍用無人機飛控", "📡 相控陣雷達", "🛰️ 航太衛星通信"],
                   detail: "多層高密度互連 (HDI) 軟硬結合板。專供軍工主動相控陣雷達信號處理、飛彈導引頭以及醫療高清內視鏡等頂級戰略領域。"
                 }
               ]

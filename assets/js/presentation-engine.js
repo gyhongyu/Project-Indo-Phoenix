@@ -154,25 +154,35 @@ let currentTheme = "a";
                      id="prodCard_${idx}" 
                      onclick="selectGenericCard('prodCard', ${idx}, '${p.detail.replace(/'/g, "\\'")}')"
                      onmouseenter="selectGenericCard('prodCard', ${idx}, '${p.detail.replace(/'/g, "\\'")}')">
-                  <div class="spec-title-col">
-                    <div class="spec-dot" style="background:${p.color}; box-shadow:0 0 8px ${p.color};"></div>
+                  <div class="product-spec-top-row">
+                    <div class="spec-title-col">
+                      <div class="spec-dot" style="background:${p.color}; box-shadow:0 0 8px ${p.color};"></div>
+                      <div>
+                        <div class="spec-name">${p.name}</div>
+                        <div class="spec-pct">${p.pct} ${currentLang === 'zh' ? '產能佔比' : 'Capacity Share'}</div>
+                      </div>
+                    </div>
                     <div>
-                      <div class="spec-name">${p.name}</div>
-                      <div class="spec-pct">${p.pct} ${currentLang === 'zh' ? '產能佔比' : 'Capacity Share'}</div>
+                      <div class="spec-val-num">${p.volume}</div>
+                      <div class="spec-val-sub">${currentLang === 'zh' ? '月產量' : 'Monthly Volume'}</div>
+                    </div>
+                    <div>
+                      <div class="spec-val-num" style="color:var(--accent);">${p.asp}</div>
+                      <div class="spec-val-sub">${currentLang === 'zh' ? '基準單價 ASP' : 'Benchmark ASP'}</div>
+                    </div>
+                    <div>
+                      <div class="spec-val-num" style="color:var(--ink);">${p.revYr}</div>
+                      <div class="spec-val-sub">${currentLang === 'zh' ? '年化預估營收' : 'Annual Run-Rate'}</div>
                     </div>
                   </div>
-                  <div>
-                    <div class="spec-val-num">${p.volume}</div>
-                    <div class="spec-val-sub">${currentLang === 'zh' ? '月產量' : 'Monthly Volume'}</div>
-                  </div>
-                  <div>
-                    <div class="spec-val-num" style="color:var(--accent);">${p.asp}</div>
-                    <div class="spec-val-sub">${currentLang === 'zh' ? '基準單價 ASP' : 'Benchmark ASP'}</div>
-                  </div>
-                  <div>
-                    <div class="spec-val-num" style="color:var(--ink);">${p.revYr}</div>
-                    <div class="spec-val-sub">${currentLang === 'zh' ? '年化預估營收' : 'Annual Run-Rate'}</div>
-                  </div>
+
+                  ${p.pills ? `
+                    <div class="product-pills-row">
+                      ${p.pills.map(pill => `
+                        <span class="product-app-pill">${pill}</span>
+                      `).join("")}
+                    </div>
+                  ` : ''}
 
                   <div class="card-smart-tooltip">
                     <div class="tooltip-tag">💎 ${currentLang === 'zh' ? '規格與技術依據' : 'Specification Insight'}</div>
