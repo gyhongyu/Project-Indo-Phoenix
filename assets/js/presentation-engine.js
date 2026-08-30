@@ -722,9 +722,6 @@ let currentTheme = "a";
 
                   <div class="bep-val-col">
                     <div class="space-row-sublbl">${currentLang === 'zh' ? '單月預估' : 'Monthly'}</div>
-                    <div class="bep-val-num ${idx === 2 ? 'accent' : ''}">${m.monthly}</div>
-                  </div>
-
                   <div class="bep-val-col">
                     <div class="space-row-sublbl">${currentLang === 'zh' ? '年度預估' : 'Annual'}</div>
                     <div class="bep-val-num ${idx === 2 ? 'accent' : ''}">${m.annual}</div>
@@ -753,136 +750,143 @@ let currentTheme = "a";
           </div>
         `;
       }
-      // 6. Visual S-Curve Dual-Track Stream Pipeline (Slide 12 Overhaul)
+      // 6. Authentic Data-Driven Scissors Crossover Financial Horizon (Slide 12)
       else if (slide.type === "flow-pipeline") {
+        const ls = slide.liveStats || {};
+        
         html += `
-          <div class="scurve-pipeline-container">
+          <div class="crossover-chart-container">
             
-            <!-- SVG Glowing Dual-Track S-Curve Stream Canvas -->
-            <div class="scurve-canvas-wrap">
-              <svg class="scurve-svg" viewBox="0 0 1000 320" preserveAspectRatio="none">
+            <!-- Real-Time Top Financial KPI Ribbon -->
+            <div class="space-kpi-ribbon" style="margin-bottom:6px;">
+              <div class="space-kpi-block">
+                <span class="space-kpi-lbl">${currentLang === 'zh' ? '初期總建廠資本開銷' : 'Initial Plant CapEx'}</span>
+                <span class="space-kpi-val" style="color:#f97316;">${ls.totCapEx || '$23.0M'}</span>
+              </div>
+              <div class="space-kpi-divider"></div>
+              <div class="space-kpi-block">
+                <span class="space-kpi-lbl">${currentLang === 'zh' ? '第12個月損益兩平營收門檻' : 'M12 BEP Monthly Revenue'}</span>
+                <span class="space-kpi-val" style="color:var(--accent);">${ls.bepRevMo || '$1.22M'}/mo</span>
+              </div>
+              <div class="space-kpi-divider"></div>
+              <div class="space-kpi-block">
+                <span class="space-kpi-lbl">${currentLang === 'zh' ? '第24個月滿載單月產值' : 'M24 Full Capacity Run-Rate'}</span>
+                <span class="space-kpi-val" style="color:#22c55e;">${ls.fullRevMo || '$2.40M'}/mo</span>
+              </div>
+              <div class="space-kpi-divider"></div>
+              <div class="space-kpi-block">
+                <span class="space-kpi-lbl">${currentLang === 'zh' ? '滿載年化營業利潤 (EBIT)' : 'Full Scale Annual EBIT'}</span>
+                <span class="space-kpi-val" style="color:#34d399;">$6.66M (23.1%)</span>
+              </div>
+            </div>
+
+            <!-- Dual-Curve Interactive Canvas -->
+            <div class="crossover-board-wrap">
+              
+              <!-- SVG Dual Curves & Central Baseline -->
+              <svg class="crossover-svg" viewBox="0 0 1000 350" preserveAspectRatio="none">
                 <defs>
-                  <!-- Cyan Commercial Stream Gradient -->
-                  <linearGradient id="commGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-                    <stop offset="0%" stop-color="#38bdf8" stop-opacity="0.2" />
-                    <stop offset="25%" stop-color="#38bdf8" stop-opacity="0.9" />
-                    <stop offset="100%" stop-color="#06b6d4" stop-opacity="0.95" />
+                  <!-- Orange Expenditure Gradient -->
+                  <linearGradient id="orangeCurveGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                    <stop offset="0%" stop-color="#f97316" stop-opacity="1" />
+                    <stop offset="35%" stop-color="#fb923c" stop-opacity="0.9" />
+                    <stop offset="60%" stop-color="#fdba74" stop-opacity="0.8" />
+                    <stop offset="100%" stop-color="#ea580c" stop-opacity="0.7" />
                   </linearGradient>
-                  <!-- Pink/Magenta Factory Stream Gradient -->
-                  <linearGradient id="infraGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-                    <stop offset="0%" stop-color="#ec4899" stop-opacity="0.95" />
-                    <stop offset="35%" stop-color="#d946ef" stop-opacity="0.8" />
-                    <stop offset="60%" stop-color="#a855f7" stop-opacity="0.9" />
-                    <stop offset="100%" stop-color="#c084fc" stop-opacity="0.95" />
+                  <!-- Green Revenue Gradient -->
+                  <linearGradient id="greenCurveGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                    <stop offset="0%" stop-color="#22c55e" stop-opacity="0.6" />
+                    <stop offset="40%" stop-color="#4ade80" stop-opacity="0.85" />
+                    <stop offset="70%" stop-color="#86efac" stop-opacity="0.95" />
+                    <stop offset="100%" stop-color="#16a34a" stop-opacity="1" />
                   </linearGradient>
-                  <!-- Central Axis Glow Filter -->
-                  <filter id="glowCyan" x="-20%" y="-20%" width="140%" height="140%">
-                    <feGaussianBlur stdDeviation="4" result="blur" />
+                  <filter id="crossoverGlow" x="-20%" y="-20%" width="140%" height="140%">
+                    <feGaussianBlur stdDeviation="3" result="blur" />
                     <feComposite in="SourceGraphic" in2="blur" operator="over" />
                   </filter>
-                  <filter id="glowPink" x="-20%" y="-20%" width="140%" height="140%">
-                    <feGaussianBlur stdDeviation="4" result="blur" />
-                    <feComposite in="SourceGraphic" in2="blur" operator="over" />
-                  </filter>
+                  <!-- Marker Arrow for Timeline -->
+                  <marker id="arrowBlue" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                    <path d="M 0 1 L 10 5 L 0 9 z" fill="#3b82f6" />
+                  </marker>
                 </defs>
 
-                <!-- Central Baseline Axis -->
-                <line x1="40" y1="160" x2="960" y2="160" stroke="rgba(255,255,255,0.15)" stroke-width="2" stroke-dasharray="4 4" />
+                <!-- Vertical Grid Alignment Lines -->
+                <line x1="60" y1="30" x2="60" y2="310" stroke="rgba(255,255,255,0.06)" stroke-width="1" stroke-dasharray="3 3" />
+                <line x1="280" y1="30" x2="280" y2="310" stroke="rgba(255,255,255,0.06)" stroke-width="1" stroke-dasharray="3 3" />
+                <line x1="500" y1="30" x2="500" y2="310" stroke="rgba(201,169,110,0.15)" stroke-width="1.5" stroke-dasharray="4 3" />
+                <line x1="720" y1="30" x2="720" y2="310" stroke="rgba(255,255,255,0.06)" stroke-width="1" stroke-dasharray="3 3" />
+                <line x1="940" y1="30" x2="940" y2="310" stroke="rgba(255,255,255,0.06)" stroke-width="1" stroke-dasharray="3 3" />
 
-                <!-- Upper Cyan Commercial Track Ribbon S-Curve (Starts at Axis T+0, bends UP into top branch) -->
-                <path d="M 40,160 C 140,160 160,55 270,55 L 940,55" 
-                      fill="none" stroke="url(#commGrad)" stroke-width="8" stroke-linecap="round" filter="url(#glowCyan)" />
-                <path d="M 40,160 C 140,160 160,55 270,55 L 940,55" 
-                      fill="none" stroke="rgba(255,255,255,0.8)" stroke-width="2" stroke-linecap="round" />
+                <!-- Central Solid Blue Horizontal Axis Line with Arrow (y=175) -->
+                <line x1="30" y1="175" x2="970" y2="175" stroke="#2563eb" stroke-width="4.5" marker-end="url(#arrowBlue)" />
 
-                <!-- Lower Pink Factory Track Ribbon S-Curve (Starts at Axis T+6M, bends DOWN into bottom branch) -->
-                <path d="M 40,160 L 270,160 C 380,160 410,265 520,265 L 940,265" 
-                      fill="none" stroke="url(#infraGrad)" stroke-width="8" stroke-linecap="round" filter="url(#glowPink)" />
-                <path d="M 40,160 L 270,160 C 380,160 410,265 520,265 L 940,265" 
-                      fill="none" stroke="rgba(255,255,255,0.8)" stroke-width="2" stroke-linecap="round" />
+                <!-- Orange Falling Expenditure Curve (From Top-Left y=55 down to Bottom-Right y=295) -->
+                <path d="M 60,55 C 160,85 240,135 280,150 C 360,185 430,210 500,225 C 620,250 780,285 940,295" 
+                      fill="none" stroke="url(#orangeCurveGrad)" stroke-width="4" filter="url(#crossoverGlow)" />
 
-                <!-- Connecting Vertical Guideline at T+6M & T+12M & T+18M -->
-                <line x1="270" y1="55" x2="270" y2="160" stroke="rgba(56,189,248,0.4)" stroke-width="1.5" stroke-dasharray="3 3" />
-                <line x1="520" y1="55" x2="520" y2="265" stroke="rgba(201,169,110,0.3)" stroke-width="1.5" stroke-dasharray="3 3" />
-                <line x1="740" y1="55" x2="740" y2="265" stroke="rgba(201,169,110,0.3)" stroke-width="1.5" stroke-dasharray="3 3" />
+                <!-- Green Rising Revenue S-Curve (From Bottom-Left y=295 up through Crossover at (500,175) to Top-Right y=55) -->
+                <path d="M 60,295 C 160,285 230,255 280,230 C 370,185 440,175 500,175 C 600,145 710,110 720,110 C 800,95 870,70 940,55" 
+                      fill="none" stroke="url(#greenCurveGrad)" stroke-width="4" filter="url(#crossoverGlow)" />
 
-                <!-- 4 Major Central Axis Time Node Bulbs -->
-                <g class="axis-node" transform="translate(40, 160)">
-                  <circle r="8" fill="#0f172a" stroke="#38bdf8" stroke-width="3" />
-                  <circle r="3" fill="#fff" />
-                  <text y="24" text-anchor="middle" fill="#94a3b8" font-family="monospace" font-size="11" font-weight="700">T+0</text>
-                </g>
-                <g class="axis-node" transform="translate(270, 160)">
-                  <circle r="9" fill="#0f172a" stroke="#38bdf8" stroke-width="3" />
-                  <circle r="4" fill="#38bdf8" />
-                  <text y="24" text-anchor="middle" fill="#38bdf8" font-family="monospace" font-size="11" font-weight="700">T+6M</text>
-                </g>
-                <g class="axis-node" transform="translate(520, 160)">
-                  <circle r="10" fill="#0f172a" stroke="#ec4899" stroke-width="3.5" />
-                  <circle r="4" fill="#ec4899" />
-                  <text y="24" text-anchor="middle" fill="#ec4899" font-family="monospace" font-size="11" font-weight="700">T+12M</text>
-                </g>
-                <g class="axis-node" transform="translate(740, 160)">
-                  <circle r="9" fill="#0f172a" stroke="#a855f7" stroke-width="3" />
-                  <circle r="4" fill="#a855f7" />
-                  <text y="24" text-anchor="middle" fill="#a855f7" font-family="monospace" font-size="11" font-weight="700">T+18M</text>
-                </g>
-                <g class="axis-node" transform="translate(940, 160)">
-                  <circle r="11" fill="#0f172a" stroke="var(--accent)" stroke-width="4" />
-                  <circle r="5" fill="var(--accent)" />
-                  <text y="24" text-anchor="middle" fill="var(--accent)" font-family="monospace" font-size="12" font-weight="700">T+24M</text>
-                </g>
+                <!-- Golden Breakeven Crossover Node Pulse at (500, 175) -->
+                <circle cx="500" cy="175" r="16" fill="none" stroke="var(--accent)" stroke-width="2" class="pulse-ring" />
+                <circle cx="500" cy="175" r="8" fill="#0f172a" stroke="var(--accent)" stroke-width="3" />
+                <circle cx="500" cy="175" r="3.5" fill="#fff" />
               </svg>
 
-              <!-- Track Identity Badges -->
-              <div class="track-flow-badge comm-badge">
-                <span>🚢 ${currentLang === 'zh' ? '業務線（以貿促工·代銷先行）' : 'Commercial Track (Trade Bridge)'}</span>
+              <!-- Main Curve Title Badges -->
+              <div class="crossover-title-badge orange-badge">
+                ${slide.orangeLabel || '建廠(支出)'}
               </div>
-              <div class="track-flow-badge infra-badge">
-                <span>🏭 ${currentLang === 'zh' ? '工廠線（基建驗機·在地落盤）' : 'Engineering Track (Gov & Tech Scope)'}</span>
+              <div class="crossover-title-badge green-badge">
+                ${slide.greenLabel || '貿易(收入)'}
+              </div>
+              <div class="timeline-legend-tag">
+                ${slide.timelineLabel || '時間線 + 損益平衡線'}
               </div>
 
-              <!-- Top Row: 4 Commercial Phase Interactive Pods (Positioned on top curve) -->
-              <div class="scurve-pods-grid top-row">
-                ${(slide.phases || []).map((p, idx) => `
-                  <div class="scurve-pod-item comm-pod gs-anim-flow"
-                       onclick="selectGenericCard('scurveComm', ${idx}, '${p.commDetail.replace(/'/g, "\\'")}')"
-                       onmouseenter="selectGenericCard('scurveComm', ${idx}, '${p.commDetail.replace(/'/g, "\\'")}')">
-                    
-                    <div class="pod-header">
-                      <span class="pod-period">${p.period}</span>
-                      <span class="pod-cap">${p.capUtil}</span>
-                    </div>
-                    <div class="pod-title">${p.commTitle}</div>
-                    <div class="pod-sub">${p.commSub}</div>
+              <!-- Orange Nodes (Top region: 4 interactive points) -->
+              <div class="crossover-node-layer orange-layer">
+                ${(slide.orangeNodes || []).map((n, idx) => `
+                  <div class="crossover-point-item orange-point" style="left:${idx === 0 ? '6%' : idx === 1 ? '28%' : idx === 2 ? '50%' : '72%'}; top:${idx === 0 ? '14%' : idx === 1 ? '38%' : idx === 2 ? '58%' : '78%'};"
+                       onclick="selectGenericCard('orangePt', ${idx}, '${n.detail.replace(/'/g, "\\'")}')"
+                       onmouseenter="selectGenericCard('orangePt', ${idx}, '${n.detail.replace(/'/g, "\\'")}')">
+                    <span class="point-bullet orange"></span>
+                    <span class="point-text">${n.title}</span>
+                    <span class="point-metric-pill orange">${n.metric}</span>
 
-                    <!-- Smart Hover Tooltip -->
+                    <!-- Smart Hover Popover -->
                     <div class="card-smart-tooltip">
-                      <div class="tooltip-tag">🚢 ${currentLang === 'zh' ? '業務線推進細節' : 'Commercial Strategy'}</div>
-                      <div class="tooltip-text">${p.commDetail}</div>
+                      <div class="tooltip-tag" style="color:#f97316;">🏗️ ${currentLang === 'zh' ? '建廠與工程支出階段' : 'Plant CapEx Milestone'}</div>
+                      <div class="tooltip-text">${n.detail}</div>
                     </div>
                   </div>
                 `).join("")}
               </div>
 
-              <!-- Bottom Row: 4 Engineering Phase Interactive Pods (Positioned on bottom curve) -->
-              <div class="scurve-pods-grid bottom-row">
-                ${(slide.phases || []).map((p, idx) => `
-                  <div class="scurve-pod-item infra-pod gs-anim-flow"
-                       onclick="selectGenericCard('scurveInfra', ${idx}, '${p.infraDetail.replace(/'/g, "\\'")}')"
-                       onmouseenter="selectGenericCard('scurveInfra', ${idx}, '${p.infraDetail.replace(/'/g, "\\'")}')">
-                    
-                    <div class="pod-header">
-                      <span class="pod-period infra">${p.num}</span>
-                      <span class="pod-infra-tag">${currentLang === 'zh' ? '工廠工程' : 'Engineering'}</span>
-                    </div>
-                    <div class="pod-title">${p.infraTitle}</div>
-                    <div class="pod-sub">${p.infraSub}</div>
+              <!-- Central Timeline T-Labels (Mounted along central blue line) -->
+              <div class="crossover-time-labels">
+                <span style="left:6%;">T+0</span>
+                <span style="left:28%;">T+6</span>
+                <span style="left:50%; color:var(--accent); font-weight:800; font-size:12.5px;">T+12 (BEP)</span>
+                <span style="left:72%;">T+18</span>
+                <span style="left:94%;">T+24</span>
+              </div>
 
-                    <!-- Smart Hover Tooltip -->
+              <!-- Green Nodes (Bottom region: 4 interactive points) -->
+              <div class="crossover-node-layer green-layer">
+                ${(slide.greenNodes || []).map((n, idx) => `
+                  <div class="crossover-point-item green-point" style="left:${idx === 0 ? '6%' : idx === 1 ? '28%' : idx === 2 ? '50%' : '72%'}; top:${idx === 0 ? '78%' : idx === 1 ? '60%' : idx === 2 ? '44%' : '20%'};"
+                       onclick="selectGenericCard('greenPt', ${idx}, '${n.detail.replace(/'/g, "\\'")}')"
+                       onmouseenter="selectGenericCard('greenPt', ${idx}, '${n.detail.replace(/'/g, "\\'")}')">
+                    <span class="point-bullet green"></span>
+                    <span class="point-text">${n.title}</span>
+                    <span class="point-metric-pill green">${n.metric}</span>
+
+                    <!-- Smart Hover Popover -->
                     <div class="card-smart-tooltip">
-                      <div class="tooltip-tag">🏭 ${currentLang === 'zh' ? '工廠線權責與工程細節' : 'Engineering Details'}</div>
-                      <div class="tooltip-text">${p.infraDetail}</div>
+                      <div class="tooltip-tag" style="color:#22c55e;">📈 ${currentLang === 'zh' ? '業務與營收放量階段' : 'Revenue & Sales Milestone'}</div>
+                      <div class="tooltip-text">${n.detail}</div>
                     </div>
                   </div>
                 `).join("")}

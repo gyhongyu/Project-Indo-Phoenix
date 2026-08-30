@@ -30,7 +30,13 @@ window.IPX_DATA = {
     payback: 4.2,               // years with SPECS subsidy (manual input)
     paybackRaw: 5.2,            // years without subsidy (manual input)
     factoryArea: 13000,         // m² total layout (D20)
-    cleanroomClass: "10K"       // Class 10,000 yellow-light exposure zone
+    cleanroomClass: "10K",      // Class 10,000 yellow-light exposure zone
+    // 24-Month Stage Sales Model (Dynamic SSOT for Slide 12)
+    stageSalesM0: 250000,       // T+0 Trade Bridge initial monthly run-rate ($0.25M)
+    stageSalesM6: 750000,       // T+6M Vendor codes & NPI sampling monthly revenue ($0.75M)
+    stageSalesM12: 1218543,     // T+12M 50.8% BEP crossover point ($1.22M)
+    stageSalesM18: 2040000,     // T+18M Automotive CCS scale 85% capacity ($2.04M)
+    stageSalesM24: 2400000      // T+24M Full scale 100% capacity ($2.40M/mo -> $28.8M/yr)
   }
 };
 
