@@ -1483,6 +1483,8 @@ let currentTheme = "a";
         `;
       }
 
+      const safePhone = phone ? (phone.startsWith("+") ? `'${phone}` : phone) : "";
+
       const payload = {
         action: "append",
         sheet_name: "INVESTOR_LEADS",
@@ -1490,7 +1492,7 @@ let currentTheme = "a";
         "Full Name": name,
         "Institution": org,
         "Corporate Email": email,
-        "Phone": phone,
+        "Phone": safePhone,
         "Message": msg,
         "Source": "Pitch Deck Slide 13",
         // Bilingual fallback keys for flexible header mapping
@@ -1498,7 +1500,8 @@ let currentTheme = "a";
         "姓名": name,
         "機構/基金": org,
         "商務郵箱": email,
-        "電話": phone,
+        "電話/WhatsApp": safePhone,
+        "電話": safePhone,
         "合作意向": msg,
         "來源": "Project Indo-Phoenix Deck"
       };
