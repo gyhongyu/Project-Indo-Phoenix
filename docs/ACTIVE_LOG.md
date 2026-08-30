@@ -5,6 +5,16 @@
 
 ---
 
+### [2026-08-30] [presentation] 重構：presentation.html 模組化解耦（3,500+ 行拆分為 css / data / engine 三大資產）
+- **類型**: `REFACTOR`
+- **代碼錨點**: `presentation.html` (L1~L97), `assets/css/presentation.css`, `assets/js/presentation-data.js`, `assets/js/presentation-engine.js`
+- **核心事實 / 決策理由**:
+  - 原 presentation.html 包含 3,500+ 行混雜代碼，導致 AI 代理人讀寫上下文消耗過大且易誤傷其他頁面。
+  - 將 43KB 專屬 CSS 抽出為 `presentation.css`，87KB 簡報結構數據抽出為 `presentation-data.js`，41KB 渲染與 GSAP 動畫引擎抽出為 `presentation-engine.js`。
+  - 外殼 presentation.html 縮減至 97 行，完全保留 Template A/B/C 主題繼承、中英文切換及 SSOT 數據穿透。
+- **驗證**: Node.js 語法校驗零報錯；本地雙擊與各模板跳轉 Pitch Deck 翻頁與動畫全數驗收正常。
+- **狀態**: `已驗收通過`
+
 ### [2026-08-26] [fx] 熱修：模板 A 煙尾/煙泡「載入後不動、切窗復活」——主迴圈缺少初始啟動呼叫
 - **類型**: `BUGFIX`
 - **代碼錨點**: `assets/js/fx.js` 檔尾（L220 新增 `requestAnimationFrame(loop)`）

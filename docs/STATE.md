@@ -58,10 +58,10 @@ Project Indo-Phoenix/
 ├── template-b.html         ← 模板 B: 航太 HUD 風 (MISSION CONTROL) — data-template="b"
 ├── template-c.html         ← 模板 C: 全息點雲科幻風 (HOLOGRAM) — data-template="c"
 ├── assets/
-│   ├── css/                ← base.css (含 nav 滾動加深/游標主題/#fx-canvas), template-a/b/c.css
+│   ├── css/                ← base.css (含 nav/游標/共用樣式), template-a/b/c.css, presentation.css (簡報專屬)
 │   └── js/                 ← data.js (備援快照+設定), content-engine.js (線上SSOT引擎),
-│                              app.js (UI引擎: cursor/smoothscroll/nav), scene-a/b/c.js (3D場景),
-│                              fx.js (A煙霧層), fx-core.js (B/C共用FX核心), fx-b.js / fx-c.js (覆蓋層)
+│                              app.js (UI引擎), scene-a/b/c.js (3D場景), fx.js (A煙霧), fx-core.js (B/C共用),
+│                              presentation-data.js (簡報數據結構), presentation-engine.js (簡報渲染與GSAP引擎)
 ├── _tools/check-shader.js  ← GLSL 靜態檢查 (A FRAG + C VERT/FRAG)
 ├── docs/                   ← DMC 研發知識庫治理中心
 │   ├── STATE.md            ← [本檔] 架構唯一真源 (≤200行)
