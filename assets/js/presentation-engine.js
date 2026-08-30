@@ -125,38 +125,44 @@ let currentTheme = "a";
           <div class="product-mix-grid">
             <!-- Left: Donut Breakdown Hero Card -->
             <div class="donut-hero-card gs-anim-card">
-              <div>
-                <div class="slide-tag" style="font-size:10px; margin-bottom:6px;">PRODUCT CAPACITY MIX</div>
-                <div class="donut-circle-wrap">
-                  <svg class="donut-svg" viewBox="0 0 100 100">
-                    <circle class="donut-bg" cx="50" cy="50" r="38"></circle>
-                    <!-- 1L: 40% (offset 0), 2L: 50% (offset 40), 3L+: 10% (offset 90) -->
-                    <circle class="donut-segment" cx="50" cy="50" r="38" stroke="#38bdf8" stroke-dasharray="95.5 238.7" stroke-dashoffset="0"></circle>
-                    <circle class="donut-segment" cx="50" cy="50" r="38" stroke="var(--accent)" stroke-dasharray="119.4 238.7" stroke-dashoffset="-95.5"></circle>
-                    <circle class="donut-segment" cx="50" cy="50" r="38" stroke="#a855f7" stroke-dasharray="23.9 238.7" stroke-dashoffset="-214.9"></circle>
-                  </svg>
-                  <div class="donut-center-text">
-                    <div class="donut-center-val count-target" data-target="${slide.totalVolume}">0</div>
-                    <div class="donut-center-lbl">MONTHLY M²</div>
-                  </div>
+              <div class="donut-card-header">
+                <div class="slide-tag" style="font-size:10px; margin:0;">PRODUCT CAPACITY MIX</div>
+                <div style="font-family:var(--font-mono); font-size:11px; color:var(--ink-sub);">
+                  ${currentLang === 'zh' ? '加權均價' : 'Weighted ASP'}: <strong style="color:var(--accent);">${slide.weightedPrice}</strong>
                 </div>
               </div>
-              <div style="border-top:1px solid rgba(255,255,255,0.08); padding-top:12px; display:flex; justify-content:space-between;">
-                <span style="font-family:var(--font-mono); font-size:11px; color:var(--ink-sub);">${currentLang === 'zh' ? '加權均價' : 'Weighted ASP'}: <strong style="color:var(--accent);">${slide.weightedPrice}</strong></span>
-                <span style="font-family:var(--font-mono); font-size:11px; color:var(--ink-sub);">${currentLang === 'zh' ? '年營收' : 'Annual Run-Rate'}: <strong style="color:var(--ink);">${slide.annualRunRate}</strong></span>
+
+              <div class="donut-circle-wrap">
+                <svg class="donut-svg" viewBox="0 0 100 100">
+                  <circle class="donut-bg" cx="50" cy="50" r="42"></circle>
+                  <!-- 1L: 40% (offset 0), 2L: 50% (offset 40), 3L+: 10% (offset 90), Perimeter = 2 * PI * 42 = 263.89 -->
+                  <circle class="donut-segment" id="donutSeg_0" cx="50" cy="50" r="42" stroke="#38bdf8" stroke-dasharray="105.5 263.9" stroke-dashoffset="0"></circle>
+                  <circle class="donut-segment" id="donutSeg_1" cx="50" cy="50" r="42" stroke="var(--accent)" stroke-dasharray="131.9 263.9" stroke-dashoffset="-105.5"></circle>
+                  <circle class="donut-segment" id="donutSeg_2" cx="50" cy="50" r="42" stroke="#a855f7" stroke-dasharray="26.4 263.9" stroke-dashoffset="-237.4"></circle>
+                </svg>
+                <div class="donut-center-text">
+                  <div class="donut-center-val count-target" data-target="${slide.totalVolume}">0</div>
+                  <div class="donut-center-lbl">MONTHLY M²</div>
+                </div>
+              </div>
+
+              <!-- Interactive Dynamic Detail Dock (Left Bottom) -->
+              <div class="donut-insight-dock" id="donutInsightDock">
+                <div class="dock-tag" id="donutDockTag">💎 ${slide.products[1].name}</div>
+                <div class="dock-desc" id="donutDockDesc">${slide.products[1].detail}</div>
               </div>
             </div>
 
-            <!-- Right: 3 Interactive Product Specification Tiles -->
+            <!-- Right: 3 Interactive Product Specification Tiles (Clean, Zero-Obtrusive Tooltip) -->
             <div class="product-spec-grid">
               ${slide.products.map((p, idx) => `
                 <div class="product-spec-card gs-anim-card ${idx === 1 ? 'active' : ''}" 
                      id="prodCard_${idx}" 
-                     onclick="selectGenericCard('prodCard', ${idx}, '${p.detail.replace(/'/g, "\\'")}')"
-                     onmouseenter="selectGenericCard('prodCard', ${idx}, '${p.detail.replace(/'/g, "\\'")}')">
+                     onclick="highlightProductMix(${idx}, '${p.name.replace(/'/g, "\\'")}', '${p.detail.replace(/'/g, "\\'")}')"
+                     onmouseenter="highlightProductMix(${idx}, '${p.name.replace(/'/g, "\\'")}', '${p.detail.replace(/'/g, "\\'")}')">
                   <div class="product-spec-top-row">
                     <div class="spec-title-col">
-                      <div class="spec-dot" style="background:${p.color}; box-shadow:0 0 8px ${p.color};"></div>
+                      <div class="spec-dot" style="background:${p.color}; box-shadow:0 0 10px ${p.color};"></div>
                       <div>
                         <div class="spec-name">${p.name}</div>
                         <div class="spec-pct">${p.pct} ${currentLang === 'zh' ? '產能佔比' : 'Capacity Share'}</div>
@@ -183,11 +189,6 @@ let currentTheme = "a";
                       `).join("")}
                     </div>
                   ` : ''}
-
-                  <div class="card-smart-tooltip">
-                    <div class="tooltip-tag">💎 ${currentLang === 'zh' ? '規格與技術依據' : 'Specification Insight'}</div>
-                    <div class="tooltip-text">${p.detail}</div>
-                  </div>
                 </div>
               `).join("")}
             </div>
@@ -827,6 +828,32 @@ let currentTheme = "a";
     /* ═══════════════════════════════════════════════════════════════
        FINANCIAL COCKPIT & SENSITIVITY INTERACTION CONTROLLER
        ═══════════════════════════════════════════════════════════════ */
+    function highlightProductMix(idx, name, detailText) {
+      document.querySelectorAll("[id^='prodCard_']").forEach((el, i) => {
+        el.classList.toggle("active", i === idx);
+      });
+
+      // Update Left Donut Segment Glowing Focus
+      [0, 1, 2].forEach(i => {
+        const seg = document.getElementById(`donutSeg_${i}`);
+        if (seg) {
+          if (i === idx) {
+            seg.style.filter = "drop-shadow(0 0 8px currentColor) brightness(1.3)";
+            seg.style.strokeWidth = "15";
+          } else {
+            seg.style.filter = "none";
+            seg.style.strokeWidth = "12";
+          }
+        }
+      });
+
+      // Update Left Bottom Insight Dock
+      const tagEl = document.getElementById("donutDockTag");
+      const descEl = document.getElementById("donutDockDesc");
+      if (tagEl) tagEl.textContent = `💎 ${name}`;
+      if (descEl) descEl.textContent = detailText;
+    }
+
     function selectGenericCard(prefix, idx, detailText) {
       document.querySelectorAll(`[id^='${prefix}_']`).forEach((el, i) => {
         el.classList.toggle("active", i === idx);

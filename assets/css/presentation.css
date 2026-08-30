@@ -302,29 +302,52 @@
     .donut-hero-card {
       background: linear-gradient(135deg, rgba(255,255,255,0.03) 0%, rgba(0,0,0,0.4) 100%);
       border: 1px solid var(--accent); border-radius: var(--card-radius);
-      padding: clamp(16px, 2vh, 24px) 24px; display: flex; flex-direction: column;
-      justify-content: space-between; box-shadow: 0 12px 36px var(--accent-glow);
+      padding: clamp(14px, 1.8vh, 20px) clamp(16px, 1.5vw, 22px);
+      display: flex; flex-direction: column; justify-content: space-between;
+      box-shadow: 0 12px 36px var(--accent-glow);
+    }
+    .donut-card-header {
+      display: flex; justify-content: space-between; align-items: center; width: 100%;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06); padding-bottom: 8px;
     }
     .donut-circle-wrap {
       flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center;
-      margin: 8px 0; position: relative; min-height: 0;
+      margin: 6px 0; position: relative; min-height: 0;
     }
-    .donut-svg { width: clamp(230px, 20vw, 290px); height: clamp(230px, 20vw, 290px); transform: rotate(-90deg); }
-    .donut-bg { fill: none; stroke: rgba(255,255,255,0.05); stroke-width: 12; }
+    .donut-svg {
+      width: 100%; height: 100%; max-width: 320px; max-height: 320px;
+      transform: rotate(-90deg); filter: drop-shadow(0 8px 24px rgba(0, 0, 0, 0.5));
+    }
+    .donut-bg { fill: none; stroke: rgba(255,255,255,0.05); stroke-width: 11; }
     .donut-segment {
-      fill: none; stroke-width: 12; stroke-linecap: round;
-      transition: stroke-dasharray 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+      fill: none; stroke-width: 11; stroke-linecap: round;
+      transition: stroke-dasharray 1.2s cubic-bezier(0.16, 1, 0.3, 1), stroke-width 0.3s ease, filter 0.3s ease;
     }
     .donut-center-text {
       position: absolute; display: flex; flex-direction: column; align-items: center; justify-content: center;
+      pointer-events: none;
     }
     .donut-center-val {
-      font-family: var(--font-display); font-size: clamp(32px, 3vw, 44px);
+      font-family: var(--font-display); font-size: clamp(34px, 3.2vw, 48px);
       font-weight: 700; color: var(--accent); line-height: 1; margin-bottom: 4px;
-      text-shadow: 0 0 20px var(--accent-glow);
+      text-shadow: 0 0 24px var(--accent-glow);
     }
     .donut-center-lbl {
       font-family: var(--font-mono); font-size: 11.5px; letter-spacing: 0.2em; color: var(--ink-sub); text-transform: uppercase;
+    }
+
+    .donut-insight-dock {
+      background: rgba(8, 12, 20, 0.85); border: 1px dashed var(--line-subtle);
+      border-left: 3px solid var(--accent); border-radius: 6px;
+      padding: 8px 12px; margin-top: 4px; transition: all 0.3s var(--ease);
+      min-height: 56px; display: flex; flex-direction: column; justify-content: center;
+    }
+    .dock-tag {
+      font-family: var(--font-mono); font-size: 9.5px; color: var(--accent);
+      letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 3px; font-weight: 600;
+    }
+    .dock-desc {
+      font-size: 11.5px; line-height: 1.4; color: var(--ink);
     }
     .product-spec-grid {
       display: grid; grid-template-columns: 1fr; gap: clamp(10px, 1.2vh, 14px);
