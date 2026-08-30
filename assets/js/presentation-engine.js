@@ -1507,25 +1507,29 @@ let currentTheme = "a";
         }).catch(err => console.warn("GAS sync background note:", err));
       }
 
-      // Render instant executive confirmation
+      // Render instant executive confirmation (Perfect Centered Card)
       setTimeout(() => {
         const formCard = document.getElementById("investorInquiryForm");
         if (formCard) {
+          formCard.style.minHeight = "240px";
+          formCard.style.display = "flex";
+          formCard.style.alignItems = "center";
+          formCard.style.justifyContent = "center";
           formCard.innerHTML = `
-            <div style="background:rgba(52,211,153,0.1); border:1px solid #34d399; border-radius:8px; padding:18px; text-align:center; margin:15px 0;">
-              <div style="color:#34d399; margin-bottom:8px;">
-                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+            <div style="background:rgba(52,211,153,0.08); border:1px solid rgba(52,211,153,0.4); border-radius:10px; padding:24px 20px; text-align:center; width:100%; box-shadow:0 0 25px rgba(52,211,153,0.15);">
+              <div style="color:#34d399; margin-bottom:12px;">
+                <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
               </div>
-              <div style="font-family:var(--font-display); font-size:16px; font-weight:700; color:#fff; margin-bottom:6px;">
+              <div style="font-family:var(--font-display); font-size:18px; font-weight:700; color:#fff; margin-bottom:8px;">
                 ${currentLang === 'zh' ? '商務會談意向已成功登記！' : 'Inquiry Successfully Submitted!'}
               </div>
-              <div style="font-size:11.5px; color:#cbd5e1; line-height:1.5;">
+              <div style="font-size:12px; color:#cbd5e1; line-height:1.6;">
                 ${currentLang === 'zh' ? `感謝 <strong>${name}</strong> (${org}) 先進，已安全記錄至專案資料庫，創始合夥人團隊將於 24 小時內親自與您聯繫。` : `Thank you, <strong>${name}</strong> (${org}). Inquiries are recorded in our secure ledger; our founding partners will reach out within 24 hours.`}
               </div>
             </div>
           `;
         }
-      }, 700);
+      }, 500);
     }
 
     /* ═══════════════════════════════════════════════════════════════
