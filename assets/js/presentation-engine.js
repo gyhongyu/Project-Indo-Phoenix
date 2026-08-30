@@ -903,7 +903,7 @@ let currentTheme = "a";
               <div class="crossover-time-labels">
                 <span style="left:8%;">T+0</span>
                 <span style="left:30%;">T+6</span>
-                <span style="left:52%; color:var(--accent); font-weight:800; font-size:12px;">T+12 (BEP)</span>
+                <span style="left:52%; color:var(--accent); font-weight:800; font-size:12px;">${currentLang === 'zh' ? 'T+12 (本土切換)' : 'T+12 (Local Switch)'}</span>
                 <span style="left:74%;">T+18</span>
                 <span style="left:93%;">T+24</span>
               </div>

@@ -737,13 +737,13 @@ function getI18NDeck() {
             // Slide 12: Dynamic Data-Driven Scissors Crossover Breakeven Horizon
             {
               type: "flow-pipeline",
-              tag: "SLIDE 12 / 24-MONTH CASH FLOW & BREAK-EVEN CROSSOVER HORIZON",
+              tag: "SLIDE 12 / 24-MONTH DUAL-TRACK PHASED TIMELINE & ROADMAP",
               title: "24-Month Phased Ramp-Up: Trade-to-Manufacture Bridge",
               desc: "Day-one commercial cash flow via mature trade supply, seamless switch to local manufacturing upon cleanroom clearance.",
-              defaultExplanation: "Data-Driven Breakeven Horizon: Upfront trading revenue ramps up to converge with declining CapEx, achieving self-sustaining profitability at Month 12 ($1.22M BEP).",
+              defaultExplanation: "24-Month Dual-Track Execution: Day-1 commercial trade bridges market cash flow & client vendor codes, seamlessly transitioning to 100% India local manufacturing at Month 12 upon cleanroom clearance.",
               orangeLabel: "Plant Setup (Expenditure)",
               greenLabel: "Trade & Sales (Revenue)",
-              timelineLabel: "Timeline + Break-Even Horizon",
+              timelineLabel: "24-Month Phased Timeline",
               // Live Dynamic Numbers for Curves & Nodes (Direct from Google Sheet WEB_DATA)
               liveStats: {
                 totCapEx: `$${totCapEx}M`,
@@ -1988,13 +1988,13 @@ function getI18NDeck() {
             // Slide 12: 雙曲線剪刀差財務與時程交叉模型（動態真實數據連動）
             {
               type: "flow-pipeline",
-              tag: "簡報 12 / 24 個月現金流與損益兩平雙曲線交叉模型",
+              tag: "簡報 12 / 24 個月雙軌放量落地時程與無縫切換模型",
               title: "24 個月雙軌放量時程：以貿促工 ✕ 本地製造無縫切換",
               desc: "首期透過成熟供應鏈代銷先行建立客戶代碼，無塵室完工即刻無縫切換為 100% 印度本土製造。",
-              defaultExplanation: `數據驅動雙曲線走勢：前期以貿促工營收持續爬坡，與遞減的建廠資本支出交匯，於第 12 個月精準跨越 $${bepRev}M 單月損益兩平點 (50.8% 稼動率)。`,
+              defaultExplanation: "24 個月雙軌推進戰略：公司成立首日即啟動代銷貿易產生現金流並鎖定客戶代碼；第 12 個月無塵室取證通線，訂單 100% 原地轉為印度本土自主製造！",
               orangeLabel: "建廠(支出)",
               greenLabel: "貿易(收入)",
-              timelineLabel: "時間線 + 損益平衡線",
+              timelineLabel: "24 個月雙軌推進時間軸",
               // Live Dynamic Numbers for Curves & Nodes（直接連動 Google Sheet WEB_DATA）
               liveStats: {
                 totCapEx: `$${totCapEx}M`,
