@@ -1484,27 +1484,34 @@ let currentTheme = "a";
       }
 
       const payload = {
-        action: "submitLead",
-        tab: "INVESTOR_LEADS",
-        timestamp: new Date().toISOString(),
-        name: name,
-        org: org,
-        email: email,
-        phone: phone,
-        message: msg,
-        source: "Project Indo-Phoenix Pitch Deck (Slide 13)"
+        action: "append",
+        sheet_name: "INVESTOR_LEADS",
+        "Timestamp": new Date().toISOString(),
+        "Full Name": name,
+        "Institution": org,
+        "Corporate Email": email,
+        "Phone": phone,
+        "Message": msg,
+        "Source": "Pitch Deck Slide 13",
+        // Bilingual fallback keys for flexible header mapping
+        "提交時間": new Date().toLocaleString(),
+        "姓名": name,
+        "機構/基金": org,
+        "商務郵箱": email,
+        "電話": phone,
+        "合作意向": msg,
+        "來源": "Project Indo-Phoenix Deck"
       };
 
       const gasUrl = (window.IPX_CONFIG && window.IPX_CONFIG.gasUrl) ? window.IPX_CONFIG.gasUrl : "";
 
-      // Send to Google Apps Script Gateway via fetch with fallback
+      // Send to Universal GAS Gateway via standard POST
       if (gasUrl) {
         fetch(gasUrl, {
           method: "POST",
-          mode: "no-cors",
-          headers: { "Content-Type": "application/json" },
+          headers: { "Content-Type": "text/plain;charset=utf-8" },
           body: JSON.stringify(payload)
-        }).catch(err => console.warn("GAS sync background note:", err));
+        }).catch(err => console.warn("GAS sync note:", err));
       }
 
       // Render instant executive confirmation (Perfect Centered Card)
