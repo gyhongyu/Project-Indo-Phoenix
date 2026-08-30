@@ -34,10 +34,15 @@
         btn.textContent = lang === "en" ? "中文" : "EN";
         btn.setAttribute("aria-label", "Switch language");
       });
-      // Synchronize deck jump links with active lang & template
+      // Synchronize deck jump links with active lang & template (preserving target slide if specified)
       const activeTemplate = document.body.getAttribute("data-template") || "a";
       document.querySelectorAll(".nav-deck-link").forEach((link) => {
-        link.href = `presentation.html?theme=${activeTemplate}&lang=${lang}`;
+        const targetSlide = link.getAttribute("data-slide");
+        if (targetSlide) {
+          link.href = `presentation.html?theme=${activeTemplate}&lang=${lang}&slide=${targetSlide}#${targetSlide}`;
+        } else {
+          link.href = `presentation.html?theme=${activeTemplate}&lang=${lang}`;
+        }
       });
     }
   };
