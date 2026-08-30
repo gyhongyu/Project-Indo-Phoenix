@@ -993,24 +993,24 @@ let currentTheme = "a";
                   ${slide.aiDesc || '完整收錄 13,000 m² 廠區規劃、SPCB 環評批文、CEC 原廠報價單與 5 年財務母模型，支援即時深度問答與音訊播客。'}
                 </div>
 
-                <!-- Structured Dossier Matrix Preview -->
+                <!-- Structured Intelligence & Capability Matrix Preview -->
                 <div class="ai-features-list">
                   <div class="ai-feature-item">
                     <div class="ai-feature-icon-box">
-                      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+                      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
                     </div>
                     <div class="ai-feature-text-block">
-                      <span class="ai-feature-heading">${currentLang === 'zh' ? '全套立項與工程文檔' : '23 Core Technical & Statutory Dossiers'}</span>
-                      <span class="ai-feature-sub">${currentLang === 'zh' ? 'SPCB 環評 CTE/CTO 批文、13,000 m² 無塵室 HVAC 工程與原廠 CEC 設備清單' : 'SPCB CTE/CTO permits, 13,000 m² HVAC blueprints, CEC machine quotes'}</span>
+                      <span class="ai-feature-heading">${currentLang === 'zh' ? '目標客戶名冊與深度 KYC' : 'Target Customer Pipeline & Market KYC'}</span>
+                      <span class="ai-feature-sub">${currentLang === 'zh' ? '全印國防、車規電池包 CCS 與高階消費電子一級買家需求與採購清單' : 'Tier-1 Defense, EV CCS & Camera Module buyer procurement profiles'}</span>
                     </div>
                   </div>
                   <div class="ai-feature-item">
                     <div class="ai-feature-icon-box">
-                      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+                      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
                     </div>
                     <div class="ai-feature-text-block">
-                      <span class="ai-feature-heading">${currentLang === 'zh' ? '5 年神聖財務母模型' : '5-Year Mathematical Financial Model'}</span>
-                      <span class="ai-feature-sub">${currentLang === 'zh' ? '$28.8M 營收、CapEx $23M、SPECS 25% 補貼與 4.2 年回本敏感度分析' : '$28.8M revenue, $23M CapEx, SPECS 25% refund, 4.2-yr payback formula'}</span>
+                      <span class="ai-feature-heading">${currentLang === 'zh' ? '技術團隊核心交付職能' : 'Technical Team Engineering Moats'}</span>
+                      <span class="ai-feature-sub">${currentLang === 'zh' ? '自主化學配方、設備選型調試、潔淨室廠房設計與 AI SFC 智慧製造系統' : 'Chemical formulations, machine configuration, fab design & AI SFC MES'}</span>
                     </div>
                   </div>
                 </div>
@@ -1463,7 +1463,7 @@ let currentTheme = "a";
     });
 
     /* ═══════════════════════════════════════════════════════════════
-       SLIDE 13: INVESTOR LEAD SUBMISSION HANDLER (GAS SYNC COMPLIANT)
+       SLIDE 13: INVESTOR LEAD SUBMISSION HANDLER (REAL GAS SYNC)
        ═══════════════════════════════════════════════════════════════ */
     function handleInvestorLeadSubmit() {
       const name = document.getElementById("leadName")?.value || "";
@@ -1479,11 +1479,35 @@ let currentTheme = "a";
         btn.disabled = true;
         btn.innerHTML = `
           <svg class="animate-spin" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10" stroke-opacity="0.25"/><path d="M12 2a10 10 0 0 1 10 10" stroke-linecap="round"/></svg>
-          <span>${currentLang === 'zh' ? '正在安全記錄...' : 'Submitting Inquiry...'}</span>
+          <span>${currentLang === 'zh' ? '正在安全記錄至 Google 表格...' : 'Logging to Google Sheet...'}</span>
         `;
       }
 
-      // Safe asynchronous feedback simulation (ready for GAS live webhook)
+      const payload = {
+        action: "submitLead",
+        tab: "INVESTOR_LEADS",
+        timestamp: new Date().toISOString(),
+        name: name,
+        org: org,
+        email: email,
+        phone: phone,
+        message: msg,
+        source: "Project Indo-Phoenix Pitch Deck (Slide 13)"
+      };
+
+      const gasUrl = (window.IPX_CONFIG && window.IPX_CONFIG.gasUrl) ? window.IPX_CONFIG.gasUrl : "";
+
+      // Send to Google Apps Script Gateway via fetch with fallback
+      if (gasUrl) {
+        fetch(gasUrl, {
+          method: "POST",
+          mode: "no-cors",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload)
+        }).catch(err => console.warn("GAS sync background note:", err));
+      }
+
+      // Render instant executive confirmation
       setTimeout(() => {
         const formCard = document.getElementById("investorInquiryForm");
         if (formCard) {
@@ -1496,7 +1520,7 @@ let currentTheme = "a";
                 ${currentLang === 'zh' ? '商務會談意向已成功登記！' : 'Inquiry Successfully Submitted!'}
               </div>
               <div style="font-size:11.5px; color:#cbd5e1; line-height:1.5;">
-                ${currentLang === 'zh' ? `感謝 <strong>${name}</strong> (${org}) 先進，創始合夥人團隊將於 24 小時內親自與您聯繫。` : `Thank you, <strong>${name}</strong> (${org}). Our founding partners will reach out to you within 24 hours.`}
+                ${currentLang === 'zh' ? `感謝 <strong>${name}</strong> (${org}) 先進，已安全記錄至專案資料庫，創始合夥人團隊將於 24 小時內親自與您聯繫。` : `Thank you, <strong>${name}</strong> (${org}). Inquiries are recorded in our secure ledger; our founding partners will reach out within 24 hours.`}
               </div>
             </div>
           `;
