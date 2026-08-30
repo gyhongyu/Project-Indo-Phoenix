@@ -295,6 +295,8 @@ function getI18NDeck() {
                   tag: "GOVERNANCE",
                   title: "5% Sweat Equity Alignment",
                   desc: "Core executives resign full-time under non-compete to co-found; equity strictly tied to 85%-95% ramp-up yield deliverables.",
+                  blueprintImg: "assets/samples/equity_pie.png",
+                  blueprintLabel: "GOVERNANCE: >90% VS 5%",
                   detail: "Zero cash equity drain on promoter. Indian industrial family holds >90% absolute controlling interest with complete operational veto."
                 },
                 {
@@ -1342,6 +1344,8 @@ function getI18NDeck() {
                   tag: "股權架構",
                   title: "5% Sweat Equity 商業法理",
                   desc: "核心高管簽署競業禁止集體離職全職投入；讓利實業股東控股，將股權與 85%~95% 爬坡良率終身對賭。",
+                  blueprintImg: "assets/samples/equity_pie.png",
+                  blueprintLabel: "合資治理：>90% 控股 VS 5% 乾股",
                   detail: "不拿現金、不搶控制權，印度實業家族持有合資公司 >90% 絕對控股權與資本主導權。"
                 },
                 {
