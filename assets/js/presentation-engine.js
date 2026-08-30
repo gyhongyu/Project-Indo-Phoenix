@@ -1022,10 +1022,10 @@ let currentTheme = "a";
               </div>
 
               <div>
-                <a href="${slide.notebookUrl || 'https://notebook.google.com/notebook/be750388-f5f2-4027-9f85-f45f61c53ba7'}" target="_blank" rel="noopener noreferrer" class="btn-action-primary btn-action-glow">
-                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-                  <span>${slide.aiBtn || '開啟官方 AI 智能資料室'}</span>
-                </a>
+                <button type="button" class="btn-action-primary btn-action-glow" onclick="openPasscodeModal()">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                  <span>${slide.aiBtn || '開啟官方 AI 智能資料室 (需密碼)'}</span>
+                </button>
               </div>
             </div>
 
@@ -1526,4 +1526,55 @@ let currentTheme = "a";
           `;
         }
       }, 700);
+    }
+
+    /* ═══════════════════════════════════════════════════════════════
+       PASSCODE GATEWAY MODAL CONTROLLER (MII GENTLEMAN'S CODE)
+       ═══════════════════════════════════════════════════════════════ */
+    function openPasscodeModal() {
+      const modal = document.getElementById("passcodeModal");
+      const titleEl = document.getElementById("passcodeModalTitle");
+      const descEl = document.getElementById("passcodeModalDesc");
+      const hintEl = document.getElementById("passcodeModalHint");
+      const inputEl = document.getElementById("passcodeInput");
+
+      if (titleEl) titleEl.textContent = currentLang === 'zh' ? '解鎖官方 AI 智能資料室' : 'Unlock Official AI Data Room';
+      if (descEl) descEl.textContent = currentLang === 'zh' ? '本資料室收錄 23 份深度研報與核心買家 KYC，請輸入訪問密碼進入：' : 'Access 23 deep-dive dossiers and buyer KYC profiles. Enter access passcode to proceed:';
+      if (hintEl) hintEl.innerHTML = currentLang === 'zh' ? '💡 <strong>通行提示</strong>：若您尚未取得密碼，請在左側留言板送出意向，系統將發送通行密碼至您的登記郵箱。' : '💡 <strong>Passcode Notice</strong>: If you do not have the passcode, please submit an inquiry on the left; the passcode will be dispatched to your email.';
+      
+      if (inputEl) {
+        inputEl.value = "";
+        inputEl.style.borderColor = "rgba(255, 255, 255, 0.15)";
+      }
+
+      if (modal) {
+        modal.classList.add("is-active");
+        setTimeout(() => { if (inputEl) inputEl.focus(); }, 150);
+      }
+    }
+
+    function closePasscodeModal(e) {
+      if (e && e.target && e.target !== e.currentTarget && !e.target.classList.contains("btn-modal-cancel")) return;
+      const modal = document.getElementById("passcodeModal");
+      if (modal) modal.classList.remove("is-active");
+    }
+
+    function verifyPasscodeAndOpen() {
+      const inputEl = document.getElementById("passcodeInput");
+      const val = (inputEl ? inputEl.value : "").trim().toUpperCase();
+      const targetUrl = "https://notebook.google.com/notebook/be750388-f5f2-4027-9f85-f45f61c53ba7";
+
+      // Gentleman's Passcode Verification: "MII" (Make In India)
+      if (val === "MII") {
+        if (inputEl) inputEl.style.borderColor = "#34d399";
+        const modal = document.getElementById("passcodeModal");
+        if (modal) modal.classList.remove("is-active");
+        window.open(targetUrl, "_blank", "noopener,noreferrer");
+      } else {
+        if (inputEl) {
+          inputEl.style.borderColor = "#ef4444";
+          inputEl.focus();
+          alert(currentLang === 'zh' ? '訪問密碼不正確。若您尚未取得密碼，請在左側留言板送出意向，系統將發送密碼至您的郵箱。' : 'Incorrect passcode. If you do not have the access code, please submit an inquiry on the left to receive it.');
+        }
+      }
     }
