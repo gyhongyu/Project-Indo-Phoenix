@@ -753,30 +753,108 @@ let currentTheme = "a";
           </div>
         `;
       }
-      // 6. Visual Dual-Track Step Gantt Table (Slide 12 Overhaul)
+      // 6. Visual S-Curve Dual-Track Stream Pipeline (Slide 12 Overhaul)
       else if (slide.type === "flow-pipeline") {
         html += `
-          <div class="gantt-cockpit-container">
-            <!-- 4-Column Step Gantt Board -->
-            <div class="gantt-board-grid">
-              ${(slide.phases || []).map((p, idx) => `
-                <div class="gantt-col-card gs-anim-flow ${idx === 1 ? 'bep-col' : ''} ${idx === 3 ? 'gold-col' : ''}">
-                  
-                  <!-- Phase Header & Period -->
-                  <div class="gantt-col-header">
-                    <div class="gantt-period-tag">${p.period}</div>
-                    <div class="gantt-phase-num">${p.num}</div>
-                    <div class="gantt-phase-title">${p.title}</div>
-                    <div class="gantt-cap-badge">${p.capUtil}</div>
-                  </div>
+          <div class="scurve-pipeline-container">
+            
+            <!-- SVG Glowing Dual-Track S-Curve Stream Canvas -->
+            <div class="scurve-canvas-wrap">
+              <svg class="scurve-svg" viewBox="0 0 1000 320" preserveAspectRatio="none">
+                <defs>
+                  <!-- Cyan Commercial Stream Gradient -->
+                  <linearGradient id="commGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                    <stop offset="0%" stop-color="#38bdf8" stop-opacity="0.2" />
+                    <stop offset="25%" stop-color="#38bdf8" stop-opacity="0.9" />
+                    <stop offset="100%" stop-color="#06b6d4" stop-opacity="0.95" />
+                  </linearGradient>
+                  <!-- Pink/Magenta Factory Stream Gradient -->
+                  <linearGradient id="infraGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                    <stop offset="0%" stop-color="#ec4899" stop-opacity="0.95" />
+                    <stop offset="35%" stop-color="#d946ef" stop-opacity="0.8" />
+                    <stop offset="60%" stop-color="#a855f7" stop-opacity="0.9" />
+                    <stop offset="100%" stop-color="#c084fc" stop-opacity="0.95" />
+                  </linearGradient>
+                  <!-- Central Axis Glow Filter -->
+                  <filter id="glowCyan" x="-20%" y="-20%" width="140%" height="140%">
+                    <feGaussianBlur stdDeviation="4" result="blur" />
+                    <feComposite in="SourceGraphic" in2="blur" operator="over" />
+                  </filter>
+                  <filter id="glowPink" x="-20%" y="-20%" width="140%" height="140%">
+                    <feGaussianBlur stdDeviation="4" result="blur" />
+                    <feComposite in="SourceGraphic" in2="blur" operator="over" />
+                  </filter>
+                </defs>
 
-                  <!-- Track 1: Commercial Bridge Block with Hover Tooltip -->
-                  <div class="gantt-track-item commercial" 
-                       onclick="selectGenericCard('ganttComm', ${idx}, '${p.commDetail.replace(/'/g, "\\'")}')"
-                       onmouseenter="selectGenericCard('ganttComm', ${idx}, '${p.commDetail.replace(/'/g, "\\'")}')">
-                    <div class="gantt-track-label">🚢 ${currentLang === 'zh' ? '業務線（以貿促工）' : 'Commercial (Trade Bridge)'}</div>
-                    <div class="gantt-item-title">${p.commTitle}</div>
-                    <div class="gantt-item-sub">${p.commSub}</div>
+                <!-- Central Baseline Axis -->
+                <line x1="40" y1="160" x2="960" y2="160" stroke="rgba(255,255,255,0.15)" stroke-width="2" stroke-dasharray="4 4" />
+
+                <!-- Upper Cyan Commercial Track Ribbon S-Curve (Starts at Axis T+0, bends UP into top branch) -->
+                <path d="M 40,160 C 140,160 160,55 270,55 L 940,55" 
+                      fill="none" stroke="url(#commGrad)" stroke-width="8" stroke-linecap="round" filter="url(#glowCyan)" />
+                <path d="M 40,160 C 140,160 160,55 270,55 L 940,55" 
+                      fill="none" stroke="rgba(255,255,255,0.8)" stroke-width="2" stroke-linecap="round" />
+
+                <!-- Lower Pink Factory Track Ribbon S-Curve (Starts at Axis T+6M, bends DOWN into bottom branch) -->
+                <path d="M 40,160 L 270,160 C 380,160 410,265 520,265 L 940,265" 
+                      fill="none" stroke="url(#infraGrad)" stroke-width="8" stroke-linecap="round" filter="url(#glowPink)" />
+                <path d="M 40,160 L 270,160 C 380,160 410,265 520,265 L 940,265" 
+                      fill="none" stroke="rgba(255,255,255,0.8)" stroke-width="2" stroke-linecap="round" />
+
+                <!-- Connecting Vertical Guideline at T+6M & T+12M & T+18M -->
+                <line x1="270" y1="55" x2="270" y2="160" stroke="rgba(56,189,248,0.4)" stroke-width="1.5" stroke-dasharray="3 3" />
+                <line x1="520" y1="55" x2="520" y2="265" stroke="rgba(201,169,110,0.3)" stroke-width="1.5" stroke-dasharray="3 3" />
+                <line x1="740" y1="55" x2="740" y2="265" stroke="rgba(201,169,110,0.3)" stroke-width="1.5" stroke-dasharray="3 3" />
+
+                <!-- 4 Major Central Axis Time Node Bulbs -->
+                <g class="axis-node" transform="translate(40, 160)">
+                  <circle r="8" fill="#0f172a" stroke="#38bdf8" stroke-width="3" />
+                  <circle r="3" fill="#fff" />
+                  <text y="24" text-anchor="middle" fill="#94a3b8" font-family="monospace" font-size="11" font-weight="700">T+0</text>
+                </g>
+                <g class="axis-node" transform="translate(270, 160)">
+                  <circle r="9" fill="#0f172a" stroke="#38bdf8" stroke-width="3" />
+                  <circle r="4" fill="#38bdf8" />
+                  <text y="24" text-anchor="middle" fill="#38bdf8" font-family="monospace" font-size="11" font-weight="700">T+6M</text>
+                </g>
+                <g class="axis-node" transform="translate(520, 160)">
+                  <circle r="10" fill="#0f172a" stroke="#ec4899" stroke-width="3.5" />
+                  <circle r="4" fill="#ec4899" />
+                  <text y="24" text-anchor="middle" fill="#ec4899" font-family="monospace" font-size="11" font-weight="700">T+12M</text>
+                </g>
+                <g class="axis-node" transform="translate(740, 160)">
+                  <circle r="9" fill="#0f172a" stroke="#a855f7" stroke-width="3" />
+                  <circle r="4" fill="#a855f7" />
+                  <text y="24" text-anchor="middle" fill="#a855f7" font-family="monospace" font-size="11" font-weight="700">T+18M</text>
+                </g>
+                <g class="axis-node" transform="translate(940, 160)">
+                  <circle r="11" fill="#0f172a" stroke="var(--accent)" stroke-width="4" />
+                  <circle r="5" fill="var(--accent)" />
+                  <text y="24" text-anchor="middle" fill="var(--accent)" font-family="monospace" font-size="12" font-weight="700">T+24M</text>
+                </g>
+              </svg>
+
+              <!-- Track Identity Badges -->
+              <div class="track-flow-badge comm-badge">
+                <span>🚢 ${currentLang === 'zh' ? '業務線（以貿促工·代銷先行）' : 'Commercial Track (Trade Bridge)'}</span>
+              </div>
+              <div class="track-flow-badge infra-badge">
+                <span>🏭 ${currentLang === 'zh' ? '工廠線（基建驗機·在地落盤）' : 'Engineering Track (Gov & Tech Scope)'}</span>
+              </div>
+
+              <!-- Top Row: 4 Commercial Phase Interactive Pods (Positioned on top curve) -->
+              <div class="scurve-pods-grid top-row">
+                ${(slide.phases || []).map((p, idx) => `
+                  <div class="scurve-pod-item comm-pod gs-anim-flow"
+                       onclick="selectGenericCard('scurveComm', ${idx}, '${p.commDetail.replace(/'/g, "\\'")}')"
+                       onmouseenter="selectGenericCard('scurveComm', ${idx}, '${p.commDetail.replace(/'/g, "\\'")}')">
+                    
+                    <div class="pod-header">
+                      <span class="pod-period">${p.period}</span>
+                      <span class="pod-cap">${p.capUtil}</span>
+                    </div>
+                    <div class="pod-title">${p.commTitle}</div>
+                    <div class="pod-sub">${p.commSub}</div>
 
                     <!-- Smart Hover Tooltip -->
                     <div class="card-smart-tooltip">
@@ -784,14 +862,22 @@ let currentTheme = "a";
                       <div class="tooltip-text">${p.commDetail}</div>
                     </div>
                   </div>
+                `).join("")}
+              </div>
 
-                  <!-- Track 2: Factory Engineering Block with Hover Tooltip -->
-                  <div class="gantt-track-item infra"
-                       onclick="selectGenericCard('ganttInfra', ${idx}, '${p.infraDetail.replace(/'/g, "\\'")}')"
-                       onmouseenter="selectGenericCard('ganttInfra', ${idx}, '${p.infraDetail.replace(/'/g, "\\'")}')">
-                    <div class="gantt-track-label">🏭 ${currentLang === 'zh' ? '工廠線（基建驗機）' : 'Engineering Track'}</div>
-                    <div class="gantt-item-title">${p.infraTitle}</div>
-                    <div class="gantt-item-sub">${p.infraSub}</div>
+              <!-- Bottom Row: 4 Engineering Phase Interactive Pods (Positioned on bottom curve) -->
+              <div class="scurve-pods-grid bottom-row">
+                ${(slide.phases || []).map((p, idx) => `
+                  <div class="scurve-pod-item infra-pod gs-anim-flow"
+                       onclick="selectGenericCard('scurveInfra', ${idx}, '${p.infraDetail.replace(/'/g, "\\'")}')"
+                       onmouseenter="selectGenericCard('scurveInfra', ${idx}, '${p.infraDetail.replace(/'/g, "\\'")}')">
+                    
+                    <div class="pod-header">
+                      <span class="pod-period infra">${p.num}</span>
+                      <span class="pod-infra-tag">${currentLang === 'zh' ? '工廠工程' : 'Engineering'}</span>
+                    </div>
+                    <div class="pod-title">${p.infraTitle}</div>
+                    <div class="pod-sub">${p.infraSub}</div>
 
                     <!-- Smart Hover Tooltip -->
                     <div class="card-smart-tooltip">
@@ -799,14 +885,21 @@ let currentTheme = "a";
                       <div class="tooltip-text">${p.infraDetail}</div>
                     </div>
                   </div>
+                `).join("")}
+              </div>
 
-                  <!-- Bottom Financial Status Capsule -->
-                  <div class="gantt-fin-badge ${p.finClass || ''}">
-                    ${p.finBadge}
-                  </div>
+            </div>
+
+            <!-- Bottom 4 Financial Milestones Ribbon -->
+            <div class="scurve-fin-ribbon">
+              ${(slide.phases || []).map((p, idx) => `
+                <div class="scurve-fin-pill ${p.finClass || ''} ${idx === 1 ? 'bep-glow' : ''}">
+                  <span class="fin-pill-idx">M${(idx+1)*6}</span>
+                  <span class="fin-pill-text">${p.finBadge}</span>
                 </div>
               `).join("")}
             </div>
+
           </div>
 
           <!-- Non-Intrusive Floating Context Explanation Bar -->

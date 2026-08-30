@@ -747,7 +747,8 @@
       .opex-cost-card:hover .card-smart-tooltip,
       .capex-row-card:hover .card-smart-tooltip,
       .cockpit-mini-card:hover .card-smart-tooltip,
-      .gantt-track-item:hover .card-smart-tooltip {
+      .gantt-track-item:hover .card-smart-tooltip,
+      .scurve-pod-item:hover .card-smart-tooltip {
         opacity: 1; transform: translateX(-50%) translateY(0); pointer-events: auto;
       }
       .split-moat-card:hover .card-smart-tooltip,
@@ -798,100 +799,128 @@
     }
     .floating-bar-text strong { color: var(--ink); font-weight: 600; }
 
-    /* 6. Visual Dual-Track Step Gantt Cockpit (Slide 12 Overhaul) */
-    .gantt-cockpit-container {
-      flex: 1; display: flex; flex-direction: column; gap: 10px;
-      margin-bottom: 8px; min-height: 0;
+    /* 6. Visual S-Curve Dual-Track Stream Pipeline (Slide 12 Overhaul) */
+    .scurve-pipeline-container {
+      flex: 1; display: flex; flex-direction: column; justify-content: space-between;
+      margin-bottom: 6px; min-height: 0; position: relative;
     }
-    .gantt-board-grid {
-      flex: 1; display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px;
-      min-height: 0; align-items: stretch;
-    }
-    .gantt-col-card {
-      background: linear-gradient(180deg, rgba(255,255,255,0.02) 0%, rgba(10,15,25,0.4) 100%);
-      border: 1px solid var(--line-subtle); border-radius: var(--card-radius);
-      padding: clamp(12px, 1.6vh, 18px) clamp(12px, 1.2vw, 16px);
+    .scurve-canvas-wrap {
+      flex: 1; position: relative; width: 100%; min-height: 280px;
       display: flex; flex-direction: column; justify-content: space-between;
-      position: relative; transition: all 0.3s var(--ease); min-height: 0;
     }
-    .gantt-col-card:hover {
-      border-color: var(--accent); box-shadow: 0 8px 24px var(--accent-glow);
-    }
-    .gantt-col-card.bep-col {
-      background: linear-gradient(180deg, rgba(56,189,248,0.06) 0%, rgba(10,15,25,0.45) 100%);
-      border-color: rgba(56,189,248,0.4);
-    }
-    .gantt-col-card.gold-col {
-      background: linear-gradient(180deg, rgba(201,169,110,0.08) 0%, rgba(10,15,25,0.45) 100%);
-      border-color: rgba(201,169,110,0.5);
+    .scurve-svg {
+      position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none;
+      z-index: 1; overflow: visible;
     }
 
-    /* Column Header */
-    .gantt-col-header {
-      display: flex; flex-direction: column; margin-bottom: 8px;
+    /* Track Identification Badges (Floating along curves) */
+    .track-flow-badge {
+      position: absolute; z-index: 5; font-family: var(--font-mono); font-size: 10px;
+      font-weight: 700; padding: 4px 10px; border-radius: 20px;
+      backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+      letter-spacing: 0.05em; text-transform: uppercase;
     }
-    .gantt-period-tag {
-      font-family: var(--font-mono); font-size: 11px; font-weight: 700; color: var(--accent);
-      margin-bottom: 2px;
+    .track-flow-badge.comm-badge {
+      top: 10px; right: 20px; background: rgba(56, 189, 248, 0.15);
+      border: 1px solid #38bdf8; color: #38bdf8;
+      box-shadow: 0 0 16px rgba(56, 189, 248, 0.3);
     }
-    .gantt-phase-num {
+    .track-flow-badge.infra-badge {
+      bottom: 10px; right: 20px; background: rgba(236, 72, 153, 0.15);
+      border: 1px solid #ec4899; color: #f472b6;
+      box-shadow: 0 0 16px rgba(236, 72, 153, 0.3);
+    }
+
+    /* Pods Grid Containers (Top Row on Upper Curve, Bottom Row on Lower Curve) */
+    .scurve-pods-grid {
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px;
+      position: relative; z-index: 10;
+    }
+    .scurve-pods-grid.top-row {
+      margin-top: 4px; padding-bottom: 25px;
+    }
+    .scurve-pods-grid.bottom-row {
+      margin-top: 25px; padding-bottom: 4px;
+    }
+
+    /* Interactive Pod Styling */
+    .scurve-pod-item {
+      background: rgba(10, 15, 25, 0.75); border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 8px; padding: 8px 12px; cursor: pointer;
+      position: relative; transition: all 0.25s var(--ease);
+      backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+    }
+    .scurve-pod-item:hover, .scurve-pod-item.active {
+      transform: translateY(-3px); box-shadow: 0 8px 24px var(--accent-glow);
+    }
+    .scurve-pod-item.comm-pod {
+      border-top: 3px solid #38bdf8;
+    }
+    .scurve-pod-item.comm-pod:hover {
+      border-color: #38bdf8; box-shadow: 0 8px 24px rgba(56, 189, 248, 0.3);
+    }
+    .scurve-pod-item.infra-pod {
+      border-bottom: 3px solid #ec4899;
+    }
+    .scurve-pod-item.infra-pod:hover {
+      border-color: #ec4899; box-shadow: 0 8px 24px rgba(236, 72, 153, 0.3);
+    }
+
+    .pod-header {
+      display: flex; justify-content: space-between; align-items: center; margin-bottom: 3px;
+    }
+    .pod-period {
+      font-family: var(--font-mono); font-size: 10.5px; font-weight: 700; color: #38bdf8;
+    }
+    .pod-period.infra { color: #f472b6; }
+    .pod-cap {
+      font-family: var(--font-mono); font-size: 9.5px; font-weight: 600; color: var(--accent);
+      background: rgba(255, 255, 255, 0.05); padding: 1px 5px; border-radius: 3px;
+    }
+    .pod-infra-tag {
       font-family: var(--font-mono); font-size: 9px; color: var(--ink-sub); text-transform: uppercase;
-      letter-spacing: 0.08em;
     }
-    .gantt-phase-title {
-      font-size: 14px; font-weight: 700; color: var(--ink); margin: 2px 0 4px 0;
+    .pod-title {
+      font-size: 12.5px; font-weight: 700; color: var(--ink); line-height: 1.25; margin-bottom: 2px;
     }
-    .gantt-cap-badge {
-      font-family: var(--font-mono); font-size: 10px; font-weight: 600; color: var(--accent-light);
-      background: rgba(255,255,255,0.04); border-radius: 4px; padding: 2px 6px; align-self: flex-start;
-    }
-
-    /* Track Items (Interactive Block with Smart Tooltip) */
-    .gantt-track-item {
-      background: rgba(255,255,255,0.03); border: 1px solid var(--line-subtle);
-      border-radius: 6px; padding: 8px 10px; margin-bottom: 8px;
-      cursor: pointer; position: relative; transition: all 0.25s var(--ease);
-    }
-    .gantt-track-item:hover, .gantt-track-item.active {
-      background: var(--bg-card-hover); border-color: var(--accent);
-      transform: translateY(-2px); box-shadow: 0 4px 16px var(--accent-glow);
-    }
-    .gantt-track-item.commercial {
-      border-left: 3px solid #38bdf8;
-    }
-    .gantt-track-item.infra {
-      border-left: 3px solid var(--accent);
-    }
-    .gantt-track-label {
-      font-family: var(--font-mono); font-size: 9px; font-weight: 700;
-      letter-spacing: 0.05em; margin-bottom: 3px;
-    }
-    .gantt-track-item.commercial .gantt-track-label { color: #38bdf8; }
-    .gantt-track-item.infra .gantt-track-label { color: var(--accent); }
-    .gantt-item-title {
-      font-size: 11.5px; font-weight: 700; color: var(--ink); line-height: 1.25; margin-bottom: 2px;
-    }
-    .gantt-item-sub {
+    .pod-sub {
       font-size: 10px; color: var(--ink-sub); line-height: 1.3;
     }
 
-    /* Bottom Financial Status Capsule */
-    .gantt-fin-badge {
-      font-family: var(--font-mono); font-size: 10.5px; font-weight: 700; text-align: center;
-      padding: 6px 8px; border-radius: 4px; border: 1px solid rgba(255,255,255,0.08);
-      background: rgba(0,0,0,0.3); color: var(--ink-sub); margin-top: auto;
+    /* Bottom 4 Financial Milestones Ribbon */
+    .scurve-fin-ribbon {
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px;
+      margin-top: 10px; z-index: 10; position: relative;
     }
-    .gantt-fin-badge.accent {
-      background: rgba(56,189,248,0.15); color: #38bdf8; border-color: #38bdf8;
-      box-shadow: 0 0 12px rgba(56,189,248,0.25);
+    .scurve-fin-pill {
+      background: rgba(0, 0, 0, 0.4); border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 6px; padding: 6px 10px; display: flex; align-items: center; gap: 8px;
+      transition: all 0.25s var(--ease);
     }
-    .gantt-fin-badge.good {
-      background: rgba(52,211,153,0.15); color: #34d399; border-color: #34d399;
+    .scurve-fin-pill:hover {
+      border-color: var(--accent); transform: translateY(-1px);
     }
-    .gantt-fin-badge.gold {
-      background: var(--accent-glow); color: var(--accent); border-color: var(--accent);
+    .fin-pill-idx {
+      font-family: var(--font-mono); font-size: 10px; font-weight: 800;
+      color: var(--accent); background: rgba(255, 255, 255, 0.06);
+      padding: 2px 6px; border-radius: 3px;
+    }
+    .fin-pill-text {
+      font-family: var(--font-mono); font-size: 10.5px; font-weight: 700; color: var(--ink);
+    }
+    .scurve-fin-pill.accent {
+      border-color: #38bdf8; background: rgba(56, 189, 248, 0.1);
+    }
+    .scurve-fin-pill.accent .fin-pill-text { color: #38bdf8; }
+    .scurve-fin-pill.good {
+      border-color: #34d399; background: rgba(52, 211, 153, 0.1);
+    }
+    .scurve-fin-pill.good .fin-pill-text { color: #34d399; }
+    .scurve-fin-pill.gold {
+      border-color: var(--accent); background: rgba(201, 169, 110, 0.12);
       box-shadow: 0 0 14px var(--accent-glow);
     }
+    .scurve-fin-pill.gold .fin-pill-text { color: var(--accent); }
 
     /* 2.5 Split Hero Matrix Layout (Slide 04 Overhaul: Left 45% Hero + Right 55% 2x2 Grid) */
     .split-hero-layout {
