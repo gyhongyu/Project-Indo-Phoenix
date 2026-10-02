@@ -24,6 +24,7 @@ function getI18NDeck() {
       const paybackYrs = getLiveStat("payback", 4.2);
       const paybackNoSub = getLiveStat("paybackRaw", 5.2);
       const totalArea = Number(getLiveStat("factoryArea", 13000)).toLocaleString();
+      const cleanroomCls = String(getLiveStat("cleanroomClass", "1K"));
 
       return {
         en: {
@@ -475,10 +476,10 @@ function getI18NDeck() {
               },
               spaces: [
                 {
-                  title: "Class 1K Cleanroom Yellow Light",
+                  title: `Class ${cleanroomCls} Cleanroom Yellow Light`,
                   kunshan: "1,200 m²",
                   india: "1,500 m²",
-                  std: "Class 1,000 / 22±2°C / 55±5% RH",
+                  std: `Class ${cleanroomCls} / 22±2°C / 55±5% RH`,
                   equip: "LDI Direct Imaging, Dry Film Vacuum Lamination",
                   infra: "+40% HVAC capacity redundancy to conquer 45°C+ Indian ambient summer heat",
                   detail: "High ambient temperature in India requires +40% higher HVAC capacity. Temperature & humidity strictly maintained at 21±1°C, 55±5% RH for 25μm line pitch."
@@ -1736,10 +1737,10 @@ function getI18NDeck() {
               },
               spaces: [
                 {
-                  title: "千級無塵黃光區",
+                  title: `${cleanroomCls === "1K" ? "千級" : cleanroomCls === "10K" ? "萬級" : cleanroomCls}無塵黃光區`,
                   kunshan: "1,200 m²",
                   india: "1,500 m²",
-                  std: "千級無塵室 / 22±2°C / 濕度 55±5%",
+                  std: `${cleanroomCls === "1K" ? "千級" : cleanroomCls === "10K" ? "萬級" : cleanroomCls}無塵室 (Class ${cleanroomCls}) / 22±2°C / 濕度 55±5%`,
                   equip: "LDI 雷射直接成像、乾膜真空壓膜機",
                   infra: "印度環境溫度高，需增加 +40% 暖通空調 (HVAC) 冗餘容量制冷",
                   detail: "配置 +40% HVAC 暖通冗餘空調制冷能力，嚴格受控（21±1°C, 55±5% RH），確保 25μm 微細線路曝光精度不衰減。"

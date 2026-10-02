@@ -1663,3 +1663,8 @@ let currentTheme = "a";
         shield.style.display = "none";
       }
     }
+
+    // Dynamic SSOT sync: re-render active slide when online sheet updates
+    window.addEventListener("ipx:content-updated", function () {
+      renderSlide(false);
+    });

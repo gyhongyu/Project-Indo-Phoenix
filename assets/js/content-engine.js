@@ -61,18 +61,26 @@
     Array.prototype.forEach.call(els, function (el) {
       var key = el.getAttribute("data-stat");
       var raw = window.IPX_DATA && window.IPX_DATA.stats ? window.IPX_DATA.stats[key] : undefined;
-      if (raw === undefined || raw === null) return;
-      var scale = parseFloat(el.getAttribute("data-scale") || "1") || 1;
-      var dec = parseInt(el.getAttribute("data-decimals") || "0", 10);
-      var shown = fmt(Number(raw) / scale, dec);
+      var isNum = typeof raw === "number" || (!isNaN(Number(raw)) && String(raw).trim() !== "");
+      var shown;
+      if (isNum) {
+        var scale = parseFloat(el.getAttribute("data-scale") || "1") || 1;
+        var dec = parseInt(el.getAttribute("data-decimals") || "0", 10);
+        shown = fmt(Number(raw) / scale, dec);
+      } else {
+        shown = String(raw);
+      }
       var tmpl = el.getAttribute("data-stat-format");
       if (tmpl) {                       // whole-string mode e.g. "$%sM"
         el.textContent = tmpl.replace("%s", shown);
         return;
       }
-      el.setAttribute("data-count", String(Number(raw) / scale));
+      if (isNum) {
+        var scaleNum = parseFloat(el.getAttribute("data-scale") || "1") || 1;
+        el.setAttribute("data-count", String(Number(raw) / scaleNum));
+      }
       var counted = el.getAttribute("data-counted") === "1";
-      if (counted || force === "silent") el.textContent = shown;
+      if (!isNum || counted || force === "silent") el.textContent = shown;
     });
   }
 
@@ -84,9 +92,8 @@
       var v = r.value;
       if (v === "" || v === null || v === undefined) return;
       var cleanStr = String(v).replace(/,/g, "").trim();
-      var match = cleanStr.match(/^[-+]?[0-9]*\.?[0-9]+/);
-      var n = match ? parseFloat(match[0]) : NaN;
-      p.stats[String(r.key).trim()] = isNaN(n) ? String(v) : n;
+      var isPureNum = /^[-+]?[0-9]*\.?[0-9]+$/.test(cleanStr);
+      p.stats[String(r.key).trim()] = isPureNum ? parseFloat(cleanStr) : String(v);
     });
     (textRows || []).forEach(function (r) {
       var k = String(r.key || "").trim();
@@ -124,6 +131,9 @@
       applyPayload(payload);
       bindStats("silent");
       if (window.IPX_LANG && window.IPX_LANG.apply) window.IPX_LANG.apply();
+      try {
+        window.dispatchEvent(new CustomEvent("ipx:content-updated", { detail: payload }));
+      } catch (err) {}
     }
     fetchSheet("WEB_DATA", function (e, d) { if (e) failed = true; else dataRows = d; fin(); });
     fetchSheet("WEB_TEXT", function (e, d) { if (e) failed = true; else textRows = d; fin(); });

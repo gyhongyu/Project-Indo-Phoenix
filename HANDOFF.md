@@ -1,30 +1,39 @@
 # 🤝 Project Indo-Phoenix 階段交接文檔 (HANDOFF.md)
 
-> 本文檔為跨會話 AI 代理人標準交接總表。接班工程師進場請先參閱此檔與 [`docs/STATE.md`](file:///E:/Projects/Project%20Indo-Phoenix/docs/STATE.md)。
+> 📅 交接時間：2026-10-02 · 工作目錄：`c:\Program1\Project-Indo-Phoenix`  
+> 本文檔為跨會話 AI 代理人標準單一真理源（SSOT）交接總表。接班工程師進場請先參閱此檔與 [`docs/STATE.md`](file:///c:/Program1/Project-Indo-Phoenix/docs/STATE.md)。
 
 ---
 
 ## 📌 1. 本會話完成並已固化之核心成果
-1. **[`presentation.html`](file:///E:/Projects/Project%20Indo-Phoenix/presentation.html) 模組化解耦**：
-   - 3,500+ 行單檔已精簡至 103 行乾淨外殼。
-   - 樣式抽出為 [`assets/css/presentation.css`](file:///E:/Projects/Project%20Indo-Phoenix/assets/css/presentation.css)。
-   - 數據結構抽出為 [`assets/js/presentation-data.js`](file:///E:/Projects/Project%20Indo-Phoenix/assets/js/presentation-data.js)。
-   - GSAP 3D 動畫與渲染邏輯抽出為 [`assets/js/presentation-engine.js`](file:///E:/Projects/Project%20Indo-Phoenix/assets/js/presentation-engine.js)。
-2. **Slide 00（四大幕劇全息目錄導航）完美復原**：
-   - 2×2 卡片網格樣式與頂部 `☰ AGENDA` 一鍵跳轉按鈕已完全就緒。
-3. **DMC 研發知識同步**：
-   - 已追加原子日誌至 [`docs/ACTIVE_LOG.md`](file:///E:/Projects/Project%20Indo-Phoenix/docs/ACTIVE_LOG.md)。
-   - 已同步校準 [`docs/STATE.md`](file:///E:/Projects/Project%20Indo-Phoenix/docs/STATE.md) 的目錄地圖。
+1. **無塵室規格全面升級**：
+   - 配合線上工程規劃與高密度 FPC 精密曝光需求，全站黃光區無塵室等級由「萬級 (Class 10K / 10,000)」升級為「**千級 (Class 1K / 1,000)**」。
+2. **GAS 萬能網關全鏈路排查與動態連動打通**：
+   - 線上 Google Sheet `WEB_DATA` 頁籤 B20 已正式改為 `1K`。
+   - 瀏覽器物理驗證 GAS 網關回傳 24 筆資料正常，網關本身未失效。
+   - 修復 [`assets/js/content-engine.js`](file:///c:/Program1/Project-Indo-Phoenix/assets/js/content-engine.js) 正則表達式貪婪截斷 Bug（`1K` 不再被誤截為純數字 `1`），並在同步時廣播 `ipx:content-updated` 事件。
+   - 打通 [`assets/js/presentation-data.js`](file:///c:/Program1/Project-Indo-Phoenix/assets/js/presentation-data.js) 與 [`assets/js/presentation-engine.js`](file:///c:/Program1/Project-Indo-Phoenix/assets/js/presentation-engine.js)，讓 WebPPT 投影片（Slide 08/09）與線上試算表實現即時動態連動。
+3. **DMC 知識日誌同步**：
+   - 已在 [`docs/ACTIVE_LOG.md`](file:///c:/Program1/Project-Indo-Phoenix/docs/ACTIVE_LOG.md) 以標準 6 行格式追加原子日誌。
 
 ---
 
-## 🎯 2. 下一個代理人的任務目標
-- **核心任務**：依照使用者需求，逐頁審視與優化 14 頁投影片（優先處理 Slide 4 下方留白、圖片槽位與版面微調）。
-- **啟動提示詞**：請直接參閱專案根目錄下的 [`未完成工作給新代理的提示詞.md`](file:///E:/Projects/Project%20Indo-Phoenix/%E6%9C%AA%E5%AE%8C%E6%88%90%E5%B7%A5%E4%BD%9C%E7%B5%A6%E6%96%B0%E4%BB%A3%E7%90%86%E7%9A%84%E6%8F%90%E7%A4%BA%E8%A9%9E.md)。
+## 🔍 2. 當前關鍵上下文：線上 Google Sheet 與 GAS 網關狀態
+- **線上 Google Sheet 實體網址**：
+  `https://docs.google.com/spreadsheets/d/1xbxE2fijxQR3Lzd9r6IQQBZbUikpxfIbcdgZkQswHvU/edit?gid=2122582769#gid=2122582769`
+- **現行配置之 GAS Web App 網關網址**（位於 [`assets/js/data.js`](file:///c:/Program1/Project-Indo-Phoenix/assets/js/data.js#L10)）：
+  `https://script.google.com/macros/s/AKfycbzPRGJ3gOlbro2YigiF5t1qoG3PEwUGXU9d-tWkrIGpiK7yfiCMNV3DxzKLvEC84mG9eQ/exec`
+- **狀態**：✅ 運行正常（Status 200, JSON valid）。
 
 ---
 
-## 🛡️ 3. 防破壞邊界
-- 嚴禁寫死 Hex 顏色（必須使用 CSS 變數相容 A/B/C 主題）。
-- 嚴禁主動發起 `git push`。
-- 修改完成後落盤 6 行日誌至 `docs/ACTIVE_LOG.md`。
+## 🎯 3. 下一步建議工作
+- 持續關注業主在 Google Sheet 上更新之財務模型或文案，前端將自動透過 Cache-First + 背景靜默同步保持最新狀態。
+
+---
+
+## 🛡️ 4. 防破壞邊界（Hard Invariants）
+- **絕對禁止未經使用者明確指示發起 `git push`**。
+- 專案為純前端靜態結構，零 build step，嚴禁引入打包工具。
+- 保持 CSS 變數相容三套主題（A/B/C）。
+- 任何代碼或重大架構異動必須於 [`docs/ACTIVE_LOG.md`](file:///c:/Program1/Project-Indo-Phoenix/docs/ACTIVE_LOG.md) 追加記錄。

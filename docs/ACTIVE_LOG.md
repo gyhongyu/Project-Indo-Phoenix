@@ -171,5 +171,14 @@
 - **核心事實 / 決策理由**:
   - 配合線上工程規劃與高密度 FPC 精密曝光需求，將黃光曝光製程無塵室等級由萬級 (Class 10,000 / 10K) 全面升級為千級 (Class 1,000 / 1K)。
   - 同步更新 WebPPT 簡報 08（空間工程標準）與簡報 09（CapEx 無塵室工程規範）中英文雙語指標。
-- **驗證**: `node --check` 通過語法校驗；中英文投影片渲染確認無殘留 10K 舊規格。
+- **狀態**: `已驗收通過`
+
+### [2026-10-02] [gas / content-engine] 修復：GAS 網關字串截斷 Bug 與 WebPPT 動態 SSOT 數據連動打通
+- **類型**: `BUGFIX`
+- **代碼錨點**: `assets/js/content-engine.js` (正則純數字判斷 & bindStats 支援字串 & 派發 ipx:content-updated 事件), `assets/js/presentation-data.js` (cleanroomCls 動態注入), `assets/js/presentation-engine.js` (監聽動態重繪)
+- **核心事實 / 決策理由**:
+  - GAS 網關實體驗證正常運作，線上 Google Sheet 成功更新 `cleanroomClass: 1K`。
+  - 修復 `content-engine.js` 正則 `/^[0-9]+/` 過度貪婪導致非純數字字串（如 `1K`、`10K`）被截斷為數字 `1`、`10` 的解析漏洞，並在資料同步時廣播 `ipx:content-updated` 事件。
+  - 打通 WebPPT Slide 08/09 與 `IPX_DATA.stats.cleanroomClass` 動態綁定，實現試算表改值、簡報即時同步。
+- **驗證**: 瀏覽器實測 GAS 網關回傳 24 筆資料正常；代碼語法通過驗證。
 - **狀態**: `已驗收通過`
