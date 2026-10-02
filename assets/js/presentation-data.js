@@ -475,10 +475,10 @@ function getI18NDeck() {
               },
               spaces: [
                 {
-                  title: "Cleanroom Yellow Light",
+                  title: "Class 1K Cleanroom Yellow Light",
                   kunshan: "1,200 m²",
                   india: "1,500 m²",
-                  std: "Class 10,000 / 22±2°C / 55±5% RH",
+                  std: "Class 1,000 / 22±2°C / 55±5% RH",
                   equip: "LDI Direct Imaging, Dry Film Vacuum Lamination",
                   infra: "+40% HVAC capacity redundancy to conquer 45°C+ Indian ambient summer heat",
                   detail: "High ambient temperature in India requires +40% higher HVAC capacity. Temperature & humidity strictly maintained at 21±1°C, 55±5% RH for 25μm line pitch."
@@ -562,8 +562,8 @@ function getI18NDeck() {
                   india: "$3,000,000",
                   subsidy: "-$750,000",
                   net: "$2,250,000",
-                  boundary: "Output 10K/100K layout & +40% HVAC specs; Promoter leads civil construction.",
-                  detail: "Output factory layout, Class 10K/100K cleanliness, and +40% HVAC humidity specs. Actual building civil works managed by local promoter."
+                  boundary: "Output 1K/10K layout & +40% HVAC specs; Promoter leads civil construction.",
+                  detail: "Output factory layout, Class 1K/10K cleanliness, and +40% HVAC humidity specs. Actual building civil works managed by local promoter."
                 },
                 {
                   title: "Total Initial Project CapEx",
@@ -1736,10 +1736,10 @@ function getI18NDeck() {
               },
               spaces: [
                 {
-                  title: "萬級無塵黃光區",
+                  title: "千級無塵黃光區",
                   kunshan: "1,200 m²",
                   india: "1,500 m²",
-                  std: "萬級無塵室 / 22±2°C / 濕度 55±5%",
+                  std: "千級無塵室 / 22±2°C / 濕度 55±5%",
                   equip: "LDI 雷射直接成像、乾膜真空壓膜機",
                   infra: "印度環境溫度高，需增加 +40% 暖通空調 (HVAC) 冗餘容量制冷",
                   detail: "配置 +40% HVAC 暖通冗餘空調制冷能力，嚴格受控（21±1°C, 55±5% RH），確保 25μm 微細線路曝光精度不衰減。"
@@ -1823,8 +1823,8 @@ function getI18NDeck() {
                   india: "$3,000,000",
                   subsidy: "-$750,000",
                   net: "$2,250,000",
-                  boundary: "輸出廠房佈局、萬級無塵室潔淨度與暖通空調 (HVAC) 濕度規範。實際土建工程由發起人負責。",
-                  detail: "輸出廠房佈局、萬級/十萬級無塵室潔淨度與暖通空調 (HVAC) 濕度規範。實際土建工程由發起人負責。"
+                  boundary: "輸出廠房佈局、千級無塵室潔淨度與暖通空調 (HVAC) 濕度規範。實際土建工程由發起人負責。",
+                  detail: "輸出廠房佈局、千級/萬級無塵室潔淨度與暖通空調 (HVAC) 濕度規範。實際土建工程由發起人負責。"
                 },
                 {
                   title: "建廠總資本支出合計",

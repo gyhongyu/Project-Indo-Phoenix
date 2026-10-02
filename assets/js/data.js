@@ -31,7 +31,7 @@ window.IPX_DATA = {
     payback: 4.2,               // years with SPECS subsidy (manual input)
     paybackRaw: 5.2,            // years without subsidy (manual input)
     factoryArea: 13000,         // m² total layout (D20)
-    cleanroomClass: "10K",      // Class 10,000 yellow-light exposure zone
+    cleanroomClass: "1K",       // Class 1,000 yellow-light exposure zone
     // 24-Month Stage Sales Model (Dynamic SSOT for Slide 12 - 100% matched to Google Sheet WEB_DATA)
     tradeSales_T0: 0,           // T+0 Trade Bridge initial monthly run-rate ($0)
     tradeSales_T6: 250000,      // T+6M Vendor codes & NPI sampling monthly revenue ($0.25M)
